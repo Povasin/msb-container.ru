@@ -1,0 +1,285 @@
+$gradient: linear-gradient(90deg, #5134c4, #773cbc, #b856d4);
+$gray: #ececec;
+// @font-face {
+//     font-family: "Inter-Light";
+//     font-style: normal;
+//     font-weight: 100;
+//     src: url("../../assets/fonts/Inter/Inter-Light.ttf");
+//     font-display: swap;
+// }
+// @font-face {
+//     font-style: normal;
+//     font-family: "Inter-Regular";
+//     font-weight: 500;
+//     src: url("../../assets/fonts/Inter/Inter-Regular.ttf");
+//     font-display: swap;
+// }
+// @font-face {
+//     font-style: normal;
+//     font-family: "Inter-Bold";
+//     font-weight: 900;
+//     src: url("../../assets/fonts/Inter/Inter-Bold.ttf");
+//     font-display: swap;
+// }
+// @font-face {
+//     font-style: normal;
+//     font-family: "fouore";
+//     src: url("../../assets/fonts/fouore/Furore.otf");
+//     font-display: swap;
+// }
+
+@function calcFluid($f-min, $f-max, $w-min, $w-max) {
+	$k: ($f-max - $f-min)/($w-max - $w-min);
+	$b: $f-min - $k * $w-min;
+  
+	$b: $b * 1px;
+  
+	@return calc( #{$k} * 100vw + #{$b} );
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+body{
+    padding: 0;
+    margin: 0;
+    font-family: "Inter-Regular";
+}
+%main {
+    padding: 0 calcFluid(0, 100, 1024, 1920);
+    @extend %d-col;
+}
+
+%d-row{
+    display: flex;
+    flex-direction: row;
+}
+
+%d-col{
+    display: flex;
+    flex-direction: column;
+}
+%more{
+    padding:10px calcFluid(10, 20, 320, 800);
+    color: white;
+    font-size:calcFluid(15, 20, 320, 1920);
+    background: $gradient;
+    text-decoration: none;
+    margin: 20px 0 auto auto;
+    border: none;
+    font-weight: 100;
+    transition: 0.3s;
+    &:hover{
+        transform: scale(1.02);
+    }
+}
+
+%slider{
+    overflow: hidden;
+   @extend %d-row;
+    .furniture-line,
+    .katalog-line,
+    .slider-line{
+        position: relative;
+        @extend %d-row;
+        width: 200%;
+        left: 0;
+        transition: all ease 0.7s;
+    }
+}
+%sliderBtn{
+    border: 1.5px solid;
+    border-image-source:$gradient;
+    border-image-slice:1;
+    background:$gradient; 
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+}
+%general__log{
+    text-decoration: none;
+    color: black ;
+    padding: calcFluid(7, 10, 1024, 1920) 20px;
+    font-size:calcFluid(15, 20, 320, 1920);;
+    text-align: center;
+    border: 1px solid black;
+    font-weight: 500;
+    margin: auto 4px;
+    transition: 0.4s;
+}
+
+%general__logo{
+    @extend %d-col;
+    text-decoration: none;
+    background:$gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #5134c4;
+    font-family: "fouore";
+    font-size:calcFluid(30, 45, 320, 1920);
+    span{
+        -webkit-text-fill-color: black;
+        color: black;
+        font-size: calcFluid(12, 18, 320, 1920);;
+    }
+}
+
+%iconMenu{
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width:  calcFluid(17, 25, 320, 1920);
+    height: calcFluid(12, 15, 320, 1920);
+    margin: auto 0 auto 10px;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    span{
+        margin: auto 0;
+        border: 1px solid white;
+    }
+}
+
+%card {
+    position: relative;
+    box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.25);
+    @extend %d-col;
+    background-color: white;
+    width: 280px;
+    padding:10px;
+    text-decoration: none;
+    color: black;
+    .rent{
+        font-size: calcFluid(15, 20, 320, 1920);
+        color: #58585e;
+        margin: auto 0 5px 0;
+    }
+    .info{
+        font-size:calcFluid(15, 20, 320, 1920);
+        font-weight: 900;
+        margin: 0;
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+    }
+    .card__bag{
+        cursor: pointer;
+        margin: auto 0 0 auto;
+        padding: calcFluid(2, 5, 700, 1920) calcFluid(15, 20, 700, 1920);
+        background:$gradient;
+        border: none;
+    }
+    .card__bagActive{
+        background:transparent;
+        border: 1px solid;
+        border-image-source:linear-gradient(90deg, #5134c4,#773cbc,#b856d4);
+        border-image-slice:1;
+        background: transparent;
+        text-decoration: none;
+        color: black;
+    }
+    .card__img{
+        cursor: pointer;
+        width: 100%;
+        margin: auto 0 0 0;
+    }
+    .fd-row{
+        @extend %d-row;
+        .card__arrow{
+            margin:auto 0 auto auto;
+            font-size: 24px;
+            font-weight: 900;
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
+        }
+        .star{
+            font-size:  calcFluid(14, 20, 700, 1920);
+            font-weight: 900;
+            margin: auto 0;
+        }
+    }
+    .card__sale{
+        @extend %d-row;
+        margin: 10px 0 0 0;
+        .fd-col{
+            .discount{
+                text-decoration:line-through;
+                color: #58585e;
+                font-size:calcFluid(15, 20, 320, 1920);
+                margin:calcFluid(0, 10, 850, 1920) 0 0 0;
+            }
+            .card__price{
+                font-size: calcFluid(17, 20, 320, 1920);
+                font-weight: 900;
+                margin: 0;
+            }
+        }
+    }   
+    .furniture__CardActive{
+        @extend %d-row;
+        border-radius: 20px;
+        width: 65%;
+        background-color: #5134c4;
+        position: absolute; 
+        bottom: -18px;
+        right: 10px;
+        .furniture__bagActive{
+            margin: auto 0 auto auto;
+            background: white !important;
+            border-radius: 50%;
+            padding: calcFluid(1, 5, 320, 1920) calcFluid(6, 10, 320, 1920);
+            border:2px solid #5134c4;
+            font-size:20px;
+        }
+        p{  
+            text-align: center;
+            margin: auto 0 auto auto;
+            color: white;
+            font-size:calcFluid(10, 16, 320, 1920) ;
+        }
+    }
+}
+%search{
+    .search {
+        box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+        border-radius: 4px;
+        border: none;
+        padding: 10px calcFluid(10, 50, 1024, 1920) 10px 4px;
+        background-color: white;
+        color: #6d6d6d;
+        font-weight: 100;
+        font-size: 20px;
+        outline: none;
+        width: calcFluid(200, 300, 1024, 1920);
+    }
+    .search__block{
+        display: none;
+        z-index: 20;
+        position: absolute;
+        @extend %d-col;
+        top: 50px;
+        width: 100%;
+        background-color: white;
+        box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+        a{
+            text-decoration: none;
+            color: black;
+            font-size: calcFluid(13, 15, 1024, 1920);
+            padding: 7px 10px;
+            font-weight: 100;
+            background-color: white;
+            &:hover{
+                background-color: #eeeeee;
+            }
+        }
+    }
+    img {
+        position: absolute;
+        right: 10px;
+        top: 8px;
+        max-width: 100%;
+        max-height: 100%;
+    }
+}

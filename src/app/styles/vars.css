@@ -1,0 +1,34 @@
+@charset "UTF-8";
+html[data-theme=light] {
+  --primary-color: #707eff;
+  --secondary-color: #97a1fe;
+  --disabled-color: #d9d9d9;
+  --empty-color: #fff;
+  --black-color: #000;
+  --unfocused-outline-color: #BFBFBF;
+  --warning-color: #FFF1AA;
+  --error-color: #FFAAAA;
+  --background-primary-color: rgba(255, 255, 255, 0.9);
+  --shadow-color: rgba(0, 0, 0, 0.16);
+}
+
+/* Пока просто продублировал */
+html[data-theme=dark] {
+  --primary-color: #707eff;
+  --secondary-color: #97a1fe;
+  --disabled-color: #d9d9d9;
+  --empty-color: #fff;
+  --black-color: #000;
+  --unfocused-outline-color: #BFBFBF;
+  --warning-color: #FFF1AA;
+  --error-color: #FFAAAA;
+  --background-primary-color: rgba(255, 255, 255, 0.9);
+  --shadow-color: rgba(0, 0, 0, 0.16);
+}
+
+:root {
+  --sidebar-width: 300px;
+  --sidebar-width-collapsed: 80px;
+  --header-height: 105px;
+  --antd-wave-shadow-color: transparent;
+}/*# sourceMappingURL=vars.css.map */
