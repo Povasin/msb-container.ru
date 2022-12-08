@@ -1,5 +1,6 @@
 import React from 'react'
 import {useSelector} from "react-redux";
+import { Link } from 'react-router-dom';
 import BagCard from '../shared/componets/bagCard'
 import "./css/bag.css"
 export default function BagPage() {
@@ -7,11 +8,11 @@ export default function BagPage() {
   return (
     <main>   
         <div className="bag__wrapper">
-            <span><a href="../index.html">главная </a>/<a href="./bag.html"> корзина</a></span>      
+            <span><Link to="/">главная </Link>/<Link to="/bag.html"> корзина</Link></span>      
             <h1>Корзина товаров</h1>
             <div  className="bag">
                 <div className="bag__items">
-                {BagStore.items.map((item, index) => <BagCard key={index} item={item}/>)}
+                {BagStore.items == 0 ? <div className="bag__clear"><h2>ваша корзина пока пуста</h2><p>вернитесь на <Link to="/">главную страницу</Link> и заполните ее</p></div> : BagStore.items.map((item, index) => <BagCard key={index} card={item}/>)}
                 </div>
                 <div className="bag__price">
                     <div className="bag__promoCode">

@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./css/header/header.css"
 import {useSelector} from "react-redux";
 import { Link } from 'react-router-dom';
 export default function Header() {
-    const BagStore = useSelector((state) => state.BagSlice); 
-    console.log(BagStore);
+    const BagStore = useSelector((state) => state.BagSlice);
+    const [scroll, setScroll] = useState(false)
+
   return (
 <header>
     <div className="headerTop">
@@ -28,7 +29,8 @@ export default function Header() {
             <Link to="/login" className="log"> <img src="/log.svg" alt="вход"/><p>вход</p></Link>
         </div>
     </div>
-    <div className="services">
+    {/* почему не работает */}
+    <div className={`services ${scroll && "services__fixed"}`} onScroll={window.onscroll = ()=> window.pageYOffset > 103 ? setScroll(true) :  setScroll(false)} >
         <Link to="/katalog">Каталог <div className="menu"><span></span></div></Link>
         <Link to="/aboutUs">О нас</Link>
         <Link to="/services">Услуги</Link>

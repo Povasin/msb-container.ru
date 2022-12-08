@@ -2,8 +2,7 @@ import React from 'react'
 import {BagSlice} from "../../store/slices/bag"
 import {store} from "../../store/slices/store"
 import {useSelector} from "react-redux";
-import { Link } from 'react-router-dom';
-export default function ProdactCard({item}) {
+export default function FurnitureCard({item}) {
      const handleClick = ()=>{
         store.dispatch(BagSlice.actions.addCard(item));
      }
@@ -17,15 +16,14 @@ export default function ProdactCard({item}) {
             </div>
             <img className="card__img" src={item.img} alt={item.name}/>
             <p className="rent">Аренда</p>
-            {/* можно ли передавать через link props */}
-            <Link to={`/card/${item.id}`} className="info">{item.name}</Link>         
+            <p className="info">{item.name}</p>         
             <div className="card__sale">
                 <div className="fd-col">
                     <p className="discount">{item.discount}</p>
-                    <p className="card__price">От {item.price}₽</p> 
-            </div>
-                <input type="image" onClick={!isActive ? handleClick : null}  className={`card__bag ${isActive && "card__bagActive"}`} src={isActive ? "/blackBag.svg" : "/bag.svg"} alt={item.name}/>
-            </div> 
+                    <p className="card__price">{item.price}₽</p> 
+                </div>
+                {isActive ? <div className="furniture__CardActive"><p>добавлено</p> <button className="furniture__bagActive">+</button></div>  :   <button onClick={!isActive && handleClick} className="card__bag">+</button> }
+                </div> 
         </div>
     )
 }

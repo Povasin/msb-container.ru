@@ -1,8 +1,10 @@
-import { BagSlice } from "./bag";
+import { BagSlice} from "./bag";
+import {authSlice} from "./auth"
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {setupListeners} from "@reduxjs/toolkit/query";
 const reducers = {
-    BagSlice: BagSlice.reducer 
+    BagSlice: BagSlice.reducer,
+    authSlice: authSlice.reducer
 };
 
 export const store = configureStore({

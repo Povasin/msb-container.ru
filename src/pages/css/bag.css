@@ -1,30 +1,3 @@
-@font-face {
-  font-family: "Inter-Light";
-  font-style: normal;
-  font-weight: 100;
-  src: url("../../assets/fonts/Inter/Inter-Light.ttf");
-  font-display: swap;
-}
-@font-face {
-  font-style: normal;
-  font-family: "Inter-Regular";
-  font-weight: 500;
-  src: url("../../assets/fonts/Inter/Inter-Regular.ttf");
-  font-display: swap;
-}
-@font-face {
-  font-style: normal;
-  font-family: "Inter-Bold";
-  font-weight: 900;
-  src: url("../../assets/fonts/Inter/Inter-Bold.ttf");
-  font-display: swap;
-}
-@font-face {
-  font-style: normal;
-  font-family: "fouore";
-  src: url("../../assets/fonts/fouore/Furore.otf");
-  font-display: swap;
-}
 img {
   max-width: 100%;
   height: auto;

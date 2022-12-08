@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import { getAllPhotos } from '../api/photos';
 
 const initialState = {
     items: [],
@@ -12,12 +11,12 @@ export const BagSlice = createSlice({
     initialState,
     reducers: {
         addCard(state, {payload}){
-            state.items = [...state.items, payload]
-            localStorage.setItem("bag", JSON.stringify([...state.items, payload]))
+            state.items = [...state.items, {id: payload.id, data: payload, count: 1, month: 1}]
+            localStorage.setItem("bag", JSON.stringify(state.items))
         },
         removeCard(state, {payload}){
             state.items =  state.items.filter((item)=>payload.id !== item.id)
-            localStorage.setItem("bag", JSON.stringify([...state.items, payload]))
+            localStorage.setItem("bag", JSON.stringify(state.items))
         },  
         getItems(state){
             return state.items
@@ -26,21 +25,11 @@ export const BagSlice = createSlice({
             if (localStorage.getItem("bag") != null) {
                 state.items = JSON.parse(localStorage.getItem("bag"))
             } 
-        } 
+        },
+        updateBag(state, {payload}){
+            state.items = payload
+            localStorage.setItem("bag", JSON.stringify(state.items))
+        }
     },
-    // extraReducers: {
-    //     [getAllPhotos.pending.type]: (state) => {
-    //         state.isLoading = true;
-    //     },
-    //     [getAllPhotos.fulfilled.type]: (state, action) => {
-    //         state.isLoading = false;
-    //         state.error = '';
-    //         state.photos = action.payload;
-    //     },
-    //     [getAllPhotos.rejected.type]: (state, action) => {
-    //         state.isLoading = false;
-    //         state.error = action.payload;
-    //     },
-    // },
 });
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import "./css/contact.css"
+import { YMaps, Map, Placemark } from "react-yandex-maps";
 export default function ContactPage() {
   return (
     <main>   
@@ -20,7 +21,11 @@ export default function ContactPage() {
                 </div>
             </div>
             <div id="map__yandex">
-                <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A975b459ad04e6f23bdc600c9da5bb050f132b186bfdc0cb84237e85aeda192e0&amp;width=100%25&amp;height=350&amp;lang=ru_RU&amp;scroll=true"></script>
+            <YMaps>
+                <Map width="100%" height="100%" defaultState={{ center: [57.60083313280139,39.890269973791455], zoom: 10 }} > 
+                    <Placemark geometry={[57.60083313280139,39.890269973791455]}  properties={{iconContent: "msb-container", }}  />
+                </Map>
+            </YMaps>
             </div>
         </div>
     </main>
