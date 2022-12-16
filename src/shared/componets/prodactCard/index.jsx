@@ -13,11 +13,10 @@ export default function ProdactCard({item}) {
         <div className="card">
             <div className="fd-row">
                 <p className="star">{item.star}</p>
-                <p className="card__arrow">→</p>
+                <Link to={`/card/${item.id}`} className="card__arrow">→</Link>
             </div>
-            <img className="card__img" src={item.img} alt={item.name}/>
+            <Link to={`/card/${item.id}`}><img className="card__img" src={item.img[0].src} alt={item.name}/></Link>
             <p className="rent">Аренда</p>
-            {/* можно ли передавать через link props */}
             <Link to={`/card/${item.id}`} className="info">{item.name}</Link>         
             <div className="card__sale">
                 <div className="fd-col">

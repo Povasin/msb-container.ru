@@ -22,7 +22,7 @@ export default function MainPage() {
                                     <p>Аренда бытовок от 5000руб</p>
                                 </div>
                                 <div className="slide__button">
-                                    <Link to="/katalog" className="more">подробнее</Link>
+                                    <Link to="/card/2" className="more">подробнее</Link>
                                 </div>
                             </div>
                             <div className="slide__radius">
@@ -36,7 +36,7 @@ export default function MainPage() {
                                     <p>доствка по всей россии</p>
                                 </div>
                                 <div className="slide__button">
-                                    <Link to="/katalog" className="more">подробнее</Link>
+                                    <Link to="/card/5" className="more">подробнее</Link>
                                 </div>
                             </div>
                             <div className="slide__radius">
@@ -50,7 +50,7 @@ export default function MainPage() {
                                     <p>лучшие бытовки</p>
                                 </div>
                                 <div className="slide__button">
-                                    <Link to="/katalog" className="more">подробнее</Link>
+                                    <Link to="/card/3" className="more">подробнее</Link>
                                 </div>
                             </div>
                             <div className="slide__radius">
@@ -64,7 +64,7 @@ export default function MainPage() {
                                     <p>Аренда бытовок от 5000руб</p>
                                 </div>
                                 <div className="slide__button">
-                                    <Link to="/katalog" className="more">подробнее</Link>
+                                    <Link to="/card/4" className="more">подробнее</Link>
                                 </div>
                             </div>
                             <div className="slide__radius">

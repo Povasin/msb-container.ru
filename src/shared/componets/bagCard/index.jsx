@@ -2,7 +2,9 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import {BagSlice} from "../../store/slices/bag"
 import {store} from "../../store/slices/store"
+
 export default function BagCard({card}) {
+
     const {items: bagItems} = useSelector((state)=>state.BagSlice)
     const handleClick = ()=>{
         store.dispatch(BagSlice.actions.removeCard(card));
@@ -17,9 +19,10 @@ export default function BagCard({card}) {
         const newItems = [...bagItems.filter((item) => item.id !== card.id), {...newProdact, month: value}] 
         store.dispatch(BagSlice.actions.updateBag(newItems));
     }   
-  return (
+    const cardImg = card.data.img ? card.data.img[0].src : null
+    return (
     <div className="bag__block">
-        <img src={card.data.img} className="block__img"alt={card.data.name}/>
+        <img src={cardImg} className="block__img"alt={card.data.name}/>
         <div className="block__content">
             <p className="block__close" onClick={handleClick}>x</p>
             <p className="rent">Аренда</p>

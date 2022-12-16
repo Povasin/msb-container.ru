@@ -73,11 +73,11 @@ export default function Footer() {
             </div>
             <div className="d-col">
                 <h4>Каталог</h4>
-                <Link to="/katalog">Бытовки для проживания</Link>
-                <Link to="/katalog">Бытовки раздевалки</Link>
-                <Link to="/katalog">Бытовки прорабские</Link>
-                <Link to="/katalog">Бытовки под склад</Link>
-                <Link to="/katalog">Бытовки с душем</Link>
+                <Link to="/card/2">Бытовки для проживания</Link>
+                <Link to="/card/1">Бытовки раздевалки</Link>
+                <Link to="/card/4">Бытовки прорабские</Link>
+                <Link to="/card/5">Бытовки под склад</Link>
+                <Link to="/card/3">Бытовки с душем</Link>
             </div>
             <div className="d-col">
                 <h4>Информация</h4>

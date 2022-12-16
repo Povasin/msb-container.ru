@@ -13,7 +13,6 @@ export default function LoginPage() {
   })
   
   const authSlice = useSelector((state)=>state.authSlice)
-  console.log(authSlice);
   return (
     <main>   
         <div className="login">

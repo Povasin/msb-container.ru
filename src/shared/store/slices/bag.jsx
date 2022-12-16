@@ -11,7 +11,7 @@ export const BagSlice = createSlice({
     initialState,
     reducers: {
         addCard(state, {payload}){
-            state.items = [...state.items, {id: payload.id, data: payload, count: 1, month: 1}]
+            state.items = [...state.items, {id: payload.id, data: payload.data, count: payload.count ?? 1 , month: payload.month ?? 1}]
             localStorage.setItem("bag", JSON.stringify(state.items))
         },
         removeCard(state, {payload}){

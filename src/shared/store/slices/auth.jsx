@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { json } from 'react-router-dom';
 import {baseUrl} from "../api/base.js"
 
 const initialState = {
@@ -8,20 +7,22 @@ const initialState = {
     error: '',
 };
 
-export const login = createAsyncThunk(
-    "auth/login",
-    async ({body}) => {
-      const data = await fetch(
-        `${baseUrl}/login`,
-        {
+export const login = createAsyncThunk("auth/login", async ({body}, {rejectWithValue}) => {
+      try{
+        const data = await fetch(`${baseUrl}/login`,{
           method: "POST",
+          mode: 'cors',
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(body)
+          body: JSON.stringify({...body})
         },
-      );
+      )
       return JSON.parse(data);
+      } catch(e){
+        rejectWithValue(e)
+      }
+     
     },
 );
 
@@ -43,9 +44,8 @@ export const authSlice = createSlice({
         },
         [login.rejected.type]: (state, action) => {
             state.isLoading = false;
-            state.error = action.payload;
+            state.error = JSON.parse(action.payload);
             console.log(action);
-            // console.log(action.payload);
         }, 
     },
 });

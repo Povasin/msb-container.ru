@@ -22,7 +22,7 @@ export default function KatalogPage() {
                                 <option value="expencive">дороже</option>
                             </select>
                         </p>
-                        <label className="katalog__kol">на странице: <span id="kolOnPage">0</span></label>
+                        <label className="katalog__kol">на странице: <span id="kolOnPage"></span></label>
                         <div className="filter__open"><img src="./filter.webp" alt="фильтры"/><p>фильтры</p></div>
                 </div>
                 <div className="katalog-row">
