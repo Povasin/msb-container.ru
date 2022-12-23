@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import "./css/header/header.css"
-import {useSelector} from "react-redux";
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 // import  Search  from '../shared/componets/search/index';
+import { authSlice } from '../shared/store/slices/auth';
 export default function Header() {
     const BagStore = useSelector((state) => state.BagSlice);
     const [scroll, setScroll] = useState(false)
-
+    const auth = useSelector((state)=>state.authSlice)
   return (
 <header>
     <div className="headerTop">
@@ -22,9 +23,13 @@ export default function Header() {
            <p>dir@ids76.ru</p> 
         </div>
         <div className="headerTop__log">
-            <Link to="/login" className="login">Войти</Link>
-            <Link to="/register" className="register">Зарегистрироваться</Link>
-            <Link to="/login" className="log"> <img src="/log.svg" alt="вход"/><p>вход</p></Link>
+            {auth.userData == null ?  <>
+                <Link to="/login" className="login">Войти</Link>
+                <Link to="/register" className="register">Зарегистрироваться</Link>
+                <Link to="/login" className="log"> <img src="/log.svg" alt="вход"/><p>вход</p></Link>
+            </> : 
+            <Link to={`/user/${auth.userData._id}`} className="loginUser"> <img src="/log.svg" alt="пользователь"/><p>{auth.userData.name}</p></Link> }
+         
         </div>
     </div>
     <div className={`services ${scroll && "services__fixed"}`} onScroll={window.onscroll = ()=> window.pageYOffset > 103 ? setScroll(true) :  setScroll(false)} >

@@ -1,9 +1,19 @@
+import { useEffect } from 'react'
 import {React, Suspense} from 'react'
 import {Routes, useLocation, Route } from 'react-router-dom'
 import RouterConfig from "../../../shared/routerConfig"
+import { authSlice } from '../../../shared/store/slices/auth'
+import { useSelector } from 'react-redux'
+import {store} from "../../../shared/store/slices/store"
 export default function AppRouter() {
-
-    const location = useLocation()
+  const auth = useSelector((state)=>state.authSlice)
+  const location = useLocation()
+  const user = localStorage.getItem("user")
+  useEffect(()=>{
+    if (user && !auth.userData) {
+      store.dispatch(authSlice.actions.setUser(user))
+    }
+  }, [])
 
   return (
     <Suspense fallback={<h1>loading profile...</h1>}>
