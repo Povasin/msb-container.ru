@@ -3,6 +3,7 @@ import {BagSlice} from "../../store/slices/bag"
 import {store} from "../../store/slices/store"
 import {useSelector} from "react-redux";
 import { Link } from 'react-router-dom';
+
 export default function ProdactCard({item}) {
      const handleClick = ()=>{
         store.dispatch(BagSlice.actions.addCard(item));

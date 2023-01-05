@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import "./css/aboutUs.css"
+import "./css/aboutUs.scss"
 export default function AboutUsPage() {
   return (
     <main>   

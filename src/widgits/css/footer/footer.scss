@@ -119,10 +119,14 @@
                 @extend %d-row;
                 color: transparent;
                 .login,
-                .register{
+                .register,
+                .katalog{
                     @extend %general__log;
                     background-color: white;
                     border: none;
+                }
+                .katalog{
+                    width: 100%;
                 }
                 .register{
                     background: #19103C;

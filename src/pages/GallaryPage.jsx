@@ -1,5 +1,5 @@
 import React from 'react'
-import "./css/galary.css"
+import "./css/galary.scss"
 import {DATA} from "../DATA/Data"
 import ProductCard from "../shared/componets/prodactCard/index"
 import { Link } from 'react-router-dom'

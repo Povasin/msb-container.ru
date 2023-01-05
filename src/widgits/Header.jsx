@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import "./css/header/header.css"
+import "./css/header/header.scss"
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
-// import  Search  from '../shared/componets/search/index';
+import  Search  from '../shared/componets/search/index';
 import { authSlice } from '../shared/store/slices/auth';
+
 export default function Header() {
     const BagStore = useSelector((state) => state.BagSlice);
     const [scroll, setScroll] = useState(false)
@@ -16,7 +17,7 @@ export default function Header() {
         </div>
         <Link to="/" className="headerTop__logo">MSB<span>container</span></Link>
         <div className="headerTop__search">
-            {/* {<Search/>} */}
+            {<Search/>}
         </div>
         <div className="headerTop__contacts">
            <p>+7(910)973-36-65</p>
@@ -28,7 +29,7 @@ export default function Header() {
                 <Link to="/register" className="register">Зарегистрироваться</Link>
                 <Link to="/login" className="log"> <img src="/log.svg" alt="вход"/><p>вход</p></Link>
             </> : 
-            <Link to={`/user/${auth.userData._id}`} className="loginUser"> <img src="/log.svg" alt="пользователь"/><p>{auth.userData.name}</p></Link> }
+            <Link to={`/user/${auth.userData.id}`} className="loginUser"> <img src="/log.svg" alt="пользователь"/><p>{auth.userData.name}</p></Link> }
          
         </div>
     </div>

@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import "./css/footer/footer.css"
+import { useSelector } from 'react-redux'
+import "./css/footer/footer.scss"
+import { authSlice } from '../shared/store/slices/auth';
 export default function Footer() {
+    const auth = useSelector((state)=>state.authSlice)
   return (
     <footer>
     <div className="pd-100">
@@ -56,15 +59,21 @@ export default function Footer() {
             <div className="basement__col">
                 <h3>Кстати нас уже 1249 человек!</h3>
                 <div className="logFooter">
-                    <Link to="../login/login.html" className="login">Войти</Link>
-                    <Link to="../register/register.html" className="register">Зарегистрироваться</Link>
+                    { auth.userData == null ? 
+                    <>
+                        <Link to="/login" className="login">Войти</Link>
+                        <Link to="/register" className="register">Зарегистрироваться</Link>
+                    </> :
+                     <Link to="/katalog" className="katalog">Каталог</Link>
+                }
+                   
                 </div>
                 <h3>Присоединяйся!</h3>
             </div>
         </div>
         <div className="basement__content">
             <div className="d-col">
-                <Link to="../index.html" className="basement__logo">MSB <span>container</span></Link>
+                <Link to="/" className="basement__logo">MSB <span>container</span></Link>
                 <div className="block">
                     <Link to="#" className="prava">2022 все права защищены</Link>
                     <Link to="#" className="prava">пользовательское соглашение</Link>

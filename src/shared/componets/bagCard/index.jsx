@@ -1,15 +1,21 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link, useLocation } from 'react-router-dom';
 import {BagSlice} from "../../store/slices/bag"
 import {store} from "../../store/slices/store"
 
 export default function BagCard({card}) {
-
+    const location = useLocation()
+    const CardId = location.pathname.split("/")[1]
     const {items: bagItems} = useSelector((state)=>state.BagSlice)
     const handleClick = ()=>{
         store.dispatch(BagSlice.actions.removeCard(card));
     }
+    
+    //TODO: при изменение инпутов карточки меняются местами
+
     const changeProdactCount = (value) =>{
+    
         let newProdact = bagItems.find(item => item.id == card.id)
         const newItems = [...bagItems.filter((item) => item.id !== card.id), {...newProdact, count: value}] 
         store.dispatch(BagSlice.actions.updateBag(newItems));
@@ -19,14 +25,14 @@ export default function BagCard({card}) {
         const newItems = [...bagItems.filter((item) => item.id !== card.id), {...newProdact, month: value}] 
         store.dispatch(BagSlice.actions.updateBag(newItems));
     }   
-    const cardImg = card.data.img ? card.data.img[0].src : null
+    const cardImg = card.data?.img ? card.data.img[0].src : null
     return (
     <div className="bag__block">
-        <img src={cardImg} className="block__img"alt={card.data.name}/>
+        <Link className="block__img" to={`/card/${card.id}`}><img src={cardImg} alt={card.data.name}/></Link>
         <div className="block__content">
-            <p className="block__close" onClick={handleClick}>x</p>
+            {CardId == "arrange" ? null : <p className="block__close" onClick={handleClick}>x</p> }
             <p className="rent">Аренда</p>
-            <p className="info">{card.data.name}</p>
+            <Link to={`/card/${card.id}`} className="info">{card.data.name}</Link>
             <div className="block__input">
                 <div className="quantity_inner">		
                     <p  className="bt_minus"  onClick={()=>changeProdactCount(card.count-1)}>-</p>

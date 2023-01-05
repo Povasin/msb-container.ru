@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import "./css/services.css"
+import "./css/services.scss"
 export default function ServicesPage() {
   return (
     <main>   

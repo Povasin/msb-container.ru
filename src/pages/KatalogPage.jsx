@@ -1,8 +1,13 @@
-import React, { useState } from 'react'
-import "./css/katalog.css"
+import React, { useState,useEffect } from 'react'
+import "./css/katalog.scss"
 import {DATA} from "../DATA/Data"
 import ProductCard from "../shared/componets/prodactCard/index"
+import { Link, useLocation } from 'react-router-dom'
 export default function KatalogPage() {
+    const location = useLocation()
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [location])
     const [slider, setSlider] = useState({
         sliderOne: 1000,
         sliderTwo: 10000,
@@ -12,7 +17,7 @@ export default function KatalogPage() {
     return (
         <main>
             <div className="katalog">
-                <span><a href="../index.html">главная </a>/<a href="./katalog.html"> каталог</a></span>
+                <span><Link to="/">главная </Link>/<Link to="/katalog"> каталог</Link></span>
                 <h1>Бытовки</h1>
                 <div className="katalog-row">
                         <p>Сначала:
@@ -47,6 +52,7 @@ export default function KatalogPage() {
                             <label> <input type="checkbox" className="katalog__Checkbox2" value="Бытовки c душем"/>Бытовки c душем</label>
                             <label> <input type="checkbox" className="katalog__Checkbox3" value="Бытовки под склад"/>Бытовки под склад</label>
                             <label> <input type="checkbox" className="katalog__Checkbox4" value="Бытовки прорабские"/>Бытовки прорабские</label>
+                            <label> <input type="checkbox" className="katalog__Checkbox4" value="Бытовки прорабские"/>Мебель</label>
                         </div>
                         <div className="katalog-size">
                             <h2>Габариты</h2>

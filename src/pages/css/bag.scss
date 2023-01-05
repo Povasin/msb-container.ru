@@ -31,18 +31,17 @@ main {
             @extend %d-col;
             overflow: scroll;
             height: calcFluid(250, 547, 320, 1920);
-            width: 70%;
-            margin: 0 calcFluid(12, 120, 1024, 1920) 0 0;
+            width: 100%;
             .bag__clear{
-                margin:calcFluid(12, 120, 320, 1920) auto auto auto;
+                margin: auto;
                 h2, p{
                    text-align: center;
                 }
                 h2{
-                    font-size: calcFluid(17, 30, 320, 1920);
+                    font-size: calcFluid(18, 30, 320, 1920);
                 }
                 p{
-                    font-size: calcFluid(12, 18, 320, 1920);
+                    font-size: calcFluid(15, 18, 320, 1920);
                 }
             }
 
@@ -165,7 +164,9 @@ main {
                 }
             }
         }
-
+        .clear{
+            height: calcFluid(150, 300, 320, 1920);
+        }
         .bag__price {
             width: 24%;
             @extend %d-col;
@@ -274,12 +275,9 @@ main {
                 font-size: calcFluid(12, 18, 800, 1920);
                 font-weight: 100;
             }
-            #adress{
-                display: none;
-            }
             #order {
                 @extend %more;
-                margin: 10px auto auto 0;
+                margin: 10px 0 auto 0;
             }
         }
     }

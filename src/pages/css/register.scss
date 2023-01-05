@@ -51,6 +51,14 @@ main{
             color: red;
             margin: 10px 0 0 0;
         }
+        .registerBTN{
+            @extend %more;
+            margin:10px 0;
+            text-align: center;
+        }
+        .loading{
+           background: rgb(165, 165, 165) !important;
+        }
     }
     .account{
         font-size: calcFluid(12, 16, 320, 1920);

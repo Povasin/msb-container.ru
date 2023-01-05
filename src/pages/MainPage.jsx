@@ -1,5 +1,5 @@
 import React from 'react'
-import "./css/main.css"
+import "./css/main.scss"
 import {DATA , furniture} from "../DATA/Data"
 import ProductCard from "../shared/componets/prodactCard/index"
 import FurnitureCard from "../shared/componets/furnitureCard/index"

@@ -179,11 +179,16 @@ body{
         text-decoration: none;
         color: black;
     }
-    .card__img{
-        cursor: pointer;
-        width: 100%;
-        margin: auto 0 0 0;
+    a{
+        .card__img{
+            cursor: pointer;
+            max-width: 100%;
+            margin: auto;
+           
+        }
+        display: flex;
     }
+   
     .fd-row{
         @extend %d-row;
         .card__arrow{
@@ -255,7 +260,6 @@ body{
         width: calcFluid(200, 300, 1024, 1920);
     }
     .search__block{
-        display: none;
         z-index: 20;
         position: absolute;
         @extend %d-col;

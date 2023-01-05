@@ -7,27 +7,18 @@ import {store} from "../shared/store/slices/store"
 import {useSelector} from "react-redux";
 import "./css/cubinsForSomeThing.scss"
 
-export default function CardPage() {
-    //при добавление карточки в store все слетает
+export default function FurniturePage() {
+
     const location = useLocation()
     const navigate = useNavigate()
     const CardId = location.pathname.split("/")[2]
-    function searchItem() {
-        let newItem = DATA.find((item)=>item.id == CardId)
-        if (!newItem) {
-            for (let i = 0; i < DATA.length; i++) {
-                if (DATA[i].mass.find((item)=>item.id == CardId) != undefined ) {
-                    return DATA[i].mass.find((item)=>item.id == CardId) 
-                }   
-            }
-        } else return newItem
-    } 
-    const item = searchItem() ?? navigate("/") 
+    const item = furniture.find((item)=>item.id == CardId) ?? navigate("/") 
     const [activeImg, setActiveImg] = useState(item.img.find((point)=>point.active == true))
     const [MainValue, setValue] = useState({
         count: 1,
         month: 1
     })
+
     function changeValue(value, key){
         if (value >= 1) {
             setValue({...MainValue, [key]: value})
@@ -73,7 +64,7 @@ export default function CardPage() {
                             <p className="prev">{'<'}</p>
                             <div className="slider">
                                 <div className="slider-line">
-                                    {item.img.map((point, index)=><img className={`slider__img ${point.active ? `active` : ""}`} onClick={()=>changeActiveImg(point)} src={point.src} key={index} alt={item.name}/>)}
+                                    {item.img.map((point, index)=><img className={`slider__img__furniture ${point.active ? `active` : ""}`} onClick={()=>changeActiveImg(point)} src={point.src} key={index} alt={item.name}/>)}
                                 </div>
                             </div>
                             <p className="next active">{'>'}</p>
@@ -81,12 +72,10 @@ export default function CardPage() {
                         <div className="transportation__img">
                             <div className="star">★★★★☆</div>
                             <img className="main__img"  src={activeImg.src} alt={item.name}/>
-                            <Link to="/gallary" className="chooseMore">выбрать формат</Link>
                         </div>
                     </div>
                     <div className="transportation__contant">
                         <h1>{item.name}</h1>
-                        <p>вместимость: <span>{item.content} человек</span></p>
                         <p>Габариты: <span>{item.size}</span></p>
                         <p>Внутренняя отделка: <span>{item.finishing}</span></p>
                         <p>Состояние:<span>{item.states}</span></p>

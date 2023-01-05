@@ -1,10 +1,13 @@
 import React from 'react'
-import "./css/contact.css"
+import "./css/contact.scss"
 import { YMaps, Map, Placemark } from "react-yandex-maps";
+import { Link } from 'react-router-dom';
+
 export default function ContactPage() {
   return (
     <main>   
         <div className="map">
+            <span><Link to="/">главная </Link>/<Link to="/contact"> контакты</Link></span>      
             <h1>Контакты</h1>
             <div className="map__contact">
                 <div className="map-col">
@@ -22,8 +25,8 @@ export default function ContactPage() {
             </div>
             <div id="map__yandex">
             <YMaps>
-                <Map width="100%" height="100%" defaultState={{ center: [57.60083313280139,39.890269973791455], zoom: 10 }} > 
-                    <Placemark geometry={[57.60083313280139,39.890269973791455]}  properties={{iconContent: "msb-container", }}  />
+                <Map width="100%" height="100%" defaultState={{ center: [57.60083313280139,39.890269973791455], zoom: 10     }} > 
+                    <Placemark geometry={[57.60083313280139,39.890269973791455]}  /*properties={{iconContent: "msb-container"}}*/  />
                 </Map>
             </YMaps>
             </div>

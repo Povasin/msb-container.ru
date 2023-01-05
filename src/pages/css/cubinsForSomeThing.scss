@@ -25,7 +25,6 @@
                 width: 25%;
                 @extend %d-col;
                 .slider{
-                 
                     @extend %slider;
                     @extend %d-col;
                     height: calcFluid(268, 358, 1024, 1920);
@@ -34,12 +33,18 @@
                         width: 100%;
                         top: 0;
                         height: 300%;
-                        .slider__img{
-                            width: 88%;
+                        .slider__img, 
+                        .slider__img__furniture{
+                            margin: auto;
+                            max-width: 90%;
+                            max-height: 100%;
                             padding: 10px 2px;
-                            margin: 5px 0;
                             box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.25);
                             border: 3px solid white;
+                            box-sizing: border-box;
+                        }
+                        .slider__img__furniture{
+                            max-width: 50%;
                         }
                         .active{
                             border: 3px solid;
@@ -75,7 +80,7 @@
                 }
                 img{
                     margin: auto;
-                    width: 90%;
+                    max-width: 90%;
                 }
                 .chooseMore{
                     margin: auto 0 0 auto;
@@ -127,7 +132,11 @@
                     text-decoration-line: line-through;
                 }
             }
+            .quantity_inner:first-child{
+                margin: auto calcFluid(17, 25, 320, 1920) 0 0;
+            }
             .quantity_inner{
+                user-select: none;
                 box-sizing: border-box;    
                 display: inline-flex;
                 border: 2px solid gray;
@@ -273,15 +282,18 @@
             .slider-wrapper{
                 width: 25%;
                 margin: 10px 0 10px 10px;
-                .slider{
-                    height: calcFluid(135, 255, 320, 1024);
+                .slider .slider-line{
+                    .slider__img, 
+                    .slider__img__furniture{
+                        max-width: 60%;
+                    }
                 }
+                
             }
             .transportation__img{
                 width: 80%;
                 .main__img{
                     margin:10px auto 0 auto;
-                    width: 70%;
                 }
                 .star{
                     margin: 10px 10px 0 auto;

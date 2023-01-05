@@ -13,29 +13,29 @@ main{
         width: 100%;
         @extend %d-col;
         .input__price,
-        .input__delivery {
+        .input__delivery,
+        .input__discount {
             @extend %d-row;
-            margin: calcFluid(12, 20, 320, 1920) 0 10px 0;
+            margin: 10px 0;
             font-size: calcFluid(15, 20, 320, 1920);
             font-weight: 900;
             p {margin: 10px 5px 0 0;}
             #price {
+                margin: 0 0 0 auto;
                 font-size: calcFluid(17, 30, 320, 1920);
                 font-weight: 900;
-            }                
+            }  
+            span {
+                margin: 0 0 0 auto !important;
+                font-size: calcFluid(13, 20, 320, 1920);
+                font-weight: 900;
+            }              
         }
-        span {
-            margin: 0 0 0 auto !important;
-            font-size: calcFluid(13, 20, 320, 1920);
-            font-weight: 900;
-        }
+       
         .input__delivery {
             margin: 0;
         }
         .input__discount{
-            margin: 10px 0 calcFluid(12, 20, 320, 1920) 0;
-            @extend %d-row;
-            font-weight: 900;
             p {margin: 5px 5px 0 0;}
             #discount {
                 font-size: calcFluid(13, 22, 320, 1920);
@@ -157,7 +157,7 @@ main{
             .rent {
                 color: #58585e;
                 font-weight: 500;
-                margin: 0 0 calcFluid(10, 20, 320, 1920) 0;
+                margin: 0 0 auto 0;
                 font-size: calcFluid(12, 18, 320, 1920);
                 span{
                     color: black;
@@ -168,7 +168,7 @@ main{
             .orderNumber {
                 text-decoration: none;
                 color: black;
-                font-size: calcFluid(12, 20, 320, 1920);
+                font-size: calcFluid(15, 25, 320, 1920);
                 font-weight: 900;
                 margin: 10px 0;
             }
@@ -180,7 +180,12 @@ main{
             .active{
               background: gray;
             }
-            .block__inputRow{ @extend %d-row;}
+
+            .block__inputRow{ 
+                margin: auto 0 0 0;
+                @extend %d-row;
+            }
+
             .block__input{
                 @extend %d-col;
                 .fd-col{

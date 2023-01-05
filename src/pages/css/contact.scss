@@ -6,10 +6,14 @@ main{
     margin-top: 90px
 }
 .map{
+    span a{
+        text-decoration: none;
+        color: black;
+        font-size: calcFluid(12, 20, 320, 1920);
+    }
     padding: 0 calcFluid(8, 200, 320, 1920);
     @extend %d-col;
     h1{
-        margin: 0 0 10px 0;
         font-weight: 900;
         font-size:calcFluid(17, 30, 320, 1920) ;
     }
