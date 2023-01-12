@@ -3,52 +3,58 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import "./css/footer/footer.scss"
 import { authSlice } from '../shared/store/slices/auth';
+import { useState } from 'react';
 export default function Footer() {
     const auth = useSelector((state)=>state.authSlice)
+    const [massQuestion, setMassQuestion] = useState([
+        {
+            quastion: "бытовка автономная?",
+            answer: "Нет, нужно будет подключать воду, электричество и канализацию",
+            active: false
+        },
+        {
+            quastion: "Какое состояние у бытовок?",
+            answer: "Бытовки б/у, все в хорошем состояние, чистые, убранные и без посторонних запахов. По запросу перед отправкой можем отправить фото бытовки которая приедет именно к вам.",
+            active: false
+        },
+        {
+            quastion: "Нужно ли проводить воду?",
+            answer: "Да, нужно будет подключать воду, электричество и канализацию",
+            active: false
+        },
+        {
+            quastion: "нужно ли подключать электричество",
+            answer: "Да, нужно будет подключать воду, электричество и канализацию",
+            active: false
+        },
+        
+    ])
+    function showAnswer(item) {
+        let newMass = massQuestion.slice()
+        newMass.forEach((card)=>{
+            if (card.quastion == item.quastion) {
+                    card.active =  !card.active
+            }
+        })
+        setMassQuestion(newMass)
+    } 
+
   return (
     <footer>
     <div className="pd-100">
-        <div className="answer">
-            <h2>Часто задаваемые воросы</h2>
+        <h2>Часто задаваемые воросы</h2>
+       {massQuestion.map((item, index)=> 
+       <div key={index} className="answer">
             <div className="answer__block">
                 <div className="answer__question">
                     <div className="answer__info">i</div>
-                    <p>бытовка автономная?</p>
-                    <p className="answer__open">{">"}</p>
+                    <p>{item.quastion}</p>
+                    <p className={`answer__open  ${item.active ? "active" : ""}`} onClick={()=>showAnswer(item)}>{">"}</p>
                 </div>
-                <div className="answer__content">Нет, нужно будет подключать воду, электричество и канализацию</div>
+                <div className={`answer__content ${item.active ? "active" : ""}`}>{item.answer}</div>
             </div>
         </div>
-        <div className="answer">
-            <div className="answer__block">
-                <div className="answer__question">
-                    <div className="answer__info">i</div>
-                    <p>Какое состояние у бытовок?</p>
-                    <p className="answer__open">{">"}</p>
-                </div>
-                <div className="answer__content">Бытовки б/у, все в хорошем состояние, чистые, убранные и без посторонних запахов. По запросу перед отправкой можем отправить фото бытовки которая приедет именно к вам.</div>
-            </div>
-        </div>
-        <div className="answer">
-            <div className="answer__block">
-                <div className="answer__question">
-                    <div className="answer__info">i</div>
-                    <p>Какое состояние у бытовок?</p>
-                    <p className="answer__open">{">"}</p>
-                </div>
-                <div className="answer__content">Бытовки б/у, все в хорошем состояние, чистые, убранные и без посторонних запахов. По запросу перед отправкой можем отправить фото бытовки которая приедет именно к вам.</div>
-            </div>
-        </div>
-        <div className="answer">
-            <div className="answer__block">
-                <div className="answer__question">
-                    <div className="answer__info">i</div>
-                    <p>Какое состояние у бытовок?</p>
-                    <p className="answer__open">{">"}</p>
-                </div>
-                <div className="answer__content">Бытовки б/у, все в хорошем состояние, чистые, убранные и без посторонних запахов. По запросу перед отправкой можем отправить фото бытовки которая приедет именно к вам.</div>
-            </div>
-        </div>
+        )}
     </div>
     <div className="basement">
         <div className="basement__block">

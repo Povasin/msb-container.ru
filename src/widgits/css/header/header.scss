@@ -195,8 +195,15 @@ header {
                 .menu{
                     @extend %iconMenu
                 }
+                background-size: 150% 100%;
+                border: none;
+                transition: all .4s ease-in-out;
                 &:hover {
-                    transform: scale(1.02);
+                    background-position: 100% 0;
+                }
+                
+                &:focus {
+                    outline: none;
                 }
             }
 

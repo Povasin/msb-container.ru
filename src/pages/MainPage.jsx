@@ -1,11 +1,12 @@
 import React from 'react'
 import "./css/main.scss"
-import {DATA , furniture} from "../DATA/Data"
+import {DATA} from "../DATA/Data"
 import ProductCard from "../shared/componets/prodactCard/index"
-import FurnitureCard from "../shared/componets/furnitureCard/index"
 import { Link } from 'react-router-dom'
-
+import FurnitureSlider from "../shared/componets/slider/furniture"
+import CubinsSlider from "../shared/componets/slider/cubins"
 export default function MainPage() {
+
     return (
         <main>
             <div className="fd-row">
@@ -142,35 +143,9 @@ export default function MainPage() {
                 <div className="choose__img"><img decoding="async" src="/emptyCubins.webp" alt="бытовка пустая"/></div> 
                 </div>
             </div>
-            <div className="furniture">
-                    <div className="content">
-                        <h2>выберети мебель и оборудывание</h2>
-                        <p>для создание комплекта вам нужно выбрать мебель</p>
-                        <div className="fd-row">
-                            <button className="prevFurniture">←</button>
-                            <button className="nextFurniture next__active">→</button>
-                        </div>
-                    </div>
-                    <div className="slider">
-                        <div className="furniture-line">
-                            {furniture.map((item, index) => <FurnitureCard key={index} item={item}/>)}
-                        </div>
-                    </div>
-            </div>
+            <FurnitureSlider/>
             <div className="line"></div>
-            <div className="katalog">
-                <div className="katalog-row">
-                    <h2>Лидеры продаж</h2>
-                    <button className="prev" >←</button>
-                    <button className="next">→</button>
-                </div>
-                <div className="slider">
-                    <div className="katalog-line">
-                    {DATA.map((item, index) => <ProductCard key={index} item={item}/>)}
-                    </div>
-                </div>
-                <Link to="/katalog" className="more">посмотреть все бытовки</Link>
-            </div>
+            <CubinsSlider/>
             <div className="line"></div>
         </main>
     )

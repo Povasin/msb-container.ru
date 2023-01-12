@@ -69,8 +69,15 @@ body{
     border: none;
     font-weight: 100;
     transition: 0.3s;
-    &:hover{
-        transform: scale(1.02);
+    background-size: 150% 100%;
+    border: none;
+    transition: all .4s ease-in-out;
+    &:hover {
+        background-position: 100% 0;
+    }
+    
+    &:focus {
+        outline: none;
     }
 }
 
@@ -88,14 +95,15 @@ body{
     }
 }
 %sliderBtn{
-    border: 1.5px solid;
-    border-image-source:$gradient;
-    border-image-slice:1;
+    border: 1.5px solid !important;
+    border-image-source:$gradient !important;
+    border-image-slice:1 !important;
     background:$gradient; 
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 900;
+    transition: 0.3s;
 }
 %general__log{
     text-decoration: none;
@@ -168,7 +176,16 @@ body{
         margin: auto 0 0 auto;
         padding: calcFluid(2, 5, 700, 1920) calcFluid(15, 20, 700, 1920);
         background:$gradient;
+        background-size: 200% 100%;
         border: none;
+        transition: all .4s ease-in-out;
+        &:hover {
+            background-position: 100% 0;
+        }
+        
+        &:focus {
+            outline: none;
+        }
     }
     .card__bagActive{
         background:transparent;

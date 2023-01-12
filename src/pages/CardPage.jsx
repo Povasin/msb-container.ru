@@ -1,17 +1,58 @@
 import React, {useEffect, useState} from 'react'
-import FurnitureCard from "../shared/componets/furnitureCard/index"
-import {DATA , furniture} from "../DATA/Data"
+import {DATA} from "../DATA/Data"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {BagSlice} from "../shared/store/slices/bag"
 import {store} from "../shared/store/slices/store"
 import {useSelector} from "react-redux";
+import FurnitureSlider from "../shared/componets/slider/furniture"
 import "./css/cubinsForSomeThing.scss"
+import { useRef } from 'react'
 
 export default function CardPage() {
+
     //при добавление карточки в store все слетает
+    // useState не перезаписывет состояние в slider
     const location = useLocation()
     const navigate = useNavigate()
     const CardId = location.pathname.split("/")[2]
+    const item = searchItem() ?? navigate("/") 
+    const [activeImg, setActiveImg] = useState(item.img.find((point)=>point.active == true))
+    const [MainValue, setValue] = useState({
+        count: 1,
+        month: 1
+    })
+    const [cubinsSlider, setCubinsSlider] = useState(0)
+    const [cubinsBTN , setCubinsBTN] = useState({
+        next: true,
+        prev: false
+    })
+    const slider = useRef()
+    const BagStore = useSelector((state) => state.BagSlice); 
+    const isActive = BagStore.items.filter((array)=>array.id == item.id)[0]
+
+    function sliderNext() {
+        if (cubinsSlider < 100 && cubinsSlider >= 0) {
+            setCubinsSlider(cubinsSlider+100)
+            slider.current.style.top = -cubinsSlider + '%' 
+            setCubinsBTN({next:  false ,prev: true})
+        } 
+    }
+
+    function sliderPrev() {
+        if (cubinsSlider < 101 && cubinsSlider > 0 ) {
+            setCubinsSlider(cubinsSlider-100)
+            console.log(cubinsSlider);
+            slider.current.style.top = cubinsSlider + '%' 
+            setCubinsBTN({next:  true ,prev: false})
+        }
+    }
+
+    function changeValue(value, key){
+        if (value >= 1) {
+            setValue({...MainValue, [key]: value})
+        }
+    }
+    
     function searchItem() {
         let newItem = DATA.find((item)=>item.id == CardId)
         if (!newItem) {
@@ -22,30 +63,18 @@ export default function CardPage() {
             }
         } else return newItem
     } 
-    const item = searchItem() ?? navigate("/") 
-    const [activeImg, setActiveImg] = useState(item.img.find((point)=>point.active == true))
-    const [MainValue, setValue] = useState({
-        count: 1,
-        month: 1
-    })
-    function changeValue(value, key){
-        if (value >= 1) {
-            setValue({...MainValue, [key]: value})
-        }
-    }
 
     function handleClick(){
-
        store.dispatch(BagSlice.actions.addCard({id: item.id, data: item, count: MainValue.count, month: MainValue.month}));
     }
-    const BagStore = useSelector((state) => state.BagSlice); 
-    const isActive = BagStore.items.filter((array)=>array.id == item.id)[0]
+
     function changeProdactCount (value){
         if (value >= 1) {
             const newItems = [...BagStore.items.filter((item) => item.id !== isActive.id), {...isActive, count: value}] 
             store.dispatch(BagSlice.actions.updateBag(newItems));
         }
     }
+
     function changeProdactMonth (value){  
         if (value >= 1) {
             const newItems = [...BagStore.items.filter((item) => item.id !== isActive.id), {...isActive, month: value}] 
@@ -60,9 +89,11 @@ export default function CardPage() {
         point.active = true
         setActiveImg(point)
     } 
+
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [location])
+
     return (
         <main>
             <div className="transportation_wrapper">
@@ -70,13 +101,13 @@ export default function CardPage() {
                 <div className="transportation">
                     <div className="transportation__block">
                         <div className="slider-wrapper">
-                            <p className="prev">{'<'}</p>
+                            <p  className={`prev ${cubinsBTN.prev ? "active" : ""} `} onClick={sliderPrev}>{item.img.length == 3 && '<'}</p>
                             <div className="slider">
-                                <div className="slider-line">
+                                <div className="slider-line" ref={slider}>
                                     {item.img.map((point, index)=><img className={`slider__img ${point.active ? `active` : ""}`} onClick={()=>changeActiveImg(point)} src={point.src} key={index} alt={item.name}/>)}
                                 </div>
                             </div>
-                            <p className="next active">{'>'}</p>
+                            <p className={`next ${cubinsBTN.next ? "active" : ""} `} onClick={sliderNext} >{item.img.length == 3 && '>'}</p>
                         </div>
                         <div className="transportation__img">
                             <div className="star">★★★★☆</div>
@@ -127,21 +158,7 @@ export default function CardPage() {
                     </ul>
                 </div>
             </div>
-                <div className="furniture">
-                    <div className="content">
-                        <h2>выберети мебель и оборудывание</h2>
-                        <p>для создание комплекта вам нужно выбрать мебель</p>
-                    <div className="fd-row">
-                        <button className="prevFurniture">←</button>
-                        <button className="nextFurniture next__active">→</button>
-                    </div>
-                </div>
-                <div className="slider">
-                    <div className="furniture-line">
-                        {furniture.map((item, index) => <FurnitureCard key={index} item={item}/>)}
-                    </div>
-                </div>
-            </div>
+            <FurnitureSlider/>
         </main>
        
     )

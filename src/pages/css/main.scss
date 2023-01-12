@@ -253,6 +253,8 @@ main {
         
         .prevFurniture, 
         .nextFurniture{
+            border: 1.5px solid;
+            font-weight: 900;
             color: gray;
             padding: 0px 5px 5px 5px;
             font-size: calcFluid(25, 30, 1024, 1920);
@@ -313,7 +315,7 @@ main {
         }
         .prev,
         .next{
-            background:#5134c4;
+            background: #cacaca;
             color: #ffffff;
             border: none;
             font-weight: 900;
@@ -323,7 +325,11 @@ main {
         }
         .prev{
             margin: auto 0 auto auto;
-            background: #cacaca;
+        }
+        
+        .next__active,
+        .prev__active{
+            background:$gradient;
         }
     }
     .slider{

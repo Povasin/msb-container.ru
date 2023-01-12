@@ -25,7 +25,7 @@ export default function ContactPage() {
             </div>
             <div id="map__yandex">
             <YMaps>
-                <Map width="100%" height="100%" defaultState={{ center: [57.60083313280139,39.890269973791455], zoom: 10     }} > 
+                <Map width="100%" height="100%" defaultState={{ center: [57.60083313280139,39.890269973791455], zoom: 18   }} > 
                     <Placemark geometry={[57.60083313280139,39.890269973791455]}  /*properties={{iconContent: "msb-container"}}*/  />
                 </Map>
             </YMaps>
