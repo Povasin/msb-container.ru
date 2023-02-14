@@ -49,7 +49,9 @@ main{
             .orders__trackInfo{
                 @extend %d-row;
                 justify-content: center;
-                .orders__trackInfoCol{
+                .orders__trackInfoCol, 
+                .orders__trackInfoCol1{
+                    position: relative;
                     margin: 0 auto;
                     @extend %d-col;
                     p{  
@@ -59,66 +61,48 @@ main{
                         font-size: calcFluid(12, 20, 320, 1920);
                     }
                     .date{
-                        margin: 5px 0 25px 0;
+                        margin: 5px 0 calcFluid(5, 25, 320, 1920) 0;
                         font-weight: 500;
                         color: #58585e;
                     }
-                }
-            }
-            .orders__trackRadius{
-                @extend %d-row;
-                position: relative;
-                .borderRadius1,
-                .borderRadius2,
-                .borderRadius3,
-                .borderRadius4{
-                    position: absolute;
-                    border-radius: 50%;
-                    background: gray;
-                    width: calcFluid(20, 42, 320, 1920);
-                    height: calcFluid(20, 42, 320, 1920);
-                    margin: 0 auto;
-                    top: calcFluid(-10, -20, 320, 1920);
-                    img{
-                        margin: calcFluid(4, 8, 320, 1920);
-                        width: 60%;
+                    .borderRadius{
+                        z-index: 100;
+                        border-radius: 50%;
+                        background: gray;
+                        width: calcFluid(30, 42, 320, 1920);
+                        height: calcFluid(30, 42, 320, 1920);
+                        margin: 0 auto;
+                        top: calcFluid(-10, -20, 320, 1920);
+                        img{
+                            margin: calcFluid(6, 8, 320, 1920);
+                            width: 60%;
+                        }
+                    }
+                    .active{
+                        background: $gradient;
+                    }
+                    .border{
+                        position: absolute;
+                        border: 2px solid gray;
+                        width: calcFluid(100, 330, 320, 1920);
+                        top: calcFluid(55, 100, 320, 1920);
+                        left: calcFluid(30, 70, 320, 1920);
+                    }
+                    
+                    .borderActive{
+                        border: 2px solid gray !important;
+                        border-image-source: linear-gradient(90deg, #5134c4, #773cbc, #b856d4) !important;
+                        border-image-slice: 1 !important;
+                        background: linear-gradient(90deg, #5134c4, #773cbc, #b856d4);
+                        -webkit-background-clip: text;
+                        background-clip: text;
+                        -webkit-text-fill-color: transparent;
                     }
                 }
-                .borderRadius1{
-                    left: calcFluid(20, 135, 320, 1920);
-                }
-                .borderRadius2{
-                    left: calcFluid(100, 465, 320, 1920);
-                }
-                .borderRadius3{
-                    left:  calcFluid(175, 795, 320, 1920);
-                }
-                .borderRadius4{
-                    left: calcFluid(250, 1108, 320, 1920);
-                }
-                .active{
-                    background:$gradient; 
-                }
-                .borderActive{
-                    border: 2px solid gray !important;
-                    border-image-source: linear-gradient(90deg, #5134c4, #773cbc, #b856d4) !important;
-                    border-image-slice: 1 !important;
-                    background: linear-gradient(90deg, #5134c4, #773cbc, #b856d4);
-                    -webkit-background-clip: text;
-                    background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                }
-                .border1,
-                .border2,
-                .border3{
-                    border: 2px solid gray;
-                    width: 100%;
-                }
-                .border1{
-                    margin: 0 0 0 calcFluid(20, 150, 320, 1920);
-                }
-                .border3{
-                    margin: 0 calcFluid(20, 150, 320, 1920) 0 0;
+                .orders__trackInfoCol1{
+                    .border{
+                        width: calcFluid(80, 300, 320, 1920);
+                    }
                 }
             }
         }

@@ -1,7 +1,12 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, {useEffect} from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import "./css/services.scss"
+
 export default function ServicesPage() {
+    const location = useLocation()
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [location]) 
   return (
     <main>   
         <div className="services__wrapper">

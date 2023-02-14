@@ -54,6 +54,7 @@ export const authSlice = createSlice({
     reducers: {
         clearError(state){
             state.error = ''
+            state.isLoading = false
         },
         setUser(state, {payload}){
             state.userData = JSON.parse(payload) 
@@ -68,7 +69,6 @@ export const authSlice = createSlice({
             state.isLoading = true;
         },
         [login.fulfilled.type]: (state, action) => {
-            console.log(action.payload);
             if (!action.payload.message) {
                 state.isLoading = false;
                 state.userData = action.payload;
@@ -82,7 +82,6 @@ export const authSlice = createSlice({
             state.isLoading = true;
         },
         [register.fulfilled.type]: (state, action) => {
-            console.log(action.payload);
             if (!action.payload.message) {
                 state.isLoading = false;
                 state.userData = action.payload;

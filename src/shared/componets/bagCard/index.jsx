@@ -11,28 +11,23 @@ export default function BagCard({card}) {
     const handleClick = ()=>{
         store.dispatch(BagSlice.actions.removeCard(card));
     }
-    
-    //TODO: при изменение инпутов карточки меняются местами
-
     const changeProdactCount = (value) =>{
     if (value > 0) {
-        let newProdact = bagItems.find(item => item.id == card.id)
-        const newItems = [...bagItems.filter((item) => item.id !== card.id), {...newProdact, count: value}] 
+        const newItems = bagItems.map((item) => item.id === card.id ? {...item, count: value} : item) 
         store.dispatch(BagSlice.actions.updateBag(newItems));
     }
 
     }
     const changeProdactMonth = (value) =>{  
         if (value > 0) {
-            let newProdact = bagItems.find(item => item.id == card.id)
-            const newItems = [...bagItems.filter((item) => item.id !== card.id), {...newProdact, month: value}] 
+            const newItems = bagItems.map((item) => item.id === card.id ? {...item, month: value} : item) 
             store.dispatch(BagSlice.actions.updateBag(newItems));
         }
     }   
-
+    const mainCard = card.data.img[0].src
     return (
     <div className="bag__block">
-        <Link className="block__img" to={`/card/${card.id}`}><img src={card.data?.img[0].src} alt={card.data.name}/></Link>
+        <Link className="block__img" to={`/card/${card.id}`}><img src={mainCard} alt={card.data.name}/></Link>
         <div className="block__content">
             {CardId == "arrange" ? null : <p className="block__close" onClick={handleClick}>x</p> }
             <p className="rent">Аренда</p>

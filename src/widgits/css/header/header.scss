@@ -257,9 +257,8 @@ header {
         
         .sidebar{
             z-index: 10;
-            transition: all 300ms;
             top: 0;
-            right: -50%;
+            right: 0;
             position: fixed;
             width: 40%;
             height: 100%;

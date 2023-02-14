@@ -7,7 +7,6 @@ export default function LayOut(props) {
   useEffect(()=>{
     store.dispatch(BagSlice.actions.fillStore());
   }, [])
-  // localStorage.clear()
   return (
     <>
       <Header/>

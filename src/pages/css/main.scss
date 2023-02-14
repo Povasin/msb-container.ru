@@ -168,22 +168,37 @@ main {
     width: 60%;
     margin: 0 0 100px 0;
     @extend %d-col;
-    select:focus,
-    select:hover,
-    option:hover,
-    option:focus {
-        border:none;
-        outline:none;
-        border:transparent;
-    }
-    .choose__more{
-        z-index: 5;
-        @extend %more;        
-        option{
-
-            color: black;
+  
+    .choose__fd-col{
+        position: relative; 
+        display: flex;
+        flex-direction: column;
+        margin: 20px 0 auto auto;
+        .choose__more{
+            z-index: 5;
+            @extend %more;  
+            margin: 0;
         }
-    }
+        .select{
+            position: absolute;
+            width: 100%;
+            z-index: 100;
+            top: 50px;
+            background-color: white;
+            @extend %d-col;
+            box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.25);
+            p{  
+               padding: 5px ;
+               margin: 0;
+                box-sizing: border-box;
+                -webkit-text-fill-color: black;
+                &:hover{
+                    background-color: #e7e7e7;
+                }
+            }
+        }
+    }     
+
     img{
         margin:50px 0 0 calcFluid(8, 200, 320, 1920);
         width: 75%;

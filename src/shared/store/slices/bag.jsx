@@ -5,18 +5,17 @@ const initialState = {
     isLoading: false,
     error: '',
 };
-export const order = createAsyncThunk("/bag", async ({body, email}, {rejectWithValue}) => {
-    console.log({body:{...body}, email: email});
+export const order = createAsyncThunk("/bag", async ({body, email}, {rejectWithValue}) => {        
     return fetch(`${baseUrl}/bag`,{
-        method: "POST",
-        mode: 'cors',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({body:{...body}, email: email})
-      },
-    )
-    .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
+            method: "POST",
+            mode: 'cors',
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({body:{...body, orderAccepted: {date: "", status: false}, orderCollect: {date: "", status: false},  orderGo: {date: "", status: false}, orderReceived: {date: "", status: false}}, email: email})
+          },
+        )
+        .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
   },
 );
 
@@ -51,7 +50,6 @@ export const BagSlice = createSlice({
             state.isLoading = true;
         },
         [order.fulfilled.type]: (state, action) => {
-            console.log(action.payload);
             if (!action.payload.message) {
                 state.isLoading = false;
                 state.items = [];

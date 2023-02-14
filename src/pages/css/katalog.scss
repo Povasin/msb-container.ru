@@ -43,7 +43,12 @@ main{
                 color: #5134c4;
             }
         }
+        .firstFilter{
+        @extend %d-row;
+        }
         #firstFilter{
+            position: relative;
+            @extend %d-col;
             margin: 0;
             font-size: calcFluid(12, 18, 320, 1920);
             background:$gradient;
@@ -54,8 +59,27 @@ main{
             border: none;
             outline: none;
             appearance: none;
-            &::after{
-                border: 0px solid  #000;
+            .active{
+                cursor: pointer;
+                margin: 0;
+            }
+            .select{
+                position: absolute;
+                z-index: 100;
+                top: 25px;
+                background-color: white;
+                @extend %d-col;
+                box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.25);
+                p{  
+                    cursor: pointer;
+                   padding: 5px ;
+                   margin: 0;
+                    box-sizing: border-box;
+                    -webkit-text-fill-color: black;
+                    &:hover{
+                        background-color: #e7e7e7;
+                    }
+                }
             }
         }
         .filter__open{
@@ -176,29 +200,31 @@ main{
                 }
             }
               
-              input[type="checkbox"]:after {
-                content: ' ';
-                position: relative;
-                left: 35%;
-                top: 10%;
-                width: 15%;
-                height: 50%;
-                border: solid #fff;
-                border-width: 0 3px 3px 0;
-                transform: rotate(50deg);
-                display: none;
-              }
-              
-              input[type="checkbox"]:checked:after {
-                display: block;
-              }
+            input[type="checkbox"]:after {
+            content: ' ';
+            position: relative;
+            left: 35%;
+            top: 10%;
+            width: 15%;
+            height: 50%;
+            border: solid #fff;
+            border-width: 0 3px 3px 0;
+            transform: rotate(50deg);
+            display: none;
+            }
+            
+            input[type="checkbox"]:checked:after {
+            display: block;
+            }
             #clear{
                 @extend %more;
             }
 
         }
         .katalog-line{
+            overflow: scroll;
             width: 80%;
+            height: 840px;
             @extend %d-row;
             flex-wrap: wrap;
             align-content: flex-start;
@@ -207,6 +233,9 @@ main{
                 margin: 7px;
                 @extend %card;
             }
+        }
+        .katalog-line::-webkit-scrollbar {
+            display: none;
         }
     }
 }
@@ -217,7 +246,7 @@ main{
             z-index: 10;
             transition: all 300ms;
             top: 0;
-            right: -70%;
+            right: 0;
             position: fixed;
             width: 62%;
             height: 100%;

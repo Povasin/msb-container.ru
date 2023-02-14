@@ -1,9 +1,13 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import "./css/contact.scss"
 import { YMaps, Map, Placemark } from "react-yandex-maps";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function ContactPage() {
+    const location = useLocation()
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [location]) 
   return (
     <main>   
         <div className="map">
@@ -26,7 +30,7 @@ export default function ContactPage() {
             <div id="map__yandex">
             <YMaps>
                 <Map width="100%" height="100%" defaultState={{ center: [57.60083313280139,39.890269973791455], zoom: 18   }} > 
-                    <Placemark geometry={[57.60083313280139,39.890269973791455]}  /*properties={{iconContent: "msb-container"}}*/  />
+                    <Placemark geometry={[57.60083313280139,39.890269973791455]}  properties={{iconCaption: "msb-container",  balloonContent: '<strong>blue</strong> color'}} options={ {preset: 'islands#violetCircleDotIconWithCaption'}  }  />
                 </Map>
             </YMaps>
             </div>

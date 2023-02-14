@@ -1,9 +1,26 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { useSelector } from 'react-redux'
+import { store } from '../shared/store/slices/store';
 import "./css/galary.scss"
 import {DATA} from "../DATA/Data"
 import ProductCard from "../shared/componets/prodactCard/index"
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import {cardsSlice, getCards} from "../shared/store/slices/cards"
+
 export default function GallaryPage() {
+  const location = useLocation()
+  const cards = useSelector((state)=>state.cardsSlice)
+  useEffect(() => {
+      window.scrollTo(0, 0)
+  }, [location]) 
+  // useEffect(()=>{
+  //   store.dispatch(getCards({}))
+  //   DATA[0].mass.push(cards.items.filter((item)=>item.role == "Бытовка для проживания") )  
+  //   DATA[1].mass.push(cards.items.filter((item)=>item.role == "Бытовка прорабская") )  
+  //   DATA[2].mass.push(cards.items.filter((item)=>item.role == "Бытовка раздевалка") )  
+  //   DATA[3].mass.push(cards.items.filter((item)=>item.role == "Бытовка с душем") )  
+  //   DATA[4].mass.push(cards.items.filter((item)=>item.role == "Бытовка под склад") )  
+  // }, [])
   return (
     <main>   
         <div className="gallary">

@@ -9,6 +9,8 @@ export default function Header() {
     const BagStore = useSelector((state) => state.BagSlice);
     const [scroll, setScroll] = useState(false)
     const auth = useSelector((state)=>state.authSlice)
+    const [showSidebar, setShowSideBar] = useState(false)
+    
   return (
 <header>
     <div className="headerTop">
@@ -41,22 +43,24 @@ export default function Header() {
         <Link to="/gallary">Галерея</Link>
         <Link to="/bag" ><img src="/bagHeader.svg" alt="корзина"/><div className="services__sum"><p>{BagStore.items?.length}</p></div>Корзина</Link>
         <img  className="services__media" src="/search.svg" alt="поиск"/>
-        <div className="sidebar__open">
+        <div className="sidebar__open" onClick={()=>setShowSideBar(!showSidebar)}>
             <span></span>
         </div>
-        <div className="sidebar">
+       {showSidebar && 
+       <div className="sidebar">
             <div className="sidebar__menu">
                 <div className="sidebar__row">
-                    <Link to="/katalog/katalog.html">Каталог <div className="iconMenu"><span></span></div></Link>
-                    <p className="sidebar__close">X</p>
+                    <Link to="/katalog">Каталог <div className="iconMenu"><span></span></div></Link>
+                    <p className="sidebar__close" onClick={()=>setShowSideBar(!showSidebar)}>X</p>
                 </div>
                 <Link to="/aboutUs">О нас</Link>
                 <Link to="/services">Услуги</Link>
                 <Link to="/contact">Контакты</Link>
                 <Link to="/gallary">Галерея</Link>
-                <Link to="/bag" ><img src="/bagHeader.svg" alt="корзина"/><div className="services__sum"><p>{BagStore.items.length}</p></div>Корзина</Link>
+                <Link to="/bag" ><img src="/bagHeader.svg" alt="корзина"/><div className="services__sum"><p>{BagStore.items?.length}</p></div>Корзина</Link>
             </div>
         </div>
+        } 
     </div>
     </header>
   )

@@ -1,11 +1,12 @@
 import React, {useEffect, useState, useRef} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import {store} from "../shared/store/slices/store"
 import {register, authSlice} from "../shared/store/slices/auth"
 import "./css/register.scss"
-export default function RegisterPage() {
 
+export default function RegisterPage() {
+  const location = useLocation()
   const navigate = useNavigate()
   const [form, setForm ] = useState({
     email: "", 
@@ -19,15 +20,11 @@ export default function RegisterPage() {
     error: ""
   })
   const auth = useSelector((state)=>state.authSlice)
-  const loading = auth.isLoading 
   const inputEl = useRef(null);
-
-  if (auth.userData && !loading ) {
+  
+  if (auth.userData && !auth.isLoading  ) {
     navigate(`/user/${auth.userData.id}`)
   }
-  useEffect(()=>{
-    store.dispatch(authSlice.actions.clearError());
-  }, [])
 
   function changeInput(key, e) {
     setForm({...form, [key]: e.target.value})
@@ -49,7 +46,13 @@ export default function RegisterPage() {
       } else setCheckInput({status: false, error: "пароли не совпадают"})
     } 
   }
-  console.log(auth);
+  useEffect(()=>{
+    store.dispatch(authSlice.actions.clearError());
+  }, [])
+
+  useEffect(() => {
+      window.scrollTo(0, 0)
+  }, [location])
   return (
     <main>   
         <div className="register">
@@ -62,7 +65,7 @@ export default function RegisterPage() {
                 <input type="password" id="passwordCheck" placeholder="подтвердите пароль" value={checkPassword} onChange={(e)=>setCheckPassword(e.target.value)} maxLength="16"/>
                 <p className="error">{auth?.error}{checkInput.error}{}</p>
                 <label><input type="checkbox" id="accept" ref={inputEl} />согласен на отправку данных</label>
-                <button id="register" className={`registerBTN ${!loading ? "" : "loading"} `} disabled={loading} onClick={send}>{!loading ? "подтвердить" : "загрузка"}</button>
+                <button id="register" className={`registerBTN ${!auth.isLoading  ? "" : "loading"} `} disabled={auth.isLoading } onClick={send}>{!auth.isLoading  ? "подтвердить" : "загрузка"}</button>
                 <p className="account">Есть аккунт? <a href="../login/login.html">выполните вход</a></p>
             </div>
         </div>  

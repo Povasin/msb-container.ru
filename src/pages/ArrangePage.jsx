@@ -17,7 +17,6 @@ export default function ArrangePage() {
         city: "",
         house: ""
     })
-    localStorage.clear()
     const [error, setError] = useState("")
     function BagStorePrice() {
         let summ = 0;
@@ -35,7 +34,6 @@ export default function ArrangePage() {
     }
     async function  send() {
         if (!isDelivery) {
-            console.log({body:{ mass:BagStore.items, delivery: "самовызов", number:  Math.floor(Math.random() * 100000000)}, email: auth.userData.email} );
             store.dispatch(order({body:{ mass:BagStore.items, delivery: "самовызов", number:  Math.floor(Math.random() * 100000000)}, email: auth.userData.email}))
         } else{
             if (inputDelivery.city == "" || inputDelivery.house == "") {
@@ -77,11 +75,11 @@ export default function ArrangePage() {
                         </div>
                     </div>
                     <div id="map__yandex">
-                        <YMaps>
-                            <Map width="100%" height="100%" defaultState={{ center: [57.60083313280139,39.890269973791455], zoom: 10     }} > 
-                                <Placemark geometry={[57.60083313280139,39.890269973791455]}  /*properties={{iconContent: "msb-container"}}*/  />
-                            </Map>
-                        </YMaps>
+                    <YMaps>
+                        <Map width="100%" height="100%" defaultState={{ center: [57.60083313280139,39.890269973791455], zoom: 18   }} > 
+                            <Placemark geometry={[57.60083313280139,39.890269973791455]}  properties={{iconCaption: "msb-container",  balloonContent: '<strong>blue</strong> color'}} options={ {preset: 'islands#violetCircleDotIconWithCaption'}  }  />
+                        </Map>
+                    </YMaps>
                     </div>
                 </div>
             </>
@@ -95,15 +93,15 @@ export default function ArrangePage() {
             <h2>Заказ</h2>
             {BagStore.items.map((item, index) => <BagCard key={index} card={item}/>)}
             <h2>Оплата</h2>
-            <div class="input__price">
+            <div className="input__price">
                     <p>Итого:</p>
                     <span name="summPriceOrder" id="price">{BagStorePrice()}₽</span>
             </div>                    
-            <div class="input__discount">
+            <div className="input__discount">
                 <p>Без скидки:</p>
                 <span id="discount">{BagStoredisCount()}₽</span>
             </div>
-            <div class="input__delivery">
+            <div className="input__delivery">
                 <p>способ доставки:</p>
                 <span id="discount">{!isDelivery ? "самовызов" : `доставка`}</span>
             </div>

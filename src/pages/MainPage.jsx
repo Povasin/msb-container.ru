@@ -5,8 +5,13 @@ import ProductCard from "../shared/componets/prodactCard/index"
 import { Link } from 'react-router-dom'
 import FurnitureSlider from "../shared/componets/slider/furniture"
 import CubinsSlider from "../shared/componets/slider/cubins"
+import { useState } from 'react'
 export default function MainPage() {
-
+    const [showSelect, setShowSelect] = useState({
+        active: "выбрать формат",
+        state: false,
+        src: "/emptyCubins.webp"
+    })
     return (
         <main>
             <div className="fd-row">
@@ -120,27 +125,24 @@ export default function MainPage() {
                     <h3>MSB</h3>
                     <h2>Cобери свой идеальный комплект бытовки</h2>
                     <p>мы предлагаем собрать комплект мебели и обарудывания для твоей бытовки</p>
-                    <select className="choose__more">
-                        <option value="/emptyCubins.webp">выбрать формат</option>
-                        <option value="/cubinsForDress.webp">бытовка раздевалка</option>
-                        <option value="/cubinsForWork.webp">бытовка прорабская</option>
-                        <option value="/cubinsForLive.webp">бытовка для проживания </option>
-                        <option value="/cubinsForBath.webp"> бытовка с душем</option>
-                    </select>
                     <div className="fd-row">
                         <Link to="/" className="content__Youtube"><div className="block1"></div></Link>
                         <Link to="/"> <p className="content__text">Наш Youtube канал</p></Link>
                     </div>
                 </div>
                 <div className="choose">
-                    <select className="choose__more">
-                        <option className="option" value="/emptyCubins.webp">выбрать формат</option>
-                        <option className="option" value="/cubinsForDress.webp">бытовка раздевалка</option>
-                        <option className="option" value="/cubinsForWork.webp">бытовка прорабская</option>
-                        <option className="option" value="/cubinsForLive.webp">бытовка для проживания </option>
-                        <option className="option" value="/cubinsForBath.webp"> бытовка с душем</option>
-                    </select>
-                <div className="choose__img"><img decoding="async" src="/emptyCubins.webp" alt="бытовка пустая"/></div> 
+                    <div className="choose__fd-col">
+                        <p className="choose__more" onClick={()=>setShowSelect({...showSelect, state: true})} >{showSelect.active}</p>
+                        {showSelect.state && <div className='select'>
+                                <p onClick={()=>setShowSelect({active: "выбрать формат", state: false, src: "/emptyCubins.webp"})}>выбрать формат</p>
+                                <p onClick={()=>setShowSelect({active: "бытовка раздевалка", state: false, src: "/cubinsForDress.webp"})}>бытовка раздевалка</p>
+                                <p onClick={()=>setShowSelect({active: "бытовка прорабская", state: false, src: "/cubinsForWork.webp"})}>бытовка прорабская</p>
+                                <p onClick={()=>setShowSelect({active: "бытовка для проживания", state: false, src: "/cubinsForLive.webp"})}>бытовка для проживания </p>
+                                <p onClick={()=>setShowSelect({active: "бытовка с душем", state: false, src: "/cubinsForBath.webp"})}> бытовка с душем</p>
+                        </div>}
+                    </div>
+
+                <div className="choose__img"><img decoding="async" src={showSelect.src} alt={showSelect.active}/></div> 
                 </div>
             </div>
             <FurnitureSlider/>

@@ -1,7 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, {useEffect} from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import "./css/aboutUs.scss"
 export default function AboutUsPage() {
+    const location = useLocation()
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [location]) 
   return (
     <main>   
         <div className="about__wrapper">

@@ -9,9 +9,6 @@ import "./css/cubinsForSomeThing.scss"
 import { useRef } from 'react'
 
 export default function CardPage() {
-
-    //при добавление карточки в store все слетает
-    // useState не перезаписывет состояние в slider
     const location = useLocation()
     const navigate = useNavigate()
     const CardId = location.pathname.split("/")[2]
@@ -65,7 +62,7 @@ export default function CardPage() {
     } 
 
     function handleClick(){
-       store.dispatch(BagSlice.actions.addCard({id: item.id, data: item, count: MainValue.count, month: MainValue.month}));
+       store.dispatch(BagSlice.actions.addCard({...item, id: item.id, count: MainValue.count, month: MainValue.month}));
     }
 
     function changeProdactCount (value){

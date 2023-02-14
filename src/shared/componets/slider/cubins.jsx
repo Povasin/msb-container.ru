@@ -17,13 +17,15 @@ export default function CubinsSlider() {
         if (document.documentElement.clientWidth > 851) {
             if ( cubinsSlider < 100 ) {
                 setCubinsBTN({next:  false ,prev: true})
-                setCubinsSlider(cubinsSlider+100)
-                cubinsLine.current.style.left = - cubinsSlider + '%' 
+                let ofset = cubinsSlider+100
+                setCubinsSlider(ofset)
+                cubinsLine.current.style.left = - ofset + '%' 
             }
         } else if (document.documentElement.clientWidth < 851 && document.documentElement.clientWidth > 440) {
             if ( cubinsSlider < 200 ) {
-                 setCubinsSlider(cubinsSlider+100)
-                    cubinsLine.current.style.left = - cubinsSlider + '%' 
+                let ofset = cubinsSlider+100
+                 setCubinsSlider(ofset)
+                    cubinsLine.current.style.left = - ofset + '%' 
                 if (cubinsSlider== 200) {
                     setCubinsBTN({next:  false ,prev: true})
                 }else if ( cubinsSlider == 100) {
@@ -32,8 +34,9 @@ export default function CubinsSlider() {
             }
         } else if (document.documentElement.clientWidth < 440) {
             if ( cubinsSlider< 500 ) {
-                 setCubinsSlider(cubinsSlider+100)
-                cubinsLine.current.style.left = - cubinsSlider + '%' 
+                let ofset = cubinsSlider+100
+                 setCubinsSlider(ofset)
+                cubinsLine.current.style.left = - ofset + '%' 
                 if ( cubinsSlider == 500) {
                     setCubinsBTN({next:  false ,prev: true})
                 }else if ( cubinsSlider == 100 || cubinsSlider == 200 ||cubinsSlider == 300 ||  cubinsSlider == 400 || cubinsSlider == 500) {
@@ -45,14 +48,16 @@ export default function CubinsSlider() {
     function sliderPrev() {
         if (document.documentElement.clientWidth > 851) {
             if ( cubinsSlider< 101 && cubinsSlider> 0) {
-                 setCubinsSlider(cubinsSlider-100)
+                let ofset = cubinsSlider-100
+                 setCubinsSlider(ofset)
                  setCubinsBTN({next:  true ,prev: false})
-                cubinsLine.current.style.left = - cubinsSlider + '%' 
+                cubinsLine.current.style.left = - ofset + '%' 
             }
         } else if (document.documentElement.clientWidth < 851 && document.documentElement.clientWidth > 440) {
             if ( cubinsSlider <= 200 &&  cubinsSlider > 0  ) {
-                 setCubinsSlider(cubinsSlider-100)
-                cubinsLine.current.style.left = - cubinsSlider + '%' 
+                let ofset = cubinsSlider-100
+                 setCubinsSlider(ofset)
+                cubinsLine.current.style.left = - ofset + '%' 
                 if ( cubinsSlider == 200 || cubinsSlider == 0) {
                     setCubinsBTN({next:  true ,prev: false})
                 }else if ( cubinsSlider == 100) {
@@ -61,8 +66,9 @@ export default function CubinsSlider() {
             }
         } else if (document.documentElement.clientWidth < 440) {
             if ( cubinsSlider <= 500 && cubinsSlider > 0 ) {
-                 setCubinsSlider(cubinsSlider-100)
-                cubinsLine.current.style.left = - cubinsSlider + '%' 
+                let ofset = cubinsSlider-100
+                 setCubinsSlider(ofset)
+                cubinsLine.current.style.left = - ofset + '%' 
                 if ( cubinsSlider == 500 || cubinsSlider == 0 ) {
                     setCubinsBTN({next:  true ,prev: false})
                 }else if ( cubinsSlider == 100 ||cubinsSlider == 200 ||  cubinsSlider == 300 ||  cubinsSlider == 400 ||cubinsSlider == 500) {

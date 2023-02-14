@@ -277,6 +277,8 @@ body{
         width: calcFluid(200, 300, 1024, 1920);
     }
     .search__block{
+        height: 192px;
+        overflow-y: scroll;
         z-index: 20;
         position: absolute;
         @extend %d-col;
