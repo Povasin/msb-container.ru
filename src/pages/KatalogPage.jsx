@@ -175,8 +175,8 @@ export default function KatalogPage() {
                         <div className="filter__open" onClick={()=>setShowSideBar(!showSideBar)}><img src="./filter.webp" alt="фильтры"/><p>фильтры</p></div>
                 </div>
                 <div className="katalog-row">
-                    {document.documentElement.clientWidth > 1024 && <ShowFillter/>}
-                    {document.documentElement.clientWidth < 1024 && showSideBar && <ShowFillter/>}
+                    {document.documentElement.clientWidth > 1024 && ShowFillter()}
+                    {document.documentElement.clientWidth < 1024 && showSideBar && ShowFillter()}
                     <div className="katalog-line">
                         {cardsState.length == 0 ?  <div className="bag__clear"><h2>По вашему запросу ничего не найдено</h2><p>измените фильтры и попробуйте еще раз</p></div> : cardsState.map((item, index) => <ProductCard key={index} item={item}/>)}
                     </div>
