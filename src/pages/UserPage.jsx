@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import {useNavigate } from 'react-router-dom'
-import { authSlice, getOrder } from '../shared/store/slices/auth';
+import { authSlice} from '../shared/store/slices/auth';
+import { orderSliceClient, getorder} from '../shared/store/slices/orderClient';
 import { store } from '../shared/store/slices/store';
-import "./css/user.scss"
-import UserBag from "../shared/componets/userBag/index"
-import { useEffect } from 'react';
+import "./scss/user.scss"
+import UserBag from "../shared/componets/UserBag"
 export default function UserPage() {
     let navigate = useNavigate()
     async function exit() {
@@ -14,14 +14,15 @@ export default function UserPage() {
         }).then(()=>{navigate("/")})
     }
     const auth = useSelector((state)=>state.authSlice)
+    const order = useSelector((state)=>state.orderSliceClient)
     useEffect(()=>{
-        auth.userData?.email && store.dispatch(getOrder({email:auth.userData.email}))
+        order.items && store.dispatch(getorder({email: auth.userData?.email}))
     }, [auth.userData?.email])
   return (
     <main>   
         <div className="userHtml">
             <div className="userContent">
-                <div className="userContent__photo"></div>
+                <div className="userContent__photo"><img src="/userIcon.svg" alt="пользователь" /></div>
                 <div className="userContent__col">
                     <p className="userContent__name">{auth.userData?.name}</p>
                     <p>Номер телефона: <span className="userContent__phone">{auth.userData?.phone}</span></p>
@@ -32,7 +33,7 @@ export default function UserPage() {
             <div className="orders">
                 <h1>Заказы</h1>
                 <div id="orders__render">
-                    {<UserBag auth={auth}/>}
+                    {<UserBag order={order} />}
                 </div>
             </div>
         </div>  

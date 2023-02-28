@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import {React, Suspense} from 'react'
 import {Routes, useLocation, Route } from 'react-router-dom'
 import RouterConfig from "../../../shared/routerConfig"
+import routerConfigAdmin from "../../../shared/routerConfigAdmin"
 import { authSlice } from '../../../shared/store/slices/auth'
 import { useSelector } from 'react-redux'
 import {store} from "../../../shared/store/slices/store"
@@ -19,6 +20,9 @@ export default function AppRouter() {
     <Suspense fallback={<h1>loading profile...</h1>}>
         <Routes>
            {Object.values(RouterConfig).map(({element, path}) =>(
+            <Route key={path} path={path} element={element}/>
+           ))}
+            {Object.values(routerConfigAdmin).map(({element, path}) =>(
             <Route key={path} path={path} element={element}/>
            ))}
         </Routes>

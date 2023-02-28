@@ -1,11 +1,11 @@
 import React, {useRef} from 'react'
 import {useSelector} from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
-import BagCard from '../shared/componets/bagCard'
+import BagCard from '../shared/componets/BagCard'
 import { authSlice } from '../shared/store/slices/auth';
 import {store} from "../shared/store/slices/store"
 import {order, BagSlice} from "../shared/store/slices/bag"
-import "./css/bag.scss"
+import "./scss/bag.scss"
 import { useState } from 'react';
 export default function BagPage() {
     const BagStore = useSelector((state) => state.BagSlice); 

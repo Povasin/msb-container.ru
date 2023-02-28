@@ -1,12 +1,13 @@
 import React, {useRef, useState} from 'react'
 import {useSelector} from "react-redux";
 import { Link, useNavigate } from 'react-router-dom'
-import "./css/arrange.scss"
+import "./scss/arrange.scss"
 import { YMaps, Map, Placemark } from "react-yandex-maps";
 import { authSlice } from '../shared/store/slices/auth';
 import {store} from "../shared/store/slices/store"
 import {order, BagSlice} from "../shared/store/slices/bag"
-import BagCard from '../shared/componets/bagCard'
+import BagCard from '../shared/componets/BagCard'
+
 export default function ArrangePage() {
     const [ isDelivery, setIsDelivery] = useState(false)
     const navigate = useNavigate()
@@ -34,12 +35,12 @@ export default function ArrangePage() {
     }
     async function  send() {
         if (!isDelivery) {
-            store.dispatch(order({body:{ mass:BagStore.items, delivery: "самовызов", number:  Math.floor(Math.random() * 100000000)}, email: auth.userData.email}))
+            await store.dispatch(order({body:{ mass:BagStore.items, delivery: "самовызов"}, email: auth.userData.email}))
         } else{
             if (inputDelivery.city == "" || inputDelivery.house == "") {
                 setError("поля не заполненны")
             } else{
-                await store.dispatch(order({body:{ mass:BagStore.items, delivery: inputDelivery, number:  Math.floor(Math.random() * 100000000), email: auth.userData.email}}))
+                await store.dispatch(order({body:{ mass:BagStore.items, delivery: inputDelivery}, email: auth.userData.email}))
             }
         }
     }

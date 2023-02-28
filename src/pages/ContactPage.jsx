@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import "./css/contact.scss"
+import "./scss/contact.scss"
 import { YMaps, Map, Placemark } from "react-yandex-maps";
 import { Link, useLocation } from 'react-router-dom';
 

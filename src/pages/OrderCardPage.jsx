@@ -1,26 +1,28 @@
 import React, {useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import {useNavigate, useLocation, Link} from 'react-router-dom'
-import { authSlice, getOrder } from '../shared/store/slices/auth';
+import { authSlice} from '../shared/store/slices/auth';
+import { orderSliceClient, getorder } from '../shared/store/slices/orderClient';
+import { OrdersCardSlice, getOrdersCards } from '../shared/store/slices/ordersCard';
 import { store } from '../shared/store/slices/store';
-import "./css/user.scss"
+import "./scss/user.scss"
 export default function  OrderCardPage() {
     const auth =  useSelector((state)=>state.authSlice)
     const location = useLocation()
     const navigate = useNavigate()
-    const orderId = location.pathname.split("/")[3]
-    const item = auth.userData?.orderMass.find((item)=>item.number == orderId) ?? navigate("/") 
-    console.log(item);
+    const ordersClient = useSelector((state)=>state.orderSliceClient)
+    const order = ordersClient?.items.find((item)=>item.number == location.pathname.split("/")[3]) ?? navigate("/") 
+    const orderCards = useSelector((state)=>state.orderSliceClient)
     function OrderPrice() {
         let summ = 0;
-        item?.mass.forEach(array=>{
+        orderCards.forEach(array=>{
             summ+= (array.count*array.data.price )*array.month 
         })
         return summ
     }
     function OrderDiscount() {
         let summ = 0;
-        item?.mass.forEach(array=>{
+        orderCards.forEach(array=>{
             summ+= (array.count*array.data.discount )*array.month 
         })
         return summ
@@ -29,12 +31,15 @@ export default function  OrderCardPage() {
         window.scrollTo(0, 0)
     }, [location]) 
     useEffect(()=>{
-        auth.userData?.email && store.dispatch(getOrder({email:auth.userData.email}))
+        ordersClient?.items && store.dispatch(getorder({email: auth.userData.email}))
+    }, [auth.userData?.email])
+    useEffect(()=>{
+        orderCards?.items && store.dispatch(getOrdersCards({email: auth.userData.id, number: location.pathname.split("/")[3]}))
     }, [auth.userData?.email])
   return (
     <main>
         <div className='userHtml'>
-            {item?.mass.map((array)=>
+            {orderCards.map((array)=>
                 <div key={array.id} className="bag__block">
                     <Link to={`/card/${array.id}`} className="block__imgJS"><img src={array.data.img[0].src} alt={array.data.name}/></Link>
                 <div className="block__content">
@@ -64,36 +69,36 @@ export default function  OrderCardPage() {
                 </div>
                 <div className="input__delivery">
                     <p className='rent'>
-                        {item?.delivery == "самовызов" ? `можно забрать:` : "срок доставки:"} 
+                        {order?.delivery == "самовызов" ? `можно забрать:` : "срок доставки:"} 
                     </p>
-                        <span>{item?.date == "" && !item?.orderReceived.status ? "не указано продавцом" : item?.orderReceived.status ? "заказ получен" : item?.date}</span>
+                        <span>{order?.date == "" && !order?.orderReceived ? "не указано продавцом" : order?.orderReceived ? "заказ получен" : order?.date}</span>
                     </div>
                 <h2>Отслеживание заказа</h2>
                 <div className="orders__track">
                     <div className="orders__trackInfo">
                         <div className="orders__trackInfoCol">
                             <p>заказ принят</p>
-                            <p className="date">{!item?.orderAccepted.date ? "x" : item?.orderAccepted.date}</p>
-                            <div className={`borderRadius ${!item?.orderAccepted.status ? "" : "active"}`} >{item?.orderAccepted.status && <img src="/tick.svg" alt="галочка"/>}</div>
-                            <div className={`border ${!item?.orderAccepted.status ? "" : "borderActive"}`}></div>
+                            <p className="date">{!order?.orderAccepted ? "x" : order?.orderAccepted}</p>
+                            <div className={`borderRadius ${!order?.orderAccepted ? "" : "active"}`} >{order?.orderAccepted && <img src="/tick.svg" alt="галочка"/>}</div>
+                            <div className={`border ${!order?.orderAccepted ? "" : "borderActive"}`}></div>
                         </div>
                         <div className="orders__trackInfoCol">
                             <p>заказ собирается</p>
-                            <p className="date">{!item?.orderCollect.date ? "x" : item?.orderCollect.date}</p>
-                            <div className={`borderRadius ${!item?.orderCollect.status ? "" : "active"}`} >{item?.orderCollect.status && <img src="/tick.svg" alt="галочка"/>}</div>
-                            <div className={`border ${!item?.orderCollect.status ? "" : "borderActive"}`}></div>
+                            <p className="date">{!order?.orderCollect ? "x" : order?.orderCollect}</p>
+                            <div className={`borderRadius ${!order?.orderCollect ? "" : "active"}`} >{order?.orderCollect && <img src="/tick.svg" alt="галочка"/>}</div>
+                            <div className={`border ${!order?.orderCollect ? "" : "borderActive"}`}></div>
                         </div>
                         <div className="orders__trackInfoCol1">
                             <p>заказ в пути</p>
-                            <p className="date">{!item?.orderGo.date ? "x" : item?.orderGo.date}</p>
-                            <div className={`borderRadius ${!item?.orderGo.status ? "" : "active"}`} >{item?.orderGo.status && <img src="/tick.svg" alt="галочка"/>}</div>
-                            <div className={`border ${!item?.orderGo.status ? "" : "borderActive"}`}></div>
+                            <p className="date">{!order?.orderGo ? "x" : order?.orderGo}</p>
+                            <div className={`borderRadius ${!order?.orderGo ? "" : "active"}`} >{order?.orderGo && <img src="/tick.svg" alt="галочка"/>}</div>
+                            <div className={`border ${!order?.orderGo ? "" : "borderActive"}`}></div>
                         </div>
                         <div className="orders__trackInfoCol">
                             <p>заказ получен</p>
-                            <p className="date">{!item?.orderReceived.date ? "x" : item?.orderReceived.date}</p>
+                            <p className="date">{!order?.orderReceived ? "x" : order?.orderReceived}</p>
                             
-                        <div className={`borderRadius ${!item?.orderReceived.status ? "" : "active"}`} >{item?.orderReceived.status && <img src="/tick.svg" alt="галочка"/>}</div>
+                        <div className={`borderRadius ${!order?.orderReceived ? "" : "active"}`} >{order?.orderReceived && <img src="/tick.svg" alt="галочка"/>}</div>
                         </div>
                     </div>
                 </div>

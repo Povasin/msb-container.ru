@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import {store} from "../shared/store/slices/store"
 import {register, authSlice} from "../shared/store/slices/auth"
-import "./css/register.scss"
+import "./scss/register.scss"
 
 export default function RegisterPage() {
   const location = useLocation()
@@ -38,7 +38,6 @@ export default function RegisterPage() {
         setCheckInput({ error: "", status: true})
         if (form.email.indexOf('@') != -1) {
          if (inputEl.current.checked) {
-          console.log(form);
           store.dispatch(register({body: form}))
          }else  setCheckInput({error: "Заполните этот флажок для успешной регистрации", status: true})
           

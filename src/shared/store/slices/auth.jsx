@@ -33,20 +33,21 @@ export const register = createAsyncThunk("auth/register", async ({body}, {reject
       .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
     },
 );
-export const getOrder = createAsyncThunk("auth/overwriteMass", async ({email}, {rejectWithValue}) => {
-    return fetch(`${baseUrl}/overwriteMass`,{
-        method: "POST",
-        mode: 'cors',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({email})
-      },
-    )
-    .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
-  },
-);
 
+export const loginAdmin = createAsyncThunk("auth/loginAdmin", async ({body}, {rejectWithValue}) => {
+    console.log({...body});
+      return fetch(`${baseUrl}/loginAdmin`,{
+          method: "POST",
+          mode: 'cors',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({...body})
+        },
+      )
+      .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
+    },
+);
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -82,22 +83,22 @@ export const authSlice = createSlice({
             state.isLoading = true;
         },
         [register.fulfilled.type]: (state, action) => {
-            if (!action.payload.message) {
+            if (!action.payload.message && !action.payload.err) {
                 state.isLoading = false;
                 state.userData = action.payload;
                 localStorage.setItem("user", JSON.stringify(state.userData))
             } else {
                 state.isLoading = false;
-                state.error = action.payload.message;
+                state.error = action.payload.message || action.payload.err;
             }
         },
-        [getOrder.pending.type]: (state) => {
+        [loginAdmin.pending.type]: (state) => {
             state.isLoading = true;
         },
-        [getOrder.fulfilled.type]: (state, action) => {
+        [loginAdmin.fulfilled.type]: (state, action) => {
             if (!action.payload.message) {
                 state.isLoading = false;
-                state.userData ={...state.userData, orderMass: action.payload.orderMass} 
+                state.userData = action.payload;
                 localStorage.setItem("user", JSON.stringify(state.userData))
             } else {
                 state.isLoading = false;

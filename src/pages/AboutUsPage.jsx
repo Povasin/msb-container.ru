@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import "./css/aboutUs.scss"
+import "./scss/aboutUs.scss"
 export default function AboutUsPage() {
     const location = useLocation()
     useEffect(() => {

@@ -1,8 +1,8 @@
 import React, { useState,useEffect } from 'react'
-import "./css/katalog.scss"
+import "./scss/katalog.scss"
 import { useSelector } from 'react-redux'
 import {DATA, furniture} from "../DATA/Data"
-import ProductCard from "../shared/componets/prodactCard/index"
+import ProductCard from "../shared/componets/ProdactCard"
 import { Link, useLocation } from 'react-router-dom'
 import {cardsSlice, getCards} from "../shared/store/slices/cards"
 import { store } from '../shared/store/slices/store';

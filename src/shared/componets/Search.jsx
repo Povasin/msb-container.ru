@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {DATA, furniture} from "../../../DATA/Data"
+import {DATA, furniture} from "../../DATA/Data"
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useCallback } from 'react'
@@ -57,7 +57,7 @@ export default function Search() {
         <input type="text" value={search} onChange={(e)=>resultFUNC(e)} placeholder="Поиск" maxLength="30" className="search" />
         <img src="/search.svg" alt="поиск"/>
         {showSearch && 
-            <div className="search__block">
+            <div className="search__block" onClick={()=>setShowSearch(false)}>
                 {results ? results.map((item, index)=><Link key={index} className="search__blockHref" to={`/card/${item.id}`}>{item.name}</Link>) : null}
             </div>
         }   

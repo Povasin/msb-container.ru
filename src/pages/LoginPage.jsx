@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import "./css/login.scss"
+import "./scss/login.scss"
 import { useSelector } from 'react-redux'
 import {store} from "../shared/store/slices/store"
 import {login, authSlice} from "../shared/store/slices/auth"

@@ -1,0 +1,67 @@
+@import "../../widgits/adminScss/layOut.scss";
+
+.headerOrder{
+    @extend %headerOrder;
+    .headerOrder__margin{
+        margin: calcFluid(16, 40, 320, 1920) 0 calcFluid(0, 35, 320, 1920) 40px !important;
+    }
+}
+h1{
+    font-family: "Inter-Bold";
+    font-size:calcFluid(17, 30, 320, 1920) ;
+}
+
+.people{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .people__order{
+        display: flex;
+        flex-direction: row;
+    }
+    .order__clear{
+        margin: auto;
+        h2, p{
+           text-align: center;
+        }
+        h2{
+            font-size: calcFluid(18, 30, 320, 1920);
+        }
+        p{
+            font-size: calcFluid(15, 18, 320, 1920);
+        }
+    }
+    .bag__block {
+        width: 10%;
+        margin: 0 10px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+        text-decoration: none;
+        padding: 20px 10px  20px 10px;
+        border-radius: calcFluid(4, 10, 320, 1920);
+        p{  
+            margin: 10px auto auto auto;
+            text-align: center;
+            color: black;
+            font-size: calcFluid(16, 20, 320, 1920);
+        }
+       .borderRadius{
+        padding: 50px 0;
+        display: flex;
+        flex-direction: row;
+        border-radius: 50%;
+        background: transparent;
+        border: 1px solid #5134c4;
+        align-items: center;
+        img{
+            margin: auto;
+            max-height: 100%;
+        }
+       }
+    }
+}
+
+.orders::-webkit-scrollbar {
+    display: none;
+}

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import ProductCard from "../prodactCard/index"
+import ProductCard from "../ProdactCard"
 import {DATA} from "../../../DATA/Data"
 import { Link } from 'react-router-dom'
 

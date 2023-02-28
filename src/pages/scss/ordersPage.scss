@@ -1,0 +1,47 @@
+@import "../../widgits/adminScss/layOut.scss";
+
+.headerOrder{
+    @extend %headerOrder;
+}
+h1{
+    font-family: "Inter-Bold";
+    font-size:calcFluid(17, 30, 320, 1920) ;
+}
+.orders{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .order__clear{
+        margin: auto;
+        h2, p{
+           text-align: center;
+        }
+        h2{
+            font-size: calcFluid(18, 30, 320, 1920);
+        }
+        p{
+            font-size: calcFluid(15, 18, 320, 1920);
+        }
+    }
+    .bag__block {
+        @extend %bag__block;
+        .block__orderNew,
+        .block__orderTrack,
+        .block__orderAccept {
+            right: 0;
+            top: -15px;
+            cursor: pointer;
+            font-size: calcFluid(15, 20, 320, 1920);
+            font-weight: 900;
+            color: #58585e;
+            position: absolute;
+        }
+        .block__orderNew{color: red;}
+        .block__orderTrack{color: gray;}
+        .block__orderAccept{color: green;}
+    }
+}
+
+.orders::-webkit-scrollbar {
+    display: none;
+}

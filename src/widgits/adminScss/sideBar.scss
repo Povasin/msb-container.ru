@@ -1,0 +1,95 @@
+@import "./layOut.scss";
+
+aside{
+    z-index: 1000;
+    position: fixed;
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    padding: calcFluid(7, 20, 320, 1920) calcFluid(7, 20, 320, 1920)  calcFluid(7, 20, 320, 1920) calcFluid(14, 40, 320, 1920);
+    top: 0;
+    width: 17%;
+    height: 96vh;
+    .logo{
+        display: flex;
+        flex-direction: row;
+        margin: 0 auto;
+        img{
+            margin: auto;
+            height: 80%;
+        }
+        a{  
+            cursor: pointer;
+            width: 70%;
+            margin: 0 0 20px 10px;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            background:$gradient;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #5134c4;
+            font-family: "fouore";
+            font-size:calcFluid(35, 60, 320, 1920);
+            span{
+                -webkit-text-fill-color: black;
+                color: black;
+                font-family: "fouore";
+                font-size: calcFluid(12, 22, 320, 1920);
+            }
+        }
+    }
+    .pages{
+        height: 100%;
+        margin: 20px 0 0 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        .pages__page{
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+            display: flex;
+            flex-direction: row;
+            margin: 18px 0;
+            img{
+             height: 100%;
+            }
+            p{  
+                text-align: justify;
+                margin: auto 0 auto 10px;
+                width: 80%;
+                font-size: calcFluid(12, 22, 320, 1920);
+                font-family: "Inter-Regular";
+            }
+
+            .circle{
+                font-size: 14px;
+                color: white;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background: $gradient;
+                text-align:center;
+                font-weight: 500;
+                padding: 3px;
+                span{
+                    font-family: "Inter-Bold";
+                }
+            }
+
+            &:last-child{
+                margin: auto 0 0 0;
+            }
+        }
+        .active{
+           p{
+            background:$gradient;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+           }
+        }
+    }
+}

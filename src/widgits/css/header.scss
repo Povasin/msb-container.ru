@@ -1,29 +1,29 @@
-@import "../general.scss";
+@import "./general.scss";
 @font-face {
     font-family: "Inter-Light";
     font-style: normal;
     font-weight: 100;
-    src: url("../../../assets/fonts/Inter/Inter-Light.ttf");
+    src: url("../../assets/fonts/Inter/Inter-Light.ttf");
     font-display: swap;
 }
 @font-face {
     font-style: normal;
     font-family: "Inter-Regular";
     font-weight: 500;
-    src: url("../../../assets/fonts/Inter/Inter-Regular.ttf");
+    src: url("../../assets/fonts/Inter/Inter-Regular.ttf");
     font-display: swap;
 }
 @font-face {
     font-style: normal;
     font-family: "Inter-Bold";
     font-weight: 900;
-    src: url("../../../assets/fonts/Inter/Inter-Bold.ttf");
+    src: url("../../assets/fonts/Inter/Inter-Bold.ttf");
     font-display: swap;
 }
 @font-face {
     font-style: normal;
     font-family: "fouore";
-    src: url("../../../assets/fonts/fouore/Furore.otf");
+    src: url("../../assets/fonts/fouore/Furore.otf");
     font-display: swap;
 }
 .search__modal{
@@ -63,9 +63,11 @@
 
 }
 
-header {
+.header {
     padding: 20px calcFluid(0, 100, 1024, 1920);
-    @extend %d-col;
+    display: flex;
+    border: none;
+    flex-direction: column;
     .headerTop {
         @extend %d-row;
         padding: 0 calcFluid(5, 200, 320, 1920) calcFluid(8, 15, 320, 1920);

@@ -1,15 +1,32 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import {cardsUrl} from "../api/base.js"
+import {baseUrl} from "../api/base.js"
 const initialState = {
     items: [],
     isLoading: false,
     error: '',
 };
 export const getCards = createAsyncThunk("/getCards", async ({}, {rejectWithValue}) => {
-    return fetch(`${cardsUrl}/getCards`)
+    return fetch(`${baseUrl}/getCards`)
     .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
   },
 );
+
+export const getDeleteCards = createAsyncThunk("/getDeleteCards", async ({}, {rejectWithValue}) => {
+  return fetch(`${baseUrl}/getDeleteCards`)
+  .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
+},
+);
+
+export const addCards = createAsyncThunk("/addCards", async ({body, img}, {rejectWithValue}) => {
+  return fetch(`${baseUrl}/addCards`,{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({card: body, img: img})
+  })
+  .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
+});
 
 export const cardsSlice = createSlice({
     name: 'cards',
@@ -20,9 +37,24 @@ export const cardsSlice = createSlice({
             state.isLoading = true;
         },
         [getCards.fulfilled.type]: (state, action) => {
-            console.log(action.payload);
             state.isLoading = false;
-            state.items = action.payload.doc;
+            state.items = [...state.items, action.payload];
+            localStorage.setItem("cards", JSON.stringify(state.items))
+        },
+        // [getDeleteCards.pending.type]: (state) => {
+        //   state.isLoading = true;
+        // },
+        // [getDeleteCards.fulfilled.type]: (state, action) => {
+        //     state.isLoading = false;
+        //     state.items = action.payload.doc;
+        //     localStorage.setItem("cards", JSON.stringify(state.items))
+        // },
+        [addCards.pending.type]: (state) => {
+            state.isLoading = true;
+        },
+        [addCards.fulfilled.type]: (state, action) => {
+            state.isLoading = false;
+            state.items = [...state.items, action.payload];
             localStorage.setItem("cards", JSON.stringify(state.items))
         },
     }

@@ -1,6 +1,6 @@
 import React from 'react'
-import {BagSlice} from "../../store/slices/bag"
-import {store} from "../../store/slices/store"
+import {BagSlice} from "../store/slices/bag"
+import {store} from "../store/slices/store"
 import {useSelector, } from "react-redux";
 import { Link } from 'react-router-dom';
 

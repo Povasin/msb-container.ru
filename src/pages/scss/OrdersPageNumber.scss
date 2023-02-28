@@ -1,0 +1,173 @@
+@import "../../widgits/adminScss/layOut.scss";
+
+.headerOrderNumber{
+    z-index: 10;
+    overflow:hidden ;
+    display: flex;
+    flex-direction: row;
+    @extend %headerOrder;
+}
+.userHtml{
+    @extend %d-col;
+    h1{
+        font-family: "Inter-Bold";
+        font-size:calcFluid(17, 30, 320, 1920) ;
+    }
+    .orders__info {
+        width: 100%;
+        @extend %d-col;
+        .input__price,
+        .input__delivery,
+        .input__discount,
+        .input__date {
+            @extend %d-row;
+            margin: 10px 0;
+            font-size: calcFluid(15, 20, 320, 1920);
+            font-family: "Inter-Bold";
+            p {margin: 10px 5px 0 0;}
+            #price {
+                margin: 0 0 0 auto;
+                font-size: calcFluid(17, 30, 320, 1920);
+                font-family: "Inter-Bold";
+            }  
+            span, input {
+                margin: 10px 0 0 auto !important;
+                font-size: calcFluid(13, 20, 320, 1920);
+                font-family: "Inter-Bold";
+            }              
+        }
+       
+        .input__delivery {
+            margin: 0;
+        }
+        .input__date{
+            input{
+                padding: 10px 10px;
+                outline:none;
+                border: none;
+                box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+                font-size:calcFluid(13, 16, 320, 1920);
+                font-family: "Inter-Regular";
+            }
+        }
+        .input__discount{
+            p {margin: 5px 5px 0 0;}
+            #discount {
+                font-size: calcFluid(13, 22, 320, 1920);
+                color: #f91155;
+            }
+        }
+        .orders__track{
+            box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+            @extend %d-col;
+            padding: calcFluid(10, 18, 320, 1920) calcFluid(10, 18, 320, 1920) calcFluid(20, 30, 320, 1920) calcFluid(10, 18, 320, 1920) ;
+            .orders__trackInfo{
+                @extend %d-row;
+                justify-content: center;
+                .orders__trackInfoCol,
+                .orders__trackInfoCol1{
+                    position: relative;
+                    margin: 0 auto;
+                    @extend %d-col;
+                    p{  
+                        text-align: center;
+                        margin: 0;
+                        font-family: "Inter-Bold";
+                        font-size: calcFluid(12, 20, 320, 1920);
+                    }
+                    .date{
+                        margin: 5px 0 25px 0;
+                        font-family: "Inter-Regular";
+                        color: #58585e;
+                    }
+                    .borderRadius{
+                        z-index: 100;
+                        border-radius: 50%;
+                        background: gray;
+                        width: calcFluid(40, 42, 320, 1920);
+                        height: calcFluid(40, 42, 320, 1920);
+                        margin: 0 auto;
+                        top: calcFluid(-10, -20, 320, 1920);
+                        img{
+                            margin: calcFluid(6, 8, 320, 1920);
+                            width: 60%;
+                        }
+                    }
+                    .active{
+                        background: $gradient;
+                    }
+                    .border{
+                        position: absolute;
+                        border: 2px solid gray;
+                        width: calcFluid(150, 353, 320, 1920);
+                        top: calcFluid(80, 98, 320, 1920);
+                        left: calcFluid(30, 70, 320, 1920);
+                    }
+                    .borderActive{
+                        border: 2px solid gray !important;
+                        border-image-source: linear-gradient(90deg, #5134c4, #773cbc, #b856d4) !important;
+                        border-image-slice: 1 !important;
+                        background: linear-gradient(90deg, #5134c4, #773cbc, #b856d4);
+                        -webkit-background-clip: text;
+                        background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                    }
+                }
+                .orders__trackInfoCol1{
+                    .border{
+                        width: calcFluid(60, 315, 320, 1920);
+                    }
+                }
+            }
+        }
+    }
+    .order{
+        .bag__block {
+            @extend %bag__block;
+            a{
+                width: 20%;
+                img{
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+    .chatAndChange{
+        display: flex;
+        flex-direction: row;
+        margin: 20px  0 0 0;
+        .writeToShop{
+            width: 30%;
+            @extend %more;
+            margin: auto 10px auto 0;
+        }
+        .change{
+            font-family: "Inter-Regular";
+            color: black;
+            font-size:calcFluid(15, 20, 320, 1920);
+            padding:calcFluid(5, 10, 320, 1920) calcFluid(10, 20, 320, 1920);
+            border: 1px solid;
+            border-image-source:  $gradient;
+            border-image-slice: 1;
+            background: white;
+            width: 70%;
+            transition: 0.3s;
+            &:hover {
+                background: #19103C;
+                color: white;
+                border:  1px solid #19103C;
+            }
+            margin: auto 0 auto 10px;
+        }
+        .loading{
+            background: none;
+            background-color: rgb(165, 165, 165);
+            color: white;
+            border: 1px solid rgb(165, 165, 165);
+            &:hover {
+                background-color: rgb(165, 165, 165);
+                border: 1px solid rgb(165, 165, 165);
+            }
+         }
+    }
+}

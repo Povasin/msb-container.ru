@@ -12,7 +12,7 @@ export const order = createAsyncThunk("/bag", async ({body, email}, {rejectWithV
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({body:{...body, orderAccepted: {date: "", status: false}, orderCollect: {date: "", status: false},  orderGo: {date: "", status: false}, orderReceived: {date: "", status: false}}, email: email})
+            body: JSON.stringify({body:{...body, orderAccepted: "", orderCollect: "",  orderGo: "", orderReceived: ""}, email: email})
           },
         )
         .then(res => res.json()).catch((rej)=>rejectWithValue(rej))

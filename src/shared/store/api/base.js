@@ -1,2 +1,2 @@
-export const baseUrl = "https://msb-container.onrender.com"
-export const cardsUrl = "http://localhost:5000"
+// export const baseUrl = "https://msb-container.onrender.com"
+export const baseUrl = "http://localhost:5000"

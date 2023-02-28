@@ -5,7 +5,7 @@ import {BagSlice} from "../shared/store/slices/bag"
 import {store} from "../shared/store/slices/store"
 import {useSelector} from "react-redux";
 import FurnitureSlider from "../shared/componets/slider/furniture"
-import "./css/cubinsForSomeThing.scss"
+import "./scss/cubinsForSomeThing.scss"
 import { useRef } from 'react'
 
 export default function CardPage() {

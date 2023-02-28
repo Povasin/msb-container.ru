@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom';
-import {BagSlice} from "../../store/slices/bag"
-import {store} from "../../store/slices/store"
+import {BagSlice} from "../store/slices/bag"
+import {store} from "../store/slices/store"
 
 export default function BagCard({card}) {
     const location = useLocation()

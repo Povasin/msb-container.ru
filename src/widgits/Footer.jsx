@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import "./css/footer/footer.scss"
+import "./css/footer.scss"
 import { authSlice } from '../shared/store/slices/auth';
 import { useState } from 'react';
 export default function Footer() {

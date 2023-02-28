@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import FurnitureCard from "../furnitureCard/index"
+import FurnitureCard from "../FurnitureCard"
 import {furniture} from "../../../DATA/Data"
 
 export default function FurnitureSlider() {
@@ -15,12 +15,12 @@ export default function FurnitureSlider() {
             if (furnitureSlider < 100 && furnitureSlider >= 0) {
                 setFurnitureSlider(furnitureSlider+100)
                 setFurnitureBTN({next:  false ,prev: true})
-                furnitureLine.current.style.left = -furnitureSlider + '%' 
+                furnitureLine.current.style.left = -(furnitureSlider+100) + '%' 
             } 
         } else {
             if (furnitureSlider < 200 && furnitureSlider >= 0) {
                 setFurnitureSlider(furnitureSlider+100)
-                furnitureLine.current.style.left = -furnitureSlider + '%' 
+                furnitureLine.current.style.left = -(furnitureSlider+100) + '%' 
                 if (furnitureSlider == 200) {
                     setFurnitureBTN({nex:  false ,prev: true})
                 } else if (furnitureSlider == 100) {
@@ -33,13 +33,13 @@ export default function FurnitureSlider() {
         if (document.documentElement.clientWidth > 851) {
             if (furnitureSlider < 101 && furnitureSlider > 0 ) {
                 setFurnitureSlider(furnitureSlider-100)
-                furnitureLine.current.style.left = -furnitureSlider + '%' 
+                furnitureLine.current.style.left = -(furnitureSlider-100) + '%' 
                 setFurnitureBTN({next:  true ,prev: false})
             }
         }  else{
             if (furnitureSlider < 201 && furnitureSlider > 0 ) {
                 setFurnitureSlider(furnitureSlider-100)
-                furnitureLine.current.style.left = -furnitureSlider + '%' 
+                furnitureLine.current.style.left = -(furnitureSlider-100) + '%' 
                 if (furnitureSlider == 0) {
                     setFurnitureBTN({next:  true ,prev: false})
                 }

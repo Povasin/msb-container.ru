@@ -1,0 +1,33 @@
+@import "../../widgits/adminScss/layOut.scss";
+
+.headerOrder{
+    @extend %headerOrder;
+}
+h1{
+    font-family: "Inter-Bold";
+    font-size:calcFluid(17, 30, 320, 1920) ;
+}
+.cards{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .order__clear{
+        margin: auto;
+        h2, p{
+           text-align: center;
+        }
+        h2{
+            font-size: calcFluid(18, 30, 320, 1920);
+        }
+        p{
+            font-size: calcFluid(15, 18, 320, 1920);
+        }
+    }
+    .bag__block {
+        @extend %bag__block;
+    }
+}
+
+.cards::-webkit-scrollbar {
+    display: none;
+}

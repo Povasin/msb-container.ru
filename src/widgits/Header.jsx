@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import "./css/header/header.scss"
+import "./css/header.scss"
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
-import  Search  from '../shared/componets/search/index';
+import  Search  from '../shared/componets/Search';
 import { authSlice } from '../shared/store/slices/auth';
 
 export default function Header() {
@@ -12,7 +12,7 @@ export default function Header() {
     const [showSidebar, setShowSideBar] = useState(false)
     
   return (
-<header>
+<header className='header'>
     <div className="headerTop">
         <div className="headerTop__logotip" itemScope itemType="http://schema.org/ImageObject">
             <img alt="логотип"  src="/iconPWA/logo96x96.svg" itemProp="contentUrl" />

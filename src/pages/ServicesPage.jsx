@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import "./css/services.scss"
+import "./scss/services.scss"
 
 export default function ServicesPage() {
     const location = useLocation()

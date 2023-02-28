@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
-import FurnitureCard from "../shared/componets/furnitureCard/index"
+import FurnitureCard from "../shared/componets/FurnitureCard"
 import {DATA , furniture} from "../DATA/Data"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {BagSlice} from "../shared/store/slices/bag"
 import {store} from "../shared/store/slices/store"
 import {useSelector} from "react-redux";
-import "./css/cubinsForSomeThing.scss"
+import "./scss/cubinsForSomeThing.scss"
 
 export default function FurniturePage() {
 

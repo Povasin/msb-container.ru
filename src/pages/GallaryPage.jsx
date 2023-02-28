@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import { store } from '../shared/store/slices/store';
-import "./css/galary.scss"
+import "./scss/galary.scss"
 import {DATA} from "../DATA/Data"
-import ProductCard from "../shared/componets/prodactCard/index"
+import ProductCard from "../shared/componets/ProdactCard"
 import { Link, useLocation } from 'react-router-dom'
 import {cardsSlice, getCards} from "../shared/store/slices/cards"
 

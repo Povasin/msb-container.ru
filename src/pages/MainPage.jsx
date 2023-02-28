@@ -1,7 +1,7 @@
 import React from 'react'
-import "./css/main.scss"
+import "./scss/main.scss"
 import {DATA} from "../DATA/Data"
-import ProductCard from "../shared/componets/prodactCard/index"
+import ProductCard from "../shared/componets/ProdactCard"
 import { Link } from 'react-router-dom'
 import FurnitureSlider from "../shared/componets/slider/furniture"
 import CubinsSlider from "../shared/componets/slider/cubins"
