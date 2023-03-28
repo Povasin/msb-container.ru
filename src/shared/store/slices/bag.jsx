@@ -5,14 +5,14 @@ const initialState = {
     isLoading: false,
     error: '',
 };
-export const order = createAsyncThunk("/bag", async ({body, email}, {rejectWithValue}) => {        
+export const order = createAsyncThunk("/bag", async ({body, idUser}, {rejectWithValue}) => {        
     return fetch(`${baseUrl}/bag`,{
             method: "POST",
             mode: 'cors',
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({body:{...body, orderAccepted: "", orderCollect: "",  orderGo: "", orderReceived: ""}, email: email})
+            body: JSON.stringify({body: body, idUser: idUser})
           },
         )
         .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
@@ -24,8 +24,8 @@ export const BagSlice = createSlice({
     initialState,
     reducers: {
         addCard(state, {payload}){
-            const {id, count, month, ...other} = payload
-            state.items = [...state.items, {id: id, data: other, count: count ?? 1 , month: month ?? 1}]
+            const {idCard, count, month, ...other} = payload
+            state.items = [...state.items, {idCard: idCard, data: other, count: count ?? 1 , month: month ?? 1}]
             localStorage.setItem("bag", JSON.stringify(state.items))
         },
         removeCard(state, {payload}){

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useRef } from 'react'
-import {OrdersSlice, getorders} from "../store/slices/orders"
+import {orderSliceClient, getordersAdmin} from "../store/slices/orderClient"
 import { useSelector } from 'react-redux'
 import { store } from '../store/slices/store';
 
@@ -29,7 +29,7 @@ export default function Search() {
 
   const [showSearch, setShowSearch] = useState(false)
   const ref = useRef()
-  const orders = useSelector((state)=>state.OrdersSlice)
+  const orders = useSelector((state)=>state.orderSliceClient)
   const [search, setSearch] = useState("")
   const [results, setResult] = useState ([])
   function resultFUNC(e) {
@@ -51,7 +51,7 @@ export default function Search() {
   }
   useOnClickOutside(ref, ()=>setShowSearch(false))
   useEffect(()=>{
-    store.dispatch(getorders({}))
+    store.dispatch(getordersAdmin({}))
   }, [])
   return (
     <div ref={ref} className="search__wrapper" >            

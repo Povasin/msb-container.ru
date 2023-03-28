@@ -5,7 +5,7 @@ main{
 .main_fixed{
     margin-top: 90px
 }
-.login{
+.loginClient{
     padding: 0 calcFluid(8, 400, 320, 1920);
     @extend %d-col;
     h1{

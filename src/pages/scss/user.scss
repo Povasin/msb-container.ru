@@ -6,7 +6,7 @@ main{
     margin-top: 90px
 }
 .userHtml{
-    padding: 0 calcFluid(8, 200, 320, 1920);
+    padding: 0 calcFluid(8, 200, 320, 1920) !important;
     @extend %d-col;
     h2{font-size: calcFluid(14, 27, 320, 1920);}
     .orders__info {

@@ -33,19 +33,21 @@ export default function ArrangePage() {
         })
         return summ
     }
+ 
     async function  send() {
         if (!isDelivery) {
-            await store.dispatch(order({body:{ mass:BagStore.items, delivery: "самовызов"}, email: auth.userData.email}))
+            await store.dispatch(order({body:{ mass: BagStore.items, delivery: "самовызов"}, idUser: auth.userData.idUser}))
         } else{
             if (inputDelivery.city == "" || inputDelivery.house == "") {
                 setError("поля не заполненны")
             } else{
-                await store.dispatch(order({body:{ mass:BagStore.items, delivery: inputDelivery}, email: auth.userData.email}))
+                console.log(auth.userData.idUser);
+                await store.dispatch(order({body:{ mass:BagStore.items, delivery: inputDelivery}, idUser: auth.userData.idUser}))
             }
         }
     }
     if (auth.userData && !loading  && BagStore.items == 0) {
-        navigate(`/user/${auth.userData.id}`)
+        navigate(`/user/${auth.userData.idUser}`)
       }
 
   return (

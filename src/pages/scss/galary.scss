@@ -20,9 +20,22 @@ main{
     &__item{
         @extend %d-row;
         justify-content: center;
+        flex-wrap: wrap;
         .card{
             margin: 7px;
             @extend %card;
+        }
+    }
+    .bag__clear{
+        margin: auto;
+        h2, p{
+           text-align: center;
+        }
+        h2{
+            font-size: calcFluid(18, 30, 320, 1920);
+        }
+        p{
+            font-size: calcFluid(15, 18, 320, 1920);
         }
     }
 }

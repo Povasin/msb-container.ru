@@ -32,7 +32,8 @@ export default function RegisterPage() {
         setCheckInput({ error: "", status: true})
         if (form.email.indexOf('@') != -1) {
           await store.dispatch(create({body: form}))
-          navigate("/people")
+          console.log(auth);
+          auth?.error != '' && navigate("/admin/people")
         } else setCheckInput({error: "Введите коректную эл.почту", status: true})
       } else setCheckInput({status: false, error: "пароли не совпадают"})
     } 
@@ -40,7 +41,6 @@ export default function RegisterPage() {
   useEffect(()=>{
     store.dispatch(peopleSlice.actions.clearError());
   }, [])
-
   return (
     <main>   
         <div className="registerPeople">

@@ -1,17 +1,23 @@
-import React from 'react'
-import "./scss/main.scss"
-import {DATA} from "../DATA/Data"
+import React,  { useState, useEffect}  from 'react'
 import ProductCard from "../shared/componets/ProdactCard"
 import { Link } from 'react-router-dom'
 import FurnitureSlider from "../shared/componets/slider/furniture"
 import CubinsSlider from "../shared/componets/slider/cubins"
-import { useState } from 'react'
+import {cardsSlice, getCards} from "../shared/store/slices/cards"
+import { useSelector } from 'react-redux'
+import { store } from '../shared/store/slices/store';
+import "./scss/main.scss"
+
 export default function MainPage() {
     const [showSelect, setShowSelect] = useState({
         active: "выбрать формат",
         state: false,
         src: "/emptyCubins.webp"
     })
+    const cards = useSelector((state)=>state.cardsSlice)
+    useEffect(()=>{
+        store.dispatch(getCards({}))
+      }, [])
     return (
         <main>
             <div className="fd-row">
@@ -92,7 +98,7 @@ export default function MainPage() {
                     </div>
                 </div>
                 <div className="one__card">
-                    <ProductCard key={0} item={DATA[0]}/>
+                    <ProductCard key={0} item={cards.items[0]}/>
                 </div>
             </div>
             <div className="line"></div>

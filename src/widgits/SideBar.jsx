@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import "./adminScss/sideBar.scss"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import {OrdersSlice} from "../shared/store/slices/orders"
+import {OrdersSlice} from "../shared/store/slices/orderClient"
 import {exit, authSlice} from "../shared/store/slices/auth"
 import { useSelector } from 'react-redux'
 import { store } from '../shared/store/slices/store';
@@ -29,22 +29,22 @@ export default function SideBar() {
             <a href="https://msb-container.ru/" className="logo">MSB<span>container</span></a>
         </div>
         <div className='pages'>
-            <Link to="/admin/order" className={`pages__page ${location.pathname.split("/")[1] == "order" && "active"}`}>
+            <Link to="/admin/order" className={`pages__page ${location.pathname.split("/")[2] == "order" && "active"}`}>
               <img src="/order.svg" alt="заказы"/>
               <p>Заказы</p>
               { countOrders() != undefined && countOrders() != 0 &&  <div className='circle'><span>{countOrders()}</span></div>}
             </Link>
-            <Link to="/admin/chat"  className={`pages__page ${location.pathname.split("/")[1] == "chat" && "active"}`}>
+            <Link to="/admin/chat"  className={`pages__page ${location.pathname.split("/")[2] == "chat" && "active"}`}>
               <img src="/chat.svg" alt="чат"/>
               <p>Чат</p>
               <div className='circle'><span>1</span></div>
             </Link>
             {user?.userData?.role == "Администратор" &&  <>
-              <Link to="/admin/activeCard"  className={`pages__page ${location.pathname.split("/")[1] == "activeCard" && "active"}`}>
+              <Link to="/admin/activeCard"  className={`pages__page ${location.pathname.split("/")[2] == "activeCard" && "active"}`}>
                 <img src="/card.svg" alt="карточки"/>
                 <p>Карточки</p>
               </Link>
-              <Link to="/admin/people"  className={`pages__page ${location.pathname.split("/")[1] == "people" && "active"}`}>
+              <Link to="/admin/people"  className={`pages__page ${location.pathname.split("/")[2] == "people" && "active"}`}>
                 <img src="/people.svg" alt="карточки"/>
                 <p>Сотрудники</p>
               </Link>

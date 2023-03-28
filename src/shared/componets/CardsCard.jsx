@@ -9,7 +9,7 @@ export default function CardsCard({item}) {
             <div className="block__content"> 
                 <p className="orderNumber">{item.name}</p>
                 <p className='rent'>Категория: <span>{item.role}</span></p>
-                <Link className="track" to={`/cards/${item.id}`}>посмотреть информацию</Link>
+                <Link className="track" to={`/admin/cards/${item.idCard}`}>посмотреть информацию</Link>
             </div>
       </div>
     </>

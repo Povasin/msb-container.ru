@@ -16,8 +16,8 @@ export default function UserPage() {
     const auth = useSelector((state)=>state.authSlice)
     const order = useSelector((state)=>state.orderSliceClient)
     useEffect(()=>{
-        order.items && store.dispatch(getorder({email: auth.userData?.email}))
-    }, [auth.userData?.email])
+        order?.items && auth.userData?.idUser && store.dispatch(getorder({idUser: auth.userData?.idUser}))
+    }, [auth.userData?.idUser])
   return (
     <main>   
         <div className="userHtml">
@@ -33,7 +33,7 @@ export default function UserPage() {
             <div className="orders">
                 <h1>Заказы</h1>
                 <div id="orders__render">
-                    {<UserBag order={order} />}
+                    {<UserBag order={order} auth={auth}/>}
                 </div>
             </div>
         </div>  

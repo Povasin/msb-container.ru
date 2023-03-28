@@ -1,64 +1,74 @@
-import React, {useEffect} from 'react'
-import { useState } from 'react';
+import React, {useEffect,useState} from 'react'
 import { useSelector } from 'react-redux'
 import {useNavigate, useLocation, Link,} from 'react-router-dom'
-import { OrdersSlice, changeOrderCard} from '../shared/store/slices/orders';
-import { OrdersCardSlice, getOrdersCards} from '../shared/store/slices/ordersCard';
+import {cardsSlice, getCards} from "../shared/store/slices/cards"
+import { orderSliceClient, getOrdersCards, changeOrderCard, getordersAdmin, getOrdersAuth} from '../shared/store/slices/orderClient';
 import { store } from '../shared/store/slices/store';
 import "./scss/OrdersPageNumber.scss"
 
 export default function  OrderCardPage() {
-    const isLoading = useSelector((state)=>state.OrdersSlice.isLoading)
-    const userData = useSelector((state)=>state.authSlice)
-    const orders = JSON.parse(localStorage.getItem("orders")) 
+    const isLoading = useSelector((state)=>state.orderSliceClient.isLoading)
+    const orderStorage = JSON.parse(localStorage.getItem("order"))
+    const orders = useSelector((state)=>state.orderSliceClient)
     const location = useLocation()
-    const user = orders.find((item)=>item.id == location.pathname.split("/")[2])
+    const [user, setUser] = useState(orderStorage.find((item)=>item.idUser == location.pathname.split("/")[3] && item.number == location.pathname.split("/")[4])) 
     const [orderDateForDelivery, setOrderDateForDelivery] = useState("")
     const [isChanged, setIsChanged] = useState(false)
-    const ordercard = useSelector((state)=>state.OrdersCardSlice) 
-    const [item, setItem] = useState(ordercard.items) 
+    const cards = useSelector((state)=>state.cardsSlice)
+    function cardsConnectFunc() {
+        let cardsConnect = []
+        orders?.orderCards.map(item=>{
+            cardsConnect = ([...cardsConnect, {data: cards?.items.find((arr)=>item.idCard == arr.idCard), count: item.count , month: item.month}])
+        })
+        return cardsConnect
+    }
+    let isCards = cardsConnectFunc()
     function OrderPrice() {
         let summ = 0;
-        item?.mass.forEach(array=>{
-            summ+= (array.count*array.data.price )*array.month 
+        isCards.forEach(array=>{
+            summ+= (array.count*array.data?.price )*array.month 
         })
         return summ
     }
-    console.log(item)
     function OrderDiscount() {
         let summ = 0;
-        item?.mass.forEach(array=>{
-            summ+= (array.count*array.data.discount )*array.month 
+        isCards.forEach(array=>{
+            summ+= (array.count*array.data?.discount )*array.month 
         })
         return summ
     }
     function changeItem(key) {
         let date = new Date() 
         setIsChanged(true)
-        setItem({...user, delivery: item.delivery, date: orderDateForDelivery, number: item.number, [key]:  `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${date.getMonth()+1 < 10 ?  `0${date.getMonth()+1}` : date.getMonth()+1}.${date.getFullYear()}`})
+        setUser({...user, date: orderDateForDelivery, [key]:  `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${date.getMonth()+1 < 10 ?  `0${date.getMonth()+1}` : date.getMonth()+1}.${date.getFullYear()}`})
     }
+    console.log(orderDateForDelivery);
+    console.log(user);
     useEffect (()=>{
-        store.dispatch(getOrdersCards({id: user.id, number:  user.number}))
+        store.dispatch(getordersAdmin({}))
+        store.dispatch(getCards({}))
+        store.dispatch(getOrdersAuth({idUser: user?.idUser}))
+        store.dispatch(getOrdersCards({idUser: user?.idUser, number:  user?.number}))
     }, [])
   return (
     <div>
-        <div className='userHtml'>
-            <h1>заказ №{item?.number}</h1>
+        <div className='userHtmlAdmin'>
+            <h1>заказ №{user?.number}</h1>
             <div className="order">
-            {item?.mass.map((array)=>
-            <div key={array.id} className="bag__block">
-                 <a href={`https://msb-container.ru/card/${array.id}`}><img  src={array.data.img[0].src} alt={array.data.name}/></a>  
+            {isCards.map((array, index)=>
+            <div key={index} className="bag__block">
+                 <Link to={`/card/${array.idCard}`}><img  src={array.data?.img} alt={array.data?.name}/></Link>  
                 <div className="block__content">
                 <p className="rent">Аренда</p>
-                <a className="OrderName"  href={`https://msb-container.ru/card/${array.id}`}>{array.data.name}</a>
+                <Link className="OrderName"  to={`/card/${array.data?.idCard}`}>{array.data?.name}</Link>
                     <div className="block__inputRow">	
                         <div className="block__input">	
                             <p className="fd-col">количество: <span>{array.count}шт</span></p>		
                             <p className="fd-col">срок Аренды: <span>{array.month}мес</span></p>
                         </div>
                         <div className="block-col">
-                            <p className="block__discount">{(array.count*array.data.discount)*array.month}</p>
-                            <p className="block__price" name="priceOrder">{(array.count*array.data.price)*array.month}₽</p>
+                            <p className="block__discount">{(array.count*array.data?.discount)*array.month}</p>
+                            <p className="block__price" name="priceOrder">{(array.count*array.data?.price)*array.month}₽</p>
                         </div>
                     </div>
                 </div>
@@ -76,44 +86,57 @@ export default function  OrderCardPage() {
             </div>
             <div className="input__delivery">
                 <p className='rent'> Способ получения: </p>
-                <span>{item?.delivery == "самовызов" ? item?.delivery : `г. ${item.delivery.city} ул. ${item.delivery.house} `}</span>
+                <span>{user?.delivery == "самовызов" ? user?.delivery : `г. ${user?.delivery.split('/')[0]} ул. ${user?.delivery.split('/')[1]} `}</span>
             </div>
             <div className="input__date">
-                <p>Дата для {item?.delivery == "самовызов" ?  "самовызова" : "доставки"} </p>
-                <input type="text" onChange={(e)=>setOrderDateForDelivery(e.target.value)} placeholder="Например 20.01.23" value={item?.date}/>
+                <p>Дата для {user?.delivery == "самовызов" ?  "самовызова" : "доставки"}: </p>
+                <input type="text" onChange={(e)=>setOrderDateForDelivery(e.target.value)} placeholder="Например 20.01.23" value={user.date}/>
+            </div>
+            <h2>Информация о заказчике</h2>
+            <div className="input__delivery">
+                <p>Имя:</p>
+                <span>{orders.auth.name}</span>
+            </div>
+            <div className="input__delivery">
+                <p>email:</p>
+                <span>{orders.auth.email}</span>
+            </div>
+            <div className="input__delivery">
+                <p>Номер телефона:</p>
+                <span>{orders.auth.phone}</span>
             </div>
             <h2>Отслеживание заказа</h2>
                 <div className="orders__track">
                     <div className="orders__trackInfo">
                         <div className="orders__trackInfoCol">
                             <p>заказ принят</p>
-                            <p className="date">{!item?.orderAccepted.date ? "x" : item?.orderAccepted.date}</p>
-                            <div className={`borderRadius ${!item?.orderAccepted.status ? "" : "active"}`} onClick={()=>changeItem("orderAccepted")}>{item?.orderAccepted.status && <img src="/tick.svg" alt="галочка"/>}</div>
-                        <div className={`border ${!item?.orderAccepted.status ? "" : "borderActive"}`}></div>
+                            <p className="date">{!user?.orderAccepted ? "x" : user?.orderAccepted}</p>
+                            <div className={`borderRadius ${!user?.orderAccepted ? "" : "active"}`} onClick={()=>changeItem("orderAccepted")}>{user?.orderAccepted && <img src="/tick.svg" alt="галочка"/>}</div>
+                        <div className={`border ${!user?.orderAccepted ? "" : "borderActive"}`}></div>
                         </div>
                         <div className="orders__trackInfoCol">
                             <p>заказ собирается</p>
-                            <p className="date">{!item?.orderCollect.date ? "x" : item?.orderCollect.date}</p>
-                            <div className={`borderRadius ${!item?.orderCollect.status ? "" : "active"}`} onClick={()=>changeItem("orderCollect")}>{item?.orderCollect.status && <img src="/tick.svg" alt="галочка"/>}</div>
-                            <div className={`border ${!item?.orderCollect.status ? "" : "borderActive"}`}></div>
+                            <p className="date">{!user?.orderCollect ? "x" : user?.orderCollect}</p>
+                            <div className={`borderRadius ${!user?.orderCollect ? "" : "active"}`} onClick={()=>changeItem("orderCollect")}>{user?.orderCollect && <img src="/tick.svg" alt="галочка"/>}</div>
+                            <div className={`border ${!user?.orderCollect ? "" : "borderActive"}`}></div>
                         </div>
                         <div className="orders__trackInfoCol1">
                             <p>заказ в пути</p>
-                            <p className="date">{!item?.orderGo.date ? "x" : item?.orderGo.date}</p>
-                            <div className={`borderRadius ${!item?.orderGo.status ? "" : "active"}`} onClick={()=>changeItem("orderGo")}>{item?.orderGo.status && <img src="/tick.svg" alt="галочка"/>}</div>
-                            <div className={`border ${!item?.orderGo.status ? "" : "borderActive"}`}></div>
+                            <p className="date">{!user?.orderGo ? "x" : user?.orderGo}</p>
+                            <div className={`borderRadius ${!user?.orderGo ? "" : "active"}`} onClick={()=>changeItem("orderGo")}>{user?.orderGo && <img src="/tick.svg" alt="галочка"/>}</div>
+                            <div className={`border ${!user?.orderGo ? "" : "borderActive"}`}></div>
                         </div>
                         <div className="orders__trackInfoCol">
                             <p>заказ получен</p>
-                            <p className="date">{!item?.orderReceived.date ? "x" : item?.orderReceived.date}</p>   
-                            <div className={`borderRadius ${!item?.orderReceived.status ? "" : "active"}`} onClick={()=>changeItem("orderReceived")}>{item?.orderReceived.status && <img src="/tick.svg" alt="галочка"/>}</div>
+                            <p className="date">{!user?.orderReceived ? "x" : user?.orderReceived}</p>   
+                            <div className={`borderRadius ${!user?.orderReceived ? "" : "active"}`} onClick={()=>changeItem("orderReceived")}>{user?.orderReceived && <img src="/tick.svg" alt="галочка"/>}</div>
                         </div>
                     </div>
                 </div>
             </div>   
             <div className="chatAndChange">
-                <button className="writeToShop">написать продавцу</button>
-                <button className={`change ${isLoading && "loading"}`} disabled={isLoading} onClick={()=>store.dispatch(changeOrderCard({email: user.email, body: item})) }>{!isChanged && !isLoading ? "сохраненно" :  !isLoading ? "сохранить" : "загрузка"}</button>
+                <button className="writeToShop">написать покупателю</button>
+                <button className={`change ${isLoading && "loading"}`} disabled={isLoading} onClick={()=>store.dispatch(changeOrderCard({body: user})) }>{!isChanged && !isLoading ? "сохраненно" :  !isLoading ? "сохранить" : "загрузка"}</button>
             </div>
         </div>
     </div>

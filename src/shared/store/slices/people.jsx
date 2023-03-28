@@ -7,7 +7,7 @@ const initialState = {
     error: '',
 };
 
-export const create = createAsyncThunk("auth/create", async ({body}, {rejectWithValue}) => {
+export const create = createAsyncThunk("/create", async ({body}, {rejectWithValue}) => {
       return fetch(`${baseUrl}/create`,{
           method: "POST",
           mode: 'cors',
@@ -48,12 +48,13 @@ export const peopleSlice = createSlice({
             state.isLoading = true;
         },
         [create.fulfilled.type]: (state, action) => {
-            console.log(action.payload);
+          
             if (!action.payload.message) {
                 state.isLoading = false;
-                state.items = action.payload.doc;
+                state.items = action.payload;
                 localStorage.setItem("people", JSON.stringify(state.items))
             } else {
+                console.log(action.payload);
                 state.isLoading = false;
                 state.error = action.payload.message;
             }
@@ -64,11 +65,7 @@ export const peopleSlice = createSlice({
         [getPeople.fulfilled.type]: (state, action) => {
             if (!action.payload.err && !action.payload.message) {
                 state.isLoading = false;
-                let newItems = []
-                for (let i = 0; i < action.payload.length; i++) {
-                    newItems.push(action.payload[`${i}`])
-                }
-                state.items = newItems
+                state.items = action.payload
                 localStorage.setItem("people", JSON.stringify(state.items))
             } else{
                 state.error = action.payload.err || action.payload.message

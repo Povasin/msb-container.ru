@@ -28,7 +28,7 @@ export default function LoginPage() {
 
   return (
     <main>   
-        <div className="login">
+        <div className="loginClient">
             <h1>Вход</h1>
             <div className="login-row">
                 <input type="email" placeholder="эл.почта" maxLength="40" value={form.email} onChange={(e)=>setForm({...form, email: e.target.value})} required/>

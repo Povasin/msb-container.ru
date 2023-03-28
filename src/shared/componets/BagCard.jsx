@@ -5,6 +5,7 @@ import {BagSlice} from "../store/slices/bag"
 import {store} from "../store/slices/store"
 
 export default function BagCard({card}) {
+    console.log(card);
     const location = useLocation()
     const CardId = location.pathname.split("/")[1]
     const {items: bagItems} = useSelector((state)=>state.BagSlice)
@@ -13,25 +14,25 @@ export default function BagCard({card}) {
     }
     const changeProdactCount = (value) =>{
     if (value > 0) {
-        const newItems = bagItems.map((item) => item.id === card.id ? {...item, count: value} : item) 
+        const newItems = bagItems.map((item) => item.idCard === card.idCard ? {...item, count: value} : item) 
         store.dispatch(BagSlice.actions.updateBag(newItems));
     }
 
     }
     const changeProdactMonth = (value) =>{  
         if (value > 0) {
-            const newItems = bagItems.map((item) => item.id === card.id ? {...item, month: value} : item) 
+            const newItems = bagItems.map((item) => item.idCard === card.idCard ? {...item, month: value} : item) 
             store.dispatch(BagSlice.actions.updateBag(newItems));
         }
     }   
-    const mainCard = card.data.img[0].src
+    const mainCard = card.data.img
     return (
     <div className="bag__block">
-        <Link className="block__img" to={`/card/${card.id}`}><img src={mainCard} alt={card.data.name}/></Link>
+        <Link className="block__img" to={`/card/${card.idCard}`}><img src={mainCard} alt={card.data.name}/></Link>
         <div className="block__content">
             {CardId == "arrange" ? null : <p className="block__close" onClick={handleClick}>x</p> }
             <p className="rent">Аренда</p>
-            <Link to={`/card/${card.id}`} className="info">{card.data.name}</Link>
+            <Link to={`/card/${card.idCard}`} className="info">{card.data.name}</Link>
             <div className="block__input">
                 <div className="quantity_inner">		
                     <p  className="bt_minus"  onClick={()=>changeProdactCount(card.count-1)}>-</p>

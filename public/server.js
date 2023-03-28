@@ -254,7 +254,7 @@ app.post('/addCards', (request, response)=>{
                 console.log(err);
                 return response.status(400).json( {err: "произошла ошибка в работе с сервером", server: error})
             } else{
-                connection.query("INSERT INTO `cards`(`name`, `role`, `content`, `size` , `finishing`, `states`, `star`, `text` , `price`, `discount`, `img`) VALUES (?,?,?,?,?,?,?,?,?,?,?)", [name, role, content , size, finishing, states, star, text, price, discount,`${__dirname}/uploads/${newFileName}`], (error, results) => {
+                connection.query("INSERT INTO `cards`(`name`, `role`, `content`, `size` , `finishing`, `states`, `star`, `text` , `price`, `discount`, `img`) VALUES (?,?,?,?,?,?,?,?,?,?,?)", [name, role, content , size, finishing, states, star, text, price, discount, `http://localhost:5000/uploads/${newFileName}`], (error, results) => {
                     if(error) {
                         console.log(error);
                         return response.status(400).json( {err: "произошла ошибка в работе с сервером", server: error})

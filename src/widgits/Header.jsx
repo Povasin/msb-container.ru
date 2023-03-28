@@ -31,7 +31,7 @@ export default function Header() {
                 <Link to="/register" className="register">Зарегистрироваться</Link>
                 <Link to="/login" className="log"> <img src="/log.svg" alt="вход"/><p>вход</p></Link>
             </> : 
-            <Link to={`/user/${auth.userData.id}`} className="loginUser"> <img src="/log.svg" alt="пользователь"/><p>{auth.userData.name}</p></Link> }
+            <Link to={`/user/${auth.userData.idUser}`} className="loginUser"> <img src="/log.svg" alt="пользователь"/><p>{auth.userData.name}</p></Link> }
          
         </div>
     </div>
@@ -40,7 +40,7 @@ export default function Header() {
         <Link to="/aboutUs">О нас</Link>
         <Link to="/services">Услуги</Link>
         <Link to="/contact">Контакты</Link>
-        <Link to="/gallary">Галерея</Link>
+        <Link to="/gallary">Виды товаров</Link>
         <Link to="/bag" ><img src="/bagHeader.svg" alt="корзина"/><div className="services__sum"><p>{BagStore.items?.length}</p></div>Корзина</Link>
         <img  className="services__media" src="/search.svg" alt="поиск"/>
         <div className="sidebar__open" onClick={()=>setShowSideBar(!showSidebar)}>

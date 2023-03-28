@@ -1,19 +1,20 @@
 import React, {useEffect, useState} from 'react'
-import {DATA} from "../DATA/Data"
+import {cardsSlice, getCards, getCardsImg} from "../shared/store/slices/cards"
+import { store } from '../shared/store/slices/store';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {BagSlice} from "../shared/store/slices/bag"
-import {store} from "../shared/store/slices/store"
 import {useSelector} from "react-redux";
 import FurnitureSlider from "../shared/componets/slider/furniture"
 import "./scss/cubinsForSomeThing.scss"
 import { useRef } from 'react'
 
 export default function CardPage() {
+    const cards = useSelector((state)=>state.cardsSlice)
     const location = useLocation()
     const navigate = useNavigate()
-    const CardId = location.pathname.split("/")[2]
-    const item = searchItem() ?? navigate("/") 
-    const [activeImg, setActiveImg] = useState(item.img.find((point)=>point.active == true))
+    const item = cards.items.find((item)=>item?.idCard == location.pathname.split("/")[2]) 
+    const itemImg = [cards.img.find((item)=>item?.idCard == location.pathname.split("/")[2])] 
+    const [activeImg, setActiveImg] = useState(/*item?.img.find((point)=>point.active == true)*/)
     const [MainValue, setValue] = useState({
         count: 1,
         month: 1
@@ -25,7 +26,7 @@ export default function CardPage() {
     })
     const slider = useRef()
     const BagStore = useSelector((state) => state.BagSlice); 
-    const isActive = BagStore.items.filter((array)=>array.id == item.id)[0]
+    const isActive = BagStore.items.filter((array)=>array.idCard == item?.idCard)[0]
 
     function sliderNext() {
         if (cubinsSlider < 100 && cubinsSlider >= 0) {
@@ -49,32 +50,21 @@ export default function CardPage() {
             setValue({...MainValue, [key]: value})
         }
     }
-    
-    function searchItem() {
-        let newItem = DATA.find((item)=>item.id == CardId)
-        if (!newItem) {
-            for (let i = 0; i < DATA.length; i++) {
-                if (DATA[i].mass.find((item)=>item.id == CardId) != undefined ) {
-                    return DATA[i].mass.find((item)=>item.id == CardId) 
-                }   
-            }
-        } else return newItem
-    } 
 
     function handleClick(){
-       store.dispatch(BagSlice.actions.addCard({...item, id: item.id, count: MainValue.count, month: MainValue.month}));
+       store.dispatch(BagSlice.actions.addCard({...item, idCard: item?.idCard, count: MainValue.count, month: MainValue.month}));
     }
 
     function changeProdactCount (value){
         if (value >= 1) {
-            const newItems = [...BagStore.items.filter((item) => item.id !== isActive.id), {...isActive, count: value}] 
+            const newItems = [...BagStore.items.filter((item) => item?.idCard !== isActive.idCard), {...isActive, count: value}] 
             store.dispatch(BagSlice.actions.updateBag(newItems));
         }
     }
 
     function changeProdactMonth (value){  
         if (value >= 1) {
-            const newItems = [...BagStore.items.filter((item) => item.id !== isActive.id), {...isActive, month: value}] 
+            const newItems = [...BagStore.items.filter((item) => item?.idCard !== isActive.idCard), {...isActive, month: value}] 
             store.dispatch(BagSlice.actions.updateBag(newItems));
         }
     }  
@@ -90,38 +80,42 @@ export default function CardPage() {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [location])
-
+  
+    useEffect(()=>{
+        store.dispatch(getCards({}))
+        store.dispatch(getCardsImg({}))
+      }, [])
     return (
         <main>
             <div className="transportation_wrapper">
-                <span><Link to="/">главная </Link>/<Link to="/katalog"> каталог</Link>/<Link to="#">{item.name}</Link></span>      
+                <span><Link to="/">главная </Link>/<Link to="/katalog"> каталог</Link>/<Link to="#">{item?.name}</Link></span>      
                 <div className="transportation">
                     <div className="transportation__block">
                         <div className="slider-wrapper">
-                            <p  className={`prev ${cubinsBTN.prev ? "active" : ""} `} onClick={sliderPrev}>{item.img.length == 3 && '<'}</p>
+                            <p  className={`prev ${cubinsBTN.prev ? "active" : ""} `} onClick={sliderPrev}>{item?.img.length < 3 && '<'}</p>
                             <div className="slider">
                                 <div className="slider-line" ref={slider}>
-                                    {item.img.map((point, index)=><img className={`slider__img ${point.active ? `active` : ""}`} onClick={()=>changeActiveImg(point)} src={point.src} key={index} alt={item.name}/>)}
+                                    {itemImg.map((point, index)=><img className={`slider__img ${point ? `active` : ""}`} onClick={()=>changeActiveImg(point)} src={point?.img} key={index} alt={item?.name}/>)}
                                 </div>
                             </div>
-                            <p className={`next ${cubinsBTN.next ? "active" : ""} `} onClick={sliderNext} >{item.img.length == 3 && '>'}</p>
+                            <p className={`next ${cubinsBTN.next ? "active" : ""} `} onClick={sliderNext} >{item?.img.length < 3 && '>'}</p>
                         </div>
                         <div className="transportation__img">
                             <div className="star">★★★★☆</div>
-                            <img className="main__img"  src={activeImg.src} alt={item.name}/>
+                            <img className="main__img"  src={itemImg[0]?.img} alt={item?.name}/>
                             <Link to="/gallary" className="chooseMore">выбрать формат</Link>
                         </div>
                     </div>
                     <div className="transportation__contant">
-                        <h1>{item.name}</h1>
-                        <p>вместимость: <span>{item.content} человек</span></p>
-                        <p>Габариты: <span>{item.size}</span></p>
-                        <p>Внутренняя отделка: <span>{item.finishing}</span></p>
-                        <p>Состояние:<span>{item.states}</span></p>
+                        <h1>{item?.name}</h1>
+                        <p>вместимость: <span>{item?.content} человек</span></p>
+                        <p>Габариты: <span>{item?.size}</span></p>
+                        <p>Внутренняя отделка: <span>{item?.finishing}</span></p>
+                        <p>Состояние:<span>{item?.states}</span></p>
                         <p className="transportation__all">Все характеристки</p>
                         <div className="transportation__row">
-                            <p className="price">{item.discount}</p> 
-                            <p className="discount">{item.price}</p>
+                            <p className="price">{item?.discount}</p> 
+                            <p className="discount">{item?.price}</p>
                         </div>
                         <div className="fd-row">
                             <div className="fd-row">
@@ -143,7 +137,7 @@ export default function CardPage() {
                 <div className="transportation__info">
                     <h2>О товаре</h2>
                     <h3>описание</h3>
-                    <p>{item.text}</p>
+                    <p>{item?.text}</p>
                     <h3>Преимущества хранения и перевозки от нашей компании:</h3>
                     <ul>
                         <li>быстрая установка;</li>

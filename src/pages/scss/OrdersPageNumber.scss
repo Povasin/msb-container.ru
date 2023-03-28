@@ -7,8 +7,9 @@
     flex-direction: row;
     @extend %headerOrder;
 }
-.userHtml{
+.userHtmlAdmin{
     @extend %d-col;
+    padding: 0;
     h1{
         font-family: "Inter-Bold";
         font-size:calcFluid(17, 30, 320, 1920) ;
@@ -63,6 +64,7 @@
             padding: calcFluid(10, 18, 320, 1920) calcFluid(10, 18, 320, 1920) calcFluid(20, 30, 320, 1920) calcFluid(10, 18, 320, 1920) ;
             .orders__trackInfo{
                 @extend %d-row;
+              
                 justify-content: center;
                 .orders__trackInfoCol,
                 .orders__trackInfoCol1{
@@ -81,6 +83,7 @@
                         color: #58585e;
                     }
                     .borderRadius{
+                        cursor: pointer;
                         z-index: 100;
                         border-radius: 50%;
                         background: gray;
@@ -97,13 +100,17 @@
                         background: $gradient;
                     }
                     .border{
+                        height: 0;
+                        padding: 0;
                         position: absolute;
                         border: 2px solid gray;
+                        background: gray;
                         width: calcFluid(150, 353, 320, 1920);
                         top: calcFluid(80, 98, 320, 1920);
                         left: calcFluid(30, 70, 320, 1920);
                     }
                     .borderActive{
+                        background: linear-gradient(90deg, #5134c4, #773cbc, #b856d4);
                         border: 2px solid gray !important;
                         border-image-source: linear-gradient(90deg, #5134c4, #773cbc, #b856d4) !important;
                         border-image-slice: 1 !important;

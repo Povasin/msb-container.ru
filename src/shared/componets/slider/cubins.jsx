@@ -1,12 +1,12 @@
 import React, { useState, useRef } from 'react'
 import ProductCard from "../ProdactCard"
-import {DATA} from "../../../DATA/Data"
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export default function CubinsSlider() {
     
     // че то не с слайдером
-
+    const cards = useSelector((state)=>state.cardsSlice)
     const [cubinsSlider, setCubinsSlider] = useState(0)
     const cubinsLine = useRef()
     const [cubinsBTN , setCubinsBTN] = useState({
@@ -77,7 +77,6 @@ export default function CubinsSlider() {
             } 
         }        
     }
-
   return (
     <div className="katalog">
         <div className="katalog-row">
@@ -87,7 +86,7 @@ export default function CubinsSlider() {
         </div>
         <div className="slider">
             <div className="katalog-line" ref={cubinsLine}>
-            {DATA.map((item, index) => <ProductCard key={index} item={item}/>)}
+            {cards?.items.map((item, index) => <ProductCard key={index} item={item}/>)}
             </div>
         </div>
         <Link to="/katalog" className="more">посмотреть все бытовки</Link>

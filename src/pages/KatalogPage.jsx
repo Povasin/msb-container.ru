@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import "./scss/katalog.scss"
 import { useSelector } from 'react-redux'
-import {DATA, furniture} from "../DATA/Data"
 import ProductCard from "../shared/componets/ProdactCard"
 import { Link, useLocation } from 'react-router-dom'
 import {cardsSlice, getCards} from "../shared/store/slices/cards"
@@ -10,6 +9,7 @@ import { store } from '../shared/store/slices/store';
 export default function KatalogPage() {
     const location = useLocation()
     const cards = useSelector((state)=>state.cardsSlice)
+   
     const [slider, setSlider] = useState({
         sliderOne: 1000,
         sliderTwo: 10000
@@ -59,9 +59,10 @@ export default function KatalogPage() {
             setSlider(prevInput => ({...prevInput, sliderTwo: e.target.value}))
         }
     }
-    function filterData(mass) {
-        const filterMass = mass.filter(item => {
+    function filterData() {
+        const filterMass = cards.items.filter(item => {
             let trueItem = true;
+       
             trueItem = trueItem &&  (slider.sliderOne <= item.price && slider.sliderTwo >= item.price ? true : false)
             trueItem = trueItem &&  (content.min <= item.content && content.max >= item.content ? true : false)
             if (!allCheckboxFalse(sizeChecked)) {
@@ -70,10 +71,16 @@ export default function KatalogPage() {
             if (!allCheckboxFalse(starsChecked)) {
                 trueItem =  trueItem && (starsChecked[item.star] ? true : false)
             }
+        
+            if (!allCheckboxFalse(nameChecked)) {
+                console.log(trueItem);
+                trueItem =  trueItem && (nameChecked[item.role] ? true : false)
+            }
+           
             return trueItem
         })
+        setCardsState(filterMass)
         return showFirstFillter.active == "популярные" ?  filterMass.sort(function (a, b) {return a.content - b.content;}) : showFirstFillter.active == "дешевле" ? filterMass.sort(function (a, b) {return a.price - b.price;}) : showFirstFillter.active == "дороже" &&  filterMass.sort(function (a, b) {return b.price - a.price;})
-         
     }
 
 
@@ -85,16 +92,16 @@ export default function KatalogPage() {
         setSlider({sliderOne: 1000, sliderTwo: 10000})
     }
 
-    function controlFilter() {
-        const obj = {"Бытовки раздевалки": DATA[0].mass,"Бытовки для проживания": DATA[1].mass,"Бытовки c душем": DATA[2].mass, 'Бытовки прорабские': DATA[3].mass, 'Бытовки под склад': DATA[4].mass}
-        let innerArr = []
-        for(let key in nameChecked) {
-            if(nameChecked[key] === true) {
-                innerArr = [...innerArr, ...filterData(obj[key])]
-            }
-        }
-        innerArr.length > 0 ? setCardsState(innerArr) : setCardsState(filterData(DATA))
-    }
+    // function controlFilter() {
+    //     const obj = {"Бытовки раздевалки": cards.role,"Бытовки для проживания": DATA[1].mass,"Бытовки c душем": DATA[2].mass, 'Бытовки прорабские': DATA[3].mass, 'Бытовки под склад': DATA[4].mass}
+    //     let innerArr = []
+    //     for(let key in nameChecked) {
+    //         if(nameChecked[key] === true) {
+    //             innerArr = [...innerArr, ...filterData(obj[key])]
+    //         }
+    //     }
+    //     innerArr.length > 0 ? setCardsState(innerArr) : setCardsState(filterData(DATA))
+    // }
 
     function ShowFillter() {
         return (
@@ -109,8 +116,8 @@ export default function KatalogPage() {
             </div>
             <div className="container">
                 <div className="slider-track"  style={{background: `linear-gradient(to right, #dadae5 ${(slider.sliderOne / 10000) * 100}% ,#5134c4 ${ (slider.sliderOne / 10000) * 100}% ,#b856d4 ${(slider.sliderTwo / 10000) * 100}%, #dadae5 ${(slider.sliderTwo / 10000) * 100}%)`}}></div>
-                <label><input type="range" min="0" max="9999" defaultValue={slider.sliderOne} id="slider-1" onChange={(e)=>checkSliderOne(e)}/></label>
-                <label><input type="range" min="0" max="10000" defaultValue={slider.sliderTwo} id="slider-2" onChange={(e)=>checkSliderTwo(e)}/></label>
+                <label><input type="range" min="0" max="9999" value={slider.sliderOne} id="slider-1" onChange={(e)=>checkSliderOne(e)}/></label>
+                <label><input type="range" min="0" max="10000" value={slider.sliderTwo} id="slider-2" onChange={(e)=>checkSliderTwo(e)}/></label>
             </div>
             <div className="katalog-name">
                 <h2>Наименование</h2>
@@ -151,10 +158,16 @@ export default function KatalogPage() {
     //   DATA[3].mass.push(cards.items.filter((item)=>item.role == "Бытовка с душем") )  
     //   DATA[4].mass.push(cards.items.filter((item)=>item.role == "Бытовка под склад") )  
     // }, [])
-    useEffect(controlFilter, [sizeChecked,starsChecked, nameChecked, content, slider, showFirstFillter.state])
+    useEffect(()=>{
+        store.dispatch(getCards({}))
+    }, [])
+    useEffect(()=>{
+        cards.items.length != 0 && filterData()
+    }, [sizeChecked,starsChecked, nameChecked, content, slider, showFirstFillter.state , cards.items])
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [location])
+
     return (
         <main>
             <div className="katalog">

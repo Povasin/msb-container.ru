@@ -1,29 +1,39 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useSelector } from 'react-redux'
 import {useNavigate, useLocation, Link} from 'react-router-dom'
 import { authSlice} from '../shared/store/slices/auth';
-import { orderSliceClient, getorder } from '../shared/store/slices/orderClient';
-import { OrdersCardSlice, getOrdersCards } from '../shared/store/slices/ordersCard';
+import {cardsSlice, getCards} from "../shared/store/slices/cards"
+import { orderSliceClient, getorder, getOrdersCards } from '../shared/store/slices/orderClient';
 import { store } from '../shared/store/slices/store';
 import "./scss/user.scss"
+
 export default function  OrderCardPage() {
     const auth =  useSelector((state)=>state.authSlice)
     const location = useLocation()
     const navigate = useNavigate()
     const ordersClient = useSelector((state)=>state.orderSliceClient)
-    const order = ordersClient?.items.find((item)=>item.number == location.pathname.split("/")[3]) ?? navigate("/") 
-    const orderCards = useSelector((state)=>state.orderSliceClient)
+    const order = ordersClient?.items.find((item)=>item.number == location.pathname.split("/")[2])
+    const cards = useSelector((state)=>state.cardsSlice)
+    function cardsConnectFunc() {
+        let cardsConnect = []
+         ordersClient?.orderCards.map(item=>{
+            cardsConnect = ([...cardsConnect, {data: cards?.items.find((arr)=>item.idCard == arr.idCard), count: item.count , month: item.month}])
+        })
+        return cardsConnect
+    }
+    let isCards = cardsConnectFunc()
+   
     function OrderPrice() {
         let summ = 0;
-        orderCards.forEach(array=>{
-            summ+= (array.count*array.data.price )*array.month 
+        isCards.forEach(array=>{
+            summ+= (array.count*array.data?.price )*array.month 
         })
         return summ
     }
     function OrderDiscount() {
         let summ = 0;
-        orderCards.forEach(array=>{
-            summ+= (array.count*array.data.discount )*array.month 
+        isCards.forEach(array=>{
+            summ+= (array.count*array.data?.discount )*array.month 
         })
         return summ
     }
@@ -31,28 +41,27 @@ export default function  OrderCardPage() {
         window.scrollTo(0, 0)
     }, [location]) 
     useEffect(()=>{
-        ordersClient?.items && store.dispatch(getorder({email: auth.userData.email}))
-    }, [auth.userData?.email])
-    useEffect(()=>{
-        orderCards?.items && store.dispatch(getOrdersCards({email: auth.userData.id, number: location.pathname.split("/")[3]}))
-    }, [auth.userData?.email])
+        ordersClient?.items && store.dispatch(getorder({idUser: auth?.userData?.idUser}))
+        ordersClient?.orderCards && store.dispatch(getOrdersCards({idUser: auth?.userData?.idUser, number: location.pathname.split("/")[2]}))
+        store.dispatch(getCards({}))
+    }, [auth?.userData?.idUser])
   return (
     <main>
         <div className='userHtml'>
-            {orderCards.map((array)=>
-                <div key={array.id} className="bag__block">
-                    <Link to={`/card/${array.id}`} className="block__imgJS"><img src={array.data.img[0].src} alt={array.data.name}/></Link>
+            {isCards.map((array)=>
+                <div key={array.idCard} className="bag__block">
+                    <Link to={`/card/${array.idCard}`} className="block__imgJS"><img src={array.data?.img} alt={array.data?.name}/></Link>
                 <div className="block__content">
                 <p className="rent">Аренда</p>
-                <Link className="orderNumber" to={`/card/${array.id}`}> {array.data.name}</Link>
+                <Link className="orderNumber" to={`/card/${array.idCard}`}> {array.data?.name}</Link>
                 <div className="block__inputRow">	
                     <div className="block__input">	
                         <p className="fd-col">количество: <span>{array.count}шт</span></p>		
                         <p className="fd-col">срок Аренды: <span>{array.month}мес</span></p>
                     </div>
                     <div className="block-col">
-                        <p className="block__discount">{(array.count*array.data.discount)*array.month}</p>
-                        <p className="block__price" name="priceOrder">{(array.count*array.data.price)*array.month}₽</p>
+                        <p className="block__discount">{(array.count*array.data?.discount)*array.month}</p>
+                        <p className="block__price" name="priceOrder">{(array.count*array.data?.price)*array.month}₽</p>
                     </div>
                 </div>
                 </div>

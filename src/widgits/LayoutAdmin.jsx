@@ -19,7 +19,7 @@ export default function LayoutAdmin(props) {
       } else if (user?.userData == null){
           store.dispatch(authSlice.actions.setUser(localStorage.getItem("user")))
       }
-    }
+    } else  navigate(`/admin`)
   }, [])
   return (
     <>
