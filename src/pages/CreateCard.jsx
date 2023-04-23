@@ -20,23 +20,26 @@ export default function CreateCard() {
     text: "",
     price: null,
     discount: null,
-    img : []
+    img: []
   })
   async function send () {
     if (!form.name || !form.role || !form.content || !form.size || !form.finishing || !form.states || !form.star || !form.text || !form.price || !form.discount){
       setError("Поля не заполненны")
     } else{
       if ( form.img.length == 0) {
-        setError("Картинки не добавленны")
+        setError("Изображения не добавленны")
       } else {
-        setError("")
-        console.log({body: form});
-        await store.dispatch(addCards({body: form}))
-         navigate("/admin/activeCard")
+        if (form.img.length > 6) {
+          setError("Добавленно слишком много Изображений(максимум 6)")
+        } else{
+          setError("")
+          console.log({body: form});
+          await store.dispatch(addCards({body: form}))
+          //  navigate("/admin/activeCard")
+        }
       }
     }
   }
-
   return (
     <div className='createcard'>
     <div className="fd-row">
@@ -47,27 +50,23 @@ export default function CreateCard() {
       <div className="fd-col">
         <h2>Категория*</h2>
         <select ref={select} onClick={()=>setForm({...form, role: select.current.value})} className="select" name="role">
-            {form.role != 'общая' ? <>
-            <option  value="Бытовка для проживания">Бытовка для проживания</option>
-            <option  value="Бытовка раздевалка" >Бытовка раздевалка</option>
+            <option  value="Бытовки для проживания">Бытовки для проживания</option>
+            <option  value="Бытовки раздевалки" >Бытовки раздевалки</option>
             <option  value="Бытовки c душем" >Бытовки c душем</option>
             <option  value="Бытовки под склад" >Бытовки под склад</option>
             <option  value="Бытовки прорабские" >Бытовки прорабские</option>
-            </> :  <option  value="общая" >Общая</option>}
-         
         </select>
       </div>
     </div>
-    <h2>Картинка*</h2>
+    <h2>Изображение*</h2>
       <label className="input-file"><input type="file" onChange={(e)=>setForm({...form, img: [...form.img, e.target.files[0]]})} accept='image/*, .png, .jpg, .gif, .web, .svg'/><span>Выберите файл</span></label>
     <p>*разрешение файлов должно 1920*1080</p>
-    {form.img.map((item, index)=>{
-      return <div key={index} className="addImg">
+    {form.img.map((item, index)=><div key={index} className="addImg">
         <img src="/paperImg.svg" alt="" />
-        <p>{item}</p>
-        <img src="/trash.svg" onClick={()=>setForm({...form, img: form.img.filter((img)=>img != item) })} alt="удалить" />
+        <p>{item.name}</p>
+        <img src="/trash.svg" onClick={()=>setForm({...form, img: form.img.filter((img)=>img.lastModified != item.lastModified) })} alt="удалить" />
       </div>
-    })}
+    )}
     <h2>Характеристки*</h2>
     <div className="fd-row">
       <div className="fd-col">

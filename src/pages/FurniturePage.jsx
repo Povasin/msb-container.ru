@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import FurnitureCard from "../shared/componets/FurnitureCard"
-import {DATA , furniture} from "../DATA/Data"
+import {furniture} from "../DATA/Data"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {BagSlice} from "../shared/store/slices/bag"
 import {store} from "../shared/store/slices/store"

@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const login = createAsyncThunk("auth/login", async ({body}, {rejectWithValue}) => {
-      return fetch(`${baseUrl}/login`,{
+      return fetch(`/login`,{
           method: "POST",
           mode: 'cors',
           headers: {
@@ -21,7 +21,7 @@ export const login = createAsyncThunk("auth/login", async ({body}, {rejectWithVa
     },
 );
 export const register = createAsyncThunk("auth/register", async ({body}, {rejectWithValue}) => {
-      return fetch(`${baseUrl}/register`,{
+      return fetch(`/register`,{
           method: "POST",
           mode: 'cors',
           headers: {
@@ -36,7 +36,7 @@ export const register = createAsyncThunk("auth/register", async ({body}, {reject
 
 export const loginAdmin = createAsyncThunk("auth/loginAdmin", async ({body}, {rejectWithValue}) => {
     console.log({...body});
-      return fetch(`${baseUrl}/loginAdmin`,{
+      return fetch(`/loginAdmin`,{
           method: "POST",
           mode: 'cors',
           headers: {

@@ -84,6 +84,7 @@ export default function Footer() {
                     <Link to="#" className="prava">2022 все права защищены</Link>
                     <Link to="#" className="prava">пользовательское соглашение</Link>
                     <Link to="#" className="prava">политика конфидециальности</Link>
+                    <Link to="/admin" className="prava">для администраторов</Link>
                 </div>
             </div>
             <div className="d-col">

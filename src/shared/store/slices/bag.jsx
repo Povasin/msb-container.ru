@@ -6,7 +6,7 @@ const initialState = {
     error: '',
 };
 export const order = createAsyncThunk("/bag", async ({body, idUser}, {rejectWithValue}) => {        
-    return fetch(`${baseUrl}/bag`,{
+    return fetch(`/bag`,{
             method: "POST",
             mode: 'cors',
             headers: {

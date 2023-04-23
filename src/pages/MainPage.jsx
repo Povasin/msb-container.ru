@@ -38,7 +38,7 @@ export default function MainPage() {
                                 </div>
                             </div>
                             <div className="slide__radius">
-                                <img decoding="async" src="/cubinsForLive.webp" alt="бытовки для проживания"/>
+                                <img decoding="async" src="/uploads/cubinsForLive.webp" alt="бытовки для проживания"/>
                             </div>
                         </div>
                         <div className="slide">
@@ -52,7 +52,7 @@ export default function MainPage() {
                                 </div>
                             </div>
                             <div className="slide__radius">
-                                <img decoding="async" src="/cubinsForwareHouse.webp" alt="бытовки под склад"/>
+                                <img decoding="async" src="/uploads/cubinsForwareHouse.webp" alt="бытовки под склад"/>
                             </div>
                         </div>
                         <div className="slide">
@@ -66,7 +66,7 @@ export default function MainPage() {
                                 </div>
                             </div>
                             <div className="slide__radius">
-                                <img decoding="async" src="/cubinsForBath.webp" alt="бытовки с душем"/>
+                                <img decoding="async" src="/uploads/cubinsForBath.webp" alt="бытовки с душем"/>
                             </div>
                         </div>
                         <div className="slide">
@@ -80,7 +80,7 @@ export default function MainPage() {
                                 </div>
                             </div>
                             <div className="slide__radius">
-                                <img decoding="async" src="/cubinsForWork.webp" alt="бытовки прорабские"/>
+                                <img decoding="async" src="/uploads/cubinsForWork.webp" alt="бытовки прорабские"/>
                             </div>
                         </div>
                         <div className="navigation-auto">
@@ -141,10 +141,10 @@ export default function MainPage() {
                         <p className="choose__more" onClick={()=>setShowSelect({...showSelect, state: true})} >{showSelect.active}</p>
                         {showSelect.state && <div className='select'>
                                 <p onClick={()=>setShowSelect({active: "выбрать формат", state: false, src: "/emptyCubins.webp"})}>выбрать формат</p>
-                                <p onClick={()=>setShowSelect({active: "бытовка раздевалка", state: false, src: "/cubinsForDress.webp"})}>бытовка раздевалка</p>
-                                <p onClick={()=>setShowSelect({active: "бытовка прорабская", state: false, src: "/cubinsForWork.webp"})}>бытовка прорабская</p>
-                                <p onClick={()=>setShowSelect({active: "бытовка для проживания", state: false, src: "/cubinsForLive.webp"})}>бытовка для проживания </p>
-                                <p onClick={()=>setShowSelect({active: "бытовка с душем", state: false, src: "/cubinsForBath.webp"})}> бытовка с душем</p>
+                                <p onClick={()=>setShowSelect({active: "бытовка раздевалка", state: false, src: "/uploads/cubinsForDress.webp"})}>бытовка раздевалка</p>
+                                <p onClick={()=>setShowSelect({active: "бытовка прорабская", state: false, src: "/uploads/cubinsForWork.webp"})}>бытовка прорабская</p>
+                                <p onClick={()=>setShowSelect({active: "бытовка для проживания", state: false, src: "/uploads/cubinsForLive.webp"})}>бытовка для проживания </p>
+                                <p onClick={()=>setShowSelect({active: "бытовка с душем", state: false, src: "/uploads/cubinsForBath.webp"})}> бытовка с душем</p>
                         </div>}
                     </div>
 

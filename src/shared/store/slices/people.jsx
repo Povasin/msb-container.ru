@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const create = createAsyncThunk("/create", async ({body}, {rejectWithValue}) => {
-      return fetch(`${baseUrl}/create`,{
+      return fetch(`/create`,{
           method: "POST",
           mode: 'cors',
           headers: {
@@ -22,7 +22,7 @@ export const create = createAsyncThunk("/create", async ({body}, {rejectWithValu
 );
 
 export const getPeople = createAsyncThunk("/overwriteAuthAdmin", async ({}, {rejectWithValue}) => {
-    return fetch(`${baseUrl}/overwriteAuthAdmin`)
+    return fetch(`/overwriteAuthAdmin`)
     .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
   },
 );

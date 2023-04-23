@@ -86,7 +86,7 @@ export default function CubinsSlider() {
         </div>
         <div className="slider">
             <div className="katalog-line" ref={cubinsLine}>
-            {cards?.items.map((item, index) => <ProductCard key={index} item={item}/>)}
+            {cards?.items.map((item, index) => item.role == 'общая' && <ProductCard key={index} item={item}/>)}
             </div>
         </div>
         <Link to="/katalog" className="more">посмотреть все бытовки</Link>

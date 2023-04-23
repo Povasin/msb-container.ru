@@ -13,12 +13,18 @@ export default function CardPage() {
     const location = useLocation()
     const navigate = useNavigate()
     const item = cards.items.find((item)=>item?.idCard == location.pathname.split("/")[2]) 
-    const itemImg = [cards.img.find((item)=>item?.idCard == location.pathname.split("/")[2])] 
+    let itemImg = [] 
+    if (cards.img.filter((item)=>item?.idCard == location.pathname.split("/")[2]) != undefined) {
+        itemImg = [item?.img, cards.img.filter((item)=>item?.idCard == location.pathname.split("/")[2])] 
+    } else {
+        itemImg = [item?.img]
+    }
     const [activeImg, setActiveImg] = useState(/*item?.img.find((point)=>point.active == true)*/)
     const [MainValue, setValue] = useState({
         count: 1,
         month: 1
     })
+    console.log(itemImg);
     const [cubinsSlider, setCubinsSlider] = useState(0)
     const [cubinsBTN , setCubinsBTN] = useState({
         next: true,
@@ -95,14 +101,14 @@ export default function CardPage() {
                             <p  className={`prev ${cubinsBTN.prev ? "active" : ""} `} onClick={sliderPrev}>{item?.img.length < 3 && '<'}</p>
                             <div className="slider">
                                 <div className="slider-line" ref={slider}>
-                                    {itemImg.map((point, index)=><img className={`slider__img ${point ? `active` : ""}`} onClick={()=>changeActiveImg(point)} src={point?.img} key={index} alt={item?.name}/>)}
+                                    {itemImg.map((point, index)=><img className={`slider__img ${point ? `active` : ""}`} onClick={()=>changeActiveImg(point)} src={point} key={index} alt={item?.name}/>)}
                                 </div>
                             </div>
                             <p className={`next ${cubinsBTN.next ? "active" : ""} `} onClick={sliderNext} >{item?.img.length < 3 && '>'}</p>
                         </div>
                         <div className="transportation__img">
                             <div className="star">★★★★☆</div>
-                            <img className="main__img"  src={itemImg[0]?.img} alt={item?.name}/>
+                            <img className="main__img"  src={itemImg[0]} alt={item?.name}/>
                             <Link to="/gallary" className="chooseMore">выбрать формат</Link>
                         </div>
                     </div>

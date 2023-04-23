@@ -7,12 +7,12 @@ const initialState = {
     error: '',
 };
 export const getCards = createAsyncThunk("/getCards", async ({}, {rejectWithValue}) => {
-    return fetch(`${baseUrl}/getCards`)
+    return fetch(`/getCards`)
     .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
   },
 );
 export const deleteCard = createAsyncThunk("/deleteCard", async ({idCard}, {rejectWithValue}) => {   
-    return fetch(`${baseUrl}/deleteCard`,{
+    return fetch(`/deleteCard`,{
             method: "POST",
             mode: 'cors',
             headers: {
@@ -27,18 +27,19 @@ export const deleteCard = createAsyncThunk("/deleteCard", async ({idCard}, {reje
 
 
 export const getCardsImg = createAsyncThunk("/getCardsImg", async ({}, {rejectWithValue}) => {
-    return fetch(`${baseUrl}/getCardsImg`)
+    return fetch(`/getCardsImg`)
     .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
   },
 );
 
 export const getDeleteCards = createAsyncThunk("/getDeleteCards", async ({}, {rejectWithValue}) => {
-  return fetch(`${baseUrl}/getDeleteCards`)
+  return fetch(`/getDeleteCards`)
   .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
 },
 );
 
 export const addCards = createAsyncThunk("/addCards", async ({body}, {rejectWithValue}) => {
+  console.log(body);
     const formData = new FormData();
     for (let i = 0; i < body.img.length; i++) {
       formData.append('img', body.img[i]);
@@ -53,17 +54,22 @@ export const addCards = createAsyncThunk("/addCards", async ({body}, {rejectWith
     formData.append('text', body.text)
     formData.append('price', body.price)
     formData.append('discount', body.discount)
-    return fetch(`${baseUrl}/addCards`,{
+    console.log(formData);
+    return fetch(`/addCards`,{
         method: "POST",
         body: formData
     })
     .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
 });
 
-export const updateCard = createAsyncThunk("/updateCard", async ({body, img}, {rejectWithValue}) => {
+export const updateCard = createAsyncThunk("/updateCard", async ({body}, {rejectWithValue}) => {
   const formData = new FormData();
-  for (let i = 0; i < img.length; i++) {
-    formData.append('img', img[i]);
+  for (let i = 0; i < body.img.length; i++) {
+    if (body.img[i] != '') {
+      formData.append('img', body.img[i]);
+    } else{
+      formData.append('Lastimg', body.img[i]);
+    }
   }
   formData.append('name', body.name)
   formData.append('role', body.role)
@@ -75,7 +81,8 @@ export const updateCard = createAsyncThunk("/updateCard", async ({body, img}, {r
   formData.append('text', body.text)
   formData.append('price', body.price)
   formData.append('discount', body.discount)
-  return fetch(`${baseUrl}/addCards`,{
+  
+  return fetch(`/addCards`,{
       method: "POST",
       body: formData
   })
@@ -91,10 +98,11 @@ export const cardsSlice = createSlice({
             state.isLoading = true;
         },
         [getCards.fulfilled.type]: (state, action) => {
-            console.log(action.payload);
-            state.isLoading = false;
-            state.items = action.payload;
-            localStorage.setItem("cards", JSON.stringify(state.items))
+          console.log(action.payload);
+          state.isLoading = false;
+          state.items = action.payload;
+
+          localStorage.setItem("cards", JSON.stringify(state.items))
         },
         [getCardsImg.pending.type]: (state) => {
           state.isLoading = true;

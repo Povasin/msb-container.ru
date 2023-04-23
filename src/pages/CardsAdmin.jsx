@@ -9,11 +9,16 @@ import {useNavigate, useLocation} from 'react-router-dom'
 
 export default function CreateCard() {
   const location = useLocation()
-  const select = useRef()
   const cardsStorage = JSON.parse(localStorage.getItem("cards"))
   const cardsStorageImg = JSON.parse(localStorage.getItem("cardsImg"))
-  const itemImg = cardsStorageImg.filter((item)=>item.idCard == location.pathname.split("/")[3])
+  const select = useRef()
+  let itemImg = [] 
   let myCards = cardsStorage.find((item)=>item.idCard == location.pathname.split("/")[3])
+    if (cardsStorageImg.filter((item)=>item.idCard == location.pathname.split("/")[3]).length != 0) {
+        itemImg = [myCards?.img.split("/")[2].split("-")[1], cardsStorageImg.filter((item)=>item.idCard == location.pathname.split("/")[3])] 
+    } else {
+        itemImg = [myCards?.img.split("/")[2].split("-")[1]]
+    }
   const navigate = useNavigate()
   const [error, setError] = useState("")
   const [form, setForm] = useState({
@@ -27,12 +32,11 @@ export default function CreateCard() {
     text: myCards.text,
     price: myCards.price,
     discount: myCards.discount,
-    img: itemImg.map(({idCard, ...keepAttrs}) => keepAttrs)
+    img: itemImg
   })
-  console.log(form.img);
-
   async function send () {
-    if (!form.name || form.role || !form.content || !form.size || !form.finishing || !form.states || !form.star || !form.text || !form.price || form.discount){
+    console.log(form);
+    if (!form.name || !form.role || !form.content || !form.size || !form.finishing || !form.states || !form.star || !form.text || !form.price || form.discount){
       setError("Поля не заполненны")
     } else{
       if ( form.img.length == 0) {
@@ -62,7 +66,7 @@ export default function CreateCard() {
             <h2>Категория*</h2>
             <select ref={select} onClick={()=>setForm({...form, role: select.current.value})} className="select" name="role">
                 {form.role != 'общая' ? <>
-                <option  value="Бытовка для проживания">Бытовка для проживания</option>
+                <option  value="Бытовка для проживания" >Бытовка для проживания</option>
                 <option  value="Бытовка раздевалка" >Бытовка раздевалка</option>
                 <option  value="Бытовки c душем" >Бытовки c душем</option>
                 <option  value="Бытовки под склад" >Бытовки под склад</option>
@@ -77,8 +81,8 @@ export default function CreateCard() {
         <p>*разрешение файлов должно 1920*1080</p>
         {form.img.map((item, index)=>{
           return <div key={index} className="addImg">
-            <img src="/paperImg.svg" alt="" />
-            <p>{item}</p>
+            <img src={index == 0 ? `/paperImgred.svg`: `/paperImg.svg`} alt="" />
+            <p>{item.name == undefined ? item : item.name}</p>
             <img src="/trash.svg" onClick={()=>setForm({...form, img: form.img.filter((img)=>img != item) })} alt="удалить" />
           </div>
         })}

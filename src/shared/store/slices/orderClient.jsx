@@ -8,7 +8,7 @@ const initialState = {
     error: '',
 };
 export const getorder = createAsyncThunk("/overwriteMass", async ({idUser}, {rejectWithValue}) => {   
-    return fetch(`${baseUrl}/overwriteMass`,{
+    return fetch(`/overwriteMass`,{
             method: "POST",
             mode: 'cors',
             headers: {
@@ -22,7 +22,7 @@ export const getorder = createAsyncThunk("/overwriteMass", async ({idUser}, {rej
 );
 
 export const getOrdersCards = createAsyncThunk("/getOrdersCards", async ({idUser, number}, {rejectWithValue}) => {
-    return fetch(`${baseUrl}/getOrdersCards`,{
+    return fetch(`/getOrdersCards`,{
         method: "POST",
         mode: 'cors',
         headers: {
@@ -34,7 +34,7 @@ export const getOrdersCards = createAsyncThunk("/getOrdersCards", async ({idUser
   },
 );
 export const getOrdersAuth = createAsyncThunk("/getOrdersAuth", async ({idUser}, {rejectWithValue}) => {
-    return fetch(`${baseUrl}/getOrdersAuth`,{
+    return fetch(`/getOrdersAuth`,{
         method: "POST",
         mode: 'cors',
         headers: {
@@ -48,14 +48,14 @@ export const getOrdersAuth = createAsyncThunk("/getOrdersAuth", async ({idUser},
 
 
 export const getordersAdmin = createAsyncThunk("/getOrdersAdmin", async ({}, {rejectWithValue}) => {
-    return fetch(`${baseUrl}/getOrdersAdmin`)
+    return fetch(`/getOrdersAdmin`)
     .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
   },
 );
 
 export const changeOrderCard = createAsyncThunk("/changeOrderCard", async ({body}, {rejectWithValue}) => {
   console.log(body);
-    return fetch(`${baseUrl}/changeOrderCard`,{
+    return fetch(`/changeOrderCard`,{
         method: "POST",
         mode: 'cors',
         headers: {

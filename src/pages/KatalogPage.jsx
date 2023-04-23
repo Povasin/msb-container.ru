@@ -73,7 +73,6 @@ export default function KatalogPage() {
             }
         
             if (!allCheckboxFalse(nameChecked)) {
-                console.log(trueItem);
                 trueItem =  trueItem && (nameChecked[item.role] ? true : false)
             }
            
