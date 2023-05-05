@@ -13,18 +13,22 @@ export default function CardPage() {
     const location = useLocation()
     const navigate = useNavigate()
     const item = cards.items.find((item)=>item?.idCard == location.pathname.split("/")[2]) 
-    let itemImg = [] 
+    let itemImg = [{src: item?.img, active: true}] 
     if (cards.img.filter((item)=>item?.idCard == location.pathname.split("/")[2]) != undefined) {
-        itemImg = [item?.img, cards.img.filter((item)=>item?.idCard == location.pathname.split("/")[2])] 
+        let cardsImg =  cards.img.filter((item)=>item.idCard == location.pathname.split("/")[2])
+        cardsImg.map((imgCard, index)=>{
+          itemImg = [...itemImg, {src: imgCard?.img, active: false}] 
+        })
     } else {
-        itemImg = [item?.img]
+        itemImg = [ {src: item?.img, active: true}]
     }
-    const [activeImg, setActiveImg] = useState(/*item?.img.find((point)=>point.active == true)*/)
+
+    const [activeImg, setActiveImg] = useState()
+    console.log(itemImg);
     const [MainValue, setValue] = useState({
         count: 1,
         month: 1
     })
-    console.log(itemImg);
     const [cubinsSlider, setCubinsSlider] = useState(0)
     const [cubinsBTN , setCubinsBTN] = useState({
         next: true,
@@ -76,8 +80,8 @@ export default function CardPage() {
     }  
 
     function changeActiveImg(point) {
-        for (let i = 0; i < item.img.length; i++) {
-            item.img[i].active = false
+        for (let i = 0; i < itemImg.length; i++) {
+            itemImg[i].active = false
         }
         point.active = true
         setActiveImg(point)
@@ -91,24 +95,26 @@ export default function CardPage() {
         store.dispatch(getCards({}))
         store.dispatch(getCardsImg({}))
       }, [])
+      console.log(item);
     return (
         <main>
             <div className="transportation_wrapper">
-                <span><Link to="/">главная </Link>/<Link to="/katalog"> каталог</Link>/<Link to="#">{item?.name}</Link></span>      
+                <span><Link to="/">главная </Link>/<Link to="/katalog"> каталог</Link>/<Link to="#"> {item?.name}</Link></span>      
                 <div className="transportation">
                     <div className="transportation__block">
                         <div className="slider-wrapper">
-                            <p  className={`prev ${cubinsBTN.prev ? "active" : ""} `} onClick={sliderPrev}>{item?.img.length < 3 && '<'}</p>
+                        {item?.img.length < 3 &&  <p  className={`prev ${cubinsBTN.prev ? "active" : ""} `} onClick={sliderPrev}>{`>`}</p>}   
+                           
                             <div className="slider">
                                 <div className="slider-line" ref={slider}>
-                                    {itemImg.map((point, index)=><img className={`slider__img ${point ? `active` : ""}`} onClick={()=>changeActiveImg(point)} src={point} key={index} alt={item?.name}/>)}
+                                    {itemImg.map((point, index)=><img className={`slider__img ${point.active ? `active` : ""}`} onClick={()=>changeActiveImg(point)} src={point.src} key={index} alt={item?.name}/>)}
                                 </div>
                             </div>
-                            <p className={`next ${cubinsBTN.next ? "active" : ""} `} onClick={sliderNext} >{item?.img.length < 3 && '>'}</p>
+                        {item?.img.length < 3 &&  <p className={`next ${cubinsBTN.next ? "active" : ""} `} onClick={sliderNext} >{`>`}</p>}   
                         </div>
                         <div className="transportation__img">
-                            <div className="star">★★★★☆</div>
-                            <img className="main__img"  src={itemImg[0]} alt={item?.name}/>
+                            <div className="star">{item?.star}</div>
+                            <img className="main__img"  src={activeImg?.src == undefined ?  itemImg[0].src : activeImg?.src} alt={item?.name}/>
                             <Link to="/gallary" className="chooseMore">выбрать формат</Link>
                         </div>
                     </div>
@@ -120,7 +126,7 @@ export default function CardPage() {
                         <p>Состояние:<span>{item?.states}</span></p>
                         <p className="transportation__all">Все характеристки</p>
                         <div className="transportation__row">
-                            <p className="price">{item?.discount}</p> 
+                            <p className="price">{item?.discount}₽</p> 
                             <p className="discount">{item?.price}</p>
                         </div>
                         <div className="fd-row">

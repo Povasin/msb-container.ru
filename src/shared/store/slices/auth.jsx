@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import {baseUrl} from "../api/base.js"
 
 const initialState = {
     userData: null,

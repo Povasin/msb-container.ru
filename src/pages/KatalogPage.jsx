@@ -9,14 +9,14 @@ import { store } from '../shared/store/slices/store';
 export default function KatalogPage() {
     const location = useLocation()
     const cards = useSelector((state)=>state.cardsSlice)
-   
+    console.log(cards);
     const [slider, setSlider] = useState({
         sliderOne: 1000,
-        sliderTwo: 10000
+        sliderTwo: 20000
     })
     const [content, setContent] = useState({
         min: 1,
-        max: 10
+        max: 100
     })
     const [starsChecked, setStarsChecked] = useState({
         "★★★★★": false,
@@ -71,11 +71,13 @@ export default function KatalogPage() {
             if (!allCheckboxFalse(starsChecked)) {
                 trueItem =  trueItem && (starsChecked[item.star] ? true : false)
             }
-        
+            
             if (!allCheckboxFalse(nameChecked)) {
-                trueItem =  trueItem && (nameChecked[item.role] ? true : false)
+                console.log(trueItem);
+                trueItem = trueItem && (nameChecked[item.role] ? true : false)
+            } else{
+                trueItem = trueItem && (item.role == "общая" ? true : false)
             }
-           
             return trueItem
         })
         setCardsState(filterMass)
@@ -88,19 +90,8 @@ export default function KatalogPage() {
         for (const key in sizeChecked) {setSizeChecked(sizeChecked[key] = false)}
         for (const key in nameChecked) {setNameChecked(nameChecked[key] = false)}
         setContent({min: 1, max: 10})
-        setSlider({sliderOne: 1000, sliderTwo: 10000})
+        setSlider({sliderOne: 1000, sliderTwo: 20000})
     }
-
-    // function controlFilter() {
-    //     const obj = {"Бытовки раздевалки": cards.role,"Бытовки для проживания": DATA[1].mass,"Бытовки c душем": DATA[2].mass, 'Бытовки прорабские': DATA[3].mass, 'Бытовки под склад': DATA[4].mass}
-    //     let innerArr = []
-    //     for(let key in nameChecked) {
-    //         if(nameChecked[key] === true) {
-    //             innerArr = [...innerArr, ...filterData(obj[key])]
-    //         }
-    //     }
-    //     innerArr.length > 0 ? setCardsState(innerArr) : setCardsState(filterData(DATA))
-    // }
 
     function ShowFillter() {
         return (
@@ -114,49 +105,41 @@ export default function KatalogPage() {
                 <label className="label__price"> до <p>{slider.sliderTwo}</p></label>
             </div>
             <div className="container">
-                <div className="slider-track"  style={{background: `linear-gradient(to right, #dadae5 ${(slider.sliderOne / 10000) * 100}% ,#5134c4 ${ (slider.sliderOne / 10000) * 100}% ,#b856d4 ${(slider.sliderTwo / 10000) * 100}%, #dadae5 ${(slider.sliderTwo / 10000) * 100}%)`}}></div>
-                <label><input type="range" min="0" max="9999" value={slider.sliderOne} id="slider-1" onChange={(e)=>checkSliderOne(e)}/></label>
-                <label><input type="range" min="0" max="10000" value={slider.sliderTwo} id="slider-2" onChange={(e)=>checkSliderTwo(e)}/></label>
+                <div className="slider-track"  style={{background: `linear-gradient(to right, #dadae5 ${(slider.sliderOne / 20000) * 100}% ,#5134c4 ${ (slider.sliderOne / 10000) * 100}% ,#b856d4 ${(slider.sliderTwo / 20000) * 100}%, #dadae5 ${(slider.sliderTwo / 20000) * 100}%)`}}></div>
+                <label><input type="range" min="0" max="19999" value={slider.sliderOne} id="slider-1" onChange={(e)=>checkSliderOne(e)}/></label>
+                <label><input type="range" min="10" max="20000" value={slider.sliderTwo} id="slider-2" onChange={(e)=>checkSliderTwo(e)}/></label>
             </div>
             <div className="katalog-name">
                 <h2>Наименование</h2>
-                <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки раздевалки": !nameChecked["Бытовки раздевалки"]})} defaultChecked={nameChecked["Бытовки раздевалки"]}/>Бытовки раздевалки</label>
-                <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки для проживания": !nameChecked["Бытовки для проживания"]})} defaultChecked={nameChecked["Бытовки для проживания"]}/>Бытовки для проживания</label>
-                <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки c душем": !nameChecked["Бытовки c душем"]})} defaultChecked={nameChecked["Бытовки c душем"]}/> Бытовки c душем</label>
-                <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки под склад": !nameChecked["Бытовки под склад"]})} defaultChecked={nameChecked["Бытовки под склад"]}/>Бытовки под склад</label>
-                <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки прорабские": !nameChecked["Бытовки прорабские"]})} defaultChecked={nameChecked["Бытовки прорабские"]}/>Бытовки прорабские</label>
+                <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки раздевалки": !nameChecked["Бытовки раздевалки"]})} checked={nameChecked["Бытовки раздевалки"]}/>Бытовки раздевалки</label>
+                <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки для проживания": !nameChecked["Бытовки для проживания"]})} checked={nameChecked["Бытовки для проживания"]}/>Бытовки для проживания</label>
+                <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки c душем": !nameChecked["Бытовки c душем"]})} checked={nameChecked["Бытовки c душем"]}/> Бытовки c душем</label>
+                <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки под склад": !nameChecked["Бытовки под склад"]})} checked={nameChecked["Бытовки под склад"]}/>Бытовки под склад</label>
+                <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки прорабские": !nameChecked["Бытовки прорабские"]})} checked={nameChecked["Бытовки прорабские"]}/>Бытовки прорабские</label>
             </div>
             <div className="katalog-size">
                 <h2>Габариты</h2>
-                <label><input type="checkbox" onClick={()=>setSizeChecked({...sizeChecked,  "6х2,4х2,50м": !sizeChecked["6х2,4х2,50м"]})} defaultChecked={sizeChecked["6х2,4х2,50м"]}/>6х2,4х2,50м</label>
-                <label><input type="checkbox" onClick={()=>setSizeChecked({...sizeChecked,  "2,5х2,5х3,0м": !sizeChecked["2,5х2,5х3,0м"]})} defaultChecked={sizeChecked["2,5х2,5х3,0м"]}/>2,5х2,5х3,0м</label>
-                <label><input type="checkbox" onClick={()=>setSizeChecked({...sizeChecked,  "6х2,4х2,4м": !sizeChecked["6х2,4х2,4м"]})} defaultChecked={sizeChecked["6х2,4х2,4м"]}/>6х2,4х2,4м</label>
+                <label><input type="checkbox" onClick={()=>setSizeChecked({...sizeChecked,  "6х2,4х2,50м": !sizeChecked["6х2,4х2,50м"]})} checked={sizeChecked["6х2,4х2,50м"]}/>6х2,4х2,50м</label>
+                <label><input type="checkbox" onClick={()=>setSizeChecked({...sizeChecked,  "2,5х2,5х3,0м": !sizeChecked["2,5х2,5х3,0м"]})} checked={sizeChecked["2,5х2,5х3,0м"]}/>2,5х2,5х3,0м</label>
+                <label><input type="checkbox" onClick={()=>setSizeChecked({...sizeChecked,  "6х2,4х2,4м": !sizeChecked["6х2,4х2,4м"]})} checked={sizeChecked["6х2,4х2,4м"]}/>6х2,4х2,4м</label>
             </div>
                 <h2>Вместимость</h2>
                 <div className="katalog-row">
                     <label className="label__price"> от <input type="text" maxLength="2" value={content.min} onChange={(e)=>setContent({...content, min: e.target.value})} className="katalog__price" /></label>
-                    <label className="label__price"> до <input type="text" maxLength="2" value={content.max} onChange={(e)=>setContent({...content, max: e.target.value})}  className="katalog__price"/></label>
+                    <label className="label__price"> до <input type="text" maxLength="3" value={content.max} onChange={(e)=>setContent({...content, max: e.target.value})}  className="katalog__price"/></label>
                 </div>
             <div className="katalog-star">
                 <h2>Рейтинг покупателей</h2>
-                <label> <input type="checkbox" onClick={()=>setStarsChecked({...starsChecked,  "★★★★★": !starsChecked["★★★★★"]})} defaultChecked={starsChecked["★★★★★"]}/>★★★★★</label>
-                <label> <input type="checkbox" onClick={()=>setStarsChecked({...starsChecked,  "★★★★☆": !starsChecked["★★★★☆"]})} defaultChecked={starsChecked["★★★★☆"]}/>★★★★☆</label>
-                <label> <input type="checkbox" onClick={()=>setStarsChecked({...starsChecked,  "★★★☆☆": !starsChecked["★★★☆☆"]})} defaultChecked={starsChecked["★★★☆☆"]}/>★★★☆☆</label>
-                <label> <input type="checkbox" onClick={()=>setStarsChecked({...starsChecked,  "★★☆☆☆": !starsChecked["★★☆☆☆"]})} defaultChecked={starsChecked["★★☆☆☆"]}/>★★☆☆☆</label>
+                <label> <input type="checkbox" onClick={()=>setStarsChecked({...starsChecked,  "★★★★★": !starsChecked["★★★★★"]})} checked={starsChecked["★★★★★"]}/>★★★★★</label>
+                <label> <input type="checkbox" onClick={()=>setStarsChecked({...starsChecked,  "★★★★☆": !starsChecked["★★★★☆"]})} checked={starsChecked["★★★★☆"]}/>★★★★☆</label>
+                <label> <input type="checkbox" onClick={()=>setStarsChecked({...starsChecked,  "★★★☆☆": !starsChecked["★★★☆☆"]})} checked={starsChecked["★★★☆☆"]}/>★★★☆☆</label>
+                <label> <input type="checkbox" onClick={()=>setStarsChecked({...starsChecked,  "★★☆☆☆": !starsChecked["★★☆☆☆"]})} checked={starsChecked["★★☆☆☆"]}/>★★☆☆☆</label>
             </div>
             <button id="clear" onClick={clear}>Очистить</button>
         </div>
         )
      }
 
-    // useEffect(()=>{
-    //   store.dispatch(getCards({}))
-    //   DATA[0].mass.push(cards.items.filter((item)=>item.role == "Бытовка для проживания") )  
-    //   DATA[1].mass.push(cards.items.filter((item)=>item.role == "Бытовка прорабская") )  
-    //   DATA[2].mass.push(cards.items.filter((item)=>item.role == "Бытовка раздевалка") )  
-    //   DATA[3].mass.push(cards.items.filter((item)=>item.role == "Бытовка с душем") )  
-    //   DATA[4].mass.push(cards.items.filter((item)=>item.role == "Бытовка под склад") )  
-    // }, [])
     useEffect(()=>{
         store.dispatch(getCards({}))
     }, [])

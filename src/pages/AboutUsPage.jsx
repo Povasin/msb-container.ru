@@ -26,7 +26,7 @@ export default function AboutUsPage() {
             </div>
             <div className="about">
                 <div className="about__blockAbsolute">
-                    <img src="/cubinsForLive.webp" alt="бытовки для проживания"/>
+                    <img src="/uploads/1-cubinsForLive.webp" alt="бытовки для проживания"/>
                     <img src="/Group.svg" alt="задний фон"/>
                 </div>
                 <div className="about__content">

@@ -13,9 +13,14 @@ export default function CreateCard() {
   const cardsStorageImg = JSON.parse(localStorage.getItem("cardsImg"))
   const select = useRef()
   let itemImg = [] 
-  let myCards = cardsStorage.find((item)=>item.idCard == location.pathname.split("/")[3])
+  let myCards = cardsStorage.find((item)=>item.idCard == location.pathname.split("/")[3]) 
+  console.log(cardsStorageImg);
     if (cardsStorageImg.filter((item)=>item.idCard == location.pathname.split("/")[3]).length != 0) {
-        itemImg = [myCards?.img.split("/")[2].split("-")[1], cardsStorageImg.filter((item)=>item.idCard == location.pathname.split("/")[3])] 
+      let cardsImg =  cardsStorageImg.filter((item)=>item.idCard == location.pathname.split("/")[3])
+      itemImg = [...itemImg, myCards?.img.split("/")[2].split("-")[1], ] 
+      cardsImg.map(item=>{
+        itemImg = [...itemImg, item.img.split("/")[2].split("-")[1]] 
+      })
     } else {
         itemImg = [myCards?.img.split("/")[2].split("-")[1]]
     }
@@ -32,7 +37,8 @@ export default function CreateCard() {
     text: myCards.text,
     price: myCards.price,
     discount: myCards.discount,
-    img: itemImg
+    img: itemImg,
+    idCard: myCards.idCard
   })
   async function send () {
     console.log(form);
@@ -49,7 +55,10 @@ export default function CreateCard() {
       }
     }
   }
-
+  async function deleteCardFUNC(params) {
+    await store.dispatch(deleteCard({idCard: myCards.idCard}))
+    navigate("/admin/activeCard")
+  }
   useEffect(()=>{
     store.dispatch(getCards({}))
     store.dispatch(getCardsImg({}))
@@ -123,7 +132,7 @@ export default function CreateCard() {
           <p className='error'>{error}</p>
           <div className="fd-row">
             <input type="submit" onClick={send}/>
-            {form.role != 'общая' && <input type="button" value='Удалить' onClick={()=>store.dispatch(deleteCard({idCard: myCards.idCard}))}/>}
+            {form.role != 'общая' && <input type="button" value='Удалить' onClick={deleteCardFUNC}/>}
           </div>
     </div>
   )

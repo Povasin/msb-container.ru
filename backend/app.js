@@ -1,10 +1,14 @@
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize('interdor_msb', 'interdor_msb', 'Pk7802662302', {
-    dialect: 'mysql',
-    host: "localhost ",
-})
+// const sequelize = new Sequelize('msbclientdb', 'root', 'Pk7802662302', {
+//     dialect: 'mysql',
+//     host: "localhost",
+// })
 
+const sequelize = new Sequelize('c74846_msb_container_ru', 'c74846_msb_container_ru', 'FuTjaYinfakol64', {
+    dialect: 'mysql',
+    host: "localhost",
+})
 
 const msbClient = sequelize.define('msbClient', {
     idUser: {

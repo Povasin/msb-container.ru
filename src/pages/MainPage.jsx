@@ -38,7 +38,7 @@ export default function MainPage() {
                                 </div>
                             </div>
                             <div className="slide__radius">
-                                <img decoding="async" src="/uploads/cubinsForLive.webp" alt="бытовки для проживания"/>
+                                <img decoding="async" src="/uploads/1-cubinsForLive.webp" alt="бытовки для проживания"/>
                             </div>
                         </div>
                         <div className="slide">
@@ -52,7 +52,7 @@ export default function MainPage() {
                                 </div>
                             </div>
                             <div className="slide__radius">
-                                <img decoding="async" src="/uploads/cubinsForwareHouse.webp" alt="бытовки под склад"/>
+                                <img decoding="async" src="/uploads/4-cubinsForwareHouse.webp" alt="бытовки под склад"/>
                             </div>
                         </div>
                         <div className="slide">
@@ -66,7 +66,7 @@ export default function MainPage() {
                                 </div>
                             </div>
                             <div className="slide__radius">
-                                <img decoding="async" src="/uploads/cubinsForBath.webp" alt="бытовки с душем"/>
+                                <img decoding="async" src="/uploads/3-cubinsForBath.webp" alt="бытовки с душем"/>
                             </div>
                         </div>
                         <div className="slide">
@@ -80,7 +80,7 @@ export default function MainPage() {
                                 </div>
                             </div>
                             <div className="slide__radius">
-                                <img decoding="async" src="/uploads/cubinsForWork.webp" alt="бытовки прорабские"/>
+                                <img decoding="async" src="/uploads/5-cubinsForWork.webp" alt="бытовки прорабские"/>
                             </div>
                         </div>
                         <div className="navigation-auto">

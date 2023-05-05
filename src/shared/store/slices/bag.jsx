@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import {baseUrl} from "../api/base.js"
 const initialState = {
     items: [],
     isLoading: false,

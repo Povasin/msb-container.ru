@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
@@ -23,5 +24,6 @@
     "promise-mysql": "^5.2.0",
     "sequelize": "^6.30.0",
     "utf8": "^3.0.0"
-  }
+  },
+  "homepage": "./index.html"
 }

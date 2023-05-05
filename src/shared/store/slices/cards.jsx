@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import {baseUrl} from "../api/base.js"
 const initialState = {
     items: [],
     img: [],
@@ -39,7 +38,6 @@ export const getDeleteCards = createAsyncThunk("/getDeleteCards", async ({}, {re
 );
 
 export const addCards = createAsyncThunk("/addCards", async ({body}, {rejectWithValue}) => {
-  console.log(body);
     const formData = new FormData();
     for (let i = 0; i < body.img.length; i++) {
       formData.append('img', body.img[i]);
@@ -81,8 +79,9 @@ export const updateCard = createAsyncThunk("/updateCard", async ({body}, {reject
   formData.append('text', body.text)
   formData.append('price', body.price)
   formData.append('discount', body.discount)
-  
-  return fetch(`/addCards`,{
+  formData.append('idCard', body.idCard)
+  console.log(formData);
+  return fetch(`/updateCard`,{
       method: "POST",
       body: formData
   })
@@ -98,10 +97,9 @@ export const cardsSlice = createSlice({
             state.isLoading = true;
         },
         [getCards.fulfilled.type]: (state, action) => {
-          console.log(action.payload);
           state.isLoading = false;
           state.items = action.payload;
-
+          console.log(action.payload);
           localStorage.setItem("cards", JSON.stringify(state.items))
         },
         [getCardsImg.pending.type]: (state) => {

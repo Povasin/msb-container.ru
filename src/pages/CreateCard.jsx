@@ -35,7 +35,7 @@ export default function CreateCard() {
           setError("")
           console.log({body: form});
           await store.dispatch(addCards({body: form}))
-          //  navigate("/admin/activeCard")
+           navigate("/admin/activeCard")
         }
       }
     }
@@ -61,8 +61,9 @@ export default function CreateCard() {
     <h2>Изображение*</h2>
       <label className="input-file"><input type="file" onChange={(e)=>setForm({...form, img: [...form.img, e.target.files[0]]})} accept='image/*, .png, .jpg, .gif, .web, .svg'/><span>Выберите файл</span></label>
     <p>*разрешение файлов должно 1920*1080</p>
+    <p>*Наименование файлов должно написано <span className='spanDanger'>англискими буквами и без пробелов</span></p>
     {form.img.map((item, index)=><div key={index} className="addImg">
-        <img src="/paperImg.svg" alt="" />
+        <img src={index == 0 ? `/paperImgred.svg`: `/paperImg.svg`} alt="" />
         <p>{item.name}</p>
         <img src="/trash.svg" onClick={()=>setForm({...form, img: form.img.filter((img)=>img.lastModified != item.lastModified) })} alt="удалить" />
       </div>
@@ -97,7 +98,7 @@ export default function CreateCard() {
         <label className='price'><input type="number"  value={form.price} onChange={(e)=>setForm({...form, price: e.target.value})}  placeholder='Цена...' maxLength="20"/><p>₽</p></label>
       </div>
       <div className="fd-col">
-        <h2>Скидка*</h2>
+        <h2>Без скидки*</h2>
         <label className='price'><input type="number" value={form.discount} onChange={(e)=>setForm({...form, discount: e.target.value})}  placeholder='Скидка...' maxLength="20"/><p>₽</p></label>
       </div>
     </div>

@@ -1,9 +1,8 @@
-import React, {useEffect} from 'react'
-import {DATA, furniture} from "../../DATA/Data"
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import { useCallback } from 'react'
-import { useRef } from 'react'
+import React, {useEffect,useState, useRef} from 'react'
+import { useSelector } from 'react-redux'
+import {useNavigate, useLocation, Link,} from 'react-router-dom'
+import {cardsSlice, getCards} from "../store/slices/cards"
+import { store } from '../store/slices/store';
 
 function useOnClickOutside(ref, handler) {
     useEffect(
@@ -25,32 +24,22 @@ function useOnClickOutside(ref, handler) {
 }
 
 export default function Search() {
-    function parseData() {
-        return DATA.reduce((acc,card)=>{
-            const cardArr = [card, ...card.mass]
-            if(acc) {
-                return  acc = [...acc, cardArr]
-            } else {
-                return acc = cardArr
-            }
-        },[]).flat(2)
-
-    }
     const [showSearch, setShowSearch] = useState(false)
     const ref = useRef()
-    const parsedData = parseData().slice()
     const [search, setSearch] = useState("")
     const [results, setResult] = useState ("")
-
+    const cards = useSelector((state)=>state.cardsSlice)
     function resultFUNC(e) {
         setShowSearch(true)
         setSearch(e.target.value)
         if ( search != "") {
-            const filterMass = DATA.filter(card =>card.name.toLowerCase().includes(e.target.value.toLocaleLowerCase()))
-            const filterUnderMass = parsedData.filter((array)=>array.name.toLowerCase().includes(e.target.value.toLocaleLowerCase()))
-            setResult(filterMass != 0 ? filterMass : filterUnderMass)
+            const filterMass = cards.items.filter(card =>card.name.toLowerCase().includes(e.target.value.toLocaleLowerCase()))
+            setResult(filterMass)
         }
     }
+    useEffect (()=>{
+      store.dispatch(getCards({}))
+    }, [])
     useOnClickOutside(ref, ()=>setShowSearch(false))
   return (
     <div ref={ref} >            
@@ -58,7 +47,7 @@ export default function Search() {
         <img src="/search.svg" alt="поиск"/>
         {showSearch && 
             <div className="search__block" onClick={()=>setShowSearch(false)}>
-                {results ? results.map((item, index)=><Link key={index} className="search__blockHref" to={`/card/${item.id}`}>{item.name}</Link>) : null}
+                {results ? results.map((item, index)=><Link key={index} className="search__blockHref" to={`/card/${item.idCard}`}>{item.name}</Link>) : null}
             </div>
         }   
     </div>

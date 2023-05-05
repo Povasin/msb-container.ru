@@ -20,6 +20,9 @@
         font-size:calcFluid(14, 18, 320, 1920);
         font-family: "Inter-Regular";
     }
+    .spanDanger{
+        font-family: "Inter-Bold";
+    }
     .fd-row{
         display: flex;
         flex-direction: row;
@@ -143,6 +146,7 @@
         border-image-source:  $gradient;
         border-image-slice: 1;
         &:hover {
+            border: 1px solid black !important;
             border: black;
             background: black;
             color: white;

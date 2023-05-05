@@ -23,24 +23,26 @@
             padding: 20px;
             .slider-wrapper{
                 width: 25%;
+                height: 100%;
                 @extend %d-col;
                 .slider{
                     @extend %slider;
                     @extend %d-col;
                     height: calcFluid(268, 358, 1024, 1920);
+                    margin: auto;
                     .slider-line{
                         @extend %d-col; 
+                        margin: auto;
                         width: 100%;
                         top: 0;
                         height: 300%;
                         .slider__img, 
                         .slider__img__furniture{
-                            margin: auto;
-                            max-width: 90%;
-                            max-height: 100%;
+                            margin: auto 0 ;
+                            width: calcFluid(64, 192, 320, 1920);
+                            height: calcFluid(36, 108, 320, 1920);
                             padding: 10px 2px;
-                            box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.25);
-                            border: 3px solid white;
+                            border: 3px solid rgb(206, 206, 206);
                             box-sizing: border-box;
                         }
                         .slider__img__furniture{
@@ -80,7 +82,8 @@
                 }
                 img{
                     margin: auto;
-                    max-width: 90%;
+                    width: calcFluid(64, 192, 320, 1920);
+                    height: calcFluid(36, 108, 320, 1920);
                 }
                 .chooseMore{
                     margin: auto 0 0 auto;
@@ -276,7 +279,7 @@
             display: flex;
             flex-direction: column;
             .transportation__block{
-                width: 100%;
+                width: calcFluid(25, 400    , 1024, 1920);
                 padding: 0;
             }
             .slider-wrapper{
