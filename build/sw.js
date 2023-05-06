@@ -1,9 +1,27 @@
 // const CACHE_NAME = 'msb-cache';
 // const urlsToCache = [
-//   './main.js',
-//   './header/header.css',
-//   './footer/footer.css',
-//   './general.css'
+//   './bad.webp',
+//   './bag.svg',
+//   '.bagheader.sqvg',
+//   './blackBag.svg',
+//   './card.svg',
+//   './chair.svg',
+//   './chat.svg',
+//   './cubins.webp',
+//   './discount.svg',
+//   './emptyCubins.webp',
+//   './filter.webp',
+//   './uploads/1-cubinsForLive.webp',
+//   './uploads/2-cubinsForDress.webp',
+//   './uploads/3-cubinsForBath.webp',
+//   './uploads/4-cubinsForwareHouse.webp',
+//   './uploads/5-cubinsForWork.webp',
+//   './static/js/main.0f51f24f.js',
+//   './static/css/main.ca0ade7c.css',
+//   './static/media/Inter-Regular.a3e5baa244e35d0f891d.ttf',
+//   './static/media/Inter-Light.a6cdc9ac687f817dbfb5.ttf',
+//   './static/media/Inter-Bold.1eca2d329458b92342aa.ttf',
+//   './static/media/Furore.7c2d24435f6f4ca0152e.otf',
 // ];
 
 // self.addEventListener('install', (event)=>{

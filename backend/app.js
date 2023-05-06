@@ -5,7 +5,7 @@ const Sequelize = require('sequelize')
 //     host: "localhost",
 // })
 
-const sequelize = new Sequelize('c74846_msb_container_ru', 'c74846_msb_container_ru', 'FuTjaYinfakol64', {
+const sequelize = new Sequelize('c74846_msb_container_ru', 'c74846_msb_container_ru', 'XaCduNugnesuh25', {
     dialect: 'mysql',
     host: "localhost",
 })

@@ -24,7 +24,7 @@ export default function ProdactCard({item}) {
                     <p className="discount">{item?.discount}</p>
                     <p className="card__price">От {item?.price}₽</p> 
             </div>
-                <input type="image" onClick={!isActive ? handleClick : null}  className={`card__bag ${isActive && "card__bagActive"}`} src={isActive ? "/blackBag.svg" : "/bag.svg"} alt={item?.name}/>
+                <img onClick={!isActive ? handleClick : null}  className={`card__bag ${isActive && "card__bagActive"}`} src={isActive ? "/blackBag.svg" : "/bag.svg"} alt={item?.name} />
             </div> 
         </div>
     )
