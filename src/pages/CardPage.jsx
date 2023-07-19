@@ -15,16 +15,14 @@ export default function CardPage() {
     const item = cards.items.find((item)=>item?.idCard == location.pathname.split("/")[2]) 
     let itemImg = [{src: item?.img, active: true}] 
     if (cards.img.filter((item)=>item?.idCard == location.pathname.split("/")[2]) != undefined) {
-        let cardsImg =  cards.img.filter((item)=>item.idCard == location.pathname.split("/")[2])
+        let cardsImg =  cards.img.filter((item)=>item.idCard == location.pathname.split("/")[2] && item.active == 'true')
         cardsImg.map((imgCard, index)=>{
           itemImg = [...itemImg, {src: imgCard?.img, active: false}] 
         })
     } else {
         itemImg = [ {src: item?.img, active: true}]
     }
-
-    const [activeImg, setActiveImg] = useState()
-    console.log(itemImg);
+    const [activeImg, setActiveImg] = useState(itemImg[0])
     const [MainValue, setValue] = useState({
         count: 1,
         month: 1
@@ -41,7 +39,7 @@ export default function CardPage() {
     function sliderNext() {
         if (cubinsSlider < 100 && cubinsSlider >= 0) {
             setCubinsSlider(cubinsSlider+100)
-            slider.current.style.top = -cubinsSlider + '%' 
+            slider.current.style.top = -100 + '%' 
             setCubinsBTN({next:  false ,prev: true})
         } 
     }
@@ -49,8 +47,7 @@ export default function CardPage() {
     function sliderPrev() {
         if (cubinsSlider < 101 && cubinsSlider > 0 ) {
             setCubinsSlider(cubinsSlider-100)
-            console.log(cubinsSlider);
-            slider.current.style.top = cubinsSlider + '%' 
+            slider.current.style.top = 0 + '%' 
             setCubinsBTN({next:  true ,prev: false})
         }
     }
@@ -86,7 +83,6 @@ export default function CardPage() {
         point.active = true
         setActiveImg(point)
     } 
-
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [location])
@@ -94,8 +90,7 @@ export default function CardPage() {
     useEffect(()=>{
         store.dispatch(getCards({}))
         store.dispatch(getCardsImg({}))
-      }, [])
-      console.log(item);
+    }, [])
     return (
         <main>
             <div className="transportation_wrapper">
@@ -103,18 +98,24 @@ export default function CardPage() {
                 <div className="transportation">
                     <div className="transportation__block">
                         <div className="slider-wrapper">
-                        {item?.img.length < 3 &&  <p  className={`prev ${cubinsBTN.prev ? "active" : ""} `} onClick={sliderPrev}>{`>`}</p>}   
+                        {itemImg.length > 3 &&  <p  className={`prev ${cubinsBTN.prev ? "active" : ""} `} onClick={sliderPrev}>{`<`}</p>}   
                            
-                            <div className="slider">
+                            {itemImg[0].src != 'false' && <div className="slider">
                                 <div className="slider-line" ref={slider}>
-                                    {itemImg.map((point, index)=><img className={`slider__img ${point.active ? `active` : ""}`} onClick={()=>changeActiveImg(point)} src={point.src} key={index} alt={item?.name}/>)}
+                                    {itemImg.map((point, index)=><img className={`slider__img ${activeImg.src == point.src ? `active` : ""} ${itemImg.length < 2 ? `bigMargin` : ""}`} onClick={()=>changeActiveImg(point)} src={point.src} key={index} alt={item?.name}/>)}
                                 </div>
-                            </div>
-                        {item?.img.length < 3 &&  <p className={`next ${cubinsBTN.next ? "active" : ""} `} onClick={sliderNext} >{`>`}</p>}   
+                            </div> } 
+                        {itemImg.length > 3 &&  <p className={`next ${cubinsBTN.next ? "active" : ""} `} onClick={sliderNext} >{`>`}</p>}   
                         </div>
                         <div className="transportation__img">
                             <div className="star">{item?.star}</div>
-                            <img className="main__img"  src={activeImg?.src == undefined ?  itemImg[0].src : activeImg?.src} alt={item?.name}/>
+                           {itemImg[0].src != 'false' ? 
+                           <img className="main__img"  src={activeImg?.src == undefined ?  itemImg[0].src : activeImg?.src} alt={item?.name}/>
+                           :
+                            <div className="img__empty">
+                                <img  className="img__emptyPhoto" src='/emptyIcon.svg' alt={item.name}/> 
+                            </div>
+                            } 
                             <Link to="/gallary" className="chooseMore">выбрать формат</Link>
                         </div>
                     </div>
@@ -126,8 +127,8 @@ export default function CardPage() {
                         <p>Состояние:<span>{item?.states}</span></p>
                         <p className="transportation__all">Все характеристки</p>
                         <div className="transportation__row">
-                            <p className="price">{item?.discount}₽</p> 
-                            <p className="discount">{item?.price}</p>
+                            <p className="price">{item?.have == 'true' ? `${item?.price}₽` : 'Нет в наличии'}</p> 
+                            <p className="discount">{item?.have == 'true' && item?.discount}</p>
                         </div>
                         <div className="fd-row">
                             <div className="fd-row">

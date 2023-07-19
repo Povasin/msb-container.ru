@@ -11,7 +11,10 @@ main {
 .bag__wrapper {
     padding: 0 calcFluid(8, 200, 320, 1920);
     @extend %d-col;
-
+    #error{
+        color: red;
+        font-size: calcFluid(12, 18, 320, 1920);
+    }
     span a {
         text-decoration: none;
         color: black;
@@ -55,9 +58,6 @@ main {
                 .block__img {
                     max-width: 30%;
                     margin: auto;
-                    img {
-                        max-width: 90%;
-                    }
                 }
 
                 .block__content {
@@ -125,10 +125,16 @@ main {
                                 -webkit-background-clip: text;
                                 background-clip: text;
                                 -webkit-text-fill-color: transparent;
+                                &:active{
+                                    transform: scale(0.80);
+                                }
                             }
                             .bt_minus,
                             .bt_minusMonth {
                                 margin: -2px 0 0 0;
+                                &:active{
+                                    transform: scale(0.80);
+                                }
                             }
 
                             .fd-col {

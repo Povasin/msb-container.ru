@@ -5,6 +5,7 @@ import ProductCard from "../shared/componets/ProdactCard"
 import { Link, useLocation } from 'react-router-dom'
 import {cardsSlice, getCards} from "../shared/store/slices/cards"
 import { store } from '../shared/store/slices/store';
+import LoadingPage from './LoadingPage'
 
 export default function KatalogPage() {
     const location = useLocation()
@@ -65,6 +66,7 @@ export default function KatalogPage() {
        
             trueItem = trueItem &&  (slider.sliderOne <= item.price && slider.sliderTwo >= item.price ? true : false)
             trueItem = trueItem &&  (content.min <= item.content && content.max >= item.content ? true : false)
+     
             if (!allCheckboxFalse(sizeChecked)) {
                 trueItem = trueItem &&  (sizeChecked[item.size] ? true : false)
             }
@@ -73,17 +75,17 @@ export default function KatalogPage() {
             }
             
             if (!allCheckboxFalse(nameChecked)) {
-                console.log(trueItem);
                 trueItem = trueItem && (nameChecked[item.role] ? true : false)
+                console.log(trueItem);
             } else{
                 trueItem = trueItem && (item.role == "общая" ? true : false)
             }
+           
             return trueItem
         })
         setCardsState(filterMass)
         return showFirstFillter.active == "популярные" ?  filterMass.sort(function (a, b) {return a.content - b.content;}) : showFirstFillter.active == "дешевле" ? filterMass.sort(function (a, b) {return a.price - b.price;}) : showFirstFillter.active == "дороже" &&  filterMass.sort(function (a, b) {return b.price - a.price;})
     }
-
 
     function clear() {
         for (const key in starsChecked) {setStarsChecked(starsChecked[key] = false)}
@@ -92,7 +94,6 @@ export default function KatalogPage() {
         setContent({min: 1, max: 10})
         setSlider({sliderOne: 1000, sliderTwo: 20000})
     }
-
     function ShowFillter() {
         return (
         <div className="katalog__filter">
@@ -173,7 +174,7 @@ export default function KatalogPage() {
                     {document.documentElement.clientWidth > 1024 && ShowFillter()}
                     {document.documentElement.clientWidth < 1024 && showSideBar && ShowFillter()}
                     <div className="katalog-line">
-                        {cardsState.length == 0 ?  <div className="bag__clear"><h2>По вашему запросу ничего не найдено</h2><p>измените фильтры и попробуйте еще раз</p></div> : cardsState.map((item, index) => <ProductCard key={index} item={item}/>)}
+                        {cards.isLoading ? <LoadingPage number={6}/> : cardsState.length == 0 ?  <div className="bag__clear"><h2>По вашему запросу ничего не найдено</h2><p>измените фильтры и попробуйте еще раз</p></div> : cardsState.map((item, index) => <ProductCard key={index} item={item}/>)}
                     </div>
                 </div>
             </div>

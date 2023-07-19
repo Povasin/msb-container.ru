@@ -1,14 +1,22 @@
 const Sequelize = require('sequelize')
-
-// const sequelize = new Sequelize('msbclientdb', 'root', 'Pk7802662302', {
-//     dialect: 'mysql',
-//     host: "localhost",
-// })
-
-const sequelize = new Sequelize('c74846_msb_container_ru', 'c74846_msb_container_ru', 'XaCduNugnesuh25', {
+const sequelize = new Sequelize('c74846_msb_container_ru', 'root', '', {
     dialect: 'mysql',
     host: "localhost",
 })
+
+//хостинг
+
+// const { APP_IP, DBUSER, DBPASS, DBHOST, DBNAME, MYSQL_SOCKET, DB_CONNECTION_STRING } = process.env;
+// const checkDbCon = async function() {
+//     try {
+//       await sequelize.authenticate()
+//       console.log('Соединение с БД было успешно установлено')
+//     } catch (e) {
+//       console.log('Невозможно выполнить подключение к БД: ', e)
+//     }
+// }
+
+// checkDbCon();
 
 const msbClient = sequelize.define('msbClient', {
     idUser: {
@@ -190,6 +198,10 @@ const cards = sequelize.define('cards', {
     role:{
         type: Sequelize.STRING,
         allowNull: false
+    },
+    have:{
+        type: Sequelize.STRING,
+        allowNull: false
     }
 }, {
     tableName : 'cards',
@@ -197,15 +209,24 @@ const cards = sequelize.define('cards', {
 });
 
 const cardsImg = sequelize.define('cardsImg', {
-    
     img:{
         type: Sequelize.TEXT,
+        allowNull: false
+    },
+    active:{
+        type: Sequelize.STRING,
         allowNull: false
     },
     idCard:{
         type: Sequelize.NUMBER,
         allowNull: false,
         primaryKey: true
+    },
+    idCardImg: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false
     },
 }, {
     tableName : 'cardsImg',

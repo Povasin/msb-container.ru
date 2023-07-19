@@ -15,7 +15,7 @@ export default function ServicesPage() {
             <div className="services">
                 <div className="services__item">
                     <div className="services__img">
-                        <img src="./uploads/1-cubinsforLive.webp" alt=""/>
+                        <img src="https://backend.msb-container.ru/uploads/1-cubinsForLive.webp" alt=""/>
                     </div>
                     <div className="services__contant">
                         <div className="star">★★★★☆</div>
@@ -54,7 +54,7 @@ export default function ServicesPage() {
                 </div>
                 <div className="services__item">
                     <div className="services__img">
-                        <img src="./uploads/5-cubinsForWork.webp" alt=""/>
+                        <img src="https://backend.msb-container.ru/uploads/5-cubinsForWork.webp" alt=""/>
                     </div>
                     <div className="services__contant">
                         <div className="star">★★★★☆</div>

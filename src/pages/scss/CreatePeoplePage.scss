@@ -1,11 +1,11 @@
 @import "../../widgits/adminScss/layOut.scss";
 
 .registerPeople{
-    padding: calcFluid(50, 100, 320, 1920) calcFluid(8, 400, 320, 1920);
+    padding: calcFluid(70, 230, 320, 1920) calcFluid(8, 400, 320, 1920);
     @extend %d-col;
     h1{
         margin: 0 0 15px 0;
-        font-size:calcFluid(20, 35, 320, 1920);
+        font-size:calcFluid(20, 30, 320, 1920);
     }
     &-row{
         @extend %d-col;
@@ -36,21 +36,12 @@
                 }
             }
         }
-        #register{
-            @extend %more;
-            margin:10px 0;
-            text-align: center;
-        }
         .error{
             font-size: calcFluid(12, 18, 320, 1920);
             color: red;
             margin: 10px 0 0 0;
         }
-        .registerBTN{
-            @extend %more;
-            margin:10px 0;
-            text-align: center;
-        }
+      
         .loading{
            background: rgb(165, 165, 165) !important;
         }
@@ -75,4 +66,29 @@
         }
     }
    
+}
+
+.registerBTN{
+    @extend %more;
+    margin: 0 !important;
+    width: 100%;
+    text-align: center;
+}
+.deleteBtn{
+    font-family: "Inter-Regular";
+    color: black;
+    font-size:calcFluid(15, 20, 320, 1920);
+    padding:calcFluid(5, 10, 320, 1920) calcFluid(10, 20, 320, 1920);
+    border: 1px solid;
+    border-image-source:  $gradient;
+    border-image-slice: 1;
+    background: white;
+    width: 70%;
+    transition: 0.3s;
+    &:hover {
+        background: #19103C;
+        color: white;
+        border:  1px solid #19103C;
+    }
+    margin: auto 0 auto 10px;
 }

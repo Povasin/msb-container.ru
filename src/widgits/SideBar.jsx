@@ -26,7 +26,7 @@ export default function SideBar() {
     <aside>
         <div className="logo">
             <img alt="логотип"  src="/iconPWA/logo96x96.svg"/>
-            <a href="https://msb-container.ru/" className="logo">MSB<span>container</span></a>
+            <Link to="/admin/order" className="logo">MSB<span>container</span></Link>
         </div>
         <div className='pages'>
             <Link to="/admin/order" className={`pages__page ${location.pathname.split("/")[2] == "order" && "active"}`}>

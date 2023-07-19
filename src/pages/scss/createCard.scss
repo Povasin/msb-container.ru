@@ -35,6 +35,11 @@
             margin: 0 0 0 auto;
         }
     }
+    .errorImg{
+        color: red;
+        margin: 0;
+        font-size: calcFluid(14, 18, 320, 1920);
+    }
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         -webkit-appearance: none;
@@ -50,6 +55,138 @@
     }
     textarea{
         resize: none;
+    }
+    .container__img{
+        display: flex;
+        flex-direction: row;
+        margin: 30px 0;
+        .mainBlock__img{
+            width: calcFluid(40, 460, 320, 1920);
+            height: calcFluid(40, 255, 320, 1920);
+            position: relative;
+            border-radius: 8px;
+            border: 2.5px dashed #A651D4;
+            display: flex;
+            &:hover{
+                border: 2.5px dashed black;
+            }
+            .mainBlock__imgPhoto{
+                border-radius: 8px;
+                margin: auto;
+                max-height: 100%;
+               
+            }
+            .mainBlock__imgTrash{
+                position: absolute;
+                border-radius: 6px;
+                top: 10px;
+                right: 45px;
+                padding: 5px;
+                background-color: black;
+                border: 2px solid  white;
+                cursor: pointer;
+                width: 16px;
+            }
+            .mainBlock__imgAccept{
+                width: 16px;
+                top: 10px;
+                right: 10px;
+                border: 2px solid  white;
+            }
+        }
+        .fd-colImg{
+            width: 65%;
+            display: flex;
+            flex-direction: column;
+            .fd-rowImg{
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+            }
+        }
+    }
+    .block__img1,
+    .block__img2,
+    .block__img3,
+    .block__img4,
+    .block__img5,
+    .block__img8,
+    .extraBlock__img{
+        display: flex;
+        position: relative;
+        border-radius: 8px;
+        height: calcFluid(40, 117, 320, 1920);
+        border: 2.5px dashed #A651D4;
+        flex-shrink: 0;
+        width: calcFluid(80, 191, 320, 1920);
+        height: calcFluid(60, 117, 320, 1920);
+        transition: 0.2s;
+        .mainBlock__imgPhoto{
+            border-radius: 8px;
+            max-height: 100%;
+            margin: auto;
+        }
+        &:hover{
+            border: 2.5px dashed black;
+        }
+    }
+    .block__img1{
+        margin: 0 calcFluid(5, 17, 320, 1920) calcFluid(5, 17, 320, 1920) calcFluid(10, 34, 320, 1920);
+    }
+    .block__img2{
+        margin: 0 calcFluid(5, 17, 320, 1920) calcFluid(5, 17, 320, 1920) calcFluid(5, 17, 320, 1920);
+    }
+    .block__img3{
+        margin: 0 calcFluid(5, 17, 320, 1920) 0 calcFluid(5, 17, 320, 1920);
+    }
+    .block__img4{
+        margin: 0 0 calcFluid(5, 17, 320, 1920) calcFluid(5, 17, 320, 1920);
+    }
+    .block__img5{
+        margin: 0 calcFluid(5, 17, 320, 1920) 0 calcFluid(10, 34, 320, 1920);
+    }
+    .block__img8{
+        margin: 0 0 0 calcFluid(5, 17, 320, 1920);
+    }
+    .mainBlock__imgDelete{
+        position: absolute;
+        border-radius: 5px;
+        width: 11px;
+        top: 5px;
+        right: 5px;
+        padding: 5px;
+        background-color: white;
+        border: 2px solid #A651D4;
+        cursor: pointer;
+    }
+    .mainBlock__imgAccept{
+        position: absolute;
+        border-radius: 5px;
+        width: 15px;
+        top: 5px;
+        right: 5px;
+        padding: 5px;
+        background: $gradient;
+        cursor: pointer;
+    }
+    .mainBlock__imgTrash{
+        width: 11px;
+        position: absolute;
+        border-radius: 5px;
+        top: 5px;
+        right: 35px;
+        padding: 5px;
+        background-color: black;
+        border: 2px solid  white;
+        cursor: pointer;
+    }
+    .extra__img{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        .extraBlock__img{
+            margin: 0 calcFluid(5, 17, 320, 1920) calcFluid(5, 17, 320, 1920) calcFluid(5, 17, 320, 1920);
+        }
     }
     h2{ 
         margin: 15px 0;
@@ -155,6 +292,14 @@
     .input-file {
         display: flex;
         flex-direction: row;
+        .loading{
+            background: none;
+            background-color: rgb(165, 165, 165);
+         }
+         .loading:hover{
+            border: none;
+            color: white;
+         }
     }
     .input-file span {
         width: 100%;

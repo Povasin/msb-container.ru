@@ -1,0 +1,59 @@
+@import "../../widgits/css/general.scss";
+
+.containerLoadingUser{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    .fd-rowUser{
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .cardLoadingUser{
+        border-radius: 6px;
+        margin: 7px;
+        width: calcFluid(170, 280, 320, 1920);
+        box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.25);
+        background-color: white;
+        position: relative;
+        box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.20);
+        @extend %d-col;
+        background-color: white;
+        padding:10px;
+        .blockLoadingUser{
+            background: linear-gradient(90deg, #E3E3E3 0%, rgba(141, 141, 141, 0.5) 100%);
+            border-radius: 6px;
+            background-size: 400% 400%;
+            width: 100%;
+            transform: translate3d(0, 0, 0);
+            animation: gradient 2s ease infinite;
+        }
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .imgUser{
+           height:calcFluid(80, 160, 320, 1920);
+           margin: calcFluid(8, 15, 320, 1920) 0 0 0;
+        }
+        .starUser,
+        .textUser,
+        .priceUser,
+        .btnUser{
+            height: calcFluid(20, 60, 320, 1920);
+         }
+         .textUser{
+            margin: calcFluid(7, 12, 320, 1920) 0;
+         }
+         .priceUser{
+             margin: 0  calcFluid(8, 15, 320, 1920) 0 0;
+          }
+    }
+}

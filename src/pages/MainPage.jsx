@@ -7,6 +7,7 @@ import {cardsSlice, getCards} from "../shared/store/slices/cards"
 import { useSelector } from 'react-redux'
 import { store } from '../shared/store/slices/store';
 import "./scss/main.scss"
+import LazyLoad from 'react-lazy-load';
 
 export default function MainPage() {
     const [showSelect, setShowSelect] = useState({
@@ -31,15 +32,13 @@ export default function MainPage() {
                             <div className="slide__contant">
                                 <div className="slide__text">
                                     <h2>Бытовки для проживания</h2>
-                                    <p>Аренда бытовок от 5000руб</p>
+                                    <p>Аренда бытовок от 5000₽</p>
                                 </div>
                                 <div className="slide__button">
                                     <Link to="/card/2" className="more">подробнее</Link>
                                 </div>
                             </div>
-                            <div className="slide__radius">
-                                <img decoding="async" src="/uploads/1-cubinsForLive.webp" alt="бытовки для проживания"/>
-                            </div>
+                            <LazyLoad className="slide__radius" threshold={ 0.20 }><img src="https://backend.msb-container.ru/uploads/1-cubinsForLive.webp" alt="бытовки для проживания"/></LazyLoad>
                         </div>
                         <div className="slide">
                             <div className="slide__contant">
@@ -51,9 +50,7 @@ export default function MainPage() {
                                     <Link to="/card/5" className="more">подробнее</Link>
                                 </div>
                             </div>
-                            <div className="slide__radius">
-                                <img decoding="async" src="/uploads/4-cubinsForwareHouse.webp" alt="бытовки под склад"/>
-                            </div>
+                            <LazyLoad className="slide__radius" threshold={ 0.20 }><img src="https://backend.msb-container.ru/uploads/4-cubinsForwareHouse.webp" alt="бытовки под склад"/></LazyLoad>
                         </div>
                         <div className="slide">
                             <div className="slide__contant">
@@ -65,9 +62,7 @@ export default function MainPage() {
                                     <Link to="/card/3" className="more">подробнее</Link>
                                 </div>
                             </div>
-                            <div className="slide__radius">
-                                <img decoding="async" src="/uploads/3-cubinsForBath.webp" alt="бытовки с душем"/>
-                            </div>
+                            <LazyLoad className="slide__radius" threshold={ 0.20 }><img src="https://backend.msb-container.ru/uploads/3-cubinsForBath.webp" alt="бытовки с душем"/></LazyLoad>
                         </div>
                         <div className="slide">
                             <div className="slide__contant">
@@ -79,9 +74,7 @@ export default function MainPage() {
                                     <Link to="/card/4" className="more">подробнее</Link>
                                 </div>
                             </div>
-                            <div className="slide__radius">
-                                <img decoding="async" src="/uploads/5-cubinsForWork.webp" alt="бытовки прорабские"/>
-                            </div>
+                            <LazyLoad className="slide__radius" threshold={ 0.20 }><img src="https://backend.msb-container.ru/uploads/5-cubinsForWork.webp" alt="бытовки прорабские"/></LazyLoad>
                         </div>
                         <div className="navigation-auto">
                             <div className="auto-btn1"></div>
@@ -104,21 +97,21 @@ export default function MainPage() {
             <div className="line"></div>
             <div className="advantages-row">
                 <div className="advantages">
-                    <img decoding="async" src="/money.svg" alt="аренда"/>
+                <img src="/money.svg" alt="аренда"/>
                     <div className="advantages__content">
                         <h2>Аренда без залога</h2>
                         <p>мы предлагаем аренду бытовок и контейнеров без залога</p>
                     </div>
                 </div>
                 <div className="advantages">
-                    <img decoding="async" src="/discount.svg" alt="скидка"/>
+                <img src="/discount.svg" alt="скидка"/>
                     <div className="advantages__content">
                         <h2>Скидка от 3х месяцев</h2>
                         <p>Особые условия сотрудничества для постоянных клиентов</p>
                     </div>
                 </div>
                 <div className="advantages">
-                    <img decoding="async" src="/services.svg" alt="сервис"/>
+                <img src="/services.svg" alt="сервис"/>
                     <div className="advantages__content">                     
                         <h2>Качественный сервис</h2>
                         <p>Поможем с обслуживанием товара и предоствим ремонт техники</p>
@@ -141,19 +134,18 @@ export default function MainPage() {
                         <p className="choose__more" onClick={()=>setShowSelect({...showSelect, state: true})} >{showSelect.active}</p>
                         {showSelect.state && <div className='select'>
                                 <p onClick={()=>setShowSelect({active: "выбрать формат", state: false, src: "/emptyCubins.webp"})}>выбрать формат</p>
-                                <p onClick={()=>setShowSelect({active: "бытовка раздевалка", state: false, src: "/uploads/cubinsForDress.webp"})}>бытовка раздевалка</p>
-                                <p onClick={()=>setShowSelect({active: "бытовка прорабская", state: false, src: "/uploads/cubinsForWork.webp"})}>бытовка прорабская</p>
-                                <p onClick={()=>setShowSelect({active: "бытовка для проживания", state: false, src: "/uploads/cubinsForLive.webp"})}>бытовка для проживания </p>
-                                <p onClick={()=>setShowSelect({active: "бытовка с душем", state: false, src: "/uploads/cubinsForBath.webp"})}> бытовка с душем</p>
+                                <p onClick={()=>setShowSelect({active: "бытовка раздевалка", state: false, src: "https://backend.msb-container.ru/uploads/2-cubinsForDress.webp"})}>бытовка раздевалка</p>
+                                <p onClick={()=>setShowSelect({active: "бытовка прорабская", state: false, src: "https://backend.msb-container.ru/uploads/5-cubinsForWork.webp"})}>бытовка прорабская</p>
+                                <p onClick={()=>setShowSelect({active: "бытовка для проживания", state: false, src: "https://backend.msb-container.ru/uploads/1-cubinsForLive.webp"})}>бытовка для проживания </p>
+                                <p onClick={()=>setShowSelect({active: "бытовка с душем", state: false, src: "https://backend.msb-container.ru/uploads/3-cubinsForBath.webp"})}> бытовка с душем</p>
                         </div>}
                     </div>
-
-                <div className="choose__img"><img decoding="async" src={showSelect.src} alt={showSelect.active}/></div> 
+                <div className="choose__img"><img src={showSelect.src} alt={showSelect.active}/></div>
                 </div>
             </div>
             <FurnitureSlider/>
             <div className="line"></div>
-            <CubinsSlider/>
+             <CubinsSlider/>
             <div className="line"></div>
         </main>
     )

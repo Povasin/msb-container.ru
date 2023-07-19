@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import {store} from "../shared/store/slices/store"
 import {register, authSlice} from "../shared/store/slices/auth"
@@ -65,7 +65,7 @@ export default function RegisterPage() {
                 <p className="error">{auth?.error}{checkInput.error}{}</p>
                 <label><input type="checkbox" id="accept" ref={inputEl} />согласен на отправку данных</label>
                 <button id="register" className={`registerBTN ${!auth.isLoading  ? "" : "loading"} `} disabled={auth.isLoading } onClick={send}>{!auth.isLoading  ? "подтвердить" : "загрузка"}</button>
-                <p className="account">Есть аккунт? <a href="../login/login.html">выполните вход</a></p>
+                <p className="account">Есть аккунт? <Link to="/login">Выполните вход</Link></p>
             </div>
         </div>  
     </main>

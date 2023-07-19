@@ -133,7 +133,7 @@
                 @extend %d-row;
                 text-decoration: none;
                 color: black;
-                font-size: calcFluid(15, 20, 320, 1920);
+                font-size: calcFluid(15, 25, 320, 1920);
                 p{
                     margin: auto 0;
                     width: 100%;
@@ -147,7 +147,7 @@
                     -webkit-background-clip: text;
                     background-clip: text;
                     -webkit-text-fill-color: transparent;
-                    width: 27%;
+                    width: 43%;
                 }
             }
         }

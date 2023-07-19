@@ -4,8 +4,11 @@ const initialState = {
     isLoading: false,
     error: '',
 };
+
+const backendUrl = 'https://backend.msb-container.ru'
+
 export const order = createAsyncThunk("/bag", async ({body, idUser}, {rejectWithValue}) => {        
-    return fetch(`/bag`,{
+    return fetch(`${backendUrl}/bag`,{
             method: "POST",
             mode: 'cors',
             headers: {
@@ -28,7 +31,8 @@ export const BagSlice = createSlice({
             localStorage.setItem("bag", JSON.stringify(state.items))
         },
         removeCard(state, {payload}){
-            state.items =  state.items.filter((item)=>payload.id !== item.id)
+            console.log(payload);
+            state.items =  state.items.filter((item)=>payload.idCard !== item.idCard)
             localStorage.setItem("bag", JSON.stringify(state.items))
         },  
         getItems(state){

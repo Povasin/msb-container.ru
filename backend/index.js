@@ -7,8 +7,8 @@ const bcrypt = require('bcrypt');
 const db = require('./app')
 const fileUpload = require("express-fileupload")
 const fs = require('fs');
-const { APP_PORT, APP_IP, APP_PATH } = process.env;
-const indexPath = path.join(path.dirname(APP_PATH), './index.html')
+// const { APP_PORT, APP_IP, APP_PATH } = process.env;
+// const indexPath = path.join(path.dirname(APP_PATH), './index.html')
 
 
 
@@ -259,28 +259,31 @@ app.post("/deleteCard", function(request, response) {
         const {idCard} = request.body;
         db.cards.findAll({where:{idCard: idCard}, raw: true })
         .then(searchCards=>{
-          
-            fs.unlink(`../public${searchCards[0].img}`, err => {
-                if(err) throw err; // не удалось удалить файл
-                console.log('Файл успешно удалён');
+            fs.unlink(`../www/${searchCards[0].img.split('/')[3]}/${searchCards[0].img.split('/')[4]}`, err => {
+                if(err) {
+                    console.log(err);
+                } else{
+                    console.log('Файл успешно удалён');
+                } 
             });
             db.cardsImg.findAll({where:{idCard: idCard}, raw: true })
             .then(searchCardsImg=>{
                 console.log(searchCardsImg);
                 searchCardsImg.map(item=>{
-                    fs.unlink(`../public${item.img}`, err => {
-                        if(err) throw err; // не удалось удалить файл
-                        console.log('Файл успешно удалён');
+                    fs.unlink(`../www/${item.img.split('/')[3]}/${item.img.split('/')[4]}`, err => {
+                        if(err) {
+                            console.log(err);
+                        } else{
+                            console.log('Файл успешно удалён');
+                        } 
                     });
                 })
-
                 db.cardsImg.destroy({where:{idCard: idCard}, raw: true })
                 .then(result=>console.log(result)).catch(err=>console.log(err))
 
             }).catch(err=>console.log(err));
             db.cards.destroy({where:{idCard: idCard}, raw: true })
             .then(result=>{
-
                 db.cards.findAll({raw: true })
                 .then(user=>{
                     return  response.json(user)
@@ -325,50 +328,23 @@ app.post("/changeOrderCard", function(request, response) {
          return response.status(500).json({err: "ОШИБКА в catch"})
     }
 })
-app.post('/addCards', async (request, response)=>{
+app.get('/addCards', async (request, response)=>{
     try {
-        console.log(request.files.img);
-        const {content, name, role , size, finishing, states, star, text, price, discount} = request.body;
-        const firstFile = !request.files.img.name ? encodeURI(Date.now() + '-' + request.files.img[0].name) : encodeURI(Date.now() + '-' + request.files.img.name)
         db.cards.create({
-            name: name,
-            role: role, 
-            content: content, 
-            size: size, 
-            finishing: finishing, 
-            states: states, 
-            star: star, 
-            text: text, 
-            price: price,
-            discount: discount,
-            img: `/uploads/${firstFile}`
+            name: 'Новая Карточка',
+            role: "Бытовки для проживания", 
+            content: 0, 
+            size: "", 
+            finishing: "", 
+            states: "", 
+            star: "", 
+            text: "", 
+            price: 0,
+            discount: 0,
+            have: "false",
+            img: 'false'
         }).then(result=>{
-            let imgMidlleWare = request.files.img.length > 1 ? request.files.img[0] : request.files.img
-            imgMidlleWare.mv(`../public/uploads/${firstFile}`, err=>{
-                if (err) {
-                    console.log(err);
-                    return response.status(500).json({err: "ОШИБКА в добавлении файла"})
-                } else return response.json(result._previousDataValues)   
-            })
-            if (request.files.img.length > 1) {
-                request.files.img.map((item, index)=>{
-                    if (index != 0) {
-                        let newDateCard = Date.now()
-                        item.mv(`../public/uploads/${encodeURI(newDateCard + '-' + item.name)}`, err=>{
-                            if (err) {
-                                console.log(err);
-                                return response.status(500).json({err: "ОШИБКА в добавлении файла"})
-                            } else {
-                                db.cardsImg.create({
-                                    idCard : result._previousDataValues.idCard,
-                                    img: `/uploads/${encodeURI(newDateCard + '-' + item.name)}` 
-                                }).then(result=>console.log(result))
-                                .catch(err=>console.log(err));
-                            }
-                        })
-                    }
-                })
-            }
+            return  response.json(result._previousDataValues)
         }).catch(err =>{
             console.log(err);  
             return response.status(500).json({err: "ОШИБКА в добавлении таблицы"})
@@ -378,15 +354,81 @@ app.post('/addCards', async (request, response)=>{
         return response.status(500).json({err: "ОШИБКА в catch"})
     }
 })
-// ПРОВЕРИТЬ 
-app.post('/updateCard', async (request, response)=>{
+app.post('/addImg', async (request, response)=>{
     try {
-        console.log(request.files.img);
-        const {content, name, role , size, finishing, states, star, text, price, discount, idCard} = request.body;
-        db.cards.findAll({where:{idCard: idCard}, raw: true })
-        .then(lastCard=>{
-            const firstFile = !request.files.img.name ? encodeURI(Date.now() + '-' + request.files.img[0].name) : encodeURI(Date.now() + '-' + request.files.img.name)
+        console.log(request.body.idCard);
+        const {content, name, role , size, finishing, states, star, text, price, discount, have, idCard} = request.body;
+        let newDateCard = Date.now()
+        request.files.img.mv(`../www/uploads/${newDateCard}-${request.files.img.name}`, err=>{
+            if (err) {
+                console.log(err);
+                return response.status(500).json({err: "ОШИБКА в добавлении файла"})
+            } else {
+                if (request.body.index != 0) {      
+                    db.cardsImg.create({
+                        idCard : idCard,
+                        img: `https://backend.msb-container.ru/uploads/${newDateCard}-${request.files.img.name}`,
+                        active: 'false'
+                    }).then(result=>{
+                        db.cardsImg.findAll({where:{idCard: idCard}, raw: true })
+                        .then(lastCard=>{
+                            return response.json({cardsImgResult: lastCard})
+                        }).catch(err=>console.log(err));
+                    })
+                    .catch(err=>console.log(err));
+                } else{
+                    db.cards.update({
+                        img: `https://backend.msb-container.ru/uploads/${newDateCard}-${request.files.img.name}`,
+                        name: name,
+                        role: role, 
+                        content: content, 
+                        size: size, 
+                        finishing: finishing, 
+                        states: states, 
+                        star: star, 
+                        text: text, 
+                        price: price,
+                        discount: discount,
+                        have: have
+                    }, {where:{idCard: idCard}, raw: true }).then(()=>{
+                        db.cards.findAll({raw: true })
+                        .then(lastCard=>{
+                            return response.json({cardsResult: lastCard})
+                        }).catch(err=>console.log(err));
+                    }).catch(err=>console.log(err));
+                }
+            }
+         
+        })
+    } catch (e) {
+        console.log(e);
+        return response.status(500).json({err: "ОШИБКА в catch"})
+    }
+})
+app.post('/deleteImg', async (request, response)=>{
+    try {
+        console.log(request.body);
+        const {index, img, idCard} = request.body;
+        const {content, name, role , size, finishing, states, star, text, price, discount, have} = request.body.form;
+        fs.unlink(`../www/${img.img.split('/')[3]}/${img.img.split('/')[4]}`, err => {
+            if(err) {
+                console.log(err);
+            } else{
+                console.log('Файл успешно удалён');
+            }
+        });
+        if (index == true) {
+            console.log(request.body.img);
+            db.cardsImg.destroy({where:{idCard: idCard, idCardImg: request.body.img.idCardImg}, raw: true })
+            .then(()=>{
+                db.cardsImg.findAll({where:{idCard: request.body.idCard}, raw: true })
+                .then(lastCard=>{
+                    return response.json({cardsImgResult: lastCard})
+                }).catch(err=>console.log(err));
+            }).catch(err=>console.log(err));
+        }else{
             db.cards.update({
+                img: `${index == false ? 'false' : index.img}`,
                 name: name,
                 role: role, 
                 content: content, 
@@ -397,66 +439,76 @@ app.post('/updateCard', async (request, response)=>{
                 text: text, 
                 price: price,
                 discount: discount,
-                img: lastCard.img == request.body.Lastimg[0] ? lastCard.img : `/uploads/${firstFile}`
-            }, {where:{idCard: idCard}, raw: true }).then(result=>{
-                let imgMidlleWare = request.files.img.length > 1 ? request.files.img[0] : request.files.img
-                if (lastCard.img != request.body.Lastimg[0]) {
-                    fs.unlink(`../public/${lastCard.img}`, err => {
-                        if(err) throw err; // не удалось удалить файл
-                        console.log('Файл успешно удалён');
-                    });
-                } else{
-                    imgMidlleWare.mv(`../public/uploads/${firstFile}`, err=>{
-                        if (err) {
-                            console.log(err);
-                            return response.status(500).json({err: "ОШИБКА в добавлении файла"})
-                        } else return response.json(result._previousDataValues)   
-                    })
-                }
-                db.cardsImg.findAll({where:{idCard: idCard}, raw: true }).then(lastCardImg=>{
-                    let deleteCard = []
-                    Lastimg.map(LastimgCard=>{
-                      return  deleteCard = lastCardImg.filter(searchImg=> searchImg.img == LastimgCard.img)
-                    })
-                    deleteCard.map(deleteCardImg =>{
-                        fs.unlink(`../public/${deleteCardImg.img}`, err => {
-                            if(err) throw err; // не удалось удалить файл
-                            return console.log('Файл успешно удалён');
-                        });
-                    })
-                    if (request.files.img.length > 1) {
-                        request.files.img.map((item, index)=>{
-                            if (index != 0) {
-                                item.mv(`../public/uploads/${encodeURI(Date.now() + '-' + item.name)}`, err=>{
-                                    if (err) {
-                                        console.log(err);
-                                        return response.status(500).json({err: "ОШИБКА в добавлении файла"})
-                                    } else {
-                                        db.cardsImg.create({
-                                            idCard : result._previousDataValues.idCard,
-                                            img: `/uploads/${encodeURI(Date.now() + '-' + item.name)}` 
-                                        }).then(result=>console.log(result))
-                                        .catch(err=>console.log(err));
-                                    }
-                                })
-                            }
-                        })
+                have: have
+            }, {where:{idCard: request.body.idCard}, raw: true }).then(()=>{
+                db.cards.findAll({raw: true })
+                .then(lastCard=>{
+                    if (index != false) {
+                        db.cardsImg.destroy({where:{idCard: idCard, idCardImg: index.idCardImg}, raw: true })
+                        .then(()=>{
+                            db.cardsImg.findAll({where:{idCard: request.body.idCard}, raw: true })
+                            .then(lastCardImg=>{
+                                return response.json({cardsImgResult: lastCardImg, cardsResult: lastCard})
+                            }).catch(err=>console.log(err));
+                        }).catch(err=>console.log(err));
+                    } else{
+                        return response.json({cardsResult: lastCard})
                     }
-                }).catch(err=>console.log(err))
-                                
-             
-            }).catch(err =>{
-                console.log(err);  
-                return response.status(500).json({err: "ОШИБКА в добавлении таблицы"})
-            })
-        }).catch(err=>console.log(err));
-       
+                }).catch(err=>console.log(err));
+            }).catch(err=>console.log(err));
+        }
     } catch (e) {
         console.log(e);
         return response.status(500).json({err: "ОШИБКА в catch"})
     }
 })
 
+app.post('/changePhoto', async (request, response)=>{
+    try {
+        const {img} = request.body;
+        db.cardsImg.update({
+            active: img.active
+        }, {where:{idCard: img.idCard, idCardImg: img.idCardImg}, raw: true }).then(()=>{
+            db.cardsImg.findAll({where:{idCard: img.idCard}, raw: true })
+            .then(lastCardImg=>{
+                return response.json({cardsImgResult: lastCardImg})
+            }).catch(err=>console.log(err));
+        }).catch(err=>console.log(err));
+    } catch (e) {
+        console.log(e);
+        return response.status(500).json({err: "ОШИБКА в catch"})
+    }
+})
+
+
+// ПРОВЕРИТЬ 
+app.post('/updateCard', async (request, response)=>{
+    try {
+        console.log(request.body);
+        const {content, name, role , size, finishing, states, star, text, price, discount, idCard, have} = request.body;
+        db.cards.update({
+            name: name,
+            role: role, 
+            content: content, 
+            size: size, 
+            finishing: finishing, 
+            states: states, 
+            star: star, 
+            text: text, 
+            price: price,
+            discount: discount,
+            have: have
+        }, {where:{idCard: idCard}, raw: true }).then(()=>{
+            db.cards.findAll({raw: true })
+            .then(lastCard=>{
+                return response.json(lastCard)
+            }).catch(err=>console.log(err));
+        }).catch(err=>console.log(err));
+    } catch (e) {
+        console.log(e);
+        return response.status(500).json({err: "ОШИБКА в catch"})
+    }
+})
 app.get('/overwriteAuthAdmin', (request, response)=>{
     try {
         db.msbAdmins.findAll({raw: true })
@@ -464,6 +516,7 @@ app.get('/overwriteAuthAdmin', (request, response)=>{
             if (result == undefined) {
                 return response.json({message: "сотрудников пока нет"})
             } else {
+                console.log(result);
                 return response.json(result)
            }
         })
@@ -474,39 +527,55 @@ app.get('/overwriteAuthAdmin', (request, response)=>{
 
 })
 
-// const start = async ()=>{
-//     try {
-//         app.listen(PORT, ()=>{
-//             console.log(`start to http://localhost:${PORT}`);
-//         })
-//     } 
-//     catch(e){
-//         console.log(e);
-//     }
-// }
-// start()
+app.post('/deletePeople', (request, response)=>{
+    try {
+        const {idUser} = request.body;
+        console.log(idUser);
+        db.msbAdmins.destroy({where:{idUser: idUser}, raw: true })
+        .then(result=>{
+            db.msbAdmins.findAll({raw: true })
+            .then(user=>{
+                return  response.json(user)
+            }).catch(err=>console.log(err));
+        
+        }).catch(err=>console.log(err));
+    } catch (e) {
+        console.log(e);
+        return response.status(500).json({err: "ОШИБКА в catch"})
+    }
 
+})
+app.post("/changePeople", function(request, response) {
+    try {
+        const {body} = request.body;
+        console.log(body);
+        db.msbAdmins.update({
+            name: body.name,
+            phone: body.phone,
+            role: body.role
+        }, {where:{idUser: body.idUser}, raw: true })
+        .then(result=>{
+            db.msbAdmins.findAll({raw: true })
+            .then(user=>{
+                console.log(user);
+                return  response.json(user)
+            }).catch(err=>console.log(err));
+        }).catch(err=>console.log(err));
+    } 
+    catch (e) {
+        console.log(e);
+         return response.status(500).json({err: "ОШИБКА в catch"})
+    }
+})
 
-const server = http.createServer((req, res) => {
-    fs.readFile(indexPath, (err, data) => {
-      if (err) {
-        res.writeHead(400, {'Content-Type': 'text/plain'});
-        res.write('index.html not found');
-      } else {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-      }
-      res.end();
-    })
-  }).listen(APP_PORT, APP_IP, () => {
-    console.log(`Server running at http://${APP_IP}:${APP_PORT}/`);
-  });
-  
-  process.on('SIGTERM', () => {
-    console.info('SIGTERM signal received.');
-    console.log('Closing http server.');
-    server.close(() => {
-      console.log('Http server closed.');
-      process.exit(0);
-    });
-  });
+const start = async ()=>{
+    try {
+        app.listen(PORT, ()=>{
+            console.log(`start to http://localhost:${PORT}`);
+        })
+    } 
+    catch(e){
+        console.log(e);
+    }
+}
+start()

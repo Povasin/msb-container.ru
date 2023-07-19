@@ -6,8 +6,11 @@ const initialState = {
     isLoading: false,
     error: '',
 };
+
+const backendUrl = 'https://backend.msb-container.ru'
+
 export const getorder = createAsyncThunk("/overwriteMass", async ({idUser}, {rejectWithValue}) => {   
-    return fetch(`/overwriteMass`,{
+    return fetch(`${backendUrl}/overwriteMass`,{
             method: "POST",
             mode: 'cors',
             headers: {
@@ -21,7 +24,7 @@ export const getorder = createAsyncThunk("/overwriteMass", async ({idUser}, {rej
 );
 
 export const getOrdersCards = createAsyncThunk("/getOrdersCards", async ({idUser, number}, {rejectWithValue}) => {
-    return fetch(`/getOrdersCards`,{
+    return fetch(`${backendUrl}/getOrdersCards`,{
         method: "POST",
         mode: 'cors',
         headers: {
@@ -33,7 +36,7 @@ export const getOrdersCards = createAsyncThunk("/getOrdersCards", async ({idUser
   },
 );
 export const getOrdersAuth = createAsyncThunk("/getOrdersAuth", async ({idUser}, {rejectWithValue}) => {
-    return fetch(`/getOrdersAuth`,{
+    return fetch(`${backendUrl}/getOrdersAuth`,{
         method: "POST",
         mode: 'cors',
         headers: {
@@ -47,14 +50,14 @@ export const getOrdersAuth = createAsyncThunk("/getOrdersAuth", async ({idUser},
 
 
 export const getordersAdmin = createAsyncThunk("/getOrdersAdmin", async ({}, {rejectWithValue}) => {
-    return fetch(`/getOrdersAdmin`)
+    return fetch(`${backendUrl}/getOrdersAdmin`)
     .then(res => res.json()).catch((rej)=>rejectWithValue(rej))
   },
 );
 
 export const changeOrderCard = createAsyncThunk("/changeOrderCard", async ({body}, {rejectWithValue}) => {
   console.log(body);
-    return fetch(`/changeOrderCard`,{
+    return fetch(`${backendUrl}/changeOrderCard`,{
         method: "POST",
         mode: 'cors',
         headers: {

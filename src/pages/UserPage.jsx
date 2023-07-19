@@ -6,6 +6,8 @@ import { orderSliceClient, getorder} from '../shared/store/slices/orderClient';
 import { store } from '../shared/store/slices/store';
 import "./scss/user.scss"
 import UserBag from "../shared/componets/UserBag"
+import LoadingPage from './LoadingPageAdmin'
+
 export default function UserPage() {
     let navigate = useNavigate()
     async function exit() {
@@ -33,7 +35,7 @@ export default function UserPage() {
             <div className="orders">
                 <h1>Заказы</h1>
                 <div id="orders__render">
-                    {<UserBag order={order} auth={auth}/>}
+                {order.isLoading ? <LoadingPage number={3}/> :  <UserBag order={order} auth={auth}/>}
                 </div>
             </div>
         </div>  

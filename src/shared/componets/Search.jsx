@@ -39,15 +39,16 @@ export default function Search() {
     }
     useEffect (()=>{
       store.dispatch(getCards({}))
+      setSearch('')
     }, [])
     useOnClickOutside(ref, ()=>setShowSearch(false))
   return (
     <div ref={ref} >            
-        <input type="text" value={search} onChange={(e)=>resultFUNC(e)} placeholder="Поиск" maxLength="30" className="search" />
+        <input type="text" value={search} onChange={(e)=>resultFUNC(e)} placeholder="Поиск..." maxLength="30" className="search" />
         <img src="/search.svg" alt="поиск"/>
         {showSearch && 
             <div className="search__block" onClick={()=>setShowSearch(false)}>
-                {results ? results.map((item, index)=><Link key={index} className="search__blockHref" to={`/card/${item.idCard}`}>{item.name}</Link>) : null}
+                {results ? results.map((item, index)=><Link onClick={()=>setSearch('')} key={index} className="search__blockHref" to={`/card/${item.idCard}`}>{item.name}</Link>) : null}
             </div>
         }   
     </div>

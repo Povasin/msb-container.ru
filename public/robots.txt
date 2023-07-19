@@ -1,3 +1,4 @@
 User-agent: *
 Disallow:/admin
+Disallow:/arrange   
 Sitemap: https://msb-container.ru/sitemap.xml

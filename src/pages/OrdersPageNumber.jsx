@@ -42,6 +42,15 @@ export default function  OrderCardPage() {
         setIsChanged(true)
         setUser({...user, date: orderDateForDelivery, [key]:  `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${date.getMonth()+1 < 10 ?  `0${date.getMonth()+1}` : date.getMonth()+1}.${date.getFullYear()}`})
     }
+    function changeItemDate(e) {
+        setIsChanged(true)
+        setOrderDateForDelivery(e.target.value)
+        setUser({...user, date: e.target.value})
+    }
+    function send() {
+        setIsChanged(false)
+        store.dispatch(changeOrderCard({body: user}))
+    }
     console.log(orderDateForDelivery);
     console.log(user);
     useEffect (()=>{
@@ -90,7 +99,7 @@ export default function  OrderCardPage() {
             </div>
             <div className="input__date">
                 <p>Дата для {user?.delivery == "самовызов" ?  "самовызова" : "доставки"}: </p>
-                <input type="text" onChange={(e)=>setOrderDateForDelivery(e.target.value)} placeholder="Например 20.01.23" value={user.date}/>
+                <input type="text" onChange={(e)=>changeItemDate(e)} placeholder="Например 20.01.23" defaultValue={user.date}/>
             </div>
             <h2>Информация о заказчике</h2>
             <div className="input__delivery">
@@ -136,7 +145,7 @@ export default function  OrderCardPage() {
             </div>   
             <div className="chatAndChange">
                 <button className="writeToShop">написать покупателю</button>
-                <button className={`change ${isLoading && "loading"}`} disabled={isLoading} onClick={()=>store.dispatch(changeOrderCard({body: user})) }>{!isChanged && !isLoading ? "сохраненно" :  !isLoading ? "сохранить" : "загрузка"}</button>
+                <button className={`change ${isLoading && "loading"}`} disabled={isLoading} onClick={send}>{!isChanged && !isLoading ? "Сохраненно" :  !isLoading ? "Сохранить" : "Загрузка"}</button>
             </div>
         </div>
     </div>

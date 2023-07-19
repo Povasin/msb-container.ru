@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import ProductCard from "../ProdactCard"
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import LoadingPage from '../../../pages/LoadingPage'
 
 export default function CubinsSlider() {
     
@@ -86,7 +87,7 @@ export default function CubinsSlider() {
         </div>
         <div className="slider">
             <div className="katalog-line" ref={cubinsLine}>
-            {cards?.items.map((item, index) => item.role == 'общая' && <ProductCard key={index} item={item}/>)}
+            {cards.isLoading ? <LoadingPage number={3}/> :  cards?.items.map((item, index) => item.role == 'общая' && <ProductCard key={index} item={item}/>)}
             </div>
         </div>
         <Link to="/katalog" className="more">посмотреть все бытовки</Link>

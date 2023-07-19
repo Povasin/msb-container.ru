@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react'
 import { useSelector } from 'react-redux'
 import "./scss/createCard.scss"
-import {cardsSlice, updateCard, getCards, getCardsImg, deleteCard} from "../shared/store/slices/cards"
+import {cardsSlice, updateCard, getCards, getCardsImg, deleteCard, addImg, deleteImg, changePhoto} from "../shared/store/slices/cards"
 import { store } from '../shared/store/slices/store';
 import {useNavigate, useLocation} from 'react-router-dom'
 
@@ -9,20 +9,24 @@ import {useNavigate, useLocation} from 'react-router-dom'
 
 export default function CreateCard() {
   const location = useLocation()
+  const cards  = useSelector((state)=>state.cardsSlice)
   const cardsStorage = JSON.parse(localStorage.getItem("cards"))
   const cardsStorageImg = JSON.parse(localStorage.getItem("cardsImg"))
   const select = useRef()
   let itemImg = [] 
   let myCards = cardsStorage.find((item)=>item.idCard == location.pathname.split("/")[3]) 
-  console.log(cardsStorageImg);
     if (cardsStorageImg.filter((item)=>item.idCard == location.pathname.split("/")[3]).length != 0) {
       let cardsImg =  cardsStorageImg.filter((item)=>item.idCard == location.pathname.split("/")[3])
-      itemImg = [...itemImg, myCards?.img.split("/")[2].split("-")[1], ] 
+      itemImg = [...itemImg, {img: myCards?.img, idCard: myCards?.idCard, active: 'true'} ] 
       cardsImg.map(item=>{
-        itemImg = [...itemImg, item.img.split("/")[2].split("-")[1]] 
+        itemImg = [...itemImg, item] 
       })
     } else {
-        itemImg = [myCards?.img.split("/")[2].split("-")[1]]
+      if (myCards?.img == 'false') {
+        itemImg = []
+      } else{
+        itemImg = [{img: myCards?.img, idCard: myCards?.idCard, active: 'true'}]
+      }
     }
   const navigate = useNavigate()
   const [error, setError] = useState("")
@@ -37,33 +41,80 @@ export default function CreateCard() {
     text: myCards.text,
     price: myCards.price,
     discount: myCards.discount,
-    img: itemImg,
-    idCard: myCards.idCard
+    imgMass: itemImg,
+    idCard: myCards.idCard,
+    have: myCards.have
   })
+  console.log(form);
+  const [errorImg, setErrorImg] = useState("")
   async function send () {
     console.log(form);
-    if (!form.name || !form.role || !form.content || !form.size || !form.finishing || !form.states || !form.star || !form.text || !form.price || form.discount){
+    if (!form.name || !form.role || !form.content || !form.size || !form.finishing || !form.states || !form.star || !form.text || !form.price || !form.discount){
       setError("Поля не заполненны")
     } else{
-      if ( form.img.length == 0) {
-        setError("Картинки не добавленны")
-      } else {
         setError("")
-        console.log({body: form});
-        await store.dispatch(updateCard({body: form}))
-         navigate("/admin/activeCard")
-      }
+        await store.dispatch(updateCard({form}))
+        navigate("/admin/activeCard")
     }
   }
-  async function deleteCardFUNC(params) {
+  async function checkMass(e) {
+    if (e.target.files[0] != undefined) {
+      await store.dispatch(addImg({img: e.target.files[0], idCard: `${myCards?.idCard}`, index: form.imgMass.length, form: form}))
+      window.location.reload(true);
+    }
+  }
+  async function deleteCardFUNC() {
     await store.dispatch(deleteCard({idCard: myCards.idCard}))
     navigate("/admin/activeCard")
+  }
+  async function DeleteImgFunc(index) {
+    let middleWare = false 
+    if (index == 0) {
+      if (form.imgMass.length > 1) {
+        middleWare = form.imgMass[1]
+      } else{
+        middleWare = false
+      }
+    } else {
+      middleWare = true
+    }
+    await store.dispatch(deleteImg({img: form.imgMass[index], idCard: myCards.idCard, index: middleWare, form: form}))
+    window.location.reload(true);
+  }
+   function changePhotoFunc(index) {
+    let middleWareMass =  form.imgMass.filter(item=>item.active == 'true').length
+    middleWareMass = form.imgMass[index].active == 'true' ? middleWareMass-1 : middleWareMass+1
+    if (middleWareMass <= 6) {      
+      let newMass = [...form.imgMass]
+      newMass[index].active = newMass[index].active == 'true' ? 'false' : 'true'
+      store.dispatch(changePhoto({img: form.imgMass[index]}))
+      setForm({...form, imgMass: newMass})
+      setErrorImg('') 
+    } else{
+      setErrorImg('ПОДСКАЗКА: Может быть максимум 6 активных фото') 
+      console.log(form.imgMass);
+    }
+  }
+  function renderImg(index) {
+    return (
+      form.imgMass[index] != undefined  && <>
+        {form.imgMass[index].active == 'true' ? 
+          <img className="mainBlock__imgAccept" onClick={()=>changePhotoFunc(index)} src='/tick.svg' alt='accept'/> 
+          : 
+          <img className="mainBlock__imgDelete" onClick={()=>changePhotoFunc(index)} src='/close.svg' alt='close'/>
+        }  
+          <img className="mainBlock__imgTrash" onClick={()=>DeleteImgFunc(index)} src='/trash.svg' alt='trash'/>
+          <img className='mainBlock__imgPhoto' src={form.imgMass[index].img} alt={form.name}/>
+        </>
+    )
   }
   useEffect(()=>{
     store.dispatch(getCards({}))
     store.dispatch(getCardsImg({}))
   }, [])
-
+  useEffect(() => {
+    window.scrollTo(0, 0)
+}, [location])
   return (
     <div className='createcard'>
         <div className="fd-row">
@@ -85,16 +136,47 @@ export default function CreateCard() {
             </select>
           </div>
         </div>
-        <h2>Картинка*</h2>
-          <label className="input-file"><input type="file" onChange={(e)=>setForm({...form, img: [...form.img, e.target.files[0]]})} accept='image/*, .png, .jpg, .gif, .web, .svg'/><span>Выберите файл</span></label>
-        <p>*разрешение файлов должно 1920*1080</p>
-        {form.img.map((item, index)=>{
-          return <div key={index} className="addImg">
-            <img src={index == 0 ? `/paperImgred.svg`: `/paperImg.svg`} alt="" />
-            <p>{item.name == undefined ? item : item.name}</p>
-            <img src="/trash.svg" onClick={()=>setForm({...form, img: form.img.filter((img)=>img != item) })} alt="удалить" />
-          </div>
-        })}
+        <h2>Фото*</h2>
+          <label className={`input-file`}><input type="file" onChange={(e)=>checkMass(e)} accept='image/*, .png, .jpg, .gif, .web, .svg'/><span className={cards?.isLoading ? 'loading' : ""}>{cards?.isLoading ? "Загрузка..." : "Выберите файл..."}</span></label>
+          <p>*разрешение файлов должно <span className='spanDanger'>1920*1080</span> </p>
+          <p>*в названии <span className='spanDanger'>не должно быть русских букв и пробелов</span> </p>
+          <div className="container__img">
+            <div className="mainBlock__img">
+                {form.imgMass[0] != undefined  && <>  
+                  <img className="mainBlock__imgTrash" onClick={()=>DeleteImgFunc(0)} src='/trash.svg' alt='trash'/>
+                  <img className="mainBlock__imgAccept" onClick={()=>setErrorImg("ПОДСКАЗКА: У главной картинки нельзя поменять активность")} src='/tick.svg' alt='accept'/> 
+                  <img className='mainBlock__imgPhoto' src={form.imgMass[0].img} alt={form.name}/>
+                </>}
+            </div>
+            <div className="fd-colImg">
+              <div className="fd-rowImg">
+                  <div className="block__img1">{renderImg(1)}</div>
+                  <div className="block__img2">{renderImg(2)}</div>
+                  <div className="block__img2">{renderImg(3)}</div>
+                  <div className="block__img4">{renderImg(4)}</div>
+              </div>
+              <div className="fd-rowImg">
+                  <div className="block__img5">{renderImg(5)}</div>
+                  <div className="block__img3">{renderImg(6)}</div>
+                  <div className="block__img3">{renderImg(7)}</div>
+                  <div className="block__img8">{renderImg(8)}</div>
+              </div>
+            </div>
+        </div>
+       {form.imgMass.length > 9 && 
+       <div className="extra__img">
+         {form.imgMass.map((item, index)=>{
+          if (index > 8) {
+           return(
+            <div className='extraBlock__img'>
+                {renderImg(index)}
+            </div>
+           ) 
+          }
+         })}
+       </div>
+       }  
+       <h3 className='errorImg'>{errorImg}</h3>
         <h2>Характеристки*</h2>
         <div className="fd-row">
           <div className="fd-col">
@@ -117,6 +199,8 @@ export default function CreateCard() {
             <input type="text" value={form.states} onChange={(e)=>setForm({...form, states: e.target.value})} placeholder='Состояние...' className="katalog__Checkbox"/>
           </div>
         </div>
+        <h2>Наличие*</h2>
+        <label> <input type="checkbox" className="katalog__Checkbox" onClick={()=>setForm({...form, have: form.have == "true" ? "false" : 'true'})}  checked={form.have == "true" ? true : false}/>В наличие</label>
         <h2>Описание*</h2>
         <textarea value={form.text} onChange={(e)=>setForm({...form, text: e.target.value})} maxLength='1000' id="" cols="30" rows="10">Описание...</textarea>
         <div className="fd-row">

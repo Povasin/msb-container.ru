@@ -101,9 +101,18 @@ body{
     padding: 10px;
     text-decoration: none;
     
-    img{
-        max-height: 100%;
-        max-width: 20%;
+    .card__img{
+        max-height: calcFluid(80, 172, 320, 1920);
+    }
+    .img__empty{
+        display: flex;
+        width: calcFluid(161, 322, 320, 1920);
+        height: calcFluid(86, 172, 320, 1920);
+        background-color: #E3E3E3;
+        border-radius: 6px;
+        .img__emptyPhoto{
+            margin: auto;
+        }
     }
 
     .block__content {
@@ -197,7 +206,8 @@ body{
     overflow:hidden ;
     display: flex;
     flex-direction: row;
-    a {
+    a, .btnForCreate {
+        cursor: pointer;
         margin: calcFluid(16, 40, 320, 1920) 0 calcFluid(0, 35, 320, 1920) 40px;
         font-size: calcFluid(15, 19, 320, 1920);
         font-family: "Inter-Regular";

@@ -282,7 +282,7 @@ main {
 }
 .furniture {
     padding:  calcFluid(8, 20, 320, 1920) 40px  calcFluid(8, 20, 320, 1920) calcFluid(8, 200, 320, 1920) ;
-    background-color: #F2F2F2;
+    background-color: #e7e7e7;
     @extend %d-row;
     margin-right: calcFluid(8, 200, 320, 1920);
     .content{

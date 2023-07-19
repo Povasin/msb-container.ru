@@ -3,7 +3,7 @@ import {BagSlice} from "../store/slices/bag"
 import {store} from "../store/slices/store"
 import {useSelector, } from "react-redux";
 import { Link } from 'react-router-dom';
-
+import LazyLoad from 'react-lazy-load';
 export default function FurnitureCard({item}) {
 
     const handleClick = ()=>{
@@ -18,7 +18,7 @@ export default function FurnitureCard({item}) {
                 <p className="star">{item.star}</p>
                 <Link to={`/furniture/${item.id}`} className="card__arrow">→</Link>
             </div>
-            <Link  to={`/furniture/${item.id}`}>  <img className="card__img" src={item.img[0].src} alt={item.name}/></Link>
+            <Link  to={`/furniture/${item.id}`}><LazyLoad  className="card__img" threshold={ 0.20 }><img  src={item.img[0].src} alt={item.name}/></LazyLoad></Link>
             <p className="rent">Аренда</p>
             <Link to={`/furniture/${item.id}`} className="info">{item.name}</Link>         
             <div className="card__sale">

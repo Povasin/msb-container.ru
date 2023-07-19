@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { store } from '../shared/store/slices/store';
 import OrdersCard from '../shared/componets/OrdersCard';
 import "./scss/ordersPage.scss"
-
+import LoadingPageAdmin from './LoadingPageAdmin'
 export default function OrdersPage() {
   const orders = useSelector((state)=>state.orderSliceClient)
   const [orderFilter, setOrderFilter] = useState("Все")
@@ -36,7 +36,7 @@ export default function OrdersPage() {
       </div>
       <h1>{orderFilter} заказы</h1>
       <div className="orders">
-        { filterFunc().length != 0 ?  filterFunc().map((item, index)=><OrdersCard key={index} orderFilter={orderFilter}  item={item}/>) :  <div className="order__clear">
+        {orders.isLoading ? <LoadingPageAdmin number={3}/> : filterFunc().length != 0 ?  filterFunc().map((item, index)=><OrdersCard key={index} orderFilter={orderFilter}  item={item}/>) :  <div className="order__clear">
             <h2>заказов пока нет</h2>
             <p>для обнавление заказов перезагрузите сайт</p>
         </div>}

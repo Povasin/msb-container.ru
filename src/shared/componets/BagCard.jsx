@@ -3,13 +3,15 @@ import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom';
 import {BagSlice} from "../store/slices/bag"
 import {store} from "../store/slices/store"
+import LazyLoad from 'react-lazy-load';
 
 export default function BagCard({card}) {
-    console.log(card);
+   
     const location = useLocation()
     const CardId = location.pathname.split("/")[1]
     const {items: bagItems} = useSelector((state)=>state.BagSlice)
     const handleClick = ()=>{
+        console.log(card);
         store.dispatch(BagSlice.actions.removeCard(card));
     }
     const changeProdactCount = (value) =>{
@@ -28,7 +30,7 @@ export default function BagCard({card}) {
     const mainCard = card.data.img
     return (
     <div className="bag__block">
-        <Link className="block__img" to={`/card/${card.idCard}`}><img src={mainCard} alt={card.data.name}/></Link>
+        <Link className="block__img" to={`/card/${card.idCard}`}><LazyLoad threshold={ 0.20 }><img src={mainCard} alt={card.data.name}/></LazyLoad></Link>
         <div className="block__content">
             {CardId == "arrange" ? null : <p className="block__close" onClick={handleClick}>x</p> }
             <p className="rent">Аренда</p>
@@ -45,8 +47,8 @@ export default function BagCard({card}) {
                     <p  className="bt_plusMonth" onClick={()=>changeProdactMonth(card.month+1)}>+</p>
                 </div>
                 <div className="block-col">
-                    <p className="block__discount">{(card.count*card.data.discount)*card.month}₽</p>
-                    <p className="block__price" name="priceOrder">{(card.count*card.data.price)*card.month }₽</p>
+                    <p className="block__discount">{card?.data.have == 'true' && `${(card.count*card.data.discount)*card.month}₽`}</p>
+                    <p className="block__price" name="priceOrder">{card?.data.have == 'true' ?  `${(card.count*card.data.price)*card.month}₽` : "Нет в наличии"}</p>
                 </div>
             </div>
         </div>

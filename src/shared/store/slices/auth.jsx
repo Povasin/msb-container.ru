@@ -6,8 +6,10 @@ const initialState = {
     error: '',
 };
 
+const backendUrl = 'https://backend.msb-container.ru'
+
 export const login = createAsyncThunk("auth/login", async ({body}, {rejectWithValue}) => {
-      return fetch(`/login`,{
+      return fetch(`${backendUrl}/login`,{
           method: "POST",
           mode: 'cors',
           headers: {
@@ -20,7 +22,7 @@ export const login = createAsyncThunk("auth/login", async ({body}, {rejectWithVa
     },
 );
 export const register = createAsyncThunk("auth/register", async ({body}, {rejectWithValue}) => {
-      return fetch(`/register`,{
+      return fetch(`${backendUrl}/register`,{
           method: "POST",
           mode: 'cors',
           headers: {
@@ -34,8 +36,7 @@ export const register = createAsyncThunk("auth/register", async ({body}, {reject
 );
 
 export const loginAdmin = createAsyncThunk("auth/loginAdmin", async ({body}, {rejectWithValue}) => {
-    console.log({...body});
-      return fetch(`/loginAdmin`,{
+      return fetch(`${backendUrl}/loginAdmin`,{
           method: "POST",
           mode: 'cors',
           headers: {

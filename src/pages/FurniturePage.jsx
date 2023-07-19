@@ -6,6 +6,7 @@ import {BagSlice} from "../shared/store/slices/bag"
 import {store} from "../shared/store/slices/store"
 import {useSelector} from "react-redux";
 import "./scss/cubinsForSomeThing.scss"
+import FurnitureSlider from "../shared/componets/slider/furniture"
 
 export default function FurniturePage() {
 
@@ -116,21 +117,7 @@ export default function FurniturePage() {
                     </ul>
                 </div>
             </div>
-                <div className="furniture">
-                    <div className="content">
-                        <h2>выберети мебель и оборудывание</h2>
-                        <p>для создание комплекта вам нужно выбрать мебель</p>
-                    <div className="fd-row">
-                        <button className="prevFurniture">←</button>
-                        <button className="nextFurniture next__active">→</button>
-                    </div>
-                </div>
-                <div className="slider">
-                    <div className="furniture-line">
-                        {furniture.map((item, index) => <FurnitureCard key={index} item={item}/>)}
-                    </div>
-                </div>
-            </div>
+            <FurnitureSlider/> 
         </main>
        
     )

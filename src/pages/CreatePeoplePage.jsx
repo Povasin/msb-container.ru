@@ -33,7 +33,7 @@ export default function RegisterPage() {
         if (form.email.indexOf('@') != -1) {
           await store.dispatch(create({body: form}))
           console.log(auth);
-          auth?.error != '' && navigate("/admin/people")
+          auth?.error == "" && navigate("/admin/people")
         } else setCheckInput({error: "Введите коректную эл.почту", status: true})
       } else setCheckInput({status: false, error: "пароли не совпадают"})
     } 

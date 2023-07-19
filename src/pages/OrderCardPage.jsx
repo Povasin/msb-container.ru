@@ -6,6 +6,7 @@ import {cardsSlice, getCards} from "../shared/store/slices/cards"
 import { orderSliceClient, getorder, getOrdersCards } from '../shared/store/slices/orderClient';
 import { store } from '../shared/store/slices/store';
 import "./scss/user.scss"
+import LoadingPageAdmin from './LoadingPageAdmin'
 
 export default function  OrderCardPage() {
     const auth =  useSelector((state)=>state.authSlice)
@@ -14,15 +15,17 @@ export default function  OrderCardPage() {
     const ordersClient = useSelector((state)=>state.orderSliceClient)
     const order = ordersClient?.items.find((item)=>item.number == location.pathname.split("/")[2])
     const cards = useSelector((state)=>state.cardsSlice)
+    
     function cardsConnectFunc() {
         let cardsConnect = []
+        console.log(ordersClient);
          ordersClient?.orderCards.map(item=>{
             cardsConnect = ([...cardsConnect, {data: cards?.items.find((arr)=>item.idCard == arr.idCard), count: item.count , month: item.month}])
         })
         return cardsConnect
     }
     let isCards = cardsConnectFunc()
-   
+    
     function OrderPrice() {
         let summ = 0;
         isCards.forEach(array=>{
@@ -42,13 +45,13 @@ export default function  OrderCardPage() {
     }, [location]) 
     useEffect(()=>{
         ordersClient?.items && store.dispatch(getorder({idUser: auth?.userData?.idUser}))
-        ordersClient?.orderCards && store.dispatch(getOrdersCards({idUser: auth?.userData?.idUser, number: location.pathname.split("/")[2]}))
+        ordersClient?.orderCards && store.dispatch(getOrdersCards({idUser: auth?.userData?.idUser, number: location.pathname.split("/")[3]}))
         store.dispatch(getCards({}))
     }, [auth?.userData?.idUser])
   return (
     <main>
         <div className='userHtml'>
-            {isCards.map((array)=>
+            {ordersClient.isLoading ? <LoadingPageAdmin number={1}/> : isCards.map((array)=>
                 <div key={array.idCard} className="bag__block">
                     <Link to={`/card/${array.idCard}`} className="block__imgJS"><img src={array.data?.img} alt={array.data?.name}/></Link>
                 <div className="block__content">
@@ -111,7 +114,7 @@ export default function  OrderCardPage() {
                         </div>
                     </div>
                 </div>
-                <button className="writeToShop">написать продавцу</button>
+                <button onClick={()=>alert('Чат в разработке!')} className="writeToShop">написать продавцу</button>
             </div>   
         </div>
     </main>

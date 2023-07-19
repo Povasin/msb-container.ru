@@ -151,13 +151,28 @@ body{
 
 %card {
     position: relative;
-    box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 2px 2px 13px rgba(0, 0, 0, 0.25);
     @extend %d-col;
     background-color: white;
     width: 280px;
     padding:10px;
     text-decoration: none;
     color: black;
+    border-radius: 6px;
+   
+    .radius {
+        align-items:center ;
+        justify-content: center;
+        background-color: #ececec;
+        padding: calcFluid(5, 10, 320, 1920);
+        height: calcFluid(150, 200, 320, 1920);
+        border-radius: 6px;
+        margin: 5px 0;
+        display: flex;
+        .img__emptyPhoto{
+            margin: auto;
+        }
+    }
     .rent{
         font-size: calcFluid(15, 20, 320, 1920);
         color: #58585e;
@@ -186,6 +201,9 @@ body{
         &:focus {
             outline: none;
         }
+        &:active {
+            transform: scale(0.80);
+        }
     }
     .card__bagActive{
         background:transparent;
@@ -196,16 +214,15 @@ body{
         text-decoration: none;
         color: black;
     }
-    a{
+    .LinkImg{  
         .card__img{
             cursor: pointer;
             max-width: 100%;
             margin: auto;
            
         }
-        display: flex;
+        display: flex; 
     }
-   
     .fd-row{
         @extend %d-row;
         .card__arrow{

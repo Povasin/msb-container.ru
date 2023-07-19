@@ -56,7 +56,7 @@ export default function GallaryPage() {
             </>}
             {filter('Бытовки под склад').length == 0 &&  filter('Бытовки для проживания').length == 0 && filter('Бытовки прорабские').length == 0 && filter('Бытовки раздевалки').length == 0 && filter('Бытовки с душем').length == 0 && <div className="bag__clear">
               <h2>других товаров пока нет</h2>
-              <p>вернитесь в <Link to="/">каталог</Link> и посмотрите основные товары</p>
+              <p>вернитесь в <Link to="/katalog">каталог</Link> и посмотрите основные товары</p>
               </div>}
           
         </div>

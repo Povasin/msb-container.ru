@@ -44,7 +44,7 @@ export default function Footer() {
     <div className="pd-100">
         <h2>Часто задаваемые воросы</h2>
        {massQuestion.map((item, index)=> 
-       <div key={index} className="answer">
+       <div key={index}  className="answer" >
             <div className="answer__block">
                 <div className="answer__question">
                     <div className="answer__info">i</div>
@@ -91,8 +91,8 @@ export default function Footer() {
                 <h4>Каталог</h4>
                 <Link to="/card/2">Бытовки для проживания</Link>
                 <Link to="/card/1">Бытовки раздевалки</Link>
-                <Link to="/card/4">Бытовки прорабские</Link>
-                <Link to="/card/5">Бытовки под склад</Link>
+                <Link to="/card/5">Бытовки прорабские</Link>
+                <Link to="/card/4">Бытовки под склад</Link>
                 <Link to="/card/3">Бытовки с душем</Link>
             </div>
             <div className="d-col">
@@ -100,7 +100,7 @@ export default function Footer() {
                 <Link to="/aboutUs">О нас</Link>
                 <Link to="/contact">контакты</Link>
                 <Link to="/services">услуги</Link>
-                <Link to="/gallary">галерея</Link>
+                <Link to="/gallary">Виды товаров</Link>
             </div>
             <div className="d-col">
                 <h4>Контакты</h4>

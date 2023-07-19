@@ -2,19 +2,19 @@
     "lang": "ru",
     "short_name": "MSB",
     "name": "MSB-container",
-    "description": "Msb-container- это провереный интренет-магазин бытовок, вагончиков и разной строительной техники ",
-    "start_url": "/index.html",
+    "description": "Msb-container - это провереный интренет-магазин бытовок, вагончиков и разной строительной техники ",
+    "start_url": "/",
     "display": "fullscreen",
     "background_color": "white",
     "theme_color": "white",
-    "orientation": "landscape-primary",
-    "id": "/index.html",
+    "orientation": "any",
+    "id": "/",
+    "scope": "." ,
     "icons": [
       {
         "src": "/iconPWA/logo512x512.png",
         "type": "image/png",
-        "sizes": "512x512",
-        "purpose": "any maskable"
+        "sizes": "512x512"
       },
       {
         "src": "/iconPWA/logo256x256.svg",

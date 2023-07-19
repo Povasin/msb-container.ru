@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<yml_catalog date="2023-06-26T11:31:59+01:00">
+    <shop>
+        <name>Msb-container</name>
+        <company>ООО МСБ</company>
+        <url>https://msb-container.ru</url>
+        <platform>uCoz</platform>
+        <categories>
+            <category id="1">Бытовки</category>
+        </categories>
+        <delivery-options>
+            <option cost="200" days="1"/>
+        </delivery-options>
+        <pickup-options>
+            <option cost="200" days="1"/>
+        </pickup-options>
+        <offers>
+            <offer id="1">
+                <name>Бытовка раздевалка</name>
+                <vendor>Msb-container</vendor>
+                <vendorCode>1</vendorCode>
+                <url>https://msb-container.ru/card/1</url>
+                <price>8000</price>
+                <oldprice>9000</oldprice>
+                <enable_auto_discounts>true</enable_auto_discounts>
+                <currencyId>RUR</currencyId>
+                <categoryId>101</categoryId>
+                <picture>https://backend.msb-container.ru/uploads/2-cubinsForDress.webp</picture>
+                <description>
+                    <![CDATA[          
+                        <h1>Бытовка раздевалка</h1>
+                        <p>Выездные мероприятия и строительные работы сопровождаются массовым скоплением людей, организовать их переодевание в увеселительную или рабочую одежду без специальных сооружений не получиться. Аренда бытовки раздевалки – выход. С ними можно обустроить условия для переодевания и хранения вещей посетителей и персонала в любом месте.</p>
+                    ]]>
+                </description>                
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <param name="Цвет">Серый</param>
+                <weight>3.6</weight>
+                <dimensions>6/2.4/2.5</dimensions>
+                <condition type="preowned">
+                    <quality>excellent</quality>
+                </condition>
+            </offer>
+            <offer id="2">
+                <name>Бытовка для проживания</name>
+                <vendor>Msb-container</vendor>
+                <vendorCode>2</vendorCode>
+                <url>https://msb-container.ru/card/2</url>
+                <price>8000</price>
+                <oldprice>9000</oldprice>
+                <enable_auto_discounts>true</enable_auto_discounts>
+                <currencyId>RUR</currencyId>
+                <categoryId>101</categoryId>
+                <picture>https://backend.msb-container.ru/uploads/1-cubinsForLive.webp</picture>
+                <description>
+                    <![CDATA[          
+                        <h1>Бытовка для проживания</h1>
+                        <p>Выездные мероприятия и строительные работы сопровождаются массовым скоплением людей, организовать их переодевание в увеселительную или рабочую одежду без специальных сооружений не получиться. Аренда бытовки раздевалки – выход. С ними можно обустроить условия для переодевания и хранения вещей посетителей и персонала в любом месте.</p>
+                    ]]>
+                </description>                
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <param name="Цвет">Серый</param>
+                <weight>3.6</weight>
+                <dimensions>6/2.4/2.5</dimensions>
+                <condition type="preowned">
+                    <quality>excellent</quality>
+                </condition>
+            </offer>
+             <offer id="3">
+                <name>Бытовка c душем</name>
+                <vendor>Msb-container</vendor>
+                <vendorCode>3</vendorCode>
+                <url>https://msb-container.ru/card/3</url>
+                <price>8000</price>
+                <oldprice>9000</oldprice>
+                <enable_auto_discounts>true</enable_auto_discounts>
+                <currencyId>RUR</currencyId>
+                <categoryId>101</categoryId>
+                <picture>https://backend.msb-container.ru//uploads/3-cubinsForBath.webp</picture>
+                <description>
+                    <![CDATA[          
+                        <h1>Бытовка c душем</h1>
+                        <p>Выездные мероприятия и строительные работы сопровождаются массовым скоплением людей, организовать их переодевание в увеселительную или рабочую одежду без специальных сооружений не получиться. Аренда бытовки раздевалки – выход. С ними можно обустроить условия для переодевания и хранения вещей посетителей и персонала в любом месте.</p>
+                    ]]>
+                </description>                
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <param name="Цвет">Серый</param>
+                <weight>3.6</weight>
+                <dimensions>6/2.4/2.5</dimensions>
+                <condition type="preowned">
+                    <quality>excellent</quality>
+                </condition>
+            </offer>
+            <offer id="4">
+                <name>Бытовка под склад</name>
+                <vendor>Msb-container</vendor>
+                <vendorCode>4</vendorCode>
+                <url>https://msb-container.ru/card/4</url>
+                <price>8000</price>
+                <oldprice>9000</oldprice>
+                <enable_auto_discounts>true</enable_auto_discounts>
+                <currencyId>RUR</currencyId>
+                <categoryId>101</categoryId>
+                <picture>https://backend.msb-container.ru/uploads/4-cubinsForwareHouse.webp</picture>
+                <description>
+                    <![CDATA[          
+                        <h1>Бытовка под склад</h1>
+                        <p>Выездные мероприятия и строительные работы сопровождаются массовым скоплением людей, организовать их переодевание в увеселительную или рабочую одежду без специальных сооружений не получиться. Аренда бытовки раздевалки – выход. С ними можно обустроить условия для переодевания и хранения вещей посетителей и персонала в любом месте.</p>
+                    ]]>
+                </description>                
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <param name="Цвет">Серый</param>
+                <weight>3.6</weight>
+                <dimensions>6/2.4/2.5</dimensions>
+                <condition type="preowned">
+                    <quality>excellent</quality>
+                </condition>
+            </offer>
+            <offer id="5">
+                <name>Бытовка прорабская</name>
+                <vendor>Msb-container</vendor>
+                <vendorCode>5</vendorCode>
+                <url>https://msb-container.ru/card/5</url>
+                <price>8000</price>
+                <oldprice>9000</oldprice>
+                <enable_auto_discounts>true</enable_auto_discounts>
+                <currencyId>RUR</currencyId>
+                <categoryId>101</categoryId>
+                <picture>https://backend.msb-container.ru/uploads/5-cubinsForWork.webp</picture>
+                <description>
+                    <![CDATA[          
+                        <h1>Бытовка прорабская</h1>
+                        <p>Выездные мероприятия и строительные работы сопровождаются массовым скоплением людей, организовать их переодевание в увеселительную или рабочую одежду без специальных сооружений не получиться. Аренда бытовки раздевалки – выход. С ними можно обустроить условия для переодевания и хранения вещей посетителей и персонала в любом месте.</p>
+                    ]]>
+                </description>                
+                <manufacturer_warranty>true</manufacturer_warranty>
+                <param name="Цвет">Серый</param>
+                <weight>3.6</weight>
+                <dimensions>6/2.4/2.5</dimensions>
+                <condition type="preowned">
+                    <quality>excellent</quality>
+                </condition>
+            </offer>
+        </offers>
+    </shop>
+</yml_catalog>

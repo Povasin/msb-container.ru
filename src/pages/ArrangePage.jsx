@@ -14,6 +14,7 @@ export default function ArrangePage() {
     const BagStore = useSelector((state) => state.BagSlice); 
     const auth = useSelector((state)=>state.authSlice)
     const loading = BagStore.isLoading 
+    let newBagMass = BagStore.items.filter(item=>item.data.have == 'true')
     const [inputDelivery, setInputDelivery] = useState({
         city: "",
         house: ""
@@ -21,14 +22,14 @@ export default function ArrangePage() {
     const [error, setError] = useState("")
     function BagStorePrice() {
         let summ = 0;
-        BagStore.items.forEach(item=>{
+        newBagMass.forEach(item=>{
             summ+= (item.count*item.data.price )*item.month 
         })
         return summ
     }
     function BagStoredisCount() {
         let summ = 0;
-        BagStore.items.forEach(item=>{
+        newBagMass.forEach(item=>{
             summ+= (item.count*item.data.discount )*item.month 
         })
         return summ
@@ -36,17 +37,17 @@ export default function ArrangePage() {
  
     async function  send() {
         if (!isDelivery) {
-            await store.dispatch(order({body:{ mass: BagStore.items, delivery: "самовызов"}, idUser: auth.userData.idUser}))
+            await store.dispatch(order({body:{ mass: newBagMass, delivery: "самовызов"}, idUser: auth.userData.idUser}))
         } else{
             if (inputDelivery.city == "" || inputDelivery.house == "") {
                 setError("поля не заполненны")
             } else{
                 console.log(auth.userData.idUser);
-                await store.dispatch(order({body:{ mass:BagStore.items, delivery: inputDelivery}, idUser: auth.userData.idUser}))
+                await store.dispatch(order({body:{ mass: newBagMass, delivery: inputDelivery}, idUser: auth.userData.idUser}))
             }
         }
     }
-    if (auth.userData && !loading  && BagStore.items == 0) {
+    if (auth.userData && !loading  && newBagMass == 0) {
         navigate(`/user/${auth.userData.idUser}`)
       }
 
@@ -94,7 +95,7 @@ export default function ArrangePage() {
             </div>
             }
             <h2>Заказ</h2>
-            {BagStore.items.map((item, index) => <BagCard key={index} card={item}/>)}
+            {newBagMass.map((item, index) => <BagCard key={index} card={item}/>)}
             <h2>Оплата</h2>
             <div className="input__price">
                     <p>Итого:</p>

@@ -12,16 +12,18 @@ export default function BagPage() {
     const auth = useSelector((state)=>state.authSlice)
     const [checkAuth, setCheckAuth] = useState("")
     const navigate = useNavigate()
+    let newBagMass = BagStore.items.filter(item=>item.data.have == 'true')
+    console.log(BagStore.items);
      function BagStorePrice() {
         let summ = 0;
-        BagStore.items.forEach(item=>{
+        newBagMass.forEach(item=>{
             summ+= (item.count*item.data.price )*item.month 
         })
         return summ
     }
     function BagStoredisCount() {
         let summ = 0;
-        BagStore.items.forEach(item=>{
+        newBagMass.forEach(item=>{
             summ+= (item.count*item.data.discount )*item.month 
         })
         return summ
@@ -32,8 +34,14 @@ export default function BagPage() {
             setCheckAuth("ваша корзина пока пуста вернитесь на главную страницу и заполните ее")
         } else {
             if (!auth.userData) {
-                setCheckAuth("для оформления заказа зарегистрируйтесь")
-            } else  navigate(`/arrange`)}
+                setCheckAuth(" ПОДСКАЗКА: Для оформления заказа зарегистрируйтесь")
+            } else {
+                if (BagStoredisCount() == 0) {
+                    setCheckAuth(" ПОДСКАЗКА: Товары которых нет в наличии нельзя заказать")
+                } else{
+                    navigate(`/arrange`)}
+                }
+            } 
     }
     return ( 
         <main>   
