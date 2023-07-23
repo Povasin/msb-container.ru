@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react'
 import FurnitureCard from "../FurnitureCard"
-import {furniture} from "../../../DATA/Data"
+import { useSelector } from 'react-redux'
 
 export default function FurnitureSlider() {
-
+    const cards = useSelector((state)=>state.cardsSlice)
+    let newMass = cards?.items.filter(item=>item.role == "Мебель")
     const [furnitureSlider, setFurnitureSlider] = useState(0)
     const furnitureLine = useRef()
     const [furnitureBTN , setFurnitureBTN] = useState({
@@ -59,7 +60,7 @@ export default function FurnitureSlider() {
     </div>
     <div className="slider">
         <div className="furniture-line" ref={furnitureLine} >
-            {furniture.map((item, index) => <FurnitureCard key={index} item={item}/>)}
+            {newMass.map((item, index) => <FurnitureCard key={index} item={item}/>)}
         </div>
     </div>
     </div>

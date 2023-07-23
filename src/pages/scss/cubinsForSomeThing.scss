@@ -84,8 +84,7 @@
                 }
                 .main__img{
                     margin:auto auto 0 auto;  
-                    width: calcFluid(150, 400, 320, 1920);
-                    height: auto;
+                    max-width: 80%;
                 }
                 .card__img{
                     max-height: calcFluid(80, 172, 320, 1920);
@@ -249,6 +248,8 @@
     .card {
         box-shadow: 3px 1px 10px rgba(0, 0, 0, 0.25);
         @extend %card;
+        border-radius: 0px;
+        width: calcFluid(70, 250, 320, 1920);
         .card__img{
             width: 60%;
             margin:  auto auto 0 auto ;
@@ -264,6 +265,7 @@
             font-size: 20px;
         }
     }
+    
     .slider{
         padding: 20px 0 20px 0;
         @extend %slider;
@@ -368,6 +370,7 @@
             }
         }
         .card{
+            width: calcFluid(140, 250, 320, 630) ;
             .card__img{
                 top: calcFluid(30, 0, 320, 630);
                 left: calcFluid(10, 30, 320, 630);

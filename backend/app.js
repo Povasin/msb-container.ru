@@ -195,6 +195,10 @@ const cards = sequelize.define('cards', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    com:{
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     role:{
         type: Sequelize.STRING,
         allowNull: false

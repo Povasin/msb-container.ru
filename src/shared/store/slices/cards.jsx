@@ -88,6 +88,7 @@ export const addImg = createAsyncThunk("/addImg", async ({img, idCard, index, fo
   formData.append('price', form.price)
   formData.append('discount', form.discount)
   formData.append('have', form.have)
+  formData.append('com', form.com)
   return fetch(`${backendUrl}/addImg`,{
       method: "POST",
       body: formData
@@ -109,6 +110,7 @@ export const updateCard = createAsyncThunk("/updateCard", async ({form}, {reject
   formData.append('price', form.price)
   formData.append('discount', form.discount)
   formData.append('have', form.have)
+  formData.append('com', form.com)
   return fetch(`${backendUrl}/updateCard`,{
       method: "POST",
       body: formData

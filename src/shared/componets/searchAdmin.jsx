@@ -1,5 +1,4 @@
 import React, {useEffect, useCallback, useState, useRef} from 'react'
-import {furniture} from "../../DATA/Data"
 import { useSelector } from 'react-redux'
 import { store } from '../store/slices/store';
 import { Link } from 'react-router-dom'

@@ -5,9 +5,8 @@ import { useSelector } from 'react-redux'
 import LoadingPage from '../../../pages/LoadingPage'
 
 export default function CubinsSlider() {
-    
-    // че то не с слайдером
     const cards = useSelector((state)=>state.cardsSlice)
+    let newMass = cards?.items.filter(item=>item.role == "общая")
     const [cubinsSlider, setCubinsSlider] = useState(0)
     const cubinsLine = useRef()
     const [cubinsBTN , setCubinsBTN] = useState({
@@ -87,7 +86,7 @@ export default function CubinsSlider() {
         </div>
         <div className="slider">
             <div className="katalog-line" ref={cubinsLine}>
-            {cards.isLoading ? <LoadingPage number={3}/> :  cards?.items.map((item, index) => item.role == 'общая' && <ProductCard key={index} item={item}/>)}
+            {cards.isLoading ? <LoadingPage number={3}/> :  newMass.map((item, index) => item.role == 'общая' && <ProductCard key={index} item={item}/>)}
             </div>
         </div>
         <Link to="/katalog" className="more">посмотреть все бытовки</Link>

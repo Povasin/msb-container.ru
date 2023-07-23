@@ -43,7 +43,8 @@ export default function CreateCard() {
     discount: myCards.discount,
     imgMass: itemImg,
     idCard: myCards.idCard,
-    have: myCards.have
+    have: myCards.have,
+    com:  myCards.com
   })
   console.log(form);
   const [errorImg, setErrorImg] = useState("")
@@ -131,6 +132,7 @@ export default function CreateCard() {
                 <option  value="Бытовки c душем" >Бытовки c душем</option>
                 <option  value="Бытовки под склад" >Бытовки под склад</option>
                 <option  value="Бытовки прорабские" >Бытовки прорабские</option>
+                <option  value="Мебель" >Мебель</option>
                 </> :  <option  value="общая" >Общая</option>}
              
             </select>
@@ -203,6 +205,8 @@ export default function CreateCard() {
         <label> <input type="checkbox" className="katalog__Checkbox" onClick={()=>setForm({...form, have: form.have == "true" ? "false" : 'true'})}  checked={form.have == "true" ? true : false}/>В наличие</label>
         <h2>Описание*</h2>
         <textarea value={form.text} onChange={(e)=>setForm({...form, text: e.target.value})} maxLength='1000' id="" cols="30" rows="10">Описание...</textarea>
+        <h2>Комментарий*</h2>
+        <textarea value={form.com} onChange={(e)=>setForm({...form, com: e.target.value})} maxLength='1000' id="" cols="30" rows="10">Комментарий...</textarea>
         <div className="fd-row">
           <div className="fd-col">
             <h2>Цена*</h2>

@@ -10,21 +10,21 @@ export default function FurnitureCard({item}) {
     store.dispatch(BagSlice.actions.addCard(item));
     }
     const BagStore = useSelector((state) => state.BagSlice); 
-    const isActive = BagStore.items.filter((array)=>array.id == item.id)[0]
+    const isActive = BagStore.items.filter((array)=>array.idCard == item.idCard)[0]
 
     return (
         <div className="card">
             <div className="fd-row">
                 <p className="star">{item.star}</p>
-                <Link to={`/furniture/${item.id}`} className="card__arrow">→</Link>
+                <Link to={`/card/${item.idCard}`} className="card__arrow">→</Link>
             </div>
-            <Link  to={`/furniture/${item.id}`}><LazyLoad  className="card__img" threshold={ 0.20 }><img  src={item.img[0].src} alt={item.name}/></LazyLoad></Link>
+            <Link  to={`/card/${item.idCard}`}><LazyLoad  className="card__img" threshold={ 0.20 }><img  src={item.img} alt={item.name}/></LazyLoad></Link>
             <p className="rent">Аренда</p>
-            <Link to={`/furniture/${item.id}`} className="info">{item.name}</Link>         
+            <Link to={`/card/${item.idCard}`} className="info">{item.name}</Link>         
             <div className="card__sale">
                 <div className="fd-col">
-                    <p className="discount">{item.discount}</p>
-                    <p className="card__price">{item.price}₽</p> 
+                    <p className="discount">{item?.have == 'true' && item?.discount}</p>
+                    <p className="card__price">{item?.have == 'true' ?  `${item?.price}₽` : 'Нет в наличии'}</p> 
                 </div>
                 {isActive ? <div className="furniture__CardActive"><p>добавлено</p> <button className="furniture__bagActive">+</button></div>  :   <button onClick={!isActive && handleClick} className="card__bag">+</button> }
                 </div> 

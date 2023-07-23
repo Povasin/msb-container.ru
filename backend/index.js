@@ -342,7 +342,8 @@ app.get('/addCards', async (request, response)=>{
             price: 0,
             discount: 0,
             have: "false",
-            img: 'false'
+            img: 'false',
+            com: ''
         }).then(result=>{
             return  response.json(result._previousDataValues)
         }).catch(err =>{
@@ -357,7 +358,7 @@ app.get('/addCards', async (request, response)=>{
 app.post('/addImg', async (request, response)=>{
     try {
         console.log(request.body.idCard);
-        const {content, name, role , size, finishing, states, star, text, price, discount, have, idCard} = request.body;
+        const {content, name, role , size, finishing, states, star, text, price, discount, have, idCard, com} = request.body;
         let newDateCard = Date.now()
         request.files.img.mv(`../www/uploads/${newDateCard}-${request.files.img.name}`, err=>{
             if (err) {
@@ -389,7 +390,8 @@ app.post('/addImg', async (request, response)=>{
                         text: text, 
                         price: price,
                         discount: discount,
-                        have: have
+                        have: have,
+                        com: com
                     }, {where:{idCard: idCard}, raw: true }).then(()=>{
                         db.cards.findAll({raw: true })
                         .then(lastCard=>{
@@ -409,7 +411,7 @@ app.post('/deleteImg', async (request, response)=>{
     try {
         console.log(request.body);
         const {index, img, idCard} = request.body;
-        const {content, name, role , size, finishing, states, star, text, price, discount, have} = request.body.form;
+        const {content, name, role , size, finishing, states, star, text, price, discount, have, com} = request.body.form;
         fs.unlink(`../www/${img.img.split('/')[3]}/${img.img.split('/')[4]}`, err => {
             if(err) {
                 console.log(err);
@@ -439,7 +441,8 @@ app.post('/deleteImg', async (request, response)=>{
                 text: text, 
                 price: price,
                 discount: discount,
-                have: have
+                have: have,
+                com: com
             }, {where:{idCard: request.body.idCard}, raw: true }).then(()=>{
                 db.cards.findAll({raw: true })
                 .then(lastCard=>{
@@ -485,7 +488,7 @@ app.post('/changePhoto', async (request, response)=>{
 app.post('/updateCard', async (request, response)=>{
     try {
         console.log(request.body);
-        const {content, name, role , size, finishing, states, star, text, price, discount, idCard, have} = request.body;
+        const {content, name, role , size, finishing, states, star, text, price, discount, idCard, have, com} = request.body;
         db.cards.update({
             name: name,
             role: role, 
@@ -497,7 +500,8 @@ app.post('/updateCard', async (request, response)=>{
             text: text, 
             price: price,
             discount: discount,
-            have: have
+            have: have,
+            com: com
         }, {where:{idCard: idCard}, raw: true }).then(()=>{
             db.cards.findAll({raw: true })
             .then(lastCard=>{

@@ -30,7 +30,8 @@ export default function KatalogPage() {
         "Бытовки для проживания": false,
         "Бытовки c душем": false,
         "Бытовки прорабские": false,
-        "Бытовки под склад": false
+        "Бытовки под склад": false,
+        "Мебель": false
     })
     const [sizeChecked ,setSizeChecked] = useState({
         "6х2,4х2,50м": false,
@@ -117,6 +118,7 @@ export default function KatalogPage() {
                 <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки c душем": !nameChecked["Бытовки c душем"]})} checked={nameChecked["Бытовки c душем"]}/> Бытовки c душем</label>
                 <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки под склад": !nameChecked["Бытовки под склад"]})} checked={nameChecked["Бытовки под склад"]}/>Бытовки под склад</label>
                 <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки прорабские": !nameChecked["Бытовки прорабские"]})} checked={nameChecked["Бытовки прорабские"]}/>Бытовки прорабские</label>
+                <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Мебель": !nameChecked["Мебель"]})} checked={nameChecked["Мебель"]}/>Мебель</label>
             </div>
             <div className="katalog-size">
                 <h2>Габариты</h2>
