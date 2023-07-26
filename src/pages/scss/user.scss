@@ -17,12 +17,12 @@ main{
         .input__discount {
             @extend %d-row;
             margin: 10px 0;
-            font-size: calcFluid(15, 20, 320, 1920);
+            font-size: calcFluid(18, 22, 320, 1920);
             font-weight: 900;
-            p {margin: 10px 5px 0 0;}
+            p {margin: 0;}
             #price {
                 margin: 0 0 0 auto;
-                font-size: calcFluid(17, 30, 320, 1920);
+                font-size: calcFluid(23, 30, 320, 1920);
                 font-weight: 900;
             }  
             span {
@@ -33,12 +33,14 @@ main{
         }
        
         .input__delivery {
-            margin: 0;
+            margin: 10px 0;
+            align-items: center;
         }
         .input__discount{
-            p {margin: 5px 5px 0 0;}
+           margin:  0 0 10px 0;
+           font-size: calcFluid(16, 20, 320, 1920);
             #discount {
-                font-size: calcFluid(13, 22, 320, 1920);
+                font-size: calcFluid(18, 22, 320, 1920);
                 color: #f91155;
             }
         }
@@ -111,97 +113,7 @@ main{
             margin:15px calcFluid(0, 220, 320, 1920) 0 calcFluid(0, 220, 320, 1920);
         }
     }
-    .bag__block {
-        margin: 10px 0;
-        @extend %d-row;
-        box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
-        padding: 10px;
-        text-decoration: none;
-        .block__img, 
-        .block__imgJS {
-            max-width: 30%;
-            margin: auto;
-            img {
-                max-width: 90%;
-            }
-        }
-        .block__imgJS{
-            max-width: 25%;
-            img {
-                max-width: 100%;
-            }
-        }
-
-        .block__content {
-            position: relative;
-            margin: 0 0 0 10px;
-            width: 70%;
-            @extend %d-col;
-            color: black;
-            .rent {
-                color: #58585e;
-                font-weight: 500;
-                margin: 0 0 auto 0;
-                font-size: calcFluid(12, 18, 320, 1920);
-                span{
-                    color: black;
-                    font-weight: 1000;
-                }
-            }
-
-            .orderNumber {
-                text-decoration: none;
-                color: black;
-                font-size: calcFluid(15, 25, 320, 1920);
-                font-weight: 900;
-                margin: 10px 0;
-            }
-            .track{
-                @extend %more;
-                padding: calcFluid(2, 10, 320, 1920)  calcFluid(20, 45, 320, 1920);
-                margin: auto auto 0 0;
-            }
-            .active{
-              background: gray;
-            }
-
-            .block__inputRow{ 
-                margin: auto 0 0 0;
-                @extend %d-row;
-            }
-
-            .block__input{
-                @extend %d-col;
-                .fd-col{
-                    margin: 0;
-                    font-weight: 500;
-                    color: #58585e;
-                    font-size: calcFluid(10, 16, 320, 1920);
-                    span{
-                        font-size: calcFluid(12, 20, 320, 1920);
-                        color: black;
-                    }
-                }
-                .fd-col:nth-child(1){
-                    margin: auto 0 10px 0;
-                }
-            }
-            .block-col {
-                margin: auto 0 0 auto;
-
-                .block__price,
-                .block__discount {
-                    margin: 5px 0 0 0;
-                }
-
-                .block__discount {
-                    font-size: calcFluid(10, 18, 320, 1920);
-                    text-decoration: line-through;
-                    color: #58585e;
-                }
-            }
-        }
-    }
+    
     .userContent{
         box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.25);
         @extend %d-row;
@@ -242,26 +154,125 @@ main{
         }
         .order__clear{
             text-align: center;
-            margin: auto;
+            margin: 100px 0;
             h2, p{
                 text-align: center;
              }
              h2{
-                 font-size: calcFluid(17, 30, 320, 1920);
+                 font-size: calcFluid(20, 30, 320, 1920);
              }
              p{
-                 font-size: calcFluid(12, 18, 320, 1920);
+                 font-size: calcFluid(14, 18, 320, 1920);
              }
+        }
+        .exit{
+            width: auto;
+            @extend %more;
+            margin: 10px 0 0 0;
+        }
+    }
+    .bag__block {
+        margin: 10px 0;
+        @extend %d-row;
+        box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+        padding: 10px;
+        text-decoration: none;
+        .radius__user {
+            width: 35%;
+            padding: calcFluid(4, 5, 320, 1920) calcFluid(6, 25, 320, 1920);
+            align-items:center ;
+            justify-content: center;
+            background-color: #ececec;
+            border-radius: 6px;
+            display: flex;
+        }
+        .block__content {
+            width: 65%;
+            position: relative;
+            margin: 0 0 0 calcFluid(8, 10, 320, 1920) !important;
+            @extend %d-col;
+            color: black;
+            .rent {
+                color: #58585e;
+                font-weight: 500;
+                font-size: calcFluid(14, 18, 320, 1920);
+                margin: 0 0 15px 0 !important;
+                span{
+                    color: black;
+                    font-weight: 1000;
+                }
+            }
+
+            .orderNumber {
+                text-decoration: none;
+                color: black;
+                font-size: calcFluid(15, 25, 320, 1920);
+                font-weight: 900;
+                margin: calcFluid(5, 10, 320, 1920) 0;
+            }
+            .track{
+                @extend %more;
+                padding: calcFluid(8, 10, 320, 1920)  calcFluid(20, 45, 320, 1920);
+                margin: auto auto 0 0;
+            }
+            .active{
+              background: gray;
+            }
+
+            .block__inputRow{ 
+                margin: auto 0 0 0;
+                @extend %d-row;
+            }
+
+            .block__input{
+                @extend %d-col;
+                .fd-col{
+                    margin: 0;
+                    font-weight: 500;
+                    color: #58585e;
+                    font-size: calcFluid(13, 16, 320, 1920);
+                    span{
+                        font-size: calcFluid(12, 20, 320, 1920);
+                        color: black;
+                    }
+                }
+                .fd-col:nth-child(1){
+                    margin: auto 0 10px 0;
+                }
+            }
+        }
+        .block-col {
+            display: flex;
+            flex-direction: column;
+            margin: auto 0 0 auto;
+
+            .block__price,
+            .block__discount {
+                font-family: 'inter-bold';
+                font-size: calcFluid(18, 20, 320, 1920);
+                margin: 5px 0 0 auto;
+            }
+
+            .block__discount {
+                font-family: 'inter-regular';
+                font-size: calcFluid(12, 18, 320, 1920);
+                text-decoration: line-through;
+                color: #58585e;
+            }
         }
     }
 }
 @media(max-width: 730px) {
     .userHtml {
         .userContent{
+            border-bottom: 1px solid #D3D3D3;
             display: flex;
             flex-direction: column;
+            box-shadow: none;
             .userContent__photo{
-                width: 100%;
+                margin: auto;
+                width: 200px;
+                border-radius: 50%;
                 height: 200px;
             }
             .userContent__col{
@@ -269,19 +280,54 @@ main{
                 flex-direction: column;
                 margin: 0;
                 width: 100%;
+                text-align: center;
+                align-items: center;
                 .userContent__row{
                     .rename{
                         margin: 0 ;
                     }
                 }
+                p{
+                    margin: 5px 0;
+                }
+                .userContent__email{
+                 font-family: 'inter-bold';
+                 font-size: calcFluid(17, 25, 320, 1920);
+                }
+                .userContent__phone{
+                    font-size: calcFluid(12, 16, 320, 1920);
+                   }
             }
         }
-        .bag__block{
-            display: flex;
-            flex-direction: column;
-            .block__img, 
-            .block__imgJS {
-                max-width: 50%;
+        .orders{
+            .bag__block{
+                display: flex;
+                .track{
+                    margin: 0 !important;
+                   text-align: center;
+                }
+            }
+        }
+    }
+}
+@media(max-width: 500px) {
+    .userHtml{
+        .orders__info {
+            .orders__track{
+                .border{
+                    top: calcFluid(55, 58, 320, 500) !important;
+                }
+            }
+        }
+    }
+}
+@media(max-width: 400px) {
+    .userHtml{
+        .orders__info {
+            .orders__track{
+                .border{
+                    top: calcFluid(68, 70, 320, 400) !important;
+                }
             }
         }
     }

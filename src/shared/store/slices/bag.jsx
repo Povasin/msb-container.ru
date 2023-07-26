@@ -31,7 +31,6 @@ export const BagSlice = createSlice({
             localStorage.setItem("bag", JSON.stringify(state.items))
         },
         removeCard(state, {payload}){
-            console.log(payload);
             state.items =  state.items.filter((item)=>payload.idCard !== item.idCard)
             localStorage.setItem("bag", JSON.stringify(state.items))
         },  
@@ -46,6 +45,9 @@ export const BagSlice = createSlice({
         updateBag(state, {payload}){
             state.items = payload
             localStorage.setItem("bag", JSON.stringify(state.items))
+        },
+        checkRegister(state, {payload}){
+            state.error = payload
         }
     },
     extraReducers: {

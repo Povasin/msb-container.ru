@@ -5,7 +5,7 @@ import { authSlice} from '../shared/store/slices/auth';
 import {cardsSlice, getCards} from "../shared/store/slices/cards"
 import { orderSliceClient, getorder, getOrdersCards } from '../shared/store/slices/orderClient';
 import { store } from '../shared/store/slices/store';
-import "./scss/user.scss"
+import "./scss/user.scss";
 import LoadingPageAdmin from './LoadingPageAdmin'
 
 export default function  OrderCardPage() {
@@ -13,12 +13,11 @@ export default function  OrderCardPage() {
     const location = useLocation()
     const navigate = useNavigate()
     const ordersClient = useSelector((state)=>state.orderSliceClient)
-    const order = ordersClient?.items.find((item)=>item.number == location.pathname.split("/")[2])
+    const order = ordersClient?.items.find((item)=>item.number == location.pathname.split("/")[3])
     const cards = useSelector((state)=>state.cardsSlice)
     
     function cardsConnectFunc() {
         let cardsConnect = []
-        console.log(ordersClient);
          ordersClient?.orderCards.map(item=>{
             cardsConnect = ([...cardsConnect, {data: cards?.items.find((arr)=>item.idCard == arr.idCard), count: item.count , month: item.month}])
         })
@@ -52,21 +51,23 @@ export default function  OrderCardPage() {
     <main>
         <div className='userHtml'>
             {ordersClient.isLoading ? <LoadingPageAdmin number={1}/> : isCards.map((array)=>
-                <div key={array.idCard} className="bag__block">
-                    <Link to={`/card/${array.idCard}`} className="block__imgJS"><img src={array.data?.img} alt={array.data?.name}/></Link>
+                <div key={array.data?.idCard} className="bag__block">
+                 <div className="radius__user">
+                    <Link to={`/card/${array.data?.idCard}`} className="block__img"><img src={array.data?.img} alt={array.data?.name}/></Link>
+                    </div>
                 <div className="block__content">
                 <p className="rent">Аренда</p>
-                <Link className="orderNumber" to={`/card/${array.idCard}`}> {array.data?.name}</Link>
-                <div className="block__inputRow">	
-                    <div className="block__input">	
-                        <p className="fd-col">количество: <span>{array.count}шт</span></p>		
-                        <p className="fd-col">срок Аренды: <span>{array.month}мес</span></p>
+                <Link className="orderNumber" to={`/card/${array.data?.idCard}`}> {array.data?.name}</Link>
+                    <div className="block__inputRow">	
+                        <div className="block__input">	
+                            <p className="fd-col">Количество: <span>{array.count}шт</span></p>		
+                            <p className="fd-col">Срок Аренды: <span>{array.month}мес</span></p>
+                        </div>
+                        <div className="block-col">
+                            <p className="block__discount">{(array.count*array.data?.discount)*array.month}</p>
+                            <p className="block__price" name="priceOrder">{(array.count*array.data?.price)*array.month}₽</p>
+                        </div>
                     </div>
-                    <div className="block-col">
-                        <p className="block__discount">{(array.count*array.data?.discount)*array.month}</p>
-                        <p className="block__price" name="priceOrder">{(array.count*array.data?.price)*array.month}₽</p>
-                    </div>
-                </div>
                 </div>
                 </div>
             )}
@@ -80,10 +81,10 @@ export default function  OrderCardPage() {
                     <span id="discount">{OrderDiscount()}₽</span>
                 </div>
                 <div className="input__delivery">
-                    <p className='rent'>
-                        {order?.delivery == "самовызов" ? `можно забрать:` : "срок доставки:"} 
+                    <p className='input__deliveryRent'>
+                        {order?.delivery == "Самовызов" ? `Можно забрать:` : "Cрок доставки:"} 
                     </p>
-                        <span>{order?.date == "" && !order?.orderReceived ? "не указано продавцом" : order?.orderReceived ? "заказ получен" : order?.date}</span>
+                        <span>{order?.date == "" && !order?.orderReceived ? "Не указано продавцом" : order?.orderReceived ? "Заказ получен" : order?.date}</span>
                     </div>
                 <h2>Отслеживание заказа</h2>
                 <div className="orders__track">

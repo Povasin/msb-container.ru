@@ -26,24 +26,14 @@ export default function CubinsSlider() {
                 let ofset = cubinsSlider+100
                  setCubinsSlider(ofset)
                     cubinsLine.current.style.left = - ofset + '%' 
-                if (cubinsSlider== 200) {
+                    setCubinsBTN({next:  true ,prev: true})
+                if (ofset== 200) {
                     setCubinsBTN({next:  false ,prev: true})
-                }else if ( cubinsSlider == 100) {
+                }else if ( ofset == 100) {
                     setCubinsBTN({next:  true ,prev: true})
                 }
             }
-        } else if (document.documentElement.clientWidth < 440) {
-            if ( cubinsSlider< 500 ) {
-                let ofset = cubinsSlider+100
-                 setCubinsSlider(ofset)
-                cubinsLine.current.style.left = - ofset + '%' 
-                if ( cubinsSlider == 500) {
-                    setCubinsBTN({next:  false ,prev: true})
-                }else if ( cubinsSlider == 100 || cubinsSlider == 200 ||cubinsSlider == 300 ||  cubinsSlider == 400 || cubinsSlider == 500) {
-                    setCubinsBTN({next:  true ,prev: true})
-                }
-            } 
-        }        
+        }   
     }
     function sliderPrev() {
         if (document.documentElement.clientWidth > 851) {
@@ -58,24 +48,17 @@ export default function CubinsSlider() {
                 let ofset = cubinsSlider-100
                  setCubinsSlider(ofset)
                 cubinsLine.current.style.left = - ofset + '%' 
-                if ( cubinsSlider == 200 || cubinsSlider == 0) {
+                setCubinsBTN({next:  true ,prev: true})
+                if ( ofset == 200 || cubinsSlider == 0) {
                     setCubinsBTN({next:  true ,prev: false})
-                }else if ( cubinsSlider == 100) {
+                }else if ( ofset == 100) {
                     setCubinsBTN({next:  true ,prev: true})
+                }
+                else if ( ofset == 0) {
+                    setCubinsBTN({next:  true ,prev: false})
                 }
             }
-        } else if (document.documentElement.clientWidth < 440) {
-            if ( cubinsSlider <= 500 && cubinsSlider > 0 ) {
-                let ofset = cubinsSlider-100
-                 setCubinsSlider(ofset)
-                cubinsLine.current.style.left = - ofset + '%' 
-                if ( cubinsSlider == 500 || cubinsSlider == 0 ) {
-                    setCubinsBTN({next:  true ,prev: false})
-                }else if ( cubinsSlider == 100 ||cubinsSlider == 200 ||  cubinsSlider == 300 ||  cubinsSlider == 400 ||cubinsSlider == 500) {
-                    setCubinsBTN({next:  true ,prev: true})
-                }
-            } 
-        }        
+        }     
     }
   return (
     <div className="katalog">

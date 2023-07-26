@@ -12,7 +12,7 @@ main{
         margin: 0 0 15px 0;
         font-size:calcFluid(20, 35, 320, 1920);
     }
-    &-row{
+    .login-row{
         @extend %d-col;
         input{
             -webkit-appearance: none;
@@ -20,8 +20,8 @@ main{
             margin: 5px 0;
             outline:none;
             border: none;
-            -webkit-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
-            font-size:calcFluid(13, 20, 320, 1920);
+            -webkit-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.20);
+            font-size:calcFluid(14, 20, 320, 1920);
         }
         .loginBTN{
             @extend %more;
@@ -33,15 +33,21 @@ main{
            background-color: rgb(165, 165, 165);
         }
         .error{
-            font-size: calcFluid(12, 18, 320, 1920);
+            font-size: calcFluid(14, 18, 320, 1920);
             color: red;
             margin: 10px 0 0 0;
         }
     }
     .account{
-        font-size: calcFluid(12, 16, 320, 1920);
+        font-size: calcFluid(13, 16, 320, 1920);
         a{
             text-decoration: none;
         }
     }
+}
+
+@media(max-width: 630px){
+    .loginClient{
+        padding: calcFluid(160, 160, 320, 630) calcFluid(8, 400, 320, 1920);
+    } 
 }

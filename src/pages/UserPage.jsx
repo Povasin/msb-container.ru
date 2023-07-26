@@ -26,13 +26,14 @@ export default function UserPage() {
             <div className="userContent">
                 <div className="userContent__photo"><img src="/userIcon.svg" alt="пользователь" /></div>
                 <div className="userContent__col">
-                    <p className="userContent__name">{auth.userData?.name}</p>
-                    <p>Номер телефона: <span className="userContent__phone">{auth.userData?.phone}</span></p>
-                    <p>Email: <span className="userContent__email">{auth.userData?.email}</span></p>
-                        <button className="exit" onClick={exit}>выйти</button>
+                {document.documentElement.clientWidth > 630 && <p className="userContent__name">{auth.userData?.name}</p>}
+                    <p>  {document.documentElement.clientWidth > 630 && 'Email:'} <span className="userContent__email">{auth.userData?.email}</span></p>
+                    <p>  {document.documentElement.clientWidth > 630 && 'Номер телефона:' }<span className="userContent__phone">{auth.userData?.phone}</span></p>
+                    {document.documentElement.clientWidth > 730 &&  <button className="exit" onClick={exit}>выйти</button> }
                 </div>
             </div>
             <div className="orders">
+            {document.documentElement.clientWidth < 730 &&  <button className="exit" onClick={exit}>выйти</button> }
                 <h1>Заказы</h1>
                 <div id="orders__render">
                 {order.isLoading ? <LoadingPage number={3}/> :  <UserBag order={order} auth={auth}/>}

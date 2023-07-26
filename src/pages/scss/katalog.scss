@@ -10,7 +10,7 @@ main{
     padding: 0 calcFluid(8, 200, 320, 1920);
     @extend %d-col;
     .bag__clear{
-        margin:calcFluid(20, 150, 320, 1920) auto auto auto;
+        margin:150px auto auto auto;
         h2, p{
            text-align: center;
         }
@@ -44,13 +44,15 @@ main{
             }
         }
         .firstFilter{
-        @extend %d-row;
+            @extend %d-row;
+            font-size: calcFluid(13, 18, 320, 1920);
+            text-align: center;
+            align-items: center;
         }
         #firstFilter{
             position: relative;
             @extend %d-col;
             margin: 0;
-            font-size: calcFluid(12, 18, 320, 1920);
             background:$gradient;
             -webkit-background-clip: text;
             background-clip: text;
@@ -60,6 +62,7 @@ main{
             outline: none;
             appearance: none;
             .active{
+                font-size: calcFluid(13, 18, 320, 1920);
                 cursor: pointer;
                 margin: 0;
             }
@@ -69,7 +72,7 @@ main{
                 top: 25px;
                 background-color: white;
                 @extend %d-col;
-                box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.25);
+                box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.20);
                 p{  
                     cursor: pointer;
                    padding: 5px ;
@@ -90,14 +93,17 @@ main{
             margin: auto 0px auto auto;
             img{
                 margin: auto 10px;
-               max-width: 23%;
+                width: calcFluid(22, 35, 320, 1920);
             }
         }
         .filter__close{
+            text-align: center;
+            align-items: center;
             display: none;
-            font-size: 30px;
+            font-size: calcFluid(28, 30, 320, 1920);
             margin: auto 0px auto auto;
-            font-weight: 100;
+            font-family: 'inter-regular';
+            color: black;
         }
         .katalog__kol{
             margin: auto 0 auto 50px;
@@ -108,8 +114,11 @@ main{
             box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.25);
             h2{
                 font-size: 20px;
+                margin: 10px 0;
             }
             .label__price{
+                text-align: center;
+                align-items: center;
                 user-select: none;
                 width: 50%;
                 @extend %d-row;
@@ -135,7 +144,7 @@ main{
                 @extend %d-col;
                 label{
                     width: 100%;
-                    font-size: calcFluid(13, 16, 320, 1920);
+                    font-size: calcFluid(15, 16, 320, 1920);
                     margin: 7px 0;
                 }
             }
@@ -218,18 +227,20 @@ main{
             }
             #clear{
                 @extend %more;
+                margin: 10px 0 15px 0;
+                width: 99%;
             }
 
         }
         .katalog-line{
             overflow: scroll;
             width: 80%;
-            height: 840px;
+            height: 900px;
             @extend %d-row;
             flex-wrap: wrap;
             align-content: flex-start;
             .card{
-                width: calcFluid(75, 306, 320, 1920);
+                width: calcFluid(98, 304, 320, 1920);
                 margin: 7px;
                 @extend %card;
             }
@@ -258,7 +269,7 @@ main{
         .katalog-line{
             width: 100%;
             .card{
-                width:calcFluid(68, 245, 320, 1024) ;
+                width:calcFluid(68, 245, 320, 1024)  !important;
             }
             
         }
@@ -267,38 +278,25 @@ main{
 @media(max-width: 730px){
     .katalog{
         .katalog-line{
+            overflow: visible;
             .card{
-                width:calcFluid(110, 267, 320, 730) ;
+                width:calcFluid(136, 288, 320, 730) !important;
+                margin: 3px;
             }
         }
     }
 }
 
-@media(max-width: 440px){
+@media(max-width: 630px){
     .katalog{
-        .katalog__kol{display: none;}
-        .katalog-line{
-            .card {
-                .card__img{
-                    margin: 0 50px;
-                    width: 70%;
-                }
-                margin: 10px 0;
-                width: 400px;
-                .card__sale {
-                    .fd-col{
-                        display: flex;
-                        flex-direction: row-reverse;
-                        margin: 10px 0 0 0;
-                        .card__price{
-                            margin: 0 10px 0 0;
-                        }
-                        .discount{
-                            margin: auto 0;
-                        }
-                    }
-                }
-            }
+        .katalog__filter{
+            z-index: 200;
+            width: calcFluid(300, 610, 320, 630);
+            height: 100%;
+            overflow: scroll;
+        }
+        .katalog-row{
+            margin: 0;
         }
     }
 }

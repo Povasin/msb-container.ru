@@ -5,7 +5,7 @@ export default function OrdersCard({item, orderFilter}) {
   return (
     <>  
       <div className="bag__block">
-            <img src={item.img} alt={`закаказ № ${item.number}`}/>
+            <img className='card__img' src={item.img} alt={`закаказ № ${item.number}`}/>
             <div className="block__content"> 
             {!item.orderCollect && !item.orderAccepted && !item.orderGo && !item.orderReceived ? <p className="block__orderNew">новый</p> : item.orderCollect && item.orderAccepted && item.orderGo && item.orderReceived ? <p className="block__orderTrack">доставлено</p> : <p className="block__orderAccept">активен</p>}
                 <p className="orderNumber">закаказ № {item.number}</p>

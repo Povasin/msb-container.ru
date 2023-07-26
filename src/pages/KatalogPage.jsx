@@ -99,7 +99,7 @@ export default function KatalogPage() {
         return (
         <div className="katalog__filter">
             <div className="katalog-row">
-                <h2>цена</h2>
+                <h2>Цена</h2>
                 <p className="filter__close" onClick={()=>setShowSideBar(!showSideBar)} >x</p>
             </div>
             <div className="katalog-row">
@@ -115,7 +115,7 @@ export default function KatalogPage() {
                 <h2>Наименование</h2>
                 <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки раздевалки": !nameChecked["Бытовки раздевалки"]})} checked={nameChecked["Бытовки раздевалки"]}/>Бытовки раздевалки</label>
                 <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки для проживания": !nameChecked["Бытовки для проживания"]})} checked={nameChecked["Бытовки для проживания"]}/>Бытовки для проживания</label>
-                <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки c душем": !nameChecked["Бытовки c душем"]})} checked={nameChecked["Бытовки c душем"]}/> Бытовки c душем</label>
+                <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки c душем": !nameChecked["Бытовки c душем"]})} checked={nameChecked["Бытовки c душем"]}/>Бытовки c душем</label>
                 <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки под склад": !nameChecked["Бытовки под склад"]})} checked={nameChecked["Бытовки под склад"]}/>Бытовки под склад</label>
                 <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Бытовки прорабские": !nameChecked["Бытовки прорабские"]})} checked={nameChecked["Бытовки прорабские"]}/>Бытовки прорабские</label>
                 <label> <input type="checkbox" onClick={()=>setNameChecked({...nameChecked,  "Мебель": !nameChecked["Мебель"]})} checked={nameChecked["Мебель"]}/>Мебель</label>
@@ -156,12 +156,15 @@ export default function KatalogPage() {
     return (
         <main>
             <div className="katalog">
+            {document.documentElement.clientWidth > 630 && <>
                 <span><Link to="/">главная </Link>/<Link to="/katalog"> каталог</Link></span>
                 <h1>Бытовки</h1>
+            </>
+            }
                 <div className="katalog-row">
                         <p className='firstFilter'>Сначала:   
                             <div id="firstFilter">
-                            <p className='active' onClick={()=>setShowFirstFillter({...showFirstFillter, state: true})}> {showFirstFillter.active}</p> 
+                            <p className='active' onClick={()=>setShowFirstFillter({...showFirstFillter, state: true})}>{showFirstFillter.active}</p> 
                             {showFirstFillter.state && <div className='select'>
                                 <p onClick={()=>setShowFirstFillter({active: "популярные", state: false})}>популярные</p>
                                 <p onClick={()=>setShowFirstFillter({active: "дешевле", state: false})}>дешевле</p>
@@ -169,7 +172,7 @@ export default function KatalogPage() {
                             </div>}    
                             </div>
                         </p>
-                        <label className="katalog__kol">на странице: <span id="kolOnPage">{cardsState.length}</span></label>
+                        {document.documentElement.clientWidth > 630 &&  <label className="katalog__kol">на странице: <span id="kolOnPage">{cardsState.length}</span></label>}
                         <div className="filter__open" onClick={()=>setShowSideBar(!showSideBar)}><img src="./filter.webp" alt="фильтры"/><p>фильтры</p></div>
                 </div>
                 <div className="katalog-row">

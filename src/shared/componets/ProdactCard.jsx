@@ -31,8 +31,8 @@ export default function ProdactCard({item}) {
             <div className="card__sale">
                 <div className="fd-col">
                     <p className="discount">{item?.have == 'true' && item?.discount}</p>
-                     <p className="card__price">{item?.have == 'true' ?  `От ${item?.price}₽` : 'Нет в наличии'} </p> 
-            </div>
+                    <p className="card__price">{item?.have == 'true' ?  `От ${item?.price}₽` : 'Нет в наличии'} </p> 
+                </div>
                 <img onClick={!isActive ? handleClick : null}  className={`card__bag ${isActive && "card__bagActive"}`} src={isActive ? "/blackBag.svg" : "/bag.svg"} alt={item?.name} />
             </div> 
         </div>

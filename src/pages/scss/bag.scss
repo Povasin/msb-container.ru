@@ -13,7 +13,7 @@ main {
     @extend %d-col;
     #error{
         color: red;
-        font-size: calcFluid(12, 18, 320, 1920);
+        font-size: calcFluid(13, 18, 320, 1920);
     }
     span a {
         text-decoration: none;
@@ -49,17 +49,32 @@ main {
             }
 
             .bag__block {
+                border-radius: 8px;
                 width: 95%;
-                margin: 10px 0;
+                margin: 5px 0;
                 @extend %d-row;
-                box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+                box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.20);
                 padding: 10px;
                 text-decoration: none;
-                .block__img {
-                    max-width: 30%;
-                    margin: auto;
-                }
+                margin: 5px 0;
+                .block__radius{
+                    width: 30%;
+                    align-items:center ;
+                    justify-content: center;
+                    background-color: #ececec;
+                    padding: calcFluid(5, 10, 320, 1920);
+                    border-radius: 6px;
+                    margin: 5px 0;
+                    display: flex;
+                    .img__emptyPhoto{
+                        margin: auto;
+                    }
+                    .block__img {
+                        max-width: 100%;
+                        margin: auto;
+                    }
 
+                }
                 .block__content {
                     position: relative;
                     margin: 0 0 0 10px;
@@ -71,7 +86,7 @@ main {
                         right: 0;
                         top: -15px;
                         cursor: pointer;
-                        font-size: calcFluid(15, 25, 320, 1920);
+                        font-size: calcFluid(18, 25, 320, 1920);
                         font-weight: 900;
                         color: #58585e;
                         position: absolute;
@@ -86,7 +101,7 @@ main {
                     p,a {
                         text-decoration: none;
                         color: black;
-                        font-size: calcFluid(12, 20, 320, 1920);
+                        font-size: calcFluid(20, 20, 320, 1920);
                         font-weight: 900;
                         margin: 10px 0;
                     }
@@ -94,14 +109,19 @@ main {
                     .block__input {
                         margin: auto 0 0px 0;
                         @extend %d-row;
-
+                        .quantity_innerContainer{
+                            display: flex;
+                            flex-direction: row;
+                        }
                         .quantity_inner {
                             display: flex;
                             flex-direction: row;
-                            border: 1px solid #58585e;
                             margin: auto 10px auto 0;
                             padding: 0 5px;
-
+                            border-radius: 5px;
+                            text-align: center;
+                            align-items: center;
+                            border: 0.6mm solid #D3D3D3;
                             .bt_minus,
                             .bt_plus,
                             .bt_minusMonth,
@@ -116,11 +136,11 @@ main {
                                 outline: 0;
                                 font-weight: 500;
                                 font-size: calcFluid(20, 35, 320, 1920);
-                                margin: 0;
                             }
 
                             .bt_plus,
                             .bt_plusMonth {
+                                font-size: calcFluid(30, 35, 320, 1920);
                                 background: $gradient;
                                 -webkit-background-clip: text;
                                 background-clip: text;
@@ -131,7 +151,7 @@ main {
                             }
                             .bt_minus,
                             .bt_minusMonth {
-                                margin: -2px 0 0 0;
+                                font-size: calcFluid(30, 35, 320, 1920);
                                 &:active{
                                     transform: scale(0.80);
                                 }
@@ -140,7 +160,7 @@ main {
                             .fd-col {
                                 @extend %d-col;
                                 margin: 0;
-                                font-size: calcFluid(8, 13, 320, 1920);
+                                font-size: calcFluid(9, 13, 320, 1920);
                                 text-align: center;
                                 .quantity {
                                     width: 50px;
@@ -206,12 +226,15 @@ main {
             }
             .input__price {
                 @extend %d-row;
-                margin: calcFluid(12, 20, 320, 1920) 0 10px 0;
-                font-size: calcFluid(15, 20, 320, 1920);
+                margin: calcFluid(2, 20, 320, 1920) 0 calcFluid(2, 10, 320, 1920) 0;
+                font-size: 20px;
                 font-weight: 900;
-                p {margin: 10px 5px 0 0;}
+                p {
+                    margin: 0;
+                }
                 #price {
-                    font-size: calcFluid(17, 30, 320, 1920);
+                    font-size: calcFluid(23, 30, 320, 1920);
+                    margin: 0 0 0 auto;
                     font-weight: 900;
                 }                
             }
@@ -220,12 +243,15 @@ main {
                 font-weight: 900;
             }
             .input__discount{
-                margin: 10px 0 calcFluid(12, 20, 320, 1920) 0;
+                margin: 10px 0 calcFluid(0, 20, 320, 1920) 0;
                 @extend %d-row;
                 font-weight: 900;
-                p {margin: 5px 5px 0 0;}
+                p {
+                    margin: 0;
+                }
                 #discount {
-                    font-size: calcFluid(13, 22, 320, 1920);
+                    margin: 0 0 0 auto;
+                    font-size: calcFluid(16, 22, 320, 1920);
                     color: #f91155;
                 }
             }
@@ -309,10 +335,87 @@ main {
             #order {
                 width: 100%;
             }
+            .bag__promoCode {
+                display: flex;
+                input {
+                    width: 90%;
+                    font-size: calcFluid(14, 20, 320, 1920);
+                }
+                #acceptPromocode {
+                    font-size: calcFluid(14, 20, 320, 1920);
+                }
+            }
         }
         .bag__block {
             width: 91%;
         }
     }
 
+}
+@media(max-width: 630px) {
+    .bag__wrapper{
+    .bag {
+        &__items {
+            height: 100%;
+            overflow: visible;
+            .bag__clear{
+                margin: 200px 0;
+            }
+            .bag__block {
+                width: auto;
+                .block__content {
+                    .rent {
+                        font-size: calcFluid(13, 16, 320, 630);
+                    }
+                    a {
+                        font-size: calcFluid(17, 20, 320, 1920);
+                        margin: calcFluid(6, 10, 320, 630) 0;
+                    }
+                    .block__input {
+                        .quantity_inner {
+                            .bt_minus,
+                            .bt_minusMonth {
+                                margin: 0 calcFluid(1, 5, 320, 630);
+                            }
+                        }
+                        .block-col {
+                            .block__price,
+                            .block__discount {
+                                margin:  0;
+                                font-size: calcFluid(15, 17, 320, 630);
+                            }
+
+                            .block__discount {
+                                text-align: end;
+                                margin: 0 0 5px 0;
+                                font-size: calcFluid(13, 16, 320, 630);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    }
+}
+
+@media(max-width: 540px) {
+    .bag__wrapper{
+        .bag {
+            &__items {
+                .bag__block {
+                    .block__content .block__input{
+                        flex-direction: column-reverse;
+                        .block-col{
+                            margin: 0 0 5px 0;
+                            .block__discount{
+                                text-align: start;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

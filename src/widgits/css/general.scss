@@ -1,32 +1,5 @@
 $gradient: linear-gradient(90deg, #5134c4, #773cbc, #b856d4);
 $gray: #ececec;
-// @font-face {
-//     font-family: "Inter-Light";
-//     font-style: normal;
-//     font-weight: 100;
-//     src: url("../../assets/fonts/Inter/Inter-Light.ttf");
-//     font-display: swap;
-// }
-// @font-face {
-//     font-style: normal;
-//     font-family: "Inter-Regular";
-//     font-weight: 500;
-//     src: url("../../assets/fonts/Inter/Inter-Regular.ttf");
-//     font-display: swap;
-// }
-// @font-face {
-//     font-style: normal;
-//     font-family: "Inter-Bold";
-//     font-weight: 900;
-//     src: url("../../assets/fonts/Inter/Inter-Bold.ttf");
-//     font-display: swap;
-// }
-// @font-face {
-//     font-style: normal;
-//     font-family: "fouore";
-//     src: url("../../assets/fonts/fouore/Furore.otf");
-//     font-display: swap;
-// }
 
 @function calcFluid($f-min, $f-max, $w-min, $w-max) {
 	$k: ($f-max - $f-min)/($w-max - $w-min);
@@ -60,9 +33,9 @@ body{
     flex-direction: column;
 }
 %more{
-    padding:10px calcFluid(10, 20, 320, 800);
+    padding:calcFluid(9, 11, 320, 1920) calcFluid(15, 20, 320, 800);
     color: white;
-    font-size:calcFluid(15, 20, 320, 1920);
+    font-size:calcFluid(13, 20, 320, 1920);
     background: $gradient;
     text-decoration: none;
     margin: 20px 0 auto auto;
@@ -72,6 +45,7 @@ body{
     background-size: 150% 100%;
     border: none;
     transition: all .4s ease-in-out;
+    border-radius: 3px;
     &:hover {
         background-position: 100% 0;
     }
@@ -108,8 +82,8 @@ body{
 %general__log{
     text-decoration: none;
     color: black ;
-    padding: calcFluid(7, 10, 1024, 1920) 20px;
-    font-size:calcFluid(15, 20, 320, 1920);;
+    padding: calcFluid(7, 10, 320, 1920) 20px;
+    font-size:calcFluid(15, 20, 320, 1920);
     text-align: center;
     border: 1px solid black;
     font-weight: 500;
@@ -151,21 +125,20 @@ body{
 
 %card {
     position: relative;
-    box-shadow: 2px 2px 13px rgba(0, 0, 0, 0.25);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.20);
     @extend %d-col;
     background-color: white;
-    width: 280px;
-    padding:10px;
+    width: calcFluid(200, 280, 320, 1920);
+    padding: calcFluid(5, 10, 320, 1920);
     text-decoration: none;
     color: black;
     border-radius: 6px;
-   
     .radius {
         align-items:center ;
         justify-content: center;
         background-color: #ececec;
         padding: calcFluid(5, 10, 320, 1920);
-        height: calcFluid(150, 200, 320, 1920);
+        height: calcFluid(140, 200, 320, 1920);
         border-radius: 6px;
         margin: 5px 0;
         display: flex;
@@ -174,7 +147,7 @@ body{
         }
     }
     .rent{
-        font-size: calcFluid(15, 20, 320, 1920);
+        font-size: calcFluid(12, 20, 320, 1920);
         color: #58585e;
         margin: auto 0 5px 0;
     }
@@ -189,11 +162,13 @@ body{
     .card__bag{
         cursor: pointer;
         margin: auto 0 0 auto;
-        padding: calcFluid(2, 5, 700, 1920) calcFluid(15, 20, 700, 1920);
+        padding: calcFluid(4, 5, 320, 1920) calcFluid(15, 25, 320, 1920);
         background:$gradient;
         background-size: 200% 100%;
         border: none;
+        border-radius: 2px;
         transition: all .4s ease-in-out;
+        width: calcFluid(20, 30, 320, 1920);
         &:hover {
             background-position: 100% 0;
         }
@@ -206,6 +181,7 @@ body{
         }
     }
     .card__bagActive{
+        border-radius: 2px;
         background:transparent;
         border: 1px solid;
         border-image-source:linear-gradient(90deg, #5134c4,#773cbc,#b856d4);
@@ -227,14 +203,14 @@ body{
         @extend %d-row;
         .card__arrow{
             margin:auto 0 auto auto;
-            font-size: 24px;
+            font-size: calcFluid(18, 24, 320, 1920);
             font-weight: 900;
             text-decoration: none;
             color: black;
             cursor: pointer;
         }
         .star{
-            font-size:  calcFluid(14, 20, 700, 1920);
+            font-size:  calcFluid(12, 20, 320, 1920);
             font-weight: 900;
             margin: auto 0;
         }
@@ -243,14 +219,16 @@ body{
         @extend %d-row;
         margin: 10px 0 0 0;
         .fd-col{
+            display: flex;
+            flex-direction: column !important;
             .discount{
                 text-decoration:line-through;
                 color: #58585e;
-                font-size:calcFluid(15, 20, 320, 1920);
+                font-size:calcFluid(12, 20, 320, 1920);
                 margin:calcFluid(0, 10, 850, 1920) 0 0 0;
             }
             .card__price{
-                font-size: calcFluid(17, 20, 320, 1920);
+                font-size: calcFluid(13, 20, 320, 1920);
                 font-weight: 900;
                 margin: 0;
             }
@@ -282,10 +260,10 @@ body{
 }
 %search{
     .search {
-        box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+        box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.20);
         border-radius: 4px;
         border: none;
-        padding: 10px calcFluid(10, 50, 1024, 1920) 10px 4px;
+        padding: 12px calcFluid(10, 50, 1024, 1920) 12px 6px;
         background-color: white;
         color: #6d6d6d;
         font-weight: 100;
@@ -318,8 +296,13 @@ body{
     img {
         position: absolute;
         right: 10px;
-        top: 8px;
+        top: 12px;
         max-width: 100%;
         max-height: 100%;
+    }
+}
+@media(max-width: 630px){
+    main{
+        margin-bottom: 150px;
     }
 }

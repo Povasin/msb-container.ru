@@ -11,8 +11,8 @@
     
     .cardLoadingUser{
         border-radius: 6px;
-        margin: 7px;
-        width: calcFluid(170, 280, 320, 1920);
+        margin: 3px;
+        width: calcFluid(134, 280, 320, 1920);
         box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.25);
         background-color: white;
         position: relative;
@@ -22,7 +22,7 @@
         padding:10px;
         .blockLoadingUser{
             background: linear-gradient(90deg, #E3E3E3 0%, rgba(141, 141, 141, 0.5) 100%);
-            border-radius: 6px;
+            border-radius: 3px;
             background-size: 400% 400%;
             width: 100%;
             transform: translate3d(0, 0, 0);

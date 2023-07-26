@@ -7,7 +7,7 @@ main{
 }
 .arrange__wrapper{
     .error{
-        font-size: calcFluid(12, 18, 320, 1920);
+        font-size: calcFluid(13, 18, 320, 1920);
         color: red;
         margin: 10px 0 0 0;
     }
@@ -27,16 +27,16 @@ main{
     .input__discount {
         @extend %d-row;
         margin: 10px 0;
-        font-size: calcFluid(15, 20, 320, 1920);
+        font-size: calcFluid(20, 20, 320, 1920);
         font-weight: 900;
         p {margin: 10px 5px 0 0;}
         #price {
-            font-size: calcFluid(17, 30, 320, 1920);
+            font-size: calcFluid(22, 30, 320, 1920);
             font-weight: 900;
         }  
         span {
             margin: 0 0 0 auto !important;
-            font-size: calcFluid(13, 20, 320, 1920);
+            font-size: calcFluid(18, 20, 320, 1920);
             font-weight: 900;
         }              
     }
@@ -45,26 +45,40 @@ main{
         margin: 0;
     }
     .input__discount{
-        p {margin: 5px 5px 0 0;}
+        margin: 0;
         #discount {
-            font-size: calcFluid(13, 22, 320, 1920);
+            font-size: calcFluid(18, 22, 320, 1920);
             color: #f91155;
         }
     }
+
     .bag__block {
-        margin: 10px 0;
+        border-radius: 8px;
+        width: 95%;
+        margin: 5px 0;
         @extend %d-row;
-        box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+        box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.20);
         padding: 10px;
         text-decoration: none;
-        .block__img {
-            max-width: 30%;
-            margin: auto;
-            img {
-                max-width: 90%;
+        margin: 5px 0;
+        .block__radius{
+            width: 30%;
+            align-items:center ;
+            justify-content: center;
+            background-color: #ececec;
+            padding: calcFluid(5, 10, 320, 1920);
+            border-radius: 6px;
+            margin: 5px 0;
+            display: flex;
+            .img__emptyPhoto{
+                margin: auto;
             }
-        }
+            .block__img {
+                max-width: 100%;
+                margin: auto;
+            }
 
+        }
         .block__content {
             position: relative;
             margin: 0 0 0 10px;
@@ -76,7 +90,7 @@ main{
                 right: 0;
                 top: -15px;
                 cursor: pointer;
-                font-size: calcFluid(15, 25, 320, 1920);
+                font-size: calcFluid(18, 25, 320, 1920);
                 font-weight: 900;
                 color: #58585e;
                 position: absolute;
@@ -91,7 +105,7 @@ main{
             p,a {
                 text-decoration: none;
                 color: black;
-                font-size: calcFluid(12, 20, 320, 1920);
+                font-size: calcFluid(20, 20, 320, 1920);
                 font-weight: 900;
                 margin: 10px 0;
             }
@@ -99,19 +113,25 @@ main{
             .block__input {
                 margin: auto 0 0px 0;
                 @extend %d-row;
-
+                .quantity_innerContainer{
+                    display: flex;
+                    flex-direction: row;
+                }
                 .quantity_inner {
                     display: flex;
                     flex-direction: row;
-                    border: 1px solid #58585e;
                     margin: auto 10px auto 0;
                     padding: 0 5px;
-
+                    border-radius: 5px;
+                    text-align: center;
+                    align-items: center;
+                    border: 0.6mm solid #D3D3D3;
                     .bt_minus,
                     .bt_plus,
                     .bt_minusMonth,
                     .bt_plusMonth,
                     .quantity {
+                        user-select: none;
                         padding: 0;
                         border: 0;
                         margin: 0;
@@ -120,25 +140,31 @@ main{
                         outline: 0;
                         font-weight: 500;
                         font-size: calcFluid(20, 35, 320, 1920);
-                        margin: 0;
                     }
 
                     .bt_plus,
                     .bt_plusMonth {
+                        font-size: calcFluid(30, 35, 320, 1920);
                         background: $gradient;
                         -webkit-background-clip: text;
                         background-clip: text;
                         -webkit-text-fill-color: transparent;
+                        &:active{
+                            transform: scale(0.80);
+                        }
                     }
                     .bt_minus,
                     .bt_minusMonth {
-                        margin: -2px 0 0 0;
+                        font-size: calcFluid(30, 35, 320, 1920);
+                        &:active{
+                            transform: scale(0.80);
+                        }
                     }
 
                     .fd-col {
                         @extend %d-col;
                         margin: 0;
-                        font-size: calcFluid(8, 13, 320, 1920);
+                        font-size: calcFluid(9, 13, 320, 1920);
                         text-align: center;
                         .quantity {
                             width: 50px;
@@ -167,7 +193,7 @@ main{
                 }
             }
         }
-    }
+    }        
     padding: 0 calcFluid(8, 200, 320, 1920);
     @extend %d-col;
 
@@ -178,7 +204,8 @@ main{
             width: 50%;
             text-decoration: none;
             color: black ;
-            padding: calcFluid(7, 10, 1024, 1920) 20px;
+            padding: calcFluid(8, 10, 1024, 1920) 20px;
+            border-radius: 4px;
             font-size:calcFluid(15, 20, 320, 1920);;
             text-align: center;
             border: 0px solid black;
@@ -244,3 +271,40 @@ main{
     }
 }
 
+.mobile__bag{
+    .order{
+        @extend %more;
+        margin: 17px 17px auto auto;
+    }     
+}
+
+@media(max-width: 630px) {
+    .arrange__wrapper{
+        .order{
+            margin: 10px auto 50px 0;
+        }
+       .map1{
+        #map__yandex{
+            border: 2px solid #EFEFEF;
+            width: 100%;
+            height: 350px;
+        }
+       }
+    }
+}
+
+@media(max-width: 540px) {
+    .arrange__wrapper{
+        .bag__block {
+            .block__content .block__input{
+                flex-direction: column-reverse;
+                .block-col{
+                    margin: 0 0 5px 0;
+                    .block__discount{
+                        text-align: start;
+                    }
+                }
+            }
+        }
+    }
+}

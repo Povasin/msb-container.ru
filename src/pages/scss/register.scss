@@ -20,26 +20,26 @@ main{
             margin: 5px 0;
             outline:none;
             border: none;
+            -moz-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+            box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
             -webkit-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
-            font-size:calcFluid(13, 20, 320, 1920);
+            font-size:calcFluid(14, 20, 320, 1920);
         }
         label{
-            font-size:calcFluid(10, 16, 320, 1920);
-            margin: 20px 0;
-            input[type='checkbox'] {
+            display: flex;
+            font-size:calcFluid(12, 16, 320, 1920);
+            margin: calcFluid(3, 20, 320, 1920) 0 calcFluid(13, 20, 320, 1920) 0 ;
+            align-items: center;
+            #accept {
                 margin: auto 10px auto 0;
                 -webkit-appearance: none;
                 -moz-appearance: none;
-                appearance: none;
-                width: 1.5em;
-                height:1.5em;
+                appearance: auto;
+                height: calcFluid(25, 30, 320, 1920);
+                width: calcFluid(25, 30, 320, 1920);
                 border: 1px solid #adb5bd;
                 cursor: pointer;
                 vertical-align:bottom;
-                &:checked{
-                    background: $gradient;
-                    appearance: auto;
-                }
             }
         }
         #register{
@@ -62,9 +62,14 @@ main{
         }
     }
     .account{
-        font-size: calcFluid(12, 16, 320, 1920);
+        font-size: calcFluid(13, 16, 320, 1920);
         a{
             text-decoration: none;
         }
     }
+}
+@media(max-width: 630px){
+    .register{
+        padding: calcFluid(100, 100, 320, 630) calcFluid(8, 400, 320, 1920);
+    } 
 }

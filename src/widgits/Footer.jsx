@@ -1,11 +1,16 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useLocation, useNavigate} from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import "./css/footer.scss"
 import { authSlice } from '../shared/store/slices/auth';
-import { useState } from 'react';
+import {BagSlice, checkRegister} from "../shared/store/slices/bag"
+import {store} from "../shared/store/slices/store"
 export default function Footer() {
     const auth = useSelector((state)=>state.authSlice)
+    const BagStore = useSelector((state) => state.BagSlice);
+    const location = useLocation()
+    const navigate = useNavigate()
+    let newBagMass = BagStore.items.filter(item=>item.data.have == 'true')
     const [massQuestion, setMassQuestion] = useState([
         {
             quastion: "бытовка автономная?",
@@ -38,8 +43,33 @@ export default function Footer() {
         })
         setMassQuestion(newMass)
     } 
-
+    function BagStorePrice() {
+        let summ = 0;
+        newBagMass.forEach(item=>{
+            summ+= (item.count*item.data.price )*item.month 
+        })
+        return summ
+    }
+    function BagStoredisCount() {
+        let summ = 0;
+        newBagMass.forEach(item=>{
+            summ+= (item.count*item.data.discount )*item.month 
+        })
+        return summ
+    }
+    function send() {
+        if (!auth.userData) {
+            store.dispatch(BagSlice.actions.checkRegister(" ПОДСКАЗКА: Для оформления заказа зарегистрируйтесь"));
+        } else {
+            if (BagStoredisCount() == 0) {
+                store.dispatch(BagSlice.actions.checkRegister(" ПОДСКАЗКА: Товары которых нет в наличии нельзя заказать"));
+            } else{
+                navigate(`/arrange`)
+            }
+        }
+    }
   return (
+   document.documentElement.clientWidth > 630 ? 
     <footer>
     <div className="pd-100">
         <h2>Часто задаваемые воросы</h2>
@@ -110,6 +140,36 @@ export default function Footer() {
             </div>
         </div>
     </div>
-</footer>
+</footer> : <>
+    {location.pathname.split("/")[1] == 'bag' && BagStore.items != 0 ? 
+        <div className="mobile__bag">
+            <p>{BagStorePrice()}₽</p>
+            <p>{BagStoredisCount()}</p>
+            <button id="order" to="/arrange" onClick={send}>к оформлению</button>
+        </div>
+    : false} 
+    <div className="mobile">
+        <div className="mobile__block">
+            <Link to='/'><img src={location.pathname.split("/")[1] == '' ? '/homeActive.svg' : '/home.svg'} alt="Главная"/></Link>
+            <p className={`mobile__text ${location.pathname.split("/")[1] == '' && 'active'}`}>Главная</p>
+        </div>
+        <div className="mobile__block">
+            <Link to='/katalog'><img src={location.pathname.split("/")[1] == 'katalog' ? '/katalogActive__icon.svg' : '/katalog__icon.svg'} alt="Каталог"/></Link>
+            <p className={`mobile__text ${location.pathname.split("/")[1] == 'katalog' && 'active'}`}>Каталог</p>
+        </div>
+        <div className="mobile__block">
+            <Link to='/gallary'><img src={location.pathname.split("/")[1] == 'gallary' ? '/productActive__icon.svg' : '/product__icon.svg'} alt="Товары"/></Link>
+            <p className={`mobile__text ${location.pathname.split("/")[1] == 'gallary' && 'active'}`}>Товары</p>
+        </div>
+        <div className="mobile__block">
+            <Link to="/bag" ><img src={location.pathname.split("/")[1] == 'bag' ? '/bagActive__icon.svg' : '/bag__icon.svg'} alt="корзина"/><div className="services__sum"><p>{BagStore.items?.length}</p></div></Link>
+            <p className={`mobile__text ${location.pathname.split("/")[1] == 'bag' && 'active'}`}>Корзина</p>
+        </div>
+        <div className="mobile__block">
+            <Link to={auth?.userData == null ? '/register' : `/user/${auth?.userData?.idUser}`}><img src={location.pathname.split("/")[1] == 'user' || location.pathname.split("/")[1] == 'register' || location.pathname.split("/")[1] == 'login' ? '/userActive__icon.svg' : '/user__icon.svg'} alt="Профиль"/></Link>
+            <p className={`mobile__text ${location.pathname.split("/")[1] == 'user' || location.pathname.split("/")[1] == 'register' || location.pathname.split("/")[1] == 'login'  ? 'active' : false}`}>Профиль</p>
+        </div>
+    </div>
+    </> 
   )
 }

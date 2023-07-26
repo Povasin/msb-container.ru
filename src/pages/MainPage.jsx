@@ -1,4 +1,4 @@
-import React,  { useState, useEffect}  from 'react'
+import React,  { useState, useEffect, useRef}  from 'react'
 import ProductCard from "../shared/componets/ProdactCard"
 import { Link } from 'react-router-dom'
 import FurnitureSlider from "../shared/componets/slider/furniture"
@@ -8,17 +8,56 @@ import { useSelector } from 'react-redux'
 import { store } from '../shared/store/slices/store';
 import "./scss/main.scss"
 import LazyLoad from 'react-lazy-load';
-
 export default function MainPage() {
     const [showSelect, setShowSelect] = useState({
         active: "выбрать формат",
         state: false,
         src: "/emptyCubins.webp"
     })
+    let ref = useRef()
     const cards = useSelector((state)=>state.cardsSlice)
+    let newMass = cards?.items.filter(item=>item.role == "Мебель")
+    const [stateScroll, setStateScroll] = useState({
+        isScrolling: false,
+        clientX: 0,
+        scrollX: 0
+    })
+    function onMouseMove(e) {
+        if (ref && ref.current && !ref.current.contains(e.target)) {
+            return
+        }
+        e.preventDefault()
+        const {clientX, scrollX, isScrolling} = stateScroll
+        if (isScrolling) {
+            ref.current.scrollLeft = scrollX + e.clientX - clientX
+            setStateScroll({...stateScroll, scrollX: scrollX + e.scrollX - clientX, clientX: e.clientX })
+        }
+    }
+    function onMouseDown(e) {
+        if (ref && ref.current && !ref.current.contains(e.target)) {
+            return
+        }
+        e.preventDefault()
+        setStateScroll({...stateScroll, isScrolling: true, clientX: e.clientX})
+    }
+    function onMouseUp(e) {
+        if (ref && ref.current && !ref.current.contains(e.target)) {
+            return
+        }
+        e.preventDefault()
+        setStateScroll({...stateScroll, isScrolling: false})
+    }
     useEffect(()=>{
         store.dispatch(getCards({}))
-      }, [])
+        document.addEventListener('mousedown', onMouseDown)
+        document.addEventListener('mouseup', onMouseUp)
+        document.addEventListener('mousemove', onMouseMove)
+        return ()=>{
+            document.removeEventListener('mousedown', onMouseDown)
+            document.removeEventListener('mouseup', onMouseUp)
+            document.removeEventListener('mousemove', onMouseMove)
+        }
+    }, [])
     return (
         <main>
             <div className="fd-row">
@@ -94,7 +133,8 @@ export default function MainPage() {
                     <ProductCard key={0} item={cards.items[0]}/>
                 </div>
             </div>
-            <div className="line"></div>
+            {document.documentElement.clientWidth > 630 && <>
+                <div className="line"></div>
             <div className="advantages-row">
                 <div className="advantages">
                 <img src="/money.svg" alt="аренда"/>
@@ -143,10 +183,28 @@ export default function MainPage() {
                 <div className="choose__img"><img src={showSelect.src} alt={showSelect.active}/></div>
                 </div>
             </div>
-            <FurnitureSlider/>
+            </>}
+            {document.documentElement.clientWidth > 630 ? <FurnitureSlider/> :
+            <div className="mobile__katalog">
+                <h2>Мебель</h2>
+                <div className="mobile__katalogSwipeContainer">
+                    <div ref={ref} className="mobile__katalogSwipe" onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseMove={onMouseMove}>
+                        {newMass.map((item, index)=>index < 6 && <ProductCard key={index} item={item}/>)}
+                    </div>
+                </div>
+            </div>
+            }
             <div className="line"></div>
-             <CubinsSlider/>
-            <div className="line"></div>
+            {document.documentElement.clientWidth > 630 ? <CubinsSlider/> :
+            <div className="mobile__katalog">
+                <h2>Лидеры продаж</h2>
+                <div className="mobile__katalogContainer">
+                    {cards?.items.map((item, index)=>index < 6 && <ProductCard key={index} item={item}/>)}
+                </div>
+                <Link to="/katalog" className="more">Посмотреть все бытовки</Link>
+            </div>
+            } 
+            {document.documentElement.clientWidth > 630 && <div className="line"></div> }
         </main>
     )
 }

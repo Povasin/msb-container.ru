@@ -29,13 +29,13 @@ export default function LoginPage() {
   return (
     <main>   
         <div className="loginClient">
-            <h1>Вход</h1>
+           <h1>Вход</h1>
             <div className="login-row">
-                <input type="email" placeholder="эл.почта" maxLength="40" value={form.email} onChange={(e)=>setForm({...form, email: e.target.value})} required/>
-                <input type="password"  value={form.password} onChange={(e)=>setForm({...form, password: e.target.value})} placeholder="пароль" maxLength="16" required/>
+                <input type="email" placeholder="Эл.почта" maxLength="40" value={form.email} onChange={(e)=>setForm({...form, email: e.target.value})} required/>
+                <input type="password"  value={form.password} onChange={(e)=>setForm({...form, password: e.target.value})} placeholder="Пароль" maxLength="16" required/>
                 <p className="error">{auth.error}</p>
-                <button className={`loginBTN ${!auth.isLoading  ? "" : "loading "} `} disabled={auth.isLoading } onClick={()=>store.dispatch(login({body: form}))}>{!auth.isLoading  ? "подтвердить" : "загрузка"}</button>
-                <p className="account">Нет аккунта? <Link to="/register">Зарегистрируйтесь</Link></p>
+                <button className={`loginBTN ${!auth.isLoading  ? "" : "loading "} `} disabled={auth.isLoading } onClick={()=>store.dispatch(login({body: form}))}>{!auth.isLoading  ? "Подтвердить" : "Загрузка"}</button>
+                <p className="account">Нет аккунта? <Link to="/register"> Зарегистрируйтесь</Link></p>
             </div>
         </div>  
     </main>

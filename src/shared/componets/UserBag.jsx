@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import LazyLoad from 'react-lazy-load';
 
 export default function UserBag({order, auth}) {
   return (
@@ -11,13 +12,18 @@ export default function UserBag({order, auth}) {
         </div> : 
         order?.items.map((item)=>
         <div key={item.number} className="bag__block">
-            <div className="block__img"> 
-                <img src={item.img} alt={`закаказ № ${item.number}`}/>
+            <div  className="radius__user">
+                <Link className='LinkImg__user'>{item?.img != 'false' ?  
+                <LazyLoad className="card__img__user" threshold={ 0.20 }>
+                    <img itemprop="contentUrl" src={item?.img} alt={item?.name}/>
+                </LazyLoad> :
+                    <img  className="img__emptyPhoto" src='/emptyIcon.svg' alt={item?.name}/> 
+                }</Link> 
             </div>
             <div className="block__content"> 
-                <p className="orderNumber">закаказ № {item.number}</p>
+                <p className="orderNumber">Закаказ № {item.number}</p>
                 <p className='rent'>{item.delivery == "самовызов" ? `можно забрать:` : "срок доставки:"} <span>{item.date == '' && !item.orderReceived ? "не указано продавцом" : item.orderReceived ? "заказ получен" : item.date}</span></p>
-                <Link className="track" to={`/user/${auth?.userData.idUser}/${item.number}`}>{!item.orderReceived ? "отслеживать заказ" : "история заказа" }</Link>
+                <Link className="track" to={`/user/${auth?.userData.idUser}/${item.number}`}>{!item.orderReceived ? "Отслеживать" : "История" }</Link>
             </div>
         </div>
         )

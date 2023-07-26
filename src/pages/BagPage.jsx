@@ -4,17 +4,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import BagCard from '../shared/componets/BagCard'
 import { authSlice } from '../shared/store/slices/auth';
 import {store} from "../shared/store/slices/store"
-import {order, BagSlice} from "../shared/store/slices/bag"
+import {order, BagSlice, checkRegister} from "../shared/store/slices/bag"
 import "./scss/bag.scss"
+import ProductCard from "../shared/componets/ProdactCard"
 import { useState } from 'react';
 export default function BagPage() {
+    const cards = useSelector((state)=>state.cardsSlice)
     const BagStore = useSelector((state) => state.BagSlice); 
     const auth = useSelector((state)=>state.authSlice)
-    const [checkAuth, setCheckAuth] = useState("")
     const navigate = useNavigate()
     let newBagMass = BagStore.items.filter(item=>item.data.have == 'true')
-    console.log(BagStore.items);
-     function BagStorePrice() {
+    function BagStorePrice() {
         let summ = 0;
         newBagMass.forEach(item=>{
             summ+= (item.count*item.data.price )*item.month 
@@ -28,32 +28,30 @@ export default function BagPage() {
         })
         return summ
     }
-    
     function send() {
-        if (BagStore.items == 0) {
-            setCheckAuth("ваша корзина пока пуста вернитесь на главную страницу и заполните ее")
+        if (!auth.userData) {
+            store.dispatch(BagSlice.actions.checkRegister(" ПОДСКАЗКА: Для оформления заказа зарегистрируйтесь"));
         } else {
-            if (!auth.userData) {
-                setCheckAuth(" ПОДСКАЗКА: Для оформления заказа зарегистрируйтесь")
-            } else {
-                if (BagStoredisCount() == 0) {
-                    setCheckAuth(" ПОДСКАЗКА: Товары которых нет в наличии нельзя заказать")
-                } else{
-                    navigate(`/arrange`)}
-                }
-            } 
+            if (BagStoredisCount() == 0) {
+                store.dispatch(BagSlice.actions.checkRegister(" ПОДСКАЗКА: Товары которых нет в наличии нельзя заказать"));
+            } else{
+                navigate(`/arrange`)
+            }
+        }
     }
     return ( 
         <main>   
             <div className="bag__wrapper">
+            {document.documentElement.clientWidth > 630 && <>
                 <span><Link to="/">главная </Link>/<Link to="/bag"> корзина</Link></span>      
                 <h1>Корзина товаров</h1>
+            </> }
                 <div  className="bag">
                     <div className={`bag__items ${BagStore.items == 0 ? "clear" : ""}`}>
                     {BagStore.items == 0 ? <div className="bag__clear"><h2>ваша корзина пока пуста</h2><p>вернитесь на <Link to="/">главную страницу</Link> и заполните ее</p></div> : BagStore.items.map((item, index) => <BagCard key={index} card={item}/>)}
                     </div>
                     {BagStore.items != 0 &&  <div className="bag__price">
-                        <div className="bag__promoCode">
+                     <div className="bag__promoCode">
                             <input type="text" placeholder="Промокод" className="promocode"/>
                             <div id="acceptPromocode">Ok</div>
                         </div>
@@ -64,13 +62,22 @@ export default function BagPage() {
                         </div>                    
                         <div className="input__discount">
                             <p>Без скидки</p>
-                            <span id="discount">{BagStoredisCount()}₽</span>
+                            <span id="discount">{BagStoredisCount()}</span>
                         </div>
-                        <p id="error">{checkAuth}{BagStore.error}</p>
+                        <p id="error">{BagStore.error}</p>
                         <button id="order" to="/arrange" onClick={send}>к оформлению</button>
                     </div>}  
                 </div>
             </div>  
+            {document.documentElement.clientWidth < 630 && BagStore.items != 0 ?
+            <div className="mobile__katalog">
+                <h2>Лидеры продаж</h2>
+                <div className="mobile__katalogContainer">
+                    {cards?.items.map((item, index)=>index < 6 && <ProductCard key={index} item={item}/>)}
+                </div>
+                <Link to="/katalog" className="more">Посмотреть все бытовки</Link>
+            </div>
+         : false} 
         </main>
   )
 }

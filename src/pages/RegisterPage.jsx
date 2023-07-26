@@ -63,9 +63,9 @@ export default function RegisterPage() {
                 <input type="password" id="password" placeholder="пароль" maxLength="16" value={form.password} onChange={(e)=>changeInput("password", e)}  />
                 <input type="password" id="passwordCheck" placeholder="подтвердите пароль" value={checkPassword} onChange={(e)=>setCheckPassword(e.target.value)} maxLength="16"/>
                 <p className="error">{auth?.error}{checkInput.error}{}</p>
-                <label><input type="checkbox" id="accept" ref={inputEl} />согласен на отправку данных</label>
+                <label><input type="checkbox" id="accept" ref={inputEl} />Cогласен на отправку данных</label>
                 <button id="register" className={`registerBTN ${!auth.isLoading  ? "" : "loading"} `} disabled={auth.isLoading } onClick={send}>{!auth.isLoading  ? "подтвердить" : "загрузка"}</button>
-                <p className="account">Есть аккунт? <Link to="/login">Выполните вход</Link></p>
+                <p className="account">Есть аккунт? <Link to="/login"> Выполните вход</Link></p>
             </div>
         </div>  
     </main>

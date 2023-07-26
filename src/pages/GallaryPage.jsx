@@ -22,7 +22,7 @@ export default function GallaryPage() {
   return (
     <main>   
         <div className="gallary">
-            <span><Link to="/">главная </Link>/<Link to="/gallary"> Виды товаров</Link></span>
+        {document.documentElement.clientWidth > 630 && <span><Link to="/">главная </Link>/<Link to="/gallary"> Виды товаров</Link></span>}
             {filter('Бытовки для проживания').length > 0 && <>
               <h1>Бытовки для проживания</h1>
               <div className="gallary__item">

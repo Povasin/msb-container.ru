@@ -17,17 +17,20 @@ main{
     h1{
         font-size:calcFluid(20, 35, 320, 1920);
     }
-    &__item{
+    .gallary__item{
         @extend %d-row;
-        justify-content: center;
         flex-wrap: wrap;
+        align-content: flex-start;
+        justify-content: center;
         .card{
-            margin: 7px;
+            width: calcFluid(250, 400, 630, 1920);  
             @extend %card;
+            margin: 5px;
+            
         }
     }
     .bag__clear{
-        margin: auto;
+        margin: 150px 0;
         h2, p{
            text-align: center;
         }
@@ -39,14 +42,13 @@ main{
         }
     }
 }
-@media(max-width: 730px){
+
+@media(max-width: 630px){
     .gallary{
-        &__item{
-            display: flex;
-            flex-direction: column;
+        .gallary__item{
             .card{
-                margin: 7px auto;
-                width: 70%;                
+                margin: 4px;    
+                width: calcFluid(134, 249, 320, 630);  
             }
         }
     }

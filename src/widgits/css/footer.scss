@@ -173,6 +173,7 @@
             .basement__logo{
                 @extend %d-col;
                 @extend %general__logo; 
+                margin: -5px 0 5px  0;
                 font-size:calcFluid(30, 40, 320, 1920);
                 -webkit-text-fill-color: white;
                 span{
@@ -191,7 +192,7 @@
                 font-size:calcFluid(13, 18, 320, 1920) ;
                 font-weight: 900;
                 color: white;
-                margin: 0 0 20px 0;
+                margin: 0 0 calcFluid(0, 20, 320, 1920)  0;
             }
             a,
             p{
@@ -205,6 +206,87 @@
             }
         }  
     
+    }
+}
+.mobile__bag{
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    background-color: white;
+    z-index: 20;
+    bottom: calcFluid(65, 75, 320, 630);
+    left: 0;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    align-items: center;
+    #order {
+        @extend %more;
+        margin: 17px 17px auto auto;
+    }
+    p:first-child{
+        margin: 17px calcFluid(8, 17, 320, 630) 17px 17px;
+        font-family: 'inter-bold';
+        font-size: calcFluid(23, 27, 320, 630);
+    }
+    p:nth-child(2){
+        margin: 17px 0;
+        color: #A9A9A9;
+        font-family: 'inter-regular';
+        font-size: calcFluid(18, 23, 320, 630);
+        text-decoration: line-through;
+    }
+}
+.mobile{
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    background-color: white;
+    z-index: 100;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top: 0.7mm solid;
+    border-image-source:  $gradient;
+    border-image-slice: 1;
+    justify-content: center;
+    align-items: center;
+    padding: 9px 0 15px 0;
+    .mobile__block{
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        a{
+            margin: auto;
+            .services__sum{
+                position: absolute;
+                top: -3px;
+                right: calcFluid(1, 13, 320, 630);
+                color: white;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background: $gradient;
+                text-align:center;
+                font-weight: 500;
+                p{
+                    font-size: 10px;
+                    margin: auto;
+                }
+            }
+        }
+        .mobile__text{
+            margin: 0;
+            color: #BABABA;
+            font-size: calcFluid(10, 16, 320, 630);
+        }
+        .active{
+            color: #7F24FF;
+        }
+       
+       
     }
 }
 
@@ -226,7 +308,7 @@
         }
     }
 }
-@media(max-width: 670px){
+@media(max-width: 780px){
     .basement{
         .basement__content{
             display: flex;
@@ -256,6 +338,9 @@
                 padding: 10px;
                 display: flex;
                 flex-direction: column;
+            }
+            .basement__logo{
+                margin: 0 0 auto 0;
             }
         }
         &__block{

@@ -54,17 +54,17 @@ export default function ArrangePage() {
   return (
     <main>
         <div className="arrange__wrapper">
-            <span><Link to="/">главная </Link>/<Link to="/arrange"> оформление заказа</Link></span>      
+            {document.documentElement.clientWidth > 630 &&  <span><Link to="/">главная </Link>/<Link to="/arrange"> Оформление заказа</Link></span> } 
             <h1>Способ получения</h1>
             <div className='delivery__wrapper'>
-                <button className={`delivery ${!isDelivery ? "active" : ""}`} onClick={()=>setIsDelivery(false)}>самовызов</button>
-                <button className={`delivery ${isDelivery ? "active" : ""}`} onClick={()=>setIsDelivery(true)} >доставкa</button>
+                <button className={`delivery ${!isDelivery ? "active" : ""}`} onClick={()=>setIsDelivery(false)}>Cамовызов</button>
+                <button className={`delivery ${isDelivery ? "active" : ""}`} onClick={()=>setIsDelivery(true)} >Доставкa</button>
             </div>
             {!isDelivery ? 
             <>  
                 <h2>Самовызов</h2>
                 <div className='map1'>
-                    <div className="map__contact">
+                {document.documentElement.clientWidth > 630 && <div className="map__contact">
                         <div className="map-col">
                             <h2>Телефон</h2>
                             <p>+7 (910)973-36-65</p>
@@ -77,7 +77,7 @@ export default function ArrangePage() {
                             <h2>Электронная почта</h2>
                             <p>dir@ids76.ru</p>
                         </div>
-                    </div>
+                    </div>}
                     <div id="map__yandex">
                     <YMaps>
                         <Map width="100%" height="100%" defaultState={{ center: [57.60083313280139,39.890269973791455], zoom: 18   }} > 
@@ -103,16 +103,20 @@ export default function ArrangePage() {
             </div>                    
             <div className="input__discount">
                 <p>Без скидки:</p>
-                <span id="discount">{BagStoredisCount()}₽</span>
+                <span id="discount">{BagStoredisCount()}</span>
             </div>
             <div className="input__delivery">
-                <p>способ доставки:</p>
-                <span id="discount">{!isDelivery ? "самовызов" : `доставка`}</span>
+                <p>Cпособ доставки:</p>
+                <span id="discount">{!isDelivery ? "Самовызов" : `Доставка`}</span>
             </div>
             <p className='error'>{error}</p>
             <button className={`order ${loading ? "loading" : ""}`} onClick={send} disabled={loading}>{loading ? "загрузка" : "Оформить заказ"}</button>
         </div>
-     
+        <div className="mobile__bag">
+            <p>{BagStorePrice()}₽</p>
+            <p>{BagStoredisCount()}</p>
+            <button className={`order ${loading ? "loading" : ""}`} onClick={send} disabled={loading}>{loading ? "загрузка" : "Оформить заказ"}</button>
+        </div>
     </main>
   )
 }
