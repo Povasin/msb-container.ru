@@ -41,7 +41,7 @@ main {
                     @extend %d-col;
                     color: white;
                     h2 {
-                        font-weight: 900;
+                        font-family: "inter-bold";
                         font-size: calcFluid(18, 32, 320, 1920);
                         margin: 10px 0;    
                     }
@@ -147,7 +147,7 @@ main {
     &__content{
         @extend %d-col;
         h2{
-            font-weight: 900;
+            font-family: "inter-bold";
             font-size: calcFluid(16, 20, 320, 1920);
             margin:calcFluid(10, 30, 320, 1920) 0 10px 0;
         }
@@ -231,12 +231,12 @@ main {
     }
     h3{
         color: #58585e;
-        font-weight: 900;
+        font-family: "inter-bold";
         font-size:calcFluid(18, 25, 320, 1920);
         margin: 0;
     }
     h2{
-        font-weight: 900;
+        font-family: "inter-bold";
         font-size: calcFluid(13, 30, 320, 1920);
     }
     p{
@@ -249,7 +249,7 @@ main {
             text-decoration: none;
             .content__text{
                 font-size: calcFluid(12, 20, 320, 1920);
-                font-weight: 900;
+                font-family: "inter-bold";
                 margin: 10px 0;
                 color: black;
             }
@@ -274,7 +274,7 @@ main {
         .prevFurniture, 
         .nextFurniture{
             border: 1.5px solid;
-            font-weight: 900;
+            font-family: "inter-bold";
             color: gray;
             padding: 0px 5px 5px 5px;
             font-size: calcFluid(25, 30, 1024, 1920);
@@ -329,7 +329,7 @@ main {
         @extend %d-row;
         margin: 20px 0 0 0;
         h2{
-            font-weight: 900;
+            font-family: "inter-bold";
             font-size:  calcFluid(17, 30, 320, 1920);
             margin:auto 0;
         }
@@ -338,7 +338,7 @@ main {
             background: #cacaca;
             color: #ffffff;
             border: none;
-            font-weight: 900;
+            font-family: "inter-bold";
             padding: 0px 7px 7px 7px;
             font-size:  calcFluid(20, 30, 320, 1920);
             margin: auto 0 auto 20px;
@@ -368,7 +368,7 @@ main {
 
 
 .mobile__katalog{
-    padding: 0  calcFluid(8, 200, 320, 1920);
+    padding: 0  calcFluid(4, 200, 320, 1920);
     display: flex;
     flex-direction: column;
     h2{
@@ -391,8 +391,8 @@ main {
         align-content: flex-start;
     }
     .card{
-        margin: 5px;
-        width: calcFluid(132, 247, 320, 630);
+        margin: 3px;
+        width: calcFluid(140, 255, 320, 630);
     }
     .more{
         @extend %more;

@@ -8,6 +8,25 @@ import FurnitureSlider from "../shared/componets/slider/furniture"
 import "./scss/cubinsForSomeThing.scss"
 import ProductCard from "../shared/componets/ProdactCard"
 
+function useOnClickOutside(refModal, handler) {
+    useEffect(
+      () => {
+        const listener = (event) => {
+          if (!refModal.current || refModal.current.contains(event.target)) {
+            return;
+          }
+          handler(event);
+        };
+        document.addEventListener("mousedown", listener);
+        document.addEventListener("touchstart", listener);
+        return () => {
+          document.removeEventListener("mousedown", listener);
+          document.removeEventListener("touchstart", listener);
+        };
+      }
+    )
+}
+
 export default function CardPage() {
     const cards = useSelector((state)=>state.cardsSlice)
     const location = useLocation()
@@ -32,6 +51,8 @@ export default function CardPage() {
         count: 1,
         month: 1
     })
+    const [modal, setModal] = useState(false)
+    const refModal = useRef()
     const [cubinsSlider, setCubinsSlider] = useState(0)
     const [cubinsBTN , setCubinsBTN] = useState({
         next: true,
@@ -129,8 +150,14 @@ export default function CardPage() {
             document.removeEventListener('mousemove', onMouseMove)
         }
     }, [])
+    useOnClickOutside(refModal, ()=>setModal(false))
     return (
         <main>
+            {modal && 
+               <div className="modalImg">
+               <img ref={refModal} src={activeImg?.src == undefined ?  itemImg[0].src : activeImg?.src} alt={item?.name} />
+                </div>     
+            }
             <div className="transportation_wrapper">
             {document.documentElement.clientWidth > 630 &&  <span><Link to="/">главная </Link>/<Link to="/katalog"> каталог</Link>/<Link to="#"> {item?.name}</Link></span> }     
                 <div className="transportation">
@@ -140,7 +167,7 @@ export default function CardPage() {
                            
                             {itemImg[0].src != 'false' && <div className="slider">
                                 <div className="slider-line" onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseMove={onMouseMove} ref={slider}>
-                                    {itemImg.map((point, index)=><div className="slider__block__img"><img className={`slider__img ${activeImg.src == point.src ? `active` : ""} ${itemImg.length < 2 ? `bigMargin` : ""}`} onClick={()=>changeActiveImg(point)} src={point.src} key={index} alt={item?.name}/></div>)}
+                                    {itemImg.map((point, index)=><div className={`slider__block__img ${activeImg.src == point.src ? `active` : ""} ${itemImg.length < 2 ? `bigMargin` : ""}`}><img className={`slider__img`} onClick={()=>changeActiveImg(point)} src={point.src} key={index} alt={item?.name}/></div>)}
                                 </div>
                             </div> } 
                         {itemImg.length > 3 && document.documentElement.clientWidth > 630 ? <p className={`next ${cubinsBTN.next ? "active" : ""} `} onClick={sliderNext} >{`>`}</p> : false}   
@@ -156,19 +183,19 @@ export default function CardPage() {
                         {document.documentElement.clientWidth > 630 &&  <div className="transportation__img">
                             <div className="star">{item?.star}</div>
                            {itemImg[0].src != 'false' ? 
-                           <img className="main__img"  src={activeImg?.src == undefined ?  itemImg[0].src : activeImg?.src} alt={item?.name}/>
+                           <img className="main__img" onClick={()=>setModal(!modal)} src={activeImg?.src == undefined ?  itemImg[0].src : activeImg?.src} alt={item?.name}/>
                            :
                             <div className="img__empty">
                                 <img  className="img__emptyPhoto" src='/emptyIcon.svg' alt={item?.name}/> 
                             </div>
                             } 
-                            <Link to="/gallary" className="chooseMore">выбрать формат</Link>
+                            <Link to="/gallary" className="chooseMore">Выбрать из наличия</Link>
                         </div>}
                     </div>
                     <div className="transportation__contant">
                         <h1>{item?.name}</h1>
                         {document.documentElement.clientWidth > 1024 && <>
-                            <p>вместимость: <span>{item?.content} человек</span></p>
+                            <p>Вместимость: <span>{item?.content} человек</span></p>
                             <p>Габариты: <span>{item?.size}</span></p>
                             <p>Внутренняя отделка: <span>{item?.finishing}</span></p>
                             <p>Состояние:<span>{item?.states}</span></p>
@@ -202,7 +229,7 @@ export default function CardPage() {
                         <p className='transportation__caract'>Состояние:<span>{item?.states}</span></p>
                     </>}
                     <h2>О товаре</h2>
-                    <h3>описание</h3>
+                    <h3>Описание</h3>
                     <p className='transportation__text'>{item?.text}</p>
                     {document.documentElement.clientWidth > 1024 && <>  
                     <h3>Преимущества хранения и перевозки от нашей компании:</h3>

@@ -127,10 +127,11 @@ export default function CreateCard() {
             <h2>Категория*</h2>
             <select ref={select} onClick={()=>setForm({...form, role: select.current.value})} className="select" name="role">
                 {form.role != 'общая' ? <>
-                <option  value="Бытовка для проживания" >Бытовка для проживания</option>
-                <option  value="Бытовка раздевалка" >Бытовка раздевалка</option>
+                {<option  value={form.role}>{form.role}</option>}
+                <option  value="Бытовки для проживания" >Бытовки для проживания</option>
+                <option  value="Бытовки раздевалки" >Бытовки раздевалки</option>
                 <option  value="Бытовки c душем" >Бытовки c душем</option>
-                <option  value="Бытовки под склад" >Бытовки под склад</option>
+                <option  value="Бытовки под склад" >Бытовка под склад</option>
                 <option  value="Бытовки прорабские" >Бытовки прорабские</option>
                 <option  value="Мебель" >Мебель</option>
                 </> :  <option  value="общая" >Общая</option>}
@@ -209,17 +210,17 @@ export default function CreateCard() {
         <textarea value={form.com} onChange={(e)=>setForm({...form, com: e.target.value})} maxLength='1000' id="" cols="30" rows="10">Комментарий...</textarea>
         <div className="fd-row">
           <div className="fd-col">
-            <h2>Цена*</h2>
+            <h2>Ваша цена*</h2>
             <label className='price'><input type="number"  value={form.price} onChange={(e)=>setForm({...form, price: e.target.value})}  placeholder='Цена...' maxLength="20"/><p>₽</p></label>
           </div>
           <div className="fd-col">
-            <h2>Скидка*</h2>
+            <h2>Цена до скидки*</h2>
             <label className='price'><input type="number" value={form.discount} onChange={(e)=>setForm({...form, discount: e.target.value})}  placeholder='Скидка...' maxLength="20"/><p>₽</p></label>
           </div>
         </div>
           <p className='error'>{error}</p>
           <div className="fd-row">
-            <input type="submit" onClick={send}/>
+            <input type="submit" value='Сохранить' onClick={send}/>
             {form.role != 'общая' && <input type="button" value='Удалить' onClick={deleteCardFUNC}/>}
           </div>
     </div>

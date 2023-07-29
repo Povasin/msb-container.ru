@@ -10,10 +10,9 @@ import LoadingPage from './LoadingPageAdmin'
 
 export default function UserPage() {
     let navigate = useNavigate()
-    async function exit() {
-        return new Promise((resolve, reject) => {
-            resolve(store.dispatch(authSlice.actions.exit()))
-        }).then(()=>{navigate("/")})
+    function exit() {
+        store.dispatch(authSlice.actions.exit())
+        navigate("/")
     }
     const auth = useSelector((state)=>state.authSlice)
     const order = useSelector((state)=>state.orderSliceClient)
@@ -29,11 +28,11 @@ export default function UserPage() {
                 {document.documentElement.clientWidth > 630 && <p className="userContent__name">{auth.userData?.name}</p>}
                     <p>  {document.documentElement.clientWidth > 630 && 'Email:'} <span className="userContent__email">{auth.userData?.email}</span></p>
                     <p>  {document.documentElement.clientWidth > 630 && 'Номер телефона:' }<span className="userContent__phone">{auth.userData?.phone}</span></p>
-                    {document.documentElement.clientWidth > 730 &&  <button className="exit" onClick={exit}>выйти</button> }
+                    {document.documentElement.clientWidth > 730 &&  <button className="exit" onClick={exit}>Выйти</button> }
                 </div>
             </div>
             <div className="orders">
-            {document.documentElement.clientWidth < 730 &&  <button className="exit" onClick={exit}>выйти</button> }
+            {document.documentElement.clientWidth < 730 &&  <button className="exit" onClick={exit}>Выйти</button> }
                 <h1>Заказы</h1>
                 <div id="orders__render">
                 {order.isLoading ? <LoadingPage number={3}/> :  <UserBag order={order} auth={auth}/>}

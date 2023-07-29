@@ -145,7 +145,7 @@ export default function Footer() {
         <div className="mobile__bag">
             <p>{BagStorePrice()}₽</p>
             <p>{BagStoredisCount()}</p>
-            <button id="order" to="/arrange" onClick={send}>к оформлению</button>
+            <button id="order" to="/arrange" onClick={send}>К оформлению</button>
         </div>
     : false} 
     <div className="mobile">

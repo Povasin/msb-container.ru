@@ -58,13 +58,13 @@ export default function RegisterPage() {
             <h1>Регистрация</h1>
             <div className="register-row">
                 <input type="text" id="nameReg" placeholder="Имя профиля" value={form.name} onChange={(e)=>changeInput("name", e)}maxLength="20" />
-                <input type="email"id="email"placeholder="эл.почта" value={form.email} onChange={(e)=>changeInput("email", e)} maxLength="40" />
+                <input type="email"id="email"placeholder="Эл.почта" value={form.email} onChange={(e)=>changeInput("email", e)} maxLength="40" />
                 <input type="tel" id="phone"placeholder="Номер телефона" value={form.phone} onChange={(e)=>changeInput("phone", e)} maxLength="40" />
-                <input type="password" id="password" placeholder="пароль" maxLength="16" value={form.password} onChange={(e)=>changeInput("password", e)}  />
-                <input type="password" id="passwordCheck" placeholder="подтвердите пароль" value={checkPassword} onChange={(e)=>setCheckPassword(e.target.value)} maxLength="16"/>
+                <input type="password" id="password" placeholder="Пароль" maxLength="16" value={form.password} onChange={(e)=>changeInput("password", e)}  />
+                <input type="password" id="passwordCheck" placeholder="Подтвердите пароль" value={checkPassword} onChange={(e)=>setCheckPassword(e.target.value)} maxLength="16"/>
                 <p className="error">{auth?.error}{checkInput.error}{}</p>
                 <label><input type="checkbox" id="accept" ref={inputEl} />Cогласен на отправку данных</label>
-                <button id="register" className={`registerBTN ${!auth.isLoading  ? "" : "loading"} `} disabled={auth.isLoading } onClick={send}>{!auth.isLoading  ? "подтвердить" : "загрузка"}</button>
+                <button id="register" className={`registerBTN ${!auth.isLoading  ? "" : "loading"} `} disabled={auth.isLoading } onClick={send}>{!auth.isLoading  ? "Подтвердить" : "Загрузка"}</button>
                 <p className="account">Есть аккунт? <Link to="/login"> Выполните вход</Link></p>
             </div>
         </div>  

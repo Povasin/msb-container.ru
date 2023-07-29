@@ -14,7 +14,7 @@ main{
     padding: 0 calcFluid(8, 200, 320, 1920);
     @extend %d-col;
     h1{
-        font-weight: 900;
+        font-family: "inter-bold";
         font-size:calcFluid(17, 30, 320, 1920) ;
     }
     &__contact{
@@ -25,13 +25,13 @@ main{
             @extend %d-col;
             h2{
                 font-size: calcFluid(13, 18, 320, 1920);
-                font-weight: 500;
+                font-family: "inter-regular";
                 opacity: 0.4;
             }
             p{
                 margin: 0;
                 font-size: calcFluid(15, 20, 320, 1920);
-                font-weight: 500;
+                font-family: "inter-regular";
             }
         }
     }

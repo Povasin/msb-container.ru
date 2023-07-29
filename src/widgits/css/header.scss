@@ -1,6 +1,6 @@
 @import "./general.scss";
 @font-face {
-    font-family: "Inter-Light";
+    font-family: "inter-light";
     font-style: normal;
     font-weight: 100;
     src: url("../../assets/fonts/Inter/Inter-Light.ttf");
@@ -8,14 +8,14 @@
 }
 @font-face {
     font-style: normal;
-    font-family: "Inter-Regular";
+    font-family: "inter-regular";
     font-weight: 500;
     src: url("../../assets/fonts/Inter/Inter-Regular.ttf");
     font-display: swap;
 }
 @font-face {
     font-style: normal;
-    font-family: "Inter-Bold";
+    font-family: "inter-bold";
     font-weight: 900;
     src: url("../../assets/fonts/Inter/Inter-Bold.ttf");
     font-display: swap;
@@ -27,6 +27,7 @@
     font-display: swap;
 }
 .search__modal{
+    @extend %search;
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -69,7 +70,7 @@
             font-size: calcFluid(18, 20, 1024, 1920);
         }
     }
-    @extend %search;
+   
 
 }
 
@@ -109,7 +110,7 @@
         &__contacts {
             @extend %d-col;
             p {
-                font-weight: 500;
+                font-family: 'inter-regular';
                 margin: auto 0;
                 font-size: calcFluid(15, 18, 320, 1920);
             }
@@ -170,7 +171,7 @@
         a {
             margin: calcFluid(16, 40, 320, 1920) 0 calcFluid(0, 35, 320, 1920) 40px;
             font-size: calcFluid(15, 19, 320, 1920);
-            font-weight: 500;
+            font-family: 'inter-regular';
             border-bottom: 2px solid $gray;
             text-decoration: none;
             color: black;
@@ -226,7 +227,7 @@
             border-radius: 50%;
             background: $gradient;
             text-align:center;
-            font-weight: 500;
+            font-family: 'inter-regular';
             p{
                 margin: 0;
             }
@@ -262,7 +263,7 @@
                     a{
                     
                     @extend %d-row;
-                    font-weight: 100;
+                    font-family: "Inter-Light";
                     font-size: calcFluid(13, 19, 320, 1920);
                     background: $gradient;
                     color: white;
@@ -276,14 +277,14 @@
                         cursor: pointer;
                         margin: auto 0 auto auto;
                         font-size:calcFluid(22, 30, 320, 1920);
-                        font-weight: 100;
+                        font-family: "Inter-Light";
                         color: black;
                     }
                 }
                 a{  
                     display: flex !important;
                     font-size:calcFluid(15, 20, 320, 1920);
-                    font-weight: 500;
+                    font-family: 'inter-regular';
                     color: black;
                     margin: 12px 0;
                     border-bottom: 2px solid $gray;
@@ -329,6 +330,7 @@
         }
         .mobile__header__text,
         .mobile__header__mainText{
+            -webkit-appearance: none;
             margin: auto;
             text-align: center;
             background:$gradient;
@@ -337,11 +339,13 @@
             -webkit-text-fill-color: transparent;
             width: calcFluid(200, 265, 320, 630);
             color: #5134c4;
-            font-size: calcFluid(20, 25, 320, 630);
+            font-size: calcFluid(18, 25, 320, 630);
             font-family: "inter-bold";
             white-space: nowrap; 
             overflow: hidden;
+            -webkit-overflow: hidden;
             text-overflow: ellipsis;
+            -webkit-text-overflow: ellipsis;
         }
     }
     .mobile__header__fixed{

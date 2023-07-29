@@ -42,11 +42,11 @@ main{
             .star{
                 margin-left: auto;
                 font-size:  calcFluid(14, 20, 700, 1920);
-                font-weight: 900;
+                font-family: "inter-bold";
             }
             p{
                 font-size:calcFluid(16, 20, 320, 1920);
-                font-weight: 900;
+                font-family: "inter-bold";
             }
             .services__contantPrice{
                 margin: auto 0 0 0 ;

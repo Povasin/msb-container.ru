@@ -49,6 +49,7 @@ export default function MainPage() {
     }
     useEffect(()=>{
         store.dispatch(getCards({}))
+      if (document.documentElement.clientWidth < 630) {
         document.addEventListener('mousedown', onMouseDown)
         document.addEventListener('mouseup', onMouseUp)
         document.addEventListener('mousemove', onMouseMove)
@@ -57,6 +58,7 @@ export default function MainPage() {
             document.removeEventListener('mouseup', onMouseUp)
             document.removeEventListener('mousemove', onMouseMove)
         }
+      } 
     }, [])
     return (
         <main>

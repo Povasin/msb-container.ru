@@ -40,12 +40,12 @@ body{
     text-decoration: none;
     margin: 20px 0 auto auto;
     border: none;
-    font-weight: 100;
+    font-family: 'inter-regular';
     transition: 0.3s;
     background-size: 150% 100%;
     border: none;
     transition: all .4s ease-in-out;
-    border-radius: 3px;
+    border-radius: 5px;
     &:hover {
         background-position: 100% 0;
     }
@@ -76,7 +76,7 @@ body{
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-weight: 900;
+    font-family: 'inter-bold';
     transition: 0.3s;
 }
 %general__log{
@@ -86,7 +86,7 @@ body{
     font-size:calcFluid(15, 20, 320, 1920);
     text-align: center;
     border: 1px solid black;
-    font-weight: 500;
+    font-family: 'inter-regular';
     margin: auto 4px;
     transition: 0.4s;
 }
@@ -125,7 +125,7 @@ body{
 
 %card {
     position: relative;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.20);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.20);
     @extend %d-col;
     background-color: white;
     width: calcFluid(200, 280, 320, 1920);
@@ -149,11 +149,12 @@ body{
     .rent{
         font-size: calcFluid(12, 20, 320, 1920);
         color: #58585e;
+        font-family: 'inter-regular';
         margin: auto 0 5px 0;
     }
     .info{
         font-size:calcFluid(15, 20, 320, 1920);
-        font-weight: 900;
+        font-family: 'inter-bold';
         margin: 0;
         text-decoration: none;
         color: black;
@@ -166,7 +167,7 @@ body{
         background:$gradient;
         background-size: 200% 100%;
         border: none;
-        border-radius: 2px;
+        border-radius: 4px;
         transition: all .4s ease-in-out;
         width: calcFluid(20, 30, 320, 1920);
         &:hover {
@@ -191,10 +192,17 @@ body{
         color: black;
     }
     .LinkImg{  
+        display: flex;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
         .card__img{
-            cursor: pointer;
-            max-width: 100%;
+            display: flex;
             margin: auto;
+            img{
+                max-width: auto;
+                max-height: calcFluid(140, 200, 320, 1920);
+            }
            
         }
         display: flex; 
@@ -204,14 +212,14 @@ body{
         .card__arrow{
             margin:auto 0 auto auto;
             font-size: calcFluid(18, 24, 320, 1920);
-            font-weight: 900;
+            font-family: 'inter-bold';
             text-decoration: none;
             color: black;
             cursor: pointer;
         }
         .star{
             font-size:  calcFluid(12, 20, 320, 1920);
-            font-weight: 900;
+            font-family: 'inter-bold';
             margin: auto 0;
         }
     }
@@ -224,12 +232,13 @@ body{
             .discount{
                 text-decoration:line-through;
                 color: #58585e;
+                font-family: 'inter-regular';
                 font-size:calcFluid(12, 20, 320, 1920);
                 margin:calcFluid(0, 10, 850, 1920) 0 0 0;
             }
             .card__price{
                 font-size: calcFluid(13, 20, 320, 1920);
-                font-weight: 900;
+                font-family: 'inter-bold';
                 margin: 0;
             }
         }
@@ -260,13 +269,15 @@ body{
 }
 %search{
     .search {
-        box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.20);
+        -webkit-appearance: none;
+        box-shadow: 3px 3px 30px rgba(0, 0, 0, 0.20);
+        -webkit-box-shadow: 3px 3px 30px rgba(0, 0, 0, 0.20);
         border-radius: 4px;
         border: none;
         padding: 12px calcFluid(10, 50, 1024, 1920) 12px 6px;
         background-color: white;
         color: #6d6d6d;
-        font-weight: 100;
+        font-family: 'inter-light';
         font-size: 20px;
         outline: none;
         width: calcFluid(200, 300, 1024, 1920);
@@ -286,7 +297,7 @@ body{
             color: black;
             font-size: calcFluid(13, 15, 1024, 1920);
             padding: 7px 10px;
-            font-weight: 100;
+            font-family: 'inter-light';
             background-color: white;
             &:hover{
                 background-color: #eeeeee;

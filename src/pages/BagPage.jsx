@@ -24,7 +24,9 @@ export default function BagPage() {
     function BagStoredisCount() {
         let summ = 0;
         newBagMass.forEach(item=>{
-            summ+= (item.count*item.data.discount )*item.month 
+            if (((item.count*item.data.price )*item.month)-((item.count*item.data.discount )*item.month)  < 0) {
+                summ+= ((item.count*item.data.price )*item.month)-((item.count*item.data.discount )*item.month)
+            }
         })
         return summ
     }
@@ -51,6 +53,7 @@ export default function BagPage() {
                     {BagStore.items == 0 ? <div className="bag__clear"><h2>ваша корзина пока пуста</h2><p>вернитесь на <Link to="/">главную страницу</Link> и заполните ее</p></div> : BagStore.items.map((item, index) => <BagCard key={index} card={item}/>)}
                     </div>
                     {BagStore.items != 0 &&  <div className="bag__price">
+                    {document.documentElement.clientWidth < 630 && <div className="line"></div>}
                      <div className="bag__promoCode">
                             <input type="text" placeholder="Промокод" className="promocode"/>
                             <div id="acceptPromocode">Ok</div>
@@ -61,11 +64,11 @@ export default function BagPage() {
                             <span name="summPriceOrder" id="price">{BagStorePrice()}₽</span>
                         </div>                    
                         <div className="input__discount">
-                            <p>Без скидки</p>
+                            <p>Cкидка</p>
                             <span id="discount">{BagStoredisCount()}</span>
                         </div>
                         <p id="error">{BagStore.error}</p>
-                        <button id="order" to="/arrange" onClick={send}>к оформлению</button>
+                        <button id="order" to="/arrange" onClick={send}>К оформлению</button>
                     </div>}  
                 </div>
             </div>  

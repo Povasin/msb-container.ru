@@ -27,25 +27,32 @@ main{
     .input__discount {
         @extend %d-row;
         margin: 10px 0;
-        font-size: calcFluid(20, 20, 320, 1920);
-        font-weight: 900;
-        p {margin: 10px 5px 0 0;}
+        font-size: calcFluid(20, 25, 320, 1920);
+        font-family: "inter-bold";
+        text-align: center;
+        p {margin: 0;}
         #price {
             font-size: calcFluid(22, 30, 320, 1920);
-            font-weight: 900;
+            font-family: "inter-bold";
         }  
         span {
             margin: 0 0 0 auto !important;
             font-size: calcFluid(18, 20, 320, 1920);
-            font-weight: 900;
+            font-family: "inter-bold";
         }              
     }
    
     .input__delivery {
         margin: 0;
+        p{
+            font-size: calcFluid(18, 22, 320, 1920);
+        }
     }
     .input__discount{
-        margin: 0;
+        margin: 10px 0;
+        p{
+            font-size: calcFluid(18, 22, 320, 1920);
+        }
         #discount {
             font-size: calcFluid(18, 22, 320, 1920);
             color: #f91155;
@@ -74,8 +81,11 @@ main{
                 margin: auto;
             }
             .block__img {
-                max-width: 100%;
-                margin: auto;
+                img{
+                    max-width: auto;
+                    max-height: calcFluid(120, 145, 320, 1920);
+                    margin: 0;
+                }
             }
 
         }
@@ -91,14 +101,14 @@ main{
                 top: -15px;
                 cursor: pointer;
                 font-size: calcFluid(18, 25, 320, 1920);
-                font-weight: 900;
+                font-family: "inter-bold";
                 color: #58585e;
                 position: absolute;
             }
 
             .rent {
                 color: #58585e;
-                font-weight: 500;
+                font-family: "inter-regular";
                 margin: calcFluid(0, 20, 320, 1920) 0 0 0;
             }
 
@@ -106,7 +116,7 @@ main{
                 text-decoration: none;
                 color: black;
                 font-size: calcFluid(20, 20, 320, 1920);
-                font-weight: 900;
+                font-family: "inter-bold";
                 margin: 10px 0;
             }
 
@@ -138,7 +148,7 @@ main{
                         background: transparent;
                         cursor: pointer;
                         outline: 0;
-                        font-weight: 500;
+                        font-family: "inter-regular";
                         font-size: calcFluid(20, 35, 320, 1920);
                     }
 
@@ -209,7 +219,7 @@ main{
             font-size:calcFluid(15, 20, 320, 1920);;
             text-align: center;
             border: 0px solid black;
-            font-weight: 500;
+            font-family: "inter-regular";
             margin: auto 4px;
             transition: 0.4s;
         }
@@ -237,13 +247,13 @@ main{
                 @extend %d-col;
                 h2{
                     font-size: calcFluid(14, 20, 320, 1920);
-                    font-weight: 500;
+                    font-family: "inter-regular";
                     opacity: 0.4;
                 }
                 p{
                     margin: 0;
                     font-size: calcFluid(14, 20, 320, 1920);
-                    font-weight: 500;
+                    font-family: "inter-regular";
                 }
             }
             .map-col:first-child{

@@ -22,7 +22,7 @@ export default function Header() {
     {searchToggle &&
         <div className="search__modal">
             <p  onClick={()=>onSearch()} className='search__arrow'>←</p>
-            {<Search/>}
+            {<Search setSearchToggle={setSearchToggle}/>}
         </div>
     } 
     <div className="headerTop">
@@ -31,7 +31,7 @@ export default function Header() {
         </div>
         <Link to="/" className="headerTop__logo">MSB<span>container</span></Link>
         <div className="headerTop__search">
-            {<Search/>}
+            {<Search setSearchToggle={setSearchToggle}/>}
         </div>
         <div className="headerTop__contacts">
            <p>+7(910)973-36-65</p>

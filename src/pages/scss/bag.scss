@@ -64,14 +64,17 @@ main {
                     background-color: #ececec;
                     padding: calcFluid(5, 10, 320, 1920);
                     border-radius: 6px;
-                    margin: 5px 0;
+                    margin: 0;
                     display: flex;
                     .img__emptyPhoto{
                         margin: auto;
                     }
                     .block__img {
-                        max-width: 100%;
-                        margin: auto;
+                        img{
+                            max-width: auto;
+                            max-height: calcFluid(120, 145, 320, 1920);
+                            margin: 0;
+                        }
                     }
 
                 }
@@ -87,14 +90,14 @@ main {
                         top: -15px;
                         cursor: pointer;
                         font-size: calcFluid(18, 25, 320, 1920);
-                        font-weight: 900;
+                        font-family: "inter-bold";
                         color: #58585e;
                         position: absolute;
                     }
 
                     .rent {
                         color: #58585e;
-                        font-weight: 500;
+                        font-family: "inter-regular";
                         margin: calcFluid(0, 20, 320, 1920) 0 0 0;
                     }
 
@@ -102,7 +105,7 @@ main {
                         text-decoration: none;
                         color: black;
                         font-size: calcFluid(20, 20, 320, 1920);
-                        font-weight: 900;
+                        font-family: "inter-bold";
                         margin: 10px 0;
                     }
 
@@ -134,7 +137,7 @@ main {
                                 background: transparent;
                                 cursor: pointer;
                                 outline: 0;
-                                font-weight: 500;
+                                font-family: "inter-regular";
                                 font-size: calcFluid(20, 35, 320, 1920);
                             }
 
@@ -198,28 +201,34 @@ main {
             width: 24%;
             @extend %d-col;
             .accept{
-                font-weight: 500;
+                font-family: "inter-regular";
                 color: black;
                 font-size: calcFluid(12, 16, 800, 1920);
                 margin: 18px 0 0 0;
             }
+            .line{
+                border: 1px solid #BABABA;
+                margin: 20px 0;
+            }
             .bag__promoCode {
                 @extend %d-row;
                 input {
+                    border-radius: 4px;
                     font-size: calcFluid(12, 20, 800, 1920);
-                    font-weight: 100;
+                    font-family: "inter-light";
                     padding: 7px;
                     outline: none;
-                    border: 1px solid #58585e;
+                    border: 2px solid #BABABA;
                     margin: auto 10px auto 0;
                 }
 
                 #acceptPromocode {
+                    border-radius: 4px;
                     background-color: #19103C;
                     padding: 7px;
                     font-size: calcFluid(10, 20, 320, 1920);
                     color: white;
-                    font-weight: 100;
+                    font-family: "inter-light";
                     border: none;
                     cursor: pointer;
                 }
@@ -227,31 +236,32 @@ main {
             .input__price {
                 @extend %d-row;
                 margin: calcFluid(2, 20, 320, 1920) 0 calcFluid(2, 10, 320, 1920) 0;
-                font-size: 20px;
-                font-weight: 900;
+                font-size: calcFluid(18, 25, 320, 1920);
+                font-family: "inter-bold";
                 p {
                     margin: 0;
                 }
                 #price {
                     font-size: calcFluid(23, 30, 320, 1920);
                     margin: 0 0 0 auto;
-                    font-weight: 900;
+                    font-family: "inter-bold";
                 }                
             }
             span {
                 font-size: calcFluid(13, 20, 320, 1920);
-                font-weight: 900;
+                font-family: "inter-bold";
             }
             .input__discount{
-                margin: 10px 0 calcFluid(0, 20, 320, 1920) 0;
+                margin: 0 0 calcFluid(0, 20, 320, 1920) 0;
                 @extend %d-row;
-                font-weight: 900;
+                font-family: "inter-bold";
                 p {
+                    font-size: calcFluid(16, 22, 320, 1920);
                     margin: 0;
                 }
                 #discount {
                     margin: 0 0 0 auto;
-                    font-size: calcFluid(16, 22, 320, 1920);
+                    font-size: calcFluid(16, 25, 320, 1920);
                     color: #f91155;
                 }
             }
@@ -306,7 +316,7 @@ main {
                 border: 1px solid #58585e;
                 width: 60%;
                 font-size: calcFluid(12, 18, 800, 1920);
-                font-weight: 100;
+                font-family: "inter-light";
             }
             #order {
                 @extend %more;
@@ -358,6 +368,7 @@ main {
         &__items {
             height: 100%;
             overflow: visible;
+            margin: 0;
             .bag__clear{
                 margin: 200px 0;
             }

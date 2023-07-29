@@ -1,7 +1,7 @@
 $gradient: linear-gradient(90deg, #5134c4, #773cbc, #b856d4);
 $gray: #ececec;
 @font-face {
-    font-family: "Inter-Light";
+    font-family: "inter-light";
     font-style: normal;
     font-weight: 100;
     src: url("../../assets/fonts/Inter/Inter-Light.ttf");
@@ -9,14 +9,14 @@ $gray: #ececec;
 }
 @font-face {
     font-style: normal;
-    font-family: "Inter-Regular";
+    font-family: "inter-regular";
     font-weight: 500;
     src: url("../../assets/fonts/Inter/Inter-Regular.ttf");
     font-display: swap;
 }
 @font-face {
     font-style: normal;
-    font-family: "Inter-Bold";
+    font-family: "inter-bold";
     font-weight: 900;
     src: url("../../assets/fonts/Inter/Inter-Bold.ttf");
     font-display: swap;
@@ -97,7 +97,7 @@ body{
     margin: 10px 0;
     display: flex;
     flex-direction: row;
-    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.20);
     padding: 10px;
     text-decoration: none;
     
@@ -167,7 +167,7 @@ body{
            flex-direction: column;
             .fd-col{
                 margin: 0;
-                font-weight: 500;
+                font-family: "inter-regular";
                 color: #58585e;
                 font-size: calcFluid(10, 16, 320, 1920);
                 span{
@@ -208,7 +208,7 @@ body{
     flex-direction: row;
     a, .btnForCreate {
         cursor: pointer;
-        margin: calcFluid(16, 40, 320, 1920) 0 calcFluid(0, 35, 320, 1920) 40px;
+        margin: calcFluid(16, 40, 320, 1920) 0 calcFluid(0, 35, 320, 1920) 20px;
         font-size: calcFluid(15, 19, 320, 1920);
         font-family: "Inter-Regular";
         text-decoration: none;
@@ -261,7 +261,7 @@ body{
             border-radius: 50%;
             background: $gradient;
             text-align:center;
-            font-weight: 500;
+            font-family: "inter-bold";
             p{
                 margin: 0;
             }

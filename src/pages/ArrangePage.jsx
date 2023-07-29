@@ -30,7 +30,9 @@ export default function ArrangePage() {
     function BagStoredisCount() {
         let summ = 0;
         newBagMass.forEach(item=>{
-            summ+= (item.count*item.data.discount )*item.month 
+            if (((item.count*item.data.price )*item.month)-((item.count*item.data.discount )*item.month)  < 0) {
+                summ+= ((item.count*item.data.price )*item.month)-((item.count*item.data.discount )*item.month)
+            }
         })
         return summ
     }
@@ -102,7 +104,7 @@ export default function ArrangePage() {
                     <span name="summPriceOrder" id="price">{BagStorePrice()}₽</span>
             </div>                    
             <div className="input__discount">
-                <p>Без скидки:</p>
+                <p>Скидка:</p>
                 <span id="discount">{BagStoredisCount()}</span>
             </div>
             <div className="input__delivery">
@@ -110,13 +112,13 @@ export default function ArrangePage() {
                 <span id="discount">{!isDelivery ? "Самовызов" : `Доставка`}</span>
             </div>
             <p className='error'>{error}</p>
-            <button className={`order ${loading ? "loading" : ""}`} onClick={send} disabled={loading}>{loading ? "загрузка" : "Оформить заказ"}</button>
+            <button className={`order ${loading ? "loading" : ""}`} onClick={send} disabled={loading}>{loading ? "Загрузка" : "Оформить заказ"}</button>
         </div>
-        <div className="mobile__bag">
+        {document.documentElement.clientWidth < 630 && <div className="mobile__bag">
             <p>{BagStorePrice()}₽</p>
             <p>{BagStoredisCount()}</p>
-            <button className={`order ${loading ? "loading" : ""}`} onClick={send} disabled={loading}>{loading ? "загрузка" : "Оформить заказ"}</button>
-        </div>
+            <button className={`order ${loading ? "loading" : ""}`} onClick={send} disabled={loading}>{loading ? "Загрузка" : "Оформить заказ"}</button>
+        </div>}
     </main>
   )
 }

@@ -7,7 +7,7 @@ import { orderSliceClient, getorder, getOrdersCards } from '../shared/store/slic
 import { store } from '../shared/store/slices/store';
 import "./scss/user.scss";
 import LoadingPageAdmin from './LoadingPageAdmin'
-
+import ProductCard from "../shared/componets/ProdactCard"
 export default function  OrderCardPage() {
     const auth =  useSelector((state)=>state.authSlice)
     const location = useLocation()
@@ -35,7 +35,9 @@ export default function  OrderCardPage() {
     function OrderDiscount() {
         let summ = 0;
         isCards.forEach(array=>{
-            summ+= (array.count*array.data?.discount )*array.month 
+            if (((array.count*array.data.price )*array.month)-((array.count*array.data.discount )*array.month)  < 0) {
+                summ+= ((array.count*array.data.price )*array.month)-((array.count*array.data.discount )*array.month)
+            }
         })
         return summ
     }
@@ -61,7 +63,7 @@ export default function  OrderCardPage() {
                     <div className="block__inputRow">	
                         <div className="block__input">	
                             <p className="fd-col">Количество: <span>{array.count}шт</span></p>		
-                            <p className="fd-col">Срок Аренды: <span>{array.month}мес</span></p>
+                            <p className="fd-col">Срок аренды: <span>{array.month}мес</span></p>
                         </div>
                         <div className="block-col">
                             <p className="block__discount">{(array.count*array.data?.discount)*array.month}</p>
@@ -77,7 +79,7 @@ export default function  OrderCardPage() {
                         <span name="summPriceOrder" id="price">{OrderPrice()}₽</span>
                 </div>                    
                 <div className="input__discount">
-                    <p>Без скидки:</p>
+                    <p>Скидка:</p>
                     <span id="discount">{OrderDiscount()}₽</span>
                 </div>
                 <div className="input__delivery">
@@ -115,9 +117,16 @@ export default function  OrderCardPage() {
                         </div>
                     </div>
                 </div>
-                <button onClick={()=>alert('Чат в разработке!')} className="writeToShop">написать продавцу</button>
+                <button onClick={()=>alert('Чат в разработке!')} className="writeToShop">Написать продавцу</button>
             </div>   
         </div>
+        {document.documentElement.clientWidth < 630 &&  <div className="mobile__katalog">
+                <h2>Лидеры продаж</h2>
+                <div className="mobile__katalogContainer">
+                    {cards?.items.map((item, index)=>index < 6 && <ProductCard key={index} item={item}/>)}
+                </div>
+                <Link to="/katalog" className="more">Посмотреть все бытовки</Link>
+            </div>}
     </main>
     
   )

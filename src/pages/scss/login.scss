@@ -15,12 +15,15 @@ main{
     .login-row{
         @extend %d-col;
         input{
+            border-radius: 6px;
             -webkit-appearance: none;
             padding: 15px 10px;
             margin: 5px 0;
             outline:none;
             border: none;
-            -webkit-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.20);
+            -moz-box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.20);
+            box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.20);
+            -webkit-box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.20);
             font-size:calcFluid(14, 20, 320, 1920);
         }
         .loginBTN{
@@ -48,6 +51,6 @@ main{
 
 @media(max-width: 630px){
     .loginClient{
-        padding: calcFluid(160, 160, 320, 630) calcFluid(8, 400, 320, 1920);
+        padding: 120px calcFluid(8, 400, 320, 1920);
     } 
 }

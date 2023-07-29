@@ -50,7 +50,7 @@ export default function BagCard({card}) {
                     </div>
                 </div>
                 <div className="block-col">
-                    <p className="block__discount">{card?.data.have == 'true' && `${(card.count*card.data.discount)*card.month}`}</p>
+                    <p className="block__discount"> {card.data.discount != 0 && card?.data.have == 'true' && `${(card.count*card.data.discount)*card.month}`}</p>
                     <p className="block__price" name="priceOrder">{card?.data.have == 'true' ?  `${(card.count*card.data.price)*card.month}₽` : "Нет в наличии"}</p>
                 </div>
             </div>

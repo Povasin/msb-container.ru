@@ -12,8 +12,8 @@ export default function KatalogPage() {
     const cards = useSelector((state)=>state.cardsSlice)
     console.log(cards);
     const [slider, setSlider] = useState({
-        sliderOne: 1000,
-        sliderTwo: 20000
+        sliderOne: 10,
+        sliderTwo: 100000
     })
     const [content, setContent] = useState({
         min: 1,
@@ -77,9 +77,8 @@ export default function KatalogPage() {
             
             if (!allCheckboxFalse(nameChecked)) {
                 trueItem = trueItem && (nameChecked[item.role] ? true : false)
-                console.log(trueItem);
             } else{
-                trueItem = trueItem && (item.role == "общая" ? true : false)
+                trueItem = trueItem  && (item.role == 'общая' ? true : false)
             }
            
             return trueItem
@@ -103,13 +102,13 @@ export default function KatalogPage() {
                 <p className="filter__close" onClick={()=>setShowSideBar(!showSideBar)} >x</p>
             </div>
             <div className="katalog-row">
-                <label className="label__price"> от <p>{slider.sliderOne}</p> </label>
-                <label className="label__price"> до <p>{slider.sliderTwo}</p></label>
+                <label className="label__price"> От <p>{slider.sliderOne}</p> </label>
+                <label className="label__price"> До <p>{slider.sliderTwo}</p></label>
             </div>
             <div className="container">
-                <div className="slider-track"  style={{background: `linear-gradient(to right, #dadae5 ${(slider.sliderOne / 20000) * 100}% ,#5134c4 ${ (slider.sliderOne / 10000) * 100}% ,#b856d4 ${(slider.sliderTwo / 20000) * 100}%, #dadae5 ${(slider.sliderTwo / 20000) * 100}%)`}}></div>
-                <label><input type="range" min="0" max="19999" value={slider.sliderOne} id="slider-1" onChange={(e)=>checkSliderOne(e)}/></label>
-                <label><input type="range" min="10" max="20000" value={slider.sliderTwo} id="slider-2" onChange={(e)=>checkSliderTwo(e)}/></label>
+                <div className="slider-track"  style={{background: `linear-gradient(to right, #dadae5 ${(slider.sliderOne / 100000) * 100}% ,#5134c4 ${ (slider.sliderOne / 100000) * 100}% ,#b856d4 ${(slider.sliderTwo / 100000) * 100}%, #dadae5 ${(slider.sliderTwo / 100000) * 100}%)`}}></div>
+                <label><input type="range" min="0" max="100000" value={slider.sliderOne} id="slider-1" onChange={(e)=>checkSliderOne(e)}/></label>
+                <label><input type="range" min="10" max="100000" value={slider.sliderTwo} id="slider-2" onChange={(e)=>checkSliderTwo(e)}/></label>
             </div>
             <div className="katalog-name">
                 <h2>Наименование</h2>

@@ -23,7 +23,7 @@ function useOnClickOutside(ref, handler) {
     )
 }
 
-export default function Search() {
+export default function Search({setSearchToggle}) {
     const [showSearch, setShowSearch] = useState(false)
     const ref = useRef()
     const [search, setSearch] = useState("")
@@ -37,6 +37,10 @@ export default function Search() {
             setResult(filterMass)
         }
     }
+    function clearSearch() {
+      setSearchToggle(false)
+      setSearch('')
+    }
     useEffect (()=>{
       store.dispatch(getCards({}))
       setSearch('')
@@ -48,7 +52,7 @@ export default function Search() {
         <img src="/search.svg" alt="поиск"/>
         {showSearch && 
             <div className="search__block" onClick={()=>setShowSearch(false)}>
-                {results ? results.map((item, index)=><Link onClick={()=>setSearch('')} key={index} className="search__blockHref" to={`/card/${item.idCard}`}>{item.name}</Link>) : null}
+                {results ? results.map((item, index)=><Link onClick={()=>clearSearch()} key={index} className="search__blockHref" to={`/card/${item.idCard}`}>{item.name}</Link>) : null}
             </div>
         }   
     </div>

@@ -13,7 +13,15 @@ export default function ActiveCard() {
   function reverse(array){
     return array.map((item,idx) => array[array.length-1-idx])
   }
-  let newMassReverse = reverse(cards?.items)
+  const [orderFilter, setOrderFilter] = useState("Все")
+  function filterFunc() {
+    if (orderFilter == "Все") {
+      return cards?.items
+    } else {
+      return cards?.items.filter(item => item.role == orderFilter)
+    }
+  }
+  let newMassReverse = reverse(filterFunc())
   async function MiddleWareCreateCard() {
     await store.dispatch(addCards({}))
   }
@@ -28,6 +36,12 @@ export default function ActiveCard() {
     <div>
       <div className='headerOrder'>
         <button className='btnForCreate' onClick={()=>MiddleWareCreateCard()} >создать карточку</button> 
+        <a onClick={()=>setOrderFilter("Бытовки для проживания")}>Бытовки для проживания</a>
+        <a onClick={()=>setOrderFilter("Бытовки раздевалки")}>Бытовки раздевалки</a>
+        <a onClick={()=>setOrderFilter("Бытовки c душем")}>Бытовки c душем</a>
+        <a onClick={()=>setOrderFilter("Бытовки под склад")}>Бытовки под склад</a>
+        <a onClick={()=>setOrderFilter("Бытовки прорабские")}>Бытовки прорабские</a>
+        <a onClick={()=>setOrderFilter("Мебель")}>Мебель</a>
         <a href=""></a>
       </div>
       <h1>Добваленные карточки</h1>
