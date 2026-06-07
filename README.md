@@ -1,4 +1,12 @@
 msb-container - интернет магазин по аренде строительных бытовок. 
+сайт - https://msb-container.ru/
+
+Стек разработки:
+1. React
+2. Express
+3. Mysql
+4. socket.io
+5. scss
 
 для запуска проекта:
 1)написать в консоли npm i --legacy-peer-deps
