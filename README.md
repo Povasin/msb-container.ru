@@ -4,6 +4,7 @@
 ![React](https://img.shields.io/badge/Frontend-React-61DAFB.svg?style=for-the-badge&logo=react)
 ![Redux](https://img.shields.io/badge/State-Redux_Toolkit-764ABC.svg?style=for-the-badge&logo=redux)
 ![Node.js](https://img.shields.io/badge/Backend-Node.js-339933.svg?style=for-the-badge&logo=node.js)
+![MySQL](https://img.shields.io/badge/Database-MySQL-4479A1.svg?style=for-the-badge&logo=mysql)
 
 **MSB Container** — это действующий коммерческий fullstack-проект (SPA + REST API), разработанный для реального заказчика. Сервис специализируется на аренде и продаже строительных бытовок, интегрирован с локальным гео-поиском и выступает основным каналом привлечения клиентов.
 
