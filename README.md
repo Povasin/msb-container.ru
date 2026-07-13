@@ -2,8 +2,7 @@
 
 ![Status: Production](https://img.shields.io/badge/Status-Production-brightgreen.svg?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-18.x-61DAFB.svg?style=for-the-badge&logo=react&logoColor=black)
-![Redux](https://img.shields.io/badge/Redux-Toolkit-764ABC.svg?style=for-the-badge&logo=redux&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-Backend-404D59.svg?style=for-the-badge&logo=express)
+![Node.js](https://img.shields.io/badge/Node.js-Backend-339933.svg?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
 ![SCSS](https://img.shields.io/badge/SCSS-Styling-CC6699.svg?style=for-the-badge&logo=sass&logoColor=white)
 
